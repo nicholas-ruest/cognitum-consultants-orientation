@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — animated 60-minute, 43-slide deck with an animated hero emblem, distinct flywheel graphics, a DNA-helix Darwin divider, and a cost/capability Pareto chart. Arrow keys / space to navigate.">
+<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — animated 60-minute, 43-slide deck. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
@@ -487,25 +487,24 @@
           </div>
           <div class="di">
             <span class="cap">Cost vs. capability — the Pareto frontier</span>
-            <svg viewBox="0 0 440 300" role="img" aria-label="MetaHarness reaches frontier-only capability at a fraction of the cost">
-              <g stroke="var(--border)" stroke-width="1" opacity="0.5" stroke-dasharray="3 6">
-                <line x1="54" y1="68" x2="418" y2="68"/><line x1="54" y1="128" x2="418" y2="128"/><line x1="54" y1="188" x2="418" y2="188"/>
-              </g>
-              <line x1="54" y1="26" x2="54" y2="248" stroke="var(--border-2)" stroke-width="1.5"/>
-              <line x1="54" y1="248" x2="418" y2="248" stroke="var(--border-2)" stroke-width="1.5"/>
-              <path d="M74 224 Q120 108 158 92 Q290 58 404 54 L404 248 L74 248 Z" fill="var(--jade)" opacity="0.08"/>
-              <path class="v-draw" d="M74 224 Q120 108 158 92 Q290 58 404 54" fill="none" stroke="var(--jade)" stroke-width="2.5" opacity="0.75"/>
-              <line x1="172" y1="92" x2="352" y2="74" stroke="var(--border-2)" stroke-width="1.5" stroke-dasharray="4 5"/>
-              <text x="262" y="62" font-size="11.5" class="vlbl-f" text-anchor="middle">same capability · far less cost</text>
-              <circle class="v-pop" cx="104" cy="206" r="6.5" fill="var(--muted)"/><text x="118" y="211" font-size="12" class="vlbl-f">small model</text>
-              <circle class="v-pop" style="animation-delay:.2s" cx="366" cy="72" r="9" fill="var(--crit)"/><text x="366" y="50" font-size="12" fill="var(--crit)" text-anchor="middle" font-weight="600">frontier-only</text>
-              <circle class="v-halo" cx="158" cy="92" r="10" fill="var(--jade)"/>
-              <circle class="v-pop" style="animation-delay:.35s" cx="158" cy="92" r="10" fill="var(--jade)"/><circle cx="158" cy="92" r="10" fill="none" stroke="var(--surface)" stroke-width="2.5"/>
-              <text x="178" y="112" font-size="13" fill="var(--jade)" font-weight="600">MetaHarness</text>
-              <text x="178" y="129" font-size="11.5" class="vlbl-f">~56× cheaper</text>
-              <text x="60" y="268" font-size="11.5" class="vlbl-f">low cost</text>
-              <text x="414" y="268" font-size="11.5" class="vlbl-f" text-anchor="end">high cost →</text>
-              <text x="36" y="138" font-size="11.5" class="vlbl-f" transform="rotate(-90 36 138)" text-anchor="middle">capability →</text>
+            <svg viewBox="0 0 440 300" role="img" aria-label="MetaHarness and frontier-only reach the same capability, but MetaHarness costs about 56 times less">
+              <defs><marker id="ar6" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <line x1="56" y1="30" x2="56" y2="250" stroke="var(--border-2)" stroke-width="1.5"/>
+              <line x1="56" y1="250" x2="414" y2="250" stroke="var(--border-2)" stroke-width="1.5"/>
+              <path class="v-draw" d="M100 212 Q132 128 152 113 L410 110" fill="none" stroke="var(--jade)" stroke-width="2" stroke-dasharray="5 6" opacity="0.55"/>
+              <text x="252" y="90" text-anchor="middle" font-size="12.5" class="vlbl">same capability</text>
+              <line x1="166" y1="152" x2="358" y2="152" stroke="var(--jade)" stroke-width="1.5" marker-start="url(#ar6)" marker-end="url(#ar6)"/>
+              <text x="262" y="172" text-anchor="middle" font-size="13.5" fill="var(--jade)" font-weight="600">~56× cheaper</text>
+              <text x="262" y="188" text-anchor="middle" font-size="10.5" class="vlbl-f">more cost buys no more capability</text>
+              <circle class="v-pop" cx="104" cy="210" r="6.5" fill="var(--muted)"/><text x="118" y="214" font-size="12" class="vlbl-f">small model</text>
+              <circle class="v-pop" style="animation-delay:.2s" cx="372" cy="112" r="9" fill="var(--crit)"/>
+              <text x="372" y="96" text-anchor="middle" font-size="12.5" fill="var(--crit)" font-weight="600">frontier-only</text>
+              <circle class="v-halo" cx="152" cy="113" r="10" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:.35s" cx="152" cy="113" r="10" fill="var(--jade)"/><circle cx="152" cy="113" r="10" fill="none" stroke="var(--surface)" stroke-width="2.5"/>
+              <text x="152" y="138" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">MetaHarness</text>
+              <text x="62" y="270" font-size="11.5" class="vlbl-f">low cost</text>
+              <text x="414" y="270" font-size="11.5" class="vlbl-f" text-anchor="end">high cost →</text>
+              <text x="38" y="140" font-size="11.5" class="vlbl-f" transform="rotate(-90 38 140)" text-anchor="middle">capability →</text>
             </svg>
           </div>
         </div>
