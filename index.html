@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants day-one orientation on the MetaHarness ecosystem — the harness factory and its Darwin and Flywheel engines.">
+<meta name="description" content="Cognitum Consultants cohort orientation on the MetaHarness ecosystem — the harness factory and its Darwin and Flywheel engines, explained in Reuven Cohen's own words.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
@@ -16,7 +16,6 @@
      ============================================================ */
 
   :root {
-    /* neutrals — light theme default, overridden for dark below */
     --ink:        #F6F7F9;
     --surface:    #FFFFFF;
     --surface-2:  #F0F2F6;
@@ -26,7 +25,6 @@
     --muted:      #566072;
     --faint:      #8A93A5;
 
-    /* accents */
     --indigo:     #4E52E0;
     --indigo-dim: #6f73ea;
     --jade:       #0E9E68;
@@ -69,7 +67,6 @@
     }
   }
 
-  /* explicit toggle wins in both directions */
   :root[data-theme="light"] {
     --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
     --text:#12151C; --muted:#566072; --faint:#8A93A5;
@@ -108,7 +105,6 @@
     border-radius: 3px;
   }
 
-  /* ---------- layout helpers ---------- */
   .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); }
   .prose { max-width: var(--prose); }
   section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--border); }
@@ -149,6 +145,7 @@
   p { margin: 0 0 1.1rem; color: var(--text); }
   .lead { font-size: 1.16rem; color: var(--muted); line-height: 1.6; }
   strong { color: var(--text); font-weight: 640; }
+  em { color: var(--text); font-style: italic; }
   .mono { font-family: var(--font-mono); }
   code {
     font-family: var(--font-mono);
@@ -215,7 +212,7 @@
   .hero-bg .glow-a { width: 46vw; height: 46vw; left: -12vw; top: -16vw; background: radial-gradient(circle, var(--indigo), transparent 66%); }
   .hero-bg .glow-b { width: 40vw; height: 40vw; right: -12vw; top: 4vw; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.35; }
 
-  .hero-in { position: relative; z-index: 1; padding-block: clamp(4.5rem, 12vw, 8.5rem); }
+  .hero-in { position: relative; z-index: 1; padding-block: clamp(4.5rem, 12vw, 8rem); }
   .kicker {
     display: inline-flex; align-items: center; gap: 0.6rem;
     font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -234,7 +231,7 @@
     text-wrap: balance;
   }
   h1 .g { color: var(--jade); }
-  .hero-sub { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--muted); max-width: 54ch; line-height: 1.55; }
+  .hero-sub { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--muted); max-width: 56ch; line-height: 1.55; }
   .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.2rem; }
   .chip {
     font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.02em;
@@ -249,7 +246,7 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-  /* ---------- generic cards / grids ---------- */
+  /* ---------- grids / cards ---------- */
   .grid { display: grid; gap: 1rem; }
   .g2 { grid-template-columns: repeat(2, 1fr); }
   .g3 { grid-template-columns: repeat(3, 1fr); }
@@ -267,8 +264,8 @@
     font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--faint); margin-bottom: 0.9rem;
   }
+  .card .tag.j { color: var(--jade); }
 
-  /* stat cards */
   .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; }
   .stat .n {
     font-family: var(--font-mono); font-weight: 600;
@@ -309,6 +306,26 @@
   .arrow span { transform: rotate(90deg); display: inline-block; }
   .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 30px -12px var(--jade); }
 
+  /* ---------- pull quotes ---------- */
+  .bigquote {
+    border: 1px solid var(--border); border-left: 3px solid var(--jade);
+    background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0;
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+  }
+  .bigquote p {
+    font-size: clamp(1.2rem, 3vw, 1.75rem); line-height: 1.35; letter-spacing: -0.02em;
+    font-weight: 560; margin: 0; text-wrap: balance;
+  }
+  .bigquote .who {
+    display: flex; align-items: center; gap: 0.6rem; margin-top: 1.2rem;
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+  .bigquote .who::before { content: ""; width: 1.6rem; height: 1px; background: var(--border-2); }
+
+  .quote { border-left: 2px solid var(--border-2); padding-left: 1.2rem; margin: 0; }
+  .quote p { font-size: 1.08rem; line-height: 1.5; color: var(--text); letter-spacing: -0.01em; margin: 0 0 0.6rem; }
+  .quote .who { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+
   /* ---------- surfaces grid (Darwin) ---------- */
   .surfaces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
   @media (max-width: 760px) { .surfaces { grid-template-columns: repeat(2, 1fr); } }
@@ -323,7 +340,7 @@
   .surf.ro .f { color: var(--jade); }
 
   /* ---------- loop steps ---------- */
-  .steps { display: grid; gap: 0.6rem; counter-reset: s; }
+  .steps { display: grid; gap: 0.6rem; }
   .step {
     display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
     border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);
@@ -353,8 +370,7 @@
   .bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; align-items: end; height: 230px; }
   .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.6rem; text-align: center; }
   .bar .col {
-    --h: 0%;
-    height: var(--h);
+    height: 0%;
     background: linear-gradient(180deg, var(--indigo-dim), var(--indigo));
     border-radius: 7px 7px 3px 3px; position: relative; min-height: 3px;
     transition: height 1.1s cubic-bezier(.2,.7,.2,1);
@@ -368,17 +384,6 @@
   .bar .lab { font-size: 0.78rem; color: var(--muted); line-height: 1.3; }
   .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.05em; margin-top: 0.15rem; }
   .axis-note { font-family: var(--font-mono); font-size: 0.68rem; color: var(--faint); margin-top: 1rem; text-align: right; }
-
-  /* cost comparison */
-  .cmp { display: grid; gap: 0.9rem; }
-  .cmp-row { display: grid; grid-template-columns: 8.5rem 1fr auto; gap: 0.9rem; align-items: center; }
-  @media (max-width: 520px){ .cmp-row { grid-template-columns: 1fr; gap: 0.3rem; } }
-  .cmp-row .who { font-size: 0.9rem; color: var(--muted); }
-  .cmp-row .track { height: 12px; background: var(--surface-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
-  .cmp-row .fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.1s cubic-bezier(.2,.7,.2,1); }
-  .cmp-row .fill.us { background: linear-gradient(90deg, var(--jade-dim), var(--jade)); }
-  .cmp-row .fill.them { background: linear-gradient(90deg, var(--border-2), var(--crit)); opacity: 0.85; }
-  .cmp-row .amt { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
   /* ---------- callout ---------- */
   .callout {
@@ -394,7 +399,7 @@
   pre {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 1.1rem 1.3rem; overflow-x: auto; margin: 0;
-    font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.65; color: var(--text);
+    font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; color: var(--text);
   }
   pre .c { color: var(--faint); }
   pre .cmd { color: var(--jade); }
@@ -469,9 +474,9 @@
     <div class="glow-b"></div>
   </div>
   <div class="wrap hero-in">
-    <span class="kicker"><span class="dot"></span>Consultant Orientation · Cohort briefing</span>
+    <span class="kicker"><span class="dot"></span>Consultant Certification · Cohort orientation</span>
     <h1>Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-    <p class="hero-sub">Your day-one map of the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and the two engines, <strong>Darwin</strong> and <strong>Flywheel</strong>, that make self-improving agents measurable instead of magical.</p>
+    <p class="hero-sub">Your day-one map of the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it: point Claude at a repo and say <em>"make my marketing better."</em></p>
     <div class="chips">
       <span class="chip"><b>metaharness</b><span>the factory</span></span>
       <span class="chip"><b>@metaharness/darwin</b><span>the engine</span></span>
@@ -489,13 +494,13 @@
       <div class="split">
         <div class="prose">
           <h2>What you'll walk out able to do</h2>
-          <p class="lead">This orientation covers three linked open-source projects from <a href="https://github.com/ruvnet/metaharness" target="_blank" rel="noopener">ruvnet/metaharness</a>. By the end you should be able to explain each one to a client, place it in the workflow, and cite the numbers that make the case.</p>
+          <p class="lead">This is the orientation for the first Cognitum consultant cohort. It covers three linked open-source projects from <a href="https://github.com/ruvnet/metaharness" target="_blank" rel="noopener">ruvnet/metaharness</a>. By the end you should be able to explain each one to a client, place it in the workflow, and cite the numbers that make the case.</p>
         </div>
         <ul class="clean">
-          <li><b>Name the factory.</b> Explain what MetaHarness scaffolds and why a repo wants its own branded agent.</li>
-          <li class="j"><b>Explain the thesis.</b> Why freezing the model and evolving the harness beats reaching for a bigger model.</li>
-          <li><b>Read the loop.</b> Walk a client through Darwin's mutate → sandbox → score → promote cycle.</li>
-          <li class="j"><b>Defend the claim.</b> Use Flywheel's receipts and anti-Goodhart gates to answer "prove it."</li>
+          <li><b>Name the factory.</b> Explain what MetaHarness wraps and why a business points it at their own funnel, ads, and data.</li>
+          <li class="j"><b>Explain the thesis.</b> Why freezing the model and evolving the harness is the cheapest path to the best answer.</li>
+          <li><b>Read the loop.</b> Walk a client through Darwin's "100 evolutions, keep the winners, kill the dead ends."</li>
+          <li class="j"><b>Defend the claim.</b> Use Flywheel's receipts and 24/7 perpetual motion to answer "prove it."</li>
         </ul>
       </div>
     </div>
@@ -507,9 +512,9 @@
       <p class="eyebrow"><span class="num">01</span> metaharness · the factory</p>
       <div class="split">
         <div class="prose">
-          <h2>A factory for agent harnesses, not another agent framework</h2>
-          <p class="lead">MetaHarness reads a GitHub repository and mints a complete, npm-publishable agent harness with its own <code>npx</code> CLI — branded as yours, in under a minute.</p>
-          <p>The problem it solves: every repo deserves a repo-aware agent tuned to its own context. MetaHarness automates that. Analysis is <strong>static and deterministic</strong> — it scans, it never executes your code — and the output ships as a versioned dependency your team can publish and govern like any other.</p>
+          <h2>A factory that wraps your systems in a self-improving harness</h2>
+          <p class="lead">MetaHarness reads a repository — or your existing stack — and mints a complete, npm-publishable agent harness with its own <code>npx</code> CLI, branded as yours, in under a minute.</p>
+          <p>In Reuven's framing: the Meta Harness <strong>wraps your other systems</strong>. You have a marketing funnel, ads, data, and a handful of API services already. You point MetaHarness at them and tell Claude to build a harness around them — then evolve it. Analysis is <strong>static and deterministic</strong>; it scans, it never executes your code, and the output ships as a versioned dependency you own and govern.</p>
         </div>
         <div class="grid" style="align-content:start">
           <div class="callout i">
@@ -528,9 +533,9 @@
       <div class="split">
         <div class="arch">
           <div class="flow">
-            <div class="node"><span class="badge">you</span><div class="body"><b>Harness author</b><span>your brand + content</span></div></div>
+            <div class="node"><span class="badge">you</span><div class="body"><b>Your stack</b><span>funnel · ads · data · APIs</span></div></div>
             <div class="arrow"><span>&rarr;</span></div>
-            <div class="node"><span class="badge">factory</span><div class="body"><b>agent-harness-generator</b><span>mints harnesses from repos</span></div></div>
+            <div class="node"><span class="badge">factory</span><div class="body"><b>agent-harness-generator</b><span>wraps it in a harness</span></div></div>
             <div class="arrow"><span>&rarr;</span></div>
             <div class="node"><span class="badge">out</span><div class="body"><b>Your harness (.zip)</b><span>npx &lt;you&gt; · agents · policies</span></div></div>
             <div class="arrow"><span>&rarr;</span></div>
@@ -561,19 +566,62 @@
     </div>
   </section>
 
-  <!-- 02 DARWIN -->
+  <!-- 02 IN REUVEN'S WORDS -->
+  <section id="voice">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">02</span> In Reuven's words</p>
+      <div class="prose">
+        <h2>The whiteboard version, from the cohort session</h2>
+        <p class="lead">Reuven Cohen (rUv), who built MetaHarness, walked the cohort through it with a live marketing example. Here is his explanation, distilled — the intuition to reach for before the deep dives.</p>
+      </div>
+
+      <div class="bigquote">
+        <p>"You've got an existing marketing funnel — ads, data, API services. You point the Meta Harness and Darwin at those services and tell Claude to create a harness around it and evolve it. Out of a hundred different evolutions, it says: <span style="color:var(--jade)">this is the best one.</span> The ones that work, it evolves more. The ones that don't are dead ends. Kind of like evolution."</p>
+        <div class="who">Reuven Cohen · MetaHarness</div>
+      </div>
+
+      <div style="height:1.6rem"></div>
+      <div class="split">
+        <div>
+          <h3 style="margin-bottom:0.9rem">The marketing feedback loop, step by step</h3>
+          <div class="steps">
+            <div class="step"><span class="idx">1</span><div><b>Point it at what you already run</b><p>Your funnel, ads, analytics, and the marketing APIs you use — MetaHarness wraps them.</p></div></div>
+            <div class="step"><span class="idx">2</span><div><b>State the problem in plain English</b><p>"I need better conversions." Claude builds a harness around your stack and starts evolving it.</p></div></div>
+            <div class="step"><span class="idx">3</span><div><b>Darwin runs the evolutions</b><p>It tries many variations, keeps the ones that measurably work, and abandons the dead ends.</p></div></div>
+            <div class="step"><span class="idx">4</span><div><b>Flywheel keeps it running</b><p>Left on, it optimizes 24/7 — always looking, always evolving, always trying to make it better.</p></div></div>
+          </div>
+        </div>
+        <div class="grid" style="align-content:start; gap:1.2rem">
+          <div class="quote">
+            <p>"The cheapest possible way to get to the best possible answer. That's your competitive advantage — not just that it's smart, but that it's cheap. Your biggest cost in a long-running app is your LLM usage."</p>
+            <div class="who">On why cost is the point</div>
+          </div>
+          <div class="quote">
+            <p>"It's basically rewriting its own code — asking what's the best process I can apply to solve the problem. That's the flywheel. A self-improving agent."</p>
+            <div class="who">On the flywheel</div>
+          </div>
+          <div class="callout i">
+            <div class="h">The line to remember</div>
+            <p style="font-weight:560;">"This is what you want — a click funnel that <em>proves its own lift</em>. Creating a funnel is easy. Optimizing one is hard."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 DARWIN -->
   <section id="darwin">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">02</span> @metaharness/darwin · the engine</p>
+      <p class="eyebrow"><span class="num">03</span> @metaharness/darwin · the engine</p>
       <div class="split">
         <div class="prose">
-          <h2>Darwin Mode: mutate the harness, keep only what measures better</h2>
-          <p class="lead">Instead of fine-tuning weights or buying a bigger model, Darwin evolves the machinery <em>around</em> a frozen model — one policy surface at a time.</p>
-          <p>Each generation mutates exactly one of seven surfaces, runs the variant in a sandbox, scores it, and promotes it only if it clears four hard gates. Variants live in an <strong>archive tree</strong>, so selection can revisit a weak ancestor that seeds a stronger lineage — not just a single greedy branch.</p>
+          <h2>Darwin evolves the operating system around a frozen model</h2>
+          <p class="lead">Instead of fine-tuning weights or buying a bigger model, Darwin evolves the machinery <em>around</em> the model — one policy surface at a time — and keeps only what measures better.</p>
+          <p>Each generation mutates exactly one of seven surfaces, runs the variant in a sandbox, scores it, and promotes it only if it clears four hard gates. Variants live in an <strong>archive tree</strong>, so — like real evolution — a weak ancestor can still seed a stronger lineage rather than being a greedy dead end. The payoff is what Reuven stresses: the <strong>cheapest capable model</strong> reaching the best answer, which is where the profit margin comes from.</p>
         </div>
-        <div class="callout">
-          <div class="h">The thesis, in five words</div>
-          <p style="font-size:1.25rem; font-weight:600; letter-spacing:-0.01em;">Freeze the model. Evolve the harness.</p>
+        <div class="bigquote" style="background:var(--indigo-wash); border-left-color:var(--indigo)">
+          <p>Freeze the model.<br>Evolve the harness.</p>
+          <div class="who">Darwin Mode · the thesis in five words</div>
         </div>
       </div>
 
@@ -621,9 +669,9 @@
           <div class="cap">SWE-bench Lite · 300 instances · official harness</div>
           <div class="ttl">Same frozen model — the harness does the lifting</div>
           <div class="bars" id="bars">
-            <div class="bar"><div class="col" data-h="13" data-v="7.7%"><span class="v">7.7%</span></div><div class="lab">Open-loop<b>BASELINE</b></div></div>
-            <div class="bar"><div class="col" data-h="26" data-v="15.3%"><span class="v">15.3%</span></div><div class="lab">Closed-loop repair<b>+REPAIR</b></div></div>
-            <div class="bar hi"><div class="col" data-h="100" data-v="58.3%"><span class="v">58.3%</span></div><div class="lab">Tiered escalation<b>CHEAP&rarr;FRONTIER</b></div></div>
+            <div class="bar"><div class="col" data-h="13"><span class="v">7.7%</span></div><div class="lab">Open-loop<b>BASELINE</b></div></div>
+            <div class="bar"><div class="col" data-h="26"><span class="v">15.3%</span></div><div class="lab">Closed-loop repair<b>+REPAIR</b></div></div>
+            <div class="bar hi"><div class="col" data-h="100"><span class="v">58.3%</span></div><div class="lab">Tiered escalation<b>CHEAP&rarr;FRONTIER</b></div></div>
           </div>
           <div class="axis-note">resolution rate · higher is better</div>
         </div>
@@ -645,19 +693,19 @@
     </div>
   </section>
 
-  <!-- 03 FLYWHEEL -->
+  <!-- 04 FLYWHEEL -->
   <section id="flywheel">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">03</span> @metaharness/flywheel · the proof</p>
+      <p class="eyebrow"><span class="num">04</span> @metaharness/flywheel · the proof</p>
       <div class="split">
         <div class="prose">
-          <h2>Turning "self-improving" from a claim into a receipt</h2>
-          <p class="lead">Flywheel is the verifiable self-improvement engine: a minimal, auditable loop that promotes a new policy only when it proves measurable lift — and signs the result so anyone can check.</p>
-          <p>Its whole reason to exist is falsifiability. Where Darwin explores the space of harness mutations, Flywheel is the <strong>frozen gate and ledger</strong> around promotion — small enough to trust, with Node's native crypto as its only runtime dependency.</p>
+          <h2>Perpetual motion — and a receipt for every gain</h2>
+          <p class="lead">Flywheel takes Darwin further: it keeps the loop running continually, and promotes a new policy only when it proves measurable lift — signing the result so anyone can check.</p>
+          <p>Reuven's distinction: Darwin finds the cheapest, best model for a task; the <strong>Flywheel asks what's the best <em>process</em></strong> — running 24/7, rewriting its own code, always evolving. That's what makes it a genuine self-improving agent, and it's how you build a <strong>digital twin of a competitor</strong>: understand how they market and grow, weigh every possibility, and keep looking for where you can be more profitable — around the clock.</p>
         </div>
-        <div class="callout">
-          <div class="h">The principle</div>
-          <p style="font-size:1.12rem; font-weight:560; letter-spacing:-0.01em;">Freeze the model. Evolve the harness. Promote only what proves lift.</p>
+        <div class="bigquote">
+          <p>"Always looking, always evolving, always trying to make it better."</p>
+          <div class="who">Reuven Cohen · on the flywheel</div>
         </div>
       </div>
 
@@ -671,7 +719,7 @@
         <div class="card">
           <div class="tag">Compounding lineage</div>
           <h3>Each generation stands on the last winner</h3>
-          <p>Promotions chain into an auditable lineage, so improvement compounds rather than resets.</p>
+          <p>Promotions chain into an auditable lineage, so improvement compounds rather than resets — season over season.</p>
         </div>
         <div class="card">
           <div class="tag">Anti-Goodhart</div>
@@ -679,7 +727,7 @@
           <p>A candidate must clear test sets it was never optimized against — you can't game a metric you can't see.</p>
         </div>
         <div class="card">
-          <div class="tag">Provenance</div>
+          <div class="tag j">Provenance</div>
           <h3>Ed25519 signed receipts</h3>
           <p>Every promotion is cryptographically signed and ships with a replay bundle for independent verification.</p>
         </div>
@@ -712,44 +760,91 @@ out.liftCurve;   out.lineage;   out.replayBundle;</pre>
     </div>
   </section>
 
-  <!-- 04 HOW THEY FIT -->
-  <section id="together">
+  <!-- 05 RUN IT -->
+  <section id="run">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">04</span> How they fit together</p>
-      <div class="prose">
-        <h2>One workflow, three roles</h2>
-        <p class="lead">The factory makes the harness. Darwin makes it better. Flywheel proves it got better — and keeps the receipts. Here's the path a consultant walks a client down:</p>
+      <p class="eyebrow"><span class="num">05</span> Getting a client started</p>
+      <div class="split">
+        <div class="prose">
+          <h2>Point Claude at it and say "make my marketing better"</h2>
+          <p class="lead">The on-ramp Reuven demoed is deliberately blunt: fork the repo (or use the npm packages), point Claude Code at it, and describe the outcome you want. It scaffolds the harness and gets to work.</p>
+          <p>Then wire in the data you already have, make sure it has API access, and let it run. "The rest just works — it's meant to do its thing."</p>
+        </div>
+        <pre><span class="c"># in Claude Code, pointed at a fork of ruvnet/metaharness</span>
+<span class="cmd">&gt;</span> Use the <span class="flag">@metaharness/flywheel</span>, <span class="flag">@metaharness/darwin</span> and <span class="flag">metaharness</span>
+  packages to build the world's best-performing click-funnel system.
+
+<span class="c"># fork first so it's selectable in Claude, then integrate your</span>
+<span class="c"># data + APIs and let the flywheel run.</span></pre>
       </div>
-      <div class="pipe">
-        <div class="pstep"><span class="s">Assess</span><b>Score</b><p><code>metaharness score</code> — is this repo a fit, and what will a run cost?</p></div>
-        <div class="pstep"><span class="s">Generate</span><b>Scaffold</b><p>Mint a branded harness with its own <code>npx</code> CLI in under a minute.</p></div>
-        <div class="pstep"><span class="s">Improve</span><b>Evolve · Darwin</b><p>Mutate surfaces, sandbox, and promote only measured wins.</p></div>
-        <div class="pstep"><span class="s">Verify</span><b>Prove · Flywheel</b><p>Confirm real lift on unseen tests; sign the promotion.</p></div>
-        <div class="pstep"><span class="s">Ship</span><b>Govern</b><p>Publish with SBOM, signed release, and MCP threat model.</p></div>
+
+      <div style="height:2rem"></div>
+      <h3 style="margin-bottom:1rem">Three ways to run it</h3>
+      <div class="grid g3">
+        <div class="card">
+          <div class="tag">Simplest</div>
+          <h3>Local</h3>
+          <p>Run it on your own machine. Good for building, testing, and one-off evolutions.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Scheduled</div>
+          <h3>Claude schedule</h3>
+          <p>A cloud version that fires on a cron — hourly, daily. Cheaper, but no perpetual motion; it runs, then stops until next time.</p>
+        </div>
+        <div class="card">
+          <div class="tag j">Always-on</div>
+          <h3>Your cloud + Flywheel</h3>
+          <p>Reuven's own setup: infra that ties into everything and runs the Flywheel perpetually — always learning, always adapting.</p>
+        </div>
       </div>
-      <div style="height:1.4rem"></div>
+
+      <div style="height:1.6rem"></div>
       <div class="callout i">
-        <div class="h">The through-line to repeat back</div>
-        <p>All three share one bet: <strong>the harness, not the model, is the cheapest lever.</strong> Darwin and Flywheel both freeze the weights and evolve the wrapper — Darwin to <em>discover</em> improvements, Flywheel to <em>prove and record</em> them. That's how "our agent gets better over time" becomes a claim you can audit.</p>
+        <div class="h">The Cognitum side · the service around the open source</div>
+        <p>Beyond the repo there's a hosted layer. In the <strong>Cognitum dashboard</strong>, <strong>Meta LLM</strong> exposes flywheels, pods, and agents behind an API key — point Claude at it and go. The <strong>comms</strong> layer lets agents work alongside people: a CMO or CIO with a team that mixes human reports and agents, each with its own privileges (e.g. permission to update ads through an API). Same building blocks under the hood, easier to adopt.</p>
       </div>
     </div>
   </section>
 
-  <!-- 05 TALKING POINTS -->
+  <!-- 06 HOW THEY FIT -->
+  <section id="together">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">06</span> How they fit together</p>
+      <div class="prose">
+        <h2>One workflow, three roles</h2>
+        <p class="lead">The factory wraps your stack. Darwin makes it better. Flywheel proves it got better — and keeps the receipts. Here's the path a consultant walks a client down:</p>
+      </div>
+      <div class="pipe">
+        <div class="pstep"><span class="s">Assess</span><b>Score</b><p><code>metaharness score</code> — is this a fit, and what will a run cost?</p></div>
+        <div class="pstep"><span class="s">Generate</span><b>Wrap</b><p>Point it at your funnel, ads, data &amp; APIs; scaffold a branded harness.</p></div>
+        <div class="pstep"><span class="s">Improve</span><b>Evolve · Darwin</b><p>100 evolutions — keep the winners, kill the dead ends.</p></div>
+        <div class="pstep"><span class="s">Verify</span><b>Prove · Flywheel</b><p>Confirm real lift on unseen tests; sign the promotion.</p></div>
+        <div class="pstep"><span class="s">Sustain</span><b>Run 24/7</b><p>Leave the flywheel on; it keeps optimizing perpetually.</p></div>
+      </div>
+      <div style="height:1.4rem"></div>
+      <div class="callout">
+        <div class="h">The through-line to repeat back</div>
+        <p>All three share one bet: <strong>the harness, not the model, is the cheapest lever.</strong> Darwin and Flywheel both freeze the weights and evolve the wrapper — Darwin to <em>discover</em> the cheapest capable path, Flywheel to <em>prove, record, and never stop improving</em> it. That's how "our agent gets better over time" becomes a claim you can audit — and a click funnel that proves its own lift.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 TALKING POINTS -->
   <section id="talking">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">05</span> Client-facing Q&amp;A</p>
+      <p class="eyebrow"><span class="num">07</span> Client-facing Q&amp;A</p>
       <div class="split">
         <div class="prose">
           <h2>Answers you should have ready</h2>
           <p class="lead">The questions clients actually ask, and the honest, specific answers — no hand-waving.</p>
         </div>
         <div>
-          <details class="faq"><summary>Isn't this just another agent framework? <span class="pm">+</span></summary><p>No. MetaHarness is a <em>factory</em> — it generates a branded harness for your specific repo, then gets out of the way. The output is a normal npm package you own and version.</p></details>
-          <details class="faq"><summary>Why not just use a bigger model? <span class="pm">+</span></summary><p>Because the harness is the cheaper lever. On SWE-bench Lite the same frozen model went from 7.7% to 58.3% by changing only the wrapper — at roughly 1/56th of frontier-only cost.</p></details>
-          <details class="faq"><summary>"Self-improving" sounds like hype. Prove it. <span class="pm">+</span></summary><p>That's exactly what Flywheel is for. Promotions clear holdout <em>and</em> anchor tests, are gated by an immutable rule, and ship as Ed25519-signed receipts with a replay bundle. You can reproduce the result yourself.</p></details>
-          <details class="faq"><summary>Is it safe to let it rewrite its own policies? <span class="pm">+</span></summary><p>Two independent checks gate every variant, the sandbox runs shell-free with secrets scrubbed from the environment, and unsafe behaviour is penalised into rejection. A variant with any blocked action cannot be promoted.</p></details>
-          <details class="faq"><summary>What does it cost to run? <span class="pm">+</span></summary><p>You get a cost estimate <em>before</em> scaffolding via <code>metaharness score</code>. In practice Darwin runs land around $0.01–$0.74 per instance versus $1–20 for frontier-only approaches.</p></details>
+          <details class="faq"><summary>How do I even start? <span class="pm">+</span></summary><p>Fork <code>ruvnet/metaharness</code> so it's selectable in Claude, point Claude Code at it, and say what you want — e.g. "make my marketing better." It scaffolds the harness; you wire in your data and APIs and let it run.</p></details>
+          <details class="faq"><summary>Isn't this just another agent framework? <span class="pm">+</span></summary><p>No. MetaHarness is a <em>factory</em> that <em>wraps</em> your existing systems in a branded harness, then gets out of the way. The output is a normal npm package you own and version.</p></details>
+          <details class="faq"><summary>Why not just use a bigger model? <span class="pm">+</span></summary><p>Because the harness is the cheaper lever. On SWE-bench Lite the same frozen model went from 7.7% to 58.3% by changing only the wrapper — at roughly 1/56th of frontier-only cost. Cheapest capable model, best answer, better margin.</p></details>
+          <details class="faq"><summary>"Self-improving" sounds like hype. Prove it. <span class="pm">+</span></summary><p>That's what Flywheel is for. Promotions clear holdout <em>and</em> anchor tests, are gated by an immutable rule, and ship as Ed25519-signed receipts with a replay bundle. You can reproduce the result yourself.</p></details>
+          <details class="faq"><summary>Does it just run once, or keep improving? <span class="pm">+</span></summary><p>Your choice. A scheduled cron run is cheaper but stops between runs. Left on your own infra, the Flywheel runs perpetually — always looking, always evolving, 24/7.</p></details>
+          <details class="faq"><summary>Is it safe to let it rewrite its own policies? <span class="pm">+</span></summary><p>Two independent checks gate every variant, the sandbox runs shell-free with secrets scrubbed, and unsafe behaviour is penalised into rejection. A variant with any blocked action cannot be promoted.</p></details>
         </div>
       </div>
     </div>
@@ -758,7 +853,7 @@ out.liftCurve;   out.lineage;   out.replayBundle;</pre>
   <!-- GLOSSARY -->
   <section id="glossary">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">06</span> Field glossary</p>
+      <p class="eyebrow"><span class="num">08</span> Field glossary</p>
       <h2 class="prose">The vocabulary, defined</h2>
       <dl class="gloss">
         <div><dt>Harness</dt><dd>The machinery around a model — planner, context, tools, retries, memory, review — everything except the weights.</dd></div>
@@ -767,7 +862,8 @@ out.liftCurve;   out.lineage;   out.replayBundle;</pre>
         <div><dt>Promotion gate</dt><dd>The all-or-nothing set of conditions a child must satisfy to replace its parent.</dd></div>
         <div><dt>Anti-Goodhart</dt><dd>Requiring wins on tests the candidate never optimized against, so the metric can't be gamed.</dd></div>
         <div><dt>Lift curve</dt><dd>Flywheel's record of improvement across generations — the visible proof of progress.</dd></div>
-        <div><dt>Replay bundle</dt><dd>Everything needed to reproduce a promotion independently.</dd></div>
+        <div><dt>Perpetual motion</dt><dd>Running the flywheel continuously, 24/7, so it never stops evolving.</dd></div>
+        <div><dt>Digital twin</dt><dd>A model of a competitor the system keeps studying and out-optimizing around the clock.</dd></div>
         <div><dt>GEPA</dt><dd>Darwin's prompt-policy learner that evolves a genome of text components via reflection.</dd></div>
         <div><dt>Cascade / escalation</dt><dd>Start on a cheap model, escalate to a frontier model only when the task demands it.</dd></div>
       </dl>
@@ -779,8 +875,8 @@ out.liftCurve;   out.lineage;   out.replayBundle;</pre>
   <div class="wrap">
     <div class="frow">
       <div class="note">
-        COGNITUM CONSULTANTS · INTERNAL ORIENTATION<br>
-        Prepared for the 29 July 2026 cohort · design is a first-pass dark treatment, tunable to brand.
+        COGNITUM CONSULTANTS · INITIAL COHORT CERTIFICATION<br>
+        Orientation · 29 July 2026 · design is a first-pass dark treatment, tunable to brand.
       </div>
       <div class="note">
         Sources ·
@@ -804,8 +900,7 @@ out.liftCurve;   out.lineage;   out.replayBundle;</pre>
     }
     if (btn) {
       btn.addEventListener('click', function () {
-        var next = current() === 'dark' ? 'light' : 'dark';
-        root.dataset.theme = next;
+        root.dataset.theme = current() === 'dark' ? 'light' : 'dark';
       });
     }
 

@@ -1,8 +1,10 @@
 # cognitum-consultants-orientation
 
-Day-one orientation for the Cognitum Consultants cohort (29 July 2026), covering the
-**MetaHarness** ecosystem: the agent-harness factory and its two engines, **Darwin**
-and **Flywheel**.
+Day-one orientation for the Cognitum Consultants certification cohort (29 July 2026),
+covering the **MetaHarness** ecosystem: the agent-harness factory and its two engines,
+**Darwin** and **Flywheel** — grounded in **Reuven Cohen's** own cohort-session
+walkthrough (the marketing-feedback-loop example, "100 evolutions, keep the winners,"
+the cheapest-model-best-answer thesis, the 24/7 flywheel, and how to actually start).
 
 ## View it
 
