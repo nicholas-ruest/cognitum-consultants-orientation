@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — a 60-minute, 43-slide deck on a fixed 16:9 stage (no scrolling) with custom SVG visualizations. Arrow keys / space to navigate.">
+<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — a 60-minute, 43-slide deck on a no-scroll fixed stage with a live particle background and animated SVG visualizations. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
   /* ============================================================
-     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v2, visual)
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
      Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
-     Palette: blue-biased ink · indigo (cognition) · jade (lift)
-     Semantic (labeled only): amber / red for penalties & cost.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
      Keys: ← →  navigate · Space next · F present · T theme
      ============================================================ */
 
@@ -20,6 +20,7 @@
     --text:#12151C; --muted:#566072; --faint:#8A93A5;
     --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
     --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
     --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
     --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
     --radius:14px; --radius-sm:9px;
@@ -32,45 +33,23 @@
       --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
     }
   }
-  :root[data-theme="light"] {
-    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
-    --text:#12151C; --muted:#566072; --faint:#8A93A5;
-    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
-    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
-  }
-  :root[data-theme="dark"] {
-    --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
-    --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
-    --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
-    --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
-  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
 
   * { box-sizing: border-box; }
   html { font-size: 16px; }
   html, body { margin: 0; height: 100%; }
-  body {
-    background: var(--ink); color: var(--text);
-    font-family: var(--font-sans); line-height: 1.5;
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-    overflow: hidden; display: flex; flex-direction: column; height: 100vh;
-  }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
   ::selection { background: var(--indigo); color: #fff; }
   a { color: var(--indigo); text-decoration: none; }
   strong { color: var(--text); font-weight: 640; }
   em { font-style: italic; color: var(--text); }
   code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
 
-  /* ---------- scaled stage ---------- */
   .stagewrap { flex: 1; position: relative; overflow: hidden; }
-  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); }
-  .stage::before {
-    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
-            mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
-    opacity: 0.3;
-  }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
 
   .slide { position: absolute; inset: 0; z-index: 1; padding: 46px 66px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
   .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
@@ -89,7 +68,6 @@
   .mut { color: var(--muted); }
   .small { font-size: 0.86rem; }
 
-  /* ---------- title / close ---------- */
   .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
   .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
   .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
@@ -97,7 +75,7 @@
   .title-brand .mark { width: 30px; height: 30px; }
   .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
   .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
-  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
   h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
   h1 .g { color: var(--jade); }
   .title-sub { font-size: 1.28rem; color: var(--muted); max-width: 60ch; line-height: 1.42; }
@@ -105,17 +83,17 @@
   .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
   .chip b { color: var(--indigo); font-weight: 600; }
   .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
 
-  /* ---------- divider ---------- */
   .divider { align-items: flex-start; }
   .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
   .divider h2 { font-size: 3.2rem; max-width: 20ch; }
   .divider .sub { font-size: 1.16rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
   .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
   .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
   .divider .dchips span { font-family:var(--font-mono); font-size:0.68rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.7rem; }
 
-  /* ---------- layout ---------- */
   .grid { display: grid; gap: 0.85rem; }
   .g2 { grid-template-columns: repeat(2,1fr); }
   .g3 { grid-template-columns: repeat(3,1fr); }
@@ -141,6 +119,9 @@
   ul.clean li.j::before { background: var(--jade); }
   ul.clean li b { color: var(--text); }
   ul.clean.sm li { font-size: 0.88rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
 
   .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
   .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
@@ -154,18 +135,14 @@
   .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
 
-  /* diagram container + svg */
   .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
   .di.plain { background: transparent; border: none; padding: 0; }
   .di .cap { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
   .di svg { width: 100%; height: auto; display: block; }
   .di.sq svg { max-width: 330px; margin-inline: auto; }
   .stage svg text { font-family: var(--font-mono); }
-  .vlbl { fill: var(--muted); }
-  .vlbl-t { fill: var(--text); }
-  .vlbl-f { fill: var(--faint); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
 
-  /* architecture flow */
   .flow { display: flex; align-items: stretch; gap: 0; }
   .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
   .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
@@ -174,25 +151,26 @@
   .node span { font-size: 0.7rem; color: var(--muted); font-family: var(--font-mono); }
   .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
   .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
 
-  /* surfaces */
   .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
   .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
   .surf .f { font-family: var(--font-mono); font-size: 0.76rem; color: var(--indigo); display: block; }
   .surf .d { font-size: 0.74rem; color: var(--muted); line-height: 1.28; }
   .surf.ro { border-style: dashed; }
   .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
 
-  /* steps */
   .steps { display: grid; gap: 0.45rem; }
   .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
   .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
-  .step.a .idx { background: var(--indigo); }
-  .step.b .idx { background: var(--jade); }
-  .step b { font-size: 0.9rem; }
-  .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.82rem; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 0.9rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.82rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
 
-  /* bar chart */
   .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
   .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
   .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 0.98rem; }
@@ -205,43 +183,38 @@
   .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
 
   pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.55; color: var(--text); }
-  pre .c { color: var(--faint); }
-  pre .cmd { color: var(--jade); }
-  pre .flag { color: var(--indigo); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
 
-  /* pipeline */
   .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
   .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
   .pstep .s { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
   .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.9rem; }
   .pstep p { font-size: 0.74rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
 
-  /* q&a */
   .qa { display: grid; gap: 0.5rem; }
   .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
   .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 0.92rem; }
   .qa .a { margin: 0; color: var(--muted); font-size: 0.82rem; line-height: 1.35; }
 
-  /* versus */
   .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
   .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
-  .vcol.d { border-top: 3px solid var(--indigo); }
-  .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
   .vcol h3 { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
   .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
   .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
 
-  /* agenda */
   .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
   .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
   .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.88rem; }
-  .arow .at { font-size: 0.98rem; }
-  .arow .am { font-family: var(--font-mono); font-size: 0.76rem; color: var(--faint); }
+  .arow .at { font-size: 0.98rem; } .arow .am { font-family: var(--font-mono); font-size: 0.76rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
 
-  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; }
-  .src a { color: var(--muted); }
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
 
-  /* chrome */
+  /* ---------- chrome ---------- */
   .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
   .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
   .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
@@ -253,15 +226,50 @@
   .navbar .part b { color: var(--indigo); }
   .navbar .spacer { flex: 1; }
   .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
-  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .counter b { color: var(--text); }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
   .arrows { display: flex; gap: 0.4rem; }
   .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
-  .arr:hover { border-color: var(--indigo); color: var(--indigo); }
-  .arr[disabled] { opacity: 0.35; cursor: default; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
   .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
   .zone.l { left: 0; } .zone.r { right: 0; }
   @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
 </style>
 </head>
 <body>
@@ -273,6 +281,7 @@
 </div>
 
 <div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
   <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
   <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
   <div class="stage" id="stage">
@@ -281,18 +290,18 @@
     <section class="slide" data-part="Welcome">
       <div class="glow-a"></div><div class="glow-b"></div>
       <div class="inner">
-        <div class="title-brand">
-          <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <div class="title-brand rise">
+          <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
             <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
             <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
           </svg>
           Cognitum <small>Consultants</small>
         </div>
-        <span class="kicker"><span class="dot"></span>Consultant Certification · Cohort orientation · 29 Jul 2026</span>
-        <h1>Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-        <p class="title-sub">A working session on the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it.</p>
-        <div class="chips">
+        <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Consultant Certification · Cohort orientation · 29 Jul 2026</span>
+        <h1 class="rise" style="animation-delay:.1s">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+        <p class="title-sub rise" style="animation-delay:.18s">A working session on the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it.</p>
+        <div class="chips rise" style="animation-delay:.26s">
           <span class="chip"><b>metaharness</b><span>the factory</span></span>
           <span class="chip"><b>@metaharness/darwin</b><span>the engine</span></span>
           <span class="chip"><b>@metaharness/flywheel</b><span>the proof</span></span>
@@ -313,29 +322,29 @@
           <div class="arow"><span class="an">05</span><span class="at">Putting it to work with a client</span><span class="am">~10 min</span></div>
           <div class="arow"><span class="an">06</span><span class="at">Selling it — playbook &amp; objections</span><span class="am">~10 min</span></div>
         </div>
-        <div class="callout i" style="margin-top:1.1rem"><div class="h">How to read this deck</div><p>Every part opens with a divider, ends with something you can say to a client. Ask questions any time — the top progress bar is click-to-jump if we need to double back. Controls: <strong>← →</strong> or Space · <strong>F</strong> fullscreen · <strong>T</strong> theme.</p></div>
+        <div class="callout i" style="margin-top:1.1rem"><div class="h">How to read this deck</div><p>Every part opens with a divider and ends with something you can say to a client. Ask questions any time — the top progress bar is click-to-jump if we double back. Controls: <strong>← →</strong> or Space · <strong>F</strong> fullscreen · <strong>T</strong> theme.</p></div>
       </div>
     </section>
 
     <!-- 3 · DIVIDER 01 -->
     <section class="slide divider" data-part="The big idea">
       <div class="inner">
-        <div class="pnum">PART 01</div>
-        <h2>The big idea</h2>
-        <p class="sub">Why the smartest move in agents right now is to stop chasing bigger models.</p>
+        <div class="pnum rise">PART 01</div>
+        <h2 class="rise" style="animation-delay:.06s">The big idea</h2>
+        <p class="sub rise" style="animation-delay:.12s">Why the smartest move in agents right now is to stop chasing bigger models.</p>
         <div class="rule"></div>
         <div class="dchips"><span>the problem</span><span>the thesis</span><span>the cheapest lever</span><span>the three projects</span></div>
       </div>
     </section>
 
-    <!-- 4 · THE PROBLEM (viz: three gaps) -->
+    <!-- 4 · THE PROBLEM -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <p class="kick"><span class="n">01.1</span> The problem</p>
         <div class="split v top">
           <div>
             <h2>Every repo wants a repo-aware agent — and every agent burns money</h2>
-            <p class="mut">A generic assistant doesn't know your codebase, your funnel, or your data. Hand-tuning one is slow and doesn't stick. And the obvious fix — reach for a bigger model — is the expensive one, which is a problem precisely where agents live longest.</p>
+            <p class="mut">A generic assistant doesn't know your codebase, your funnel, or your data. Hand-tuning one is slow and doesn't stick. And the obvious fix — reach for a bigger model — is the expensive one, precisely where agents live longest.</p>
             <ul class="clean" style="margin-top:0.8rem">
               <li><b>Context gap</b> — off-the-shelf agents have no idea how your system actually works.</li>
               <li class="j"><b>Cost gap</b> — in a long-running app, LLM tokens are the single biggest line item.</li>
@@ -346,37 +355,28 @@
             <span class="cap">The three gaps a harness has to close</span>
             <svg viewBox="0 0 400 250" role="img" aria-label="Three gaps: context, cost, trust">
               <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
-              <!-- context -->
-              <g>
-                <rect x="20" y="24" width="150" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
-                <text x="34" y="48" font-size="13" class="vlbl-t" font-weight="600">Generic agent</text>
-                <text x="34" y="66" font-size="11" class="vlbl-f">no repo knowledge</text>
-                <line x1="170" y1="52" x2="250" y2="52" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ar1)"/>
-                <text x="176" y="42" font-size="10" fill="var(--crit)">context gap</text>
-                <rect x="252" y="24" width="128" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
-                <text x="266" y="48" font-size="13" class="vlbl-t" font-weight="600">Your system</text>
-                <text x="266" y="66" font-size="11" class="vlbl-f">the real context</text>
-              </g>
-              <!-- cost -->
-              <g transform="translate(0,86)">
-                <text x="20" y="34" font-size="11" fill="var(--amber)">cost gap</text>
-                <rect x="20" y="42" width="360" height="16" rx="8" fill="var(--surface-2)" stroke="var(--border)"/>
-                <rect x="20" y="42" width="300" height="16" rx="8" fill="var(--crit)" opacity="0.8"/>
-                <text x="330" y="55" font-size="11" class="vlbl">LLM $$$</text>
-              </g>
-              <!-- trust -->
-              <g transform="translate(0,168)">
-                <text x="20" y="26" font-size="11" fill="var(--indigo)">trust gap</text>
-                <text x="20" y="52" font-size="14" class="vlbl">"it improves over time"</text>
-                <text x="243" y="52" font-size="18" fill="var(--crit)">?</text>
-              </g>
+              <rect x="20" y="24" width="150" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="34" y="48" font-size="13" class="vlbl-t" font-weight="600">Generic agent</text>
+              <text x="34" y="66" font-size="11" class="vlbl-f">no repo knowledge</text>
+              <line class="v-draw" x1="170" y1="52" x2="250" y2="52" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ar1)"/>
+              <text x="176" y="42" font-size="10" fill="var(--crit)">context gap</text>
+              <rect x="252" y="24" width="128" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="266" y="48" font-size="13" class="vlbl-t" font-weight="600">Your system</text>
+              <text x="266" y="66" font-size="11" class="vlbl-f">the real context</text>
+              <text x="20" y="120" font-size="11" fill="var(--amber)">cost gap</text>
+              <rect x="20" y="128" width="360" height="16" rx="8" fill="var(--surface-2)" stroke="var(--border)"/>
+              <rect class="v-gx" x="20" y="128" width="300" height="16" rx="8" fill="var(--crit)" opacity="0.8"/>
+              <text x="330" y="141" font-size="11" class="vlbl">LLM $$$</text>
+              <text x="20" y="194" font-size="11" fill="var(--indigo)">trust gap</text>
+              <text x="20" y="220" font-size="14" class="vlbl">"it improves over time"</text>
+              <text x="243" y="220" font-size="18" fill="var(--crit)" class="v-shim">?</text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 · THESIS (viz: freeze/evolve rings) -->
+    <!-- 5 · THESIS (rings) -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <div class="split v">
@@ -387,26 +387,25 @@
           <div class="di sq">
             <span class="cap">Frozen core, evolving harness</span>
             <svg viewBox="0 0 300 300" role="img" aria-label="A frozen model core surrounded by an evolving harness ring">
-              <circle cx="150" cy="150" r="128" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="7 7" opacity="0.85"/>
-              <g font-size="11" fill="var(--indigo)" text-anchor="middle">
-                <circle cx="150" cy="22" r="5" fill="var(--indigo)"/><text x="150" y="14">planner</text>
-                <circle cx="278" cy="150" r="5" fill="var(--indigo)"/><text x="256" y="140">tools</text>
-                <circle cx="150" cy="278" r="5" fill="var(--indigo)"/><text x="150" y="296">memory</text>
-                <circle cx="22" cy="150" r="5" fill="var(--indigo)"/><text x="44" y="140">context</text>
-              </g>
-              <path d="M150 40 A110 110 0 0 1 260 150" fill="none" stroke="var(--indigo)" stroke-width="2" marker-end="url(#arRing)"/>
               <defs><marker id="arRing" markerWidth="9" markerHeight="9" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--indigo)"/></marker></defs>
-              <circle cx="150" cy="150" r="62" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <g class="v-spinS">
+                <circle cx="150" cy="150" r="128" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="7 9" opacity="0.85"/>
+                <circle cx="150" cy="22" r="6" fill="var(--indigo)"/>
+                <circle cx="278" cy="150" r="6" fill="var(--indigo)"/>
+                <circle cx="150" cy="278" r="6" fill="var(--indigo)"/>
+                <circle cx="22" cy="150" r="6" fill="var(--indigo)"/>
+              </g>
+              <g font-size="11" fill="var(--indigo)" text-anchor="middle"><text x="150" y="14">planner</text><text x="256" y="140">tools</text><text x="150" y="296">memory</text><text x="44" y="140">context</text></g>
+              <circle class="v-pulse" cx="150" cy="150" r="62" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
               <path d="M143 150 v-8 a7 7 0 0 1 14 0 v8 M138 150 h24 v20 h-24 z" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linejoin="round"/>
               <text x="150" y="205" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MODEL · frozen</text>
-              <text x="150" y="150" text-anchor="middle" font-size="0"></text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6 · CHEAPEST LEVER (viz: pareto) -->
+    <!-- 6 · CHEAPEST LEVER (pareto) -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <p class="kick"><span class="n">01.3</span> Why the harness is the cheapest lever</p>
@@ -414,32 +413,27 @@
           <div>
             <h2>Cheapest capable model, best possible answer</h2>
             <p class="mut">The edge isn't only that it's smart — it's that it's the <strong>cheapest</strong> route to the best answer. Small model where it suffices; escalate to a frontier model only when a task truly needs it.</p>
-            <ul class="clean" style="margin-top:0.7rem">
-              <li class="j"><b>The gap is your margin</b> — every task solved on a cheap model is money kept.</li>
-              <li><b>It compounds</b> — matters most for always-on apps, where tokens dominate cost.</li>
-              <li class="j"><b>No weights touched</b> — you move the frontier by changing the wrapper.</li>
-            </ul>
+            <div class="grid g2" style="margin-top:0.7rem; gap:0.6rem">
+              <div class="stat"><div class="num"><span class="count" data-to="56" data-pre="~" data-suf="×">0</span></div><div class="k">cheaper than frontier-only</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="7.6" data-dp="1" data-suf="×">0</span></div><div class="k">resolution lift, harness alone</div></div>
+            </div>
           </div>
           <div class="di">
             <span class="cap">Cost vs. capability — the Pareto frontier</span>
-            <svg viewBox="0 0 420 270" role="img" aria-label="Scatter of models by cost and capability, MetaHarness on the frontier">
-              <!-- axes -->
-              <line x1="46" y1="24" x2="46" y2="224" stroke="var(--border-2)" stroke-width="1.5"/>
-              <line x1="46" y1="224" x2="404" y2="224" stroke="var(--border-2)" stroke-width="1.5"/>
-              <text x="46" y="246" font-size="11" class="vlbl-f">low cost</text>
-              <text x="404" y="246" font-size="11" class="vlbl-f" text-anchor="end">high cost →</text>
-              <text x="30" y="150" font-size="11" class="vlbl-f" transform="rotate(-90 30 150)" text-anchor="middle">capability →</text>
-              <!-- frontier curve -->
-              <path d="M70 200 Q90 90 150 78 Q320 60 380 56" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.6"/>
-              <!-- cheap weak models -->
-              <circle cx="86" cy="188" r="6" fill="var(--muted)"/><text x="96" y="192" font-size="10" class="vlbl-f">small model</text>
-              <circle cx="120" cy="150" r="6" fill="var(--muted)"/>
-              <!-- frontier-only -->
-              <circle cx="360" cy="66" r="8" fill="var(--crit)"/><text x="350" y="60" font-size="10.5" fill="var(--crit)" text-anchor="end">frontier-only · $$$</text>
-              <!-- metaharness cascade -->
-              <circle cx="150" cy="80" r="9" fill="var(--jade)"/><circle cx="150" cy="80" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
-              <text x="164" y="76" font-size="11" fill="var(--jade)" font-weight="600">MetaHarness</text>
-              <text x="164" y="90" font-size="10" class="vlbl-f">~56× cheaper</text>
+            <svg viewBox="0 0 420 262" role="img" aria-label="Scatter of models by cost and capability; MetaHarness sits on the frontier">
+              <line x1="46" y1="24" x2="46" y2="216" stroke="var(--border-2)" stroke-width="1.5"/>
+              <line x1="46" y1="216" x2="404" y2="216" stroke="var(--border-2)" stroke-width="1.5"/>
+              <text x="52" y="236" font-size="11" class="vlbl-f">low cost</text>
+              <text x="404" y="236" font-size="11" class="vlbl-f" text-anchor="end">high cost →</text>
+              <text x="30" y="130" font-size="11" class="vlbl-f" transform="rotate(-90 30 130)" text-anchor="middle">capability →</text>
+              <path class="v-draw" d="M70 196 Q92 92 152 80 Q320 60 384 54" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 6" opacity="0.65"/>
+              <circle class="v-pop" cx="86" cy="184" r="6" fill="var(--muted)"/><text x="96" y="188" font-size="10" class="vlbl-f">small model</text>
+              <circle class="v-pop" style="animation-delay:.1s" cx="120" cy="150" r="6" fill="var(--muted)"/>
+              <circle class="v-pop" style="animation-delay:.2s" cx="360" cy="64" r="8" fill="var(--crit)"/><text x="350" y="58" font-size="10.5" fill="var(--crit)" text-anchor="end">frontier-only · $$$</text>
+              <circle class="v-halo" cx="152" cy="80" r="9" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:.35s" cx="152" cy="80" r="9" fill="var(--jade)"/><circle cx="152" cy="80" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
+              <text x="166" y="76" font-size="11" fill="var(--jade)" font-weight="600">MetaHarness</text>
+              <text x="166" y="90" font-size="10" class="vlbl-f">~56× cheaper</text>
             </svg>
           </div>
         </div>
@@ -457,7 +451,7 @@
           <div class="card"><div class="tag">the proof</div><h3>@metaharness/flywheel</h3><p>Runs the loop continually and promotes only proven lift — with signed, replayable receipts.</p></div>
         </div>
         <div class="di plain" style="margin-top:0.9rem">
-          <svg viewBox="0 0 900 60" role="img" aria-label="Factory produces a harness, Darwin evolves it, Flywheel proves it">
+          <svg viewBox="0 0 900 60" role="img" aria-label="Factory builds a harness, Darwin improves it, Flywheel proves it, then ship">
             <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
             <g font-size="14" text-anchor="middle">
               <rect x="20" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--indigo)"/><text x="120" y="36" fill="var(--indigo)">metaharness — build</text>
@@ -465,10 +459,10 @@
               <rect x="290" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="390" y="36" fill="var(--jade)">darwin — improve</text>
               <line x1="494" y1="31" x2="556" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
               <rect x="560" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="660" y="36" fill="var(--jade)">flywheel — prove</text>
-              <path d="M760 31 h40 a12 12 0 0 1 12 12 v-24 a12 12 0 0 0 -12 12 z" fill="none"/>
               <line x1="762" y1="31" x2="824" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
               <text x="864" y="36" fill="var(--muted)">ship</text>
             </g>
+            <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M20 31 H864')"/>
           </svg>
         </div>
         <p class="src">All three: open source, MIT · github.com/ruvnet/metaharness · npm @metaharness/*</p>
@@ -478,9 +472,9 @@
     <!-- 8 · DIVIDER 02 -->
     <section class="slide divider" data-part="MetaHarness">
       <div class="inner">
-        <div class="pnum">PART 02</div>
-        <h2>MetaHarness — the factory</h2>
-        <p class="sub">A factory for agent harnesses. Not another agent framework.</p>
+        <div class="pnum rise">PART 02</div>
+        <h2 class="rise" style="animation-delay:.06s">MetaHarness — the factory</h2>
+        <p class="sub rise" style="animation-delay:.12s">A factory for agent harnesses. Not another agent framework.</p>
         <div class="rule"></div>
         <div class="dchips"><span>wraps your stack</span><span>one kernel · nine hosts</span><span>governed by default</span><span>the numbers</span></div>
       </div>
@@ -504,14 +498,14 @@
             <div class="callout i"><div class="h">The one-liner</div><p>"The meta-harness for AI agents — scaffold your own focused, branded agent harness with its own <code>npx</code> CLI."</p></div>
             <div class="grid g2">
               <div class="stat"><div class="num i">&lt;60s</div><div class="k">repo → publishable harness</div></div>
-              <div class="stat"><div class="num i">9</div><div class="k">agent hosts it runs on</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="9">0</span></div><div class="k">agent hosts it runs on</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 10 · WRAPS YOUR STACK (viz: nested wrap) -->
+    <!-- 10 · WRAPS YOUR STACK -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.2</span> It wraps what you already run</p>
@@ -527,14 +521,15 @@
           </div>
           <div class="di sq">
             <span class="cap">A harness is a wrapper, not a rewrite</span>
-            <svg viewBox="0 0 320 260" role="img" aria-label="Your stack wrapped by a harness, wrapped by governance">
-              <rect x="14" y="14" width="292" height="232" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="6 6"/>
+            <svg viewBox="0 0 320 262" role="img" aria-label="Your stack wrapped by a harness, wrapped by governance">
+              <rect class="v-pop" x="14" y="14" width="292" height="234" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="6 6"/>
               <text x="160" y="34" text-anchor="middle" font-size="11" fill="var(--indigo)">GOVERNANCE · MCP default-deny</text>
-              <rect x="46" y="50" width="228" height="164" rx="13" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
+              <rect class="v-pop" style="animation-delay:.12s" x="46" y="50" width="228" height="166" rx="13" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
               <text x="160" y="70" text-anchor="middle" font-size="11" fill="var(--jade)">HARNESS · agents · tools · retries</text>
-              <rect x="84" y="88" width="152" height="102" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
-              <text x="160" y="128" text-anchor="middle" font-size="13" class="vlbl-t" font-weight="600">YOUR STACK</text>
+              <rect class="v-pop" style="animation-delay:.24s" x="84" y="88" width="152" height="104" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="160" y="130" text-anchor="middle" font-size="13" class="vlbl-t" font-weight="600">YOUR STACK</text>
               <text x="160" y="150" text-anchor="middle" font-size="11" class="vlbl-f">funnel · ads · data · APIs</text>
+              <circle r="4" fill="var(--indigo)" class="v-t" style="offset-path:path('M30 30 H290 V232 H30 Z');animation-duration:6s"/>
             </svg>
           </div>
         </div>
@@ -584,15 +579,15 @@
           </ul>
         </div>
         <div class="grid g4" style="margin-top:0.9rem">
-          <div class="stat"><div class="num i">568</div><div class="k">passing tests · 67 files</div></div>
-          <div class="stat"><div class="num i">16</div><div class="k">green CI jobs</div></div>
-          <div class="stat"><div class="num i">21</div><div class="k"><code>harness</code> subcommands</div></div>
-          <div class="stat"><div class="num i">19</div><div class="k">vertical templates</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="568">0</span></div><div class="k">passing tests · 67 files</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="16">0</span></div><div class="k">green CI jobs</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="21">0</span></div><div class="k"><code>harness</code> subcommands</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="19">0</span></div><div class="k">vertical templates</div></div>
         </div>
       </div>
     </section>
 
-    <!-- 13 · NINE HOSTS (viz: hub-spoke) -->
+    <!-- 13 · NINE HOSTS (hub-spoke) -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.5</span> Runs on nine hosts</p>
@@ -607,18 +602,15 @@
             </ul>
           </div>
           <div class="di">
-            <span class="cap">One kernel · nine adapters</span>
-            <svg viewBox="0 0 420 300" role="img" aria-label="Kernel at center connected to nine hosts">
-              <defs></defs>
-              <!-- spokes -->
+            <span class="cap">One kernel · nine adapters · live signal</span>
+            <svg viewBox="0 0 420 300" role="img" aria-label="Kernel at center firing signals out to nine hosts">
               <g stroke="var(--border-2)" stroke-width="1.3">
-                <line x1="210" y1="150" x2="210" y2="40"/><line x1="210" y1="150" x2="320" y2="70"/>
-                <line x1="210" y1="150" x2="372" y2="150"/><line x1="210" y1="150" x2="320" y2="230"/>
-                <line x1="210" y1="150" x2="210" y2="260"/><line x1="210" y1="150" x2="100" y2="230"/>
-                <line x1="210" y1="150" x2="48" y2="150"/><line x1="210" y1="150" x2="100" y2="70"/>
-                <line x1="210" y1="150" x2="140" y2="150"/>
+                <line class="v-draw" x1="210" y1="150" x2="210" y2="40"/><line class="v-draw" x1="210" y1="150" x2="326" y2="66"/>
+                <line class="v-draw" x1="210" y1="150" x2="378" y2="150"/><line class="v-draw" x1="210" y1="150" x2="326" y2="234"/>
+                <line class="v-draw" x1="210" y1="150" x2="210" y2="266"/><line class="v-draw" x1="210" y1="150" x2="94" y2="234"/>
+                <line class="v-draw" x1="210" y1="150" x2="42" y2="150"/><line class="v-draw" x1="210" y1="150" x2="94" y2="66"/>
+                <line class="v-draw" x1="210" y1="150" x2="150" y2="112"/>
               </g>
-              <!-- host nodes -->
               <g font-size="10.5" fill="var(--muted)" text-anchor="middle">
                 <circle cx="210" cy="34" r="5" fill="var(--indigo)"/><text x="210" y="22">Claude Code</text>
                 <circle cx="326" cy="66" r="5" fill="var(--indigo)"/><text x="344" y="58">Codex</text>
@@ -626,12 +618,16 @@
                 <circle cx="326" cy="234" r="5" fill="var(--indigo)"/><text x="344" y="252">Hermes</text>
                 <circle cx="210" cy="266" r="5" fill="var(--indigo)"/><text x="210" y="284">OpenClaw</text>
                 <circle cx="94" cy="234" r="5" fill="var(--indigo)"/><text x="74" y="252">RVM</text>
-                <circle cx="42" cy="150" r="5" fill="var(--indigo)"/><text x="44" y="138">Copilot</text>
+                <circle cx="42" cy="150" r="5" fill="var(--indigo)"/><text x="46" y="138">Copilot</text>
                 <circle cx="94" cy="66" r="5" fill="var(--indigo)"/><text x="74" y="58">OpenCode</text>
                 <circle cx="150" cy="112" r="5" fill="var(--indigo)"/><text x="120" y="106">Actions</text>
               </g>
-              <!-- kernel -->
-              <circle cx="210" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L210 40')"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L378 150');animation-delay:.5s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L326 234');animation-delay:1s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L94 234');animation-delay:1.5s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L94 66');animation-delay:2s"/>
+              <circle class="v-pulse" cx="210" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
               <text x="210" y="147" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">kernel</text>
               <text x="210" y="161" text-anchor="middle" font-size="8.5" class="vlbl-f">Rust→WASM</text>
             </svg>
@@ -681,7 +677,7 @@
       </div>
     </section>
 
-    <!-- 16 · THE NUMBERS (viz: cost bars) -->
+    <!-- 16 · THE NUMBERS (cost bars) -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.8</span> The case, in numbers</p>
@@ -689,20 +685,20 @@
           <div>
             <h2>Same benchmark, a fraction of the cost</h2>
             <div class="grid g2" style="margin-top:0.6rem; gap:0.6rem">
-              <div class="stat"><div class="num">55.6%</div><div class="k">SWE-bench Verified (500) resolved</div></div>
-              <div class="stat"><div class="num i">51.3%</div><div class="k">the Lite-cascade baseline it beats</div></div>
+              <div class="stat"><div class="num"><span class="count" data-to="55.6" data-dp="1" data-suf="%">0</span></div><div class="k">SWE-bench Verified (500) resolved</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="51.3" data-dp="1" data-suf="%">0</span></div><div class="k">the Lite-cascade baseline it beats</div></div>
             </div>
             <p class="mut small" style="margin-top:0.7rem">The GLM→Opus empty-patch cascade resolves more of the benchmark than the baseline — for cents, not dollars, per instance. Cost is the headline, not a footnote.</p>
           </div>
           <div class="di">
-            <span class="cap">Cost per instance · log scale</span>
-            <svg viewBox="0 0 420 200" role="img" aria-label="MetaHarness ~$0.15 versus frontier-only $1 to $20 per instance">
+            <span class="cap">Cost per instance</span>
+            <svg viewBox="0 0 420 200" role="img" aria-label="MetaHarness about 15 cents versus frontier-only $1 to $20 per instance">
               <text x="14" y="40" font-size="12" fill="var(--jade)">MetaHarness cascade</text>
-              <rect x="14" y="48" width="60" height="22" rx="6" fill="var(--jade)"/>
+              <rect class="v-gx" x="14" y="48" width="60" height="22" rx="6" fill="var(--jade)"/>
               <text x="82" y="64" font-size="12" class="vlbl-t" font-weight="600">~$0.15</text>
               <text x="14" y="112" font-size="12" fill="var(--crit)">frontier-only</text>
               <rect x="14" y="120" width="388" height="22" rx="6" fill="var(--surface-2)" stroke="var(--border)"/>
-              <rect x="14" y="120" width="388" height="22" rx="6" fill="var(--crit)" opacity="0.82"/>
+              <rect class="v-gx" style="animation-delay:.25s" x="14" y="120" width="388" height="22" rx="6" fill="var(--crit)" opacity="0.82"/>
               <text x="396" y="136" font-size="12" fill="var(--surface)" text-anchor="end" font-weight="600">$1 – $20</text>
               <line x1="14" y1="164" x2="402" y2="164" stroke="var(--border)"/>
               <text x="14" y="184" font-size="11" fill="var(--jade)" font-weight="600">≈ 56× cheaper</text>
@@ -731,9 +727,9 @@
     <!-- 18 · DIVIDER 03 -->
     <section class="slide divider" data-part="Darwin">
       <div class="inner">
-        <div class="pnum">PART 03</div>
-        <h2>Darwin — the engine</h2>
-        <p class="sub">"Freeze the model, evolve the harness" — made mechanical.</p>
+        <div class="pnum rise">PART 03</div>
+        <h2 class="rise" style="animation-delay:.06s">Darwin — the engine</h2>
+        <p class="sub rise" style="animation-delay:.12s">"Freeze the model, evolve the harness" — made mechanical.</p>
         <div class="rule"></div>
         <div class="dchips"><span>seven surfaces</span><span>archive tree</span><span>score &amp; gate</span><span>the lift</span></div>
       </div>
@@ -778,7 +774,7 @@
       </div>
     </section>
 
-    <!-- 21 · ARCHIVE TREE (viz) -->
+    <!-- 21 · ARCHIVE TREE -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.3</span> The archive tree</p>
@@ -796,25 +792,26 @@
             <span class="cap">A weak ancestor can seed the winner</span>
             <svg viewBox="0 0 420 250" role="img" aria-label="Evolution tree with a highlighted winning lineage and faded dead ends">
               <g stroke-width="2" fill="none">
-                <path d="M40 125 L140 70" stroke="var(--border-2)"/>
-                <path d="M40 125 L140 185" stroke="var(--jade)"/>
-                <path d="M140 70 L250 44" stroke="var(--border-2)" stroke-dasharray="4 4"/>
-                <path d="M140 70 L250 104" stroke="var(--border-2)"/>
-                <path d="M140 185 L250 158" stroke="var(--jade)"/>
-                <path d="M140 185 L250 214" stroke="var(--border-2)" stroke-dasharray="4 4"/>
-                <path d="M250 158 L370 132" stroke="var(--jade)"/>
-                <path d="M250 104 L370 78" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path class="v-draw" d="M40 125 L140 70" stroke="var(--border-2)"/>
+                <path class="v-draw" d="M40 125 L140 185" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 70 L250 44" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 70 L250 104" stroke="var(--border-2)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 185 L250 158" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 185 L250 214" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path class="v-draw" style="animation-delay:.6s" d="M250 158 L370 132" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.6s" d="M250 104 L370 78" stroke="var(--border-2)" stroke-dasharray="4 4"/>
               </g>
               <g>
-                <circle cx="40" cy="125" r="8" fill="var(--muted)"/>
-                <circle cx="140" cy="70" r="7" fill="var(--muted)"/>
-                <circle cx="140" cy="185" r="8" fill="var(--jade)"/>
-                <circle cx="250" cy="44" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="48" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
-                <circle cx="250" cy="104" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="108" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
-                <circle cx="250" cy="158" r="8" fill="var(--jade)"/>
-                <circle cx="250" cy="214" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="218" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
-                <circle cx="370" cy="132" r="11" fill="var(--jade)"/><circle cx="370" cy="132" r="11" fill="none" stroke="var(--surface)" stroke-width="2"/>
-                <circle cx="370" cy="78" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="370" y="82" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-pop" cx="40" cy="125" r="8" fill="var(--muted)"/>
+                <circle class="v-pop" style="animation-delay:.3s" cx="140" cy="70" r="7" fill="var(--muted)"/>
+                <circle class="v-pop" style="animation-delay:.3s" cx="140" cy="185" r="8" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="44" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="48" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="104" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="108" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="158" r="8" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="214" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="218" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-halo" cx="370" cy="132" r="11" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.8s" cx="370" cy="132" r="11" fill="var(--jade)"/><circle cx="370" cy="132" r="11" fill="none" stroke="var(--surface)" stroke-width="2"/>
+                <circle class="v-pop" style="animation-delay:.8s" cx="370" cy="78" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="370" y="82" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
               </g>
               <text x="40" y="150" text-anchor="middle" font-size="10" class="vlbl-f">root</text>
               <text x="140" y="209" text-anchor="middle" font-size="9.5" fill="var(--jade)">weak ancestor</text>
@@ -825,14 +822,14 @@
       </div>
     </section>
 
-    <!-- 22 · FOUR STEPS (viz: loop) -->
+    <!-- 22 · FOUR STEPS (loop) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.4</span> One generation, four steps</p>
         <div class="split vr top">
           <div class="di sq">
             <span class="cap">The generation loop</span>
-            <svg viewBox="0 0 300 300" role="img" aria-label="Cyclic loop: mutate, sandbox, score, promote">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Cyclic loop: mutate, sandbox, score, promote, with an orbiting token">
               <defs><marker id="arL" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
               <g fill="none" stroke="var(--border-2)" stroke-width="2">
                 <path d="M186 66 A100 100 0 0 1 234 114" marker-end="url(#arL)"/>
@@ -840,6 +837,7 @@
                 <path d="M114 234 A100 100 0 0 1 66 186" marker-end="url(#arL)"/>
                 <path d="M66 114 A100 100 0 0 1 114 66" marker-end="url(#arL)"/>
               </g>
+              <circle r="8" fill="var(--jade)" class="v-t" style="offset-path:path('M150 50 A100 100 0 1 1 149 50');animation-duration:6s"/>
               <g text-anchor="middle">
                 <circle cx="150" cy="48" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="150" y="52" font-size="12" class="vlbl-t">Mutate</text>
                 <circle cx="252" cy="150" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="252" y="154" font-size="11" class="vlbl-t">Sandbox</text>
@@ -867,7 +865,7 @@
       </div>
     </section>
 
-    <!-- 23 · SCORING (viz: waterfall) -->
+    <!-- 23 · SCORING (waterfall) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.5</span> The scoring model</p>
@@ -888,19 +886,16 @@
               <line x1="40" y1="180" x2="410" y2="180" stroke="var(--border)"/>
               <text x="34" y="30" font-size="9" class="vlbl-f" text-anchor="end">1.0</text>
               <text x="34" y="184" font-size="9" class="vlbl-f" text-anchor="end">0</text>
-              <!-- base -->
-              <rect x="54" y="30" width="46" height="150" rx="4" fill="var(--jade)"/>
+              <rect class="v-gy" x="54" y="30" width="46" height="150" rx="4" fill="var(--jade)"/>
               <text x="77" y="196" font-size="9" class="vlbl" text-anchor="middle">base</text>
-              <!-- penalties -->
               <g font-size="8.5" text-anchor="middle">
-                <rect x="120" y="30" width="34" height="45" rx="3" fill="var(--crit)"/><text x="137" y="196" fill="var(--crit)">−.30</text>
-                <rect x="168" y="30" width="34" height="38" rx="3" fill="var(--crit)" opacity="0.85"/><text x="185" y="196" fill="var(--crit)">−.25</text>
-                <rect x="216" y="30" width="34" height="30" rx="3" fill="var(--amber)"/><text x="233" y="196" fill="var(--amber)">−.20</text>
-                <rect x="264" y="30" width="34" height="23" rx="3" fill="var(--amber)" opacity="0.85"/><text x="281" y="196" fill="var(--amber)">−.15</text>
-                <rect x="312" y="30" width="34" height="15" rx="3" fill="var(--amber)" opacity="0.7"/><text x="329" y="196" fill="var(--amber)">−.10</text>
+                <rect class="v-gy" style="animation-delay:.15s" x="120" y="30" width="34" height="45" rx="3" fill="var(--crit)"/><text x="137" y="196" fill="var(--crit)">−.30</text>
+                <rect class="v-gy" style="animation-delay:.25s" x="168" y="30" width="34" height="38" rx="3" fill="var(--crit)" opacity="0.85"/><text x="185" y="196" fill="var(--crit)">−.25</text>
+                <rect class="v-gy" style="animation-delay:.35s" x="216" y="30" width="34" height="30" rx="3" fill="var(--amber)"/><text x="233" y="196" fill="var(--amber)">−.20</text>
+                <rect class="v-gy" style="animation-delay:.45s" x="264" y="30" width="34" height="23" rx="3" fill="var(--amber)" opacity="0.85"/><text x="281" y="196" fill="var(--amber)">−.15</text>
+                <rect class="v-gy" style="animation-delay:.55s" x="312" y="30" width="34" height="15" rx="3" fill="var(--amber)" opacity="0.7"/><text x="329" y="196" fill="var(--amber)">−.10</text>
               </g>
-              <!-- net -->
-              <rect x="362" y="112" width="40" height="68" rx="4" fill="var(--indigo)"/>
+              <rect class="v-gy" style="animation-delay:.7s" x="362" y="112" width="40" height="68" rx="4" fill="var(--indigo)"/>
               <text x="382" y="196" font-size="9" fill="var(--indigo)" text-anchor="middle">net</text>
             </svg>
           </div>
@@ -909,7 +904,7 @@
       </div>
     </section>
 
-    <!-- 24 · PROMOTION GATE (viz: funnel) -->
+    <!-- 24 · PROMOTION GATE (funnel) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.6</span> The promotion gate</p>
@@ -926,23 +921,20 @@
           </div>
           <div class="di">
             <span class="cap">Many variants in · few promoted out</span>
-            <svg viewBox="0 0 420 230" role="img" aria-label="Variants filtered through four gates, one promoted">
-              <!-- incoming variants -->
-              <g fill="var(--muted)">
-                <circle cx="24" cy="60" r="5"/><circle cx="24" cy="90" r="5"/><circle cx="24" cy="120" r="5"/><circle cx="24" cy="150" r="5"/><circle cx="24" cy="180" r="5"/>
-              </g>
-              <text x="24" y="210" font-size="9.5" class="vlbl-f" text-anchor="middle">variants</text>
-              <!-- gates -->
+            <svg viewBox="0 0 420 230" role="img" aria-label="Variants flowing through four gates, most filtered, one promoted">
               <g stroke="var(--border-2)" stroke-width="2"><line x1="110" y1="30" x2="110" y2="200"/><line x1="190" y1="30" x2="190" y2="200"/><line x1="270" y1="30" x2="270" y2="200"/><line x1="350" y1="30" x2="350" y2="200"/></g>
               <g font-size="8.5" fill="var(--muted)" text-anchor="middle"><text x="110" y="24">score</text><text x="190" y="24">safety</text><text x="270" y="24">no-reg</text><text x="350" y="24">0-block</text></g>
-              <!-- flow lines (surviving path) -->
-              <path d="M30 120 H110 M110 120 H190 M190 120 H270 M270 120 H350 M350 120 H400" fill="none" stroke="var(--jade)" stroke-width="2"/>
-              <!-- dropped -->
-              <g stroke="var(--crit)" stroke-width="1.4" opacity="0.6"><path d="M110 120 l16 40"/><path d="M190 120 l16 -46"/><path d="M270 120 l16 42"/></g>
-              <g fill="var(--crit)" opacity="0.6"><circle cx="128" cy="164" r="4"/><circle cx="208" cy="72" r="4"/><circle cx="288" cy="164" r="4"/></g>
-              <!-- promoted -->
-              <circle cx="400" cy="120" r="9" fill="var(--jade)"/><circle cx="400" cy="120" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
-              <text x="400" y="210" font-size="9.5" fill="var(--jade)" text-anchor="middle">promoted</text>
+              <path d="M20 120 H400" fill="none" stroke="var(--jade)" stroke-width="2" opacity="0.5"/>
+              <text x="24" y="214" font-size="9.5" class="vlbl-f" text-anchor="middle">variants</text>
+              <circle class="v-pulse" cx="400" cy="120" r="9" fill="var(--jade)"/><circle cx="400" cy="120" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
+              <text x="400" y="214" font-size="9.5" fill="var(--jade)" text-anchor="middle">promoted</text>
+              <!-- flowing pass dot -->
+              <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M20 120 H400');animation-duration:3s"/>
+              <!-- dropped dots diverting at gates -->
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H110 l18 46');animation-duration:3s;animation-delay:.6s"/>
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H190 l18 -50');animation-duration:3s;animation-delay:1.2s"/>
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H270 l18 48');animation-duration:3s;animation-delay:1.8s"/>
+              <circle r="4.5" fill="var(--muted)" class="v-tf" style="offset-path:path('M20 120 H350 l16 -44');animation-duration:3s;animation-delay:2.4s"/>
             </svg>
           </div>
         </div>
@@ -1007,38 +999,30 @@
             <div class="callout" style="margin-top:0.6rem"><div class="h">Proof it isn't hand-waving</div><p><code>cand-6</code> was the first <strong>holdout-confirmed</strong> promoted genome — accepted under strict promotion: no regression on the gold set, and cost-per-resolved no worse than before.</p></div>
           </div>
           <div class="di">
-            <span class="cap">A genome of text components, evolving</span>
+            <span class="cap">A genome of text components, mutating</span>
             <svg viewBox="0 0 420 210" role="img" aria-label="A strip of prompt components mutating across generations">
-              <g font-size="9.5" text-anchor="middle">
-                <text x="40" y="28" class="vlbl-f">gen 0</text>
-                <text x="210" y="28" class="vlbl-f">gen n</text>
-                <text x="380" y="28" fill="var(--jade)">cand-6 ✓</text>
-              </g>
+              <g font-size="9.5" text-anchor="middle"><text x="43" y="28" class="vlbl-f">gen 0</text><text x="210" y="28" class="vlbl-f">gen n</text><text x="378" y="28" fill="var(--jade)">cand-6 ✓</text></g>
               <g>
                 <rect x="20" y="40" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
                 <rect x="20" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
                 <rect x="20" y="104" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
                 <rect x="20" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
               </g>
-              <g stroke="var(--border-2)" stroke-width="1.3" fill="none">
-                <path d="M66 53 H180"/><path d="M66 85 H180"/><path d="M66 117 H180"/><path d="M66 149 H180"/>
-              </g>
+              <g stroke="var(--border-2)" stroke-width="1.3" fill="none"><path class="v-draw" d="M66 53 H180"/><path class="v-draw" d="M66 85 H180"/><path class="v-draw" d="M66 117 H180"/><path class="v-draw" d="M66 149 H180"/></g>
               <g>
-                <rect x="184" y="40" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect class="v-shim" x="184" y="40" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
                 <rect x="184" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
-                <rect x="184" y="104" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect class="v-shim" style="animation-delay:.6s" x="184" y="104" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
                 <rect x="184" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
               </g>
-              <g stroke="var(--jade)" stroke-width="1.6" fill="none">
-                <path d="M230 53 H350"/><path d="M230 85 H350"/><path d="M230 117 H350"/><path d="M230 149 H350"/>
-              </g>
+              <g stroke="var(--jade)" stroke-width="1.6" fill="none"><path class="v-draw" style="animation-delay:.3s" d="M230 53 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 85 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 117 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 149 H350"/></g>
               <g>
                 <rect x="354" y="40" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
                 <rect x="354" y="72" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
                 <rect x="354" y="104" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
                 <rect x="354" y="136" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
               </g>
-              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">reflect on per-instance feedback → mutate components → keep confirmed wins</text>
+              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">reflect on feedback → mutate components → keep confirmed wins</text>
             </svg>
           </div>
         </div>
@@ -1048,15 +1032,15 @@
     <!-- 28 · DIVIDER 04 -->
     <section class="slide divider" data-part="Flywheel">
       <div class="inner">
-        <div class="pnum">PART 04</div>
-        <h2>Flywheel — the proof</h2>
-        <p class="sub">Turning "self-improving" from a claim into a receipt.</p>
+        <div class="pnum rise">PART 04</div>
+        <h2 class="rise" style="animation-delay:.06s">Flywheel — the proof</h2>
+        <p class="sub rise" style="animation-delay:.12s">Turning "self-improving" from a claim into a receipt.</p>
         <div class="rule"></div>
         <div class="dchips"><span>frozen gate</span><span>anti-Goodhart</span><span>signed receipts</span><span>the digital twin</span></div>
       </div>
     </section>
 
-    <!-- 29 · FLYWHEEL ONE LINE (viz: wheel) -->
+    <!-- 29 · FLYWHEEL ONE LINE (wheel) -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <div class="split vr">
@@ -1068,17 +1052,17 @@
           </div>
           <div class="di sq">
             <span class="cap">The loop that never stops</span>
-            <svg viewBox="0 0 300 300" role="img" aria-label="A flywheel spinning through propose, evaluate, gate, promote, compound">
-              <defs><marker id="arF" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
-              <circle cx="150" cy="150" r="118" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
-              <g stroke="var(--border-2)" stroke-width="2"><line x1="150" y1="60" x2="150" y2="240"/><line x1="60" y1="150" x2="240" y2="150"/><line x1="86" y1="86" x2="214" y2="214"/><line x1="214" y1="86" x2="86" y2="214"/></g>
-              <path d="M150 20 A130 130 0 0 1 268 108" fill="none" stroke="var(--jade)" stroke-width="2.5" marker-end="url(#arF)"/>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A continuously spinning flywheel">
+              <g class="v-spin">
+                <circle cx="150" cy="150" r="118" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+                <g stroke="var(--border-2)" stroke-width="2"><line x1="150" y1="60" x2="150" y2="240"/><line x1="60" y1="150" x2="240" y2="150"/><line x1="86" y1="86" x2="214" y2="214"/><line x1="214" y1="86" x2="86" y2="214"/></g>
+                <circle cx="150" cy="32" r="6" fill="var(--jade)"/><circle cx="150" cy="268" r="6" fill="var(--jade)"/>
+                <circle cx="32" cy="150" r="6" fill="var(--jade)"/><circle cx="268" cy="150" r="6" fill="var(--jade)"/>
+              </g>
               <circle cx="150" cy="150" r="34" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
               <text x="150" y="147" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">24/7</text>
               <text x="150" y="163" text-anchor="middle" font-size="8.5" class="vlbl-f">momentum</text>
-              <g font-size="9.5" fill="var(--muted)" text-anchor="middle">
-                <text x="150" y="46">propose</text><text x="262" y="153">evaluate</text><text x="150" y="262">gate</text><text x="40" y="153">promote</text>
-              </g>
+              <g font-size="9.5" fill="var(--muted)" text-anchor="middle"><text x="150" y="46">propose</text><text x="262" y="153">evaluate</text><text x="150" y="262">gate</text><text x="40" y="153">promote</text></g>
             </svg>
           </div>
         </div>
@@ -1099,7 +1083,7 @@
       </div>
     </section>
 
-    <!-- 31 · ANTI-GOODHART (viz) -->
+    <!-- 31 · ANTI-GOODHART -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <p class="kick"><span class="n">04.3</span> Anti-Goodhart construction</p>
@@ -1120,17 +1104,17 @@
               <rect x="18" y="72" width="104" height="60" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
               <text x="70" y="98" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">TRAIN</text>
               <text x="70" y="116" text-anchor="middle" font-size="9.5" class="vlbl-f">optimize here</text>
-              <line x1="124" y1="102" x2="170" y2="70" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
-              <line x1="124" y1="102" x2="170" y2="134" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
-              <rect x="176" y="40" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <line class="v-draw" x1="124" y1="102" x2="170" y2="70" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line class="v-draw" x1="124" y1="102" x2="170" y2="134" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect class="v-shim" x="176" y="40" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
               <text x="236" y="62" text-anchor="middle" font-size="11" fill="var(--jade)">HOLDOUT ✓</text>
               <text x="236" y="80" text-anchor="middle" font-size="9" class="vlbl-f">never seen</text>
-              <rect x="176" y="112" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <rect class="v-shim" style="animation-delay:.5s" x="176" y="112" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
               <text x="236" y="134" text-anchor="middle" font-size="11" fill="var(--jade)">ANCHOR ✓</text>
               <text x="236" y="152" text-anchor="middle" font-size="9" class="vlbl-f">fixed reference</text>
-              <line x1="298" y1="66" x2="336" y2="98" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
-              <line x1="298" y1="138" x2="336" y2="106" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
-              <rect x="338" y="80" width="66" height="48" rx="10" fill="var(--jade)"/>
+              <line class="v-draw" style="animation-delay:.4s" x1="298" y1="66" x2="336" y2="98" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line class="v-draw" style="animation-delay:.4s" x1="298" y1="138" x2="336" y2="106" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect class="v-pulse" x="338" y="80" width="66" height="48" rx="10" fill="var(--jade)"/>
               <text x="371" y="102" text-anchor="middle" font-size="10.5" fill="var(--surface)" font-weight="600">PROMOTE</text>
               <text x="371" y="118" text-anchor="middle" font-size="8.5" fill="var(--surface)">if both ✓</text>
             </svg>
@@ -1139,7 +1123,7 @@
       </div>
     </section>
 
-    <!-- 32 · SKEPTIC + LIFT CURVE (viz) -->
+    <!-- 32 · SKEPTIC + LIFT CURVE -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <p class="kick"><span class="n">04.4</span> What you hand a skeptic</p>
@@ -1159,13 +1143,15 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
           </div>
           <div class="di">
             <span class="cap">Lift curve · cumulative, per generation</span>
-            <svg viewBox="0 0 420 210" role="img" aria-label="A rising lift curve; jade dots are promotions, faint marks are rejected attempts">
+            <svg viewBox="0 0 420 210" role="img" aria-label="A rising lift curve; jade dots are promotions, faint marks rejected attempts">
               <line x1="42" y1="18" x2="42" y2="176" stroke="var(--border)"/>
               <line x1="42" y1="176" x2="406" y2="176" stroke="var(--border)"/>
               <g stroke="var(--border)" stroke-width="1" opacity="0.5"><line x1="42" y1="130" x2="406" y2="130"/><line x1="42" y1="84" x2="406" y2="84"/><line x1="42" y1="40" x2="406" y2="40"/></g>
-              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
-              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.10"/>
-              <g fill="var(--jade)"><circle cx="112" cy="140" r="4.5"/><circle cx="182" cy="104" r="4.5"/><circle cx="252" cy="72" r="4.5"/><circle cx="322" cy="72" r="4.5"/><circle cx="392" cy="44" r="6"/></g>
+              <path class="v-fade" d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.10"/>
+              <path class="v-draw" d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+              <g fill="var(--jade)"><circle class="v-pop" style="animation-delay:.5s" cx="112" cy="140" r="4.5"/><circle class="v-pop" style="animation-delay:.7s" cx="182" cy="104" r="4.5"/><circle class="v-pop" style="animation-delay:.9s" cx="252" cy="72" r="4.5"/><circle class="v-pop" style="animation-delay:1.1s" cx="322" cy="72" r="4.5"/></g>
+              <circle class="v-halo" cx="392" cy="44" r="6" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:1.3s" cx="392" cy="44" r="6" fill="var(--jade)"/>
               <g stroke="var(--faint)" stroke-width="1.2" opacity="0.55"><path d="M144 150 l6 6 M150 150 l-6 6"/><path d="M286 82 l6 6 M292 82 l-6 6"/></g>
               <text x="224" y="198" font-size="10" class="vlbl-f" text-anchor="middle">generations →   (✕ = rejected attempt)</text>
               <text x="392" y="36" font-size="10" fill="var(--jade)" text-anchor="middle" font-weight="600">lift</text>
@@ -1223,9 +1209,9 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <!-- 35 · DIVIDER 05 -->
     <section class="slide divider" data-part="Putting it to work">
       <div class="inner">
-        <div class="pnum">PART 05</div>
-        <h2>Putting it to work</h2>
-        <p class="sub">From an npm install to a client outcome.</p>
+        <div class="pnum rise">PART 05</div>
+        <h2 class="rise" style="animation-delay:.06s">Putting it to work</h2>
+        <p class="sub rise" style="animation-delay:.12s">From an npm install to a client outcome.</p>
         <div class="rule"></div>
         <div class="dchips"><span>the marketing loop</span><span>getting started</span><span>three deployments</span><span>the Cognitum service</span></div>
       </div>
@@ -1290,17 +1276,18 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
         <div class="di plain" style="margin-top:0.9rem">
           <svg viewBox="0 0 900 54" role="img" aria-label="A spectrum from cheaper scheduled runs to continuous perpetual motion">
             <line x1="30" y1="27" x2="870" y2="27" stroke="var(--border-2)" stroke-width="2"/>
-            <circle cx="120" cy="27" r="7" fill="var(--muted)"/><text x="120" y="16" font-size="12" fill="var(--muted)" text-anchor="middle">local</text>
-            <circle cx="450" cy="27" r="7" fill="var(--indigo)"/><text x="450" y="16" font-size="12" fill="var(--indigo)" text-anchor="middle">cron / scheduled</text>
-            <circle cx="780" cy="27" r="8" fill="var(--jade)"/><text x="780" y="16" font-size="12" fill="var(--jade)" text-anchor="middle">always-on flywheel</text>
+            <circle class="v-pop" cx="120" cy="27" r="7" fill="var(--muted)"/><text x="120" y="16" font-size="12" fill="var(--muted)" text-anchor="middle">local</text>
+            <circle class="v-pop" style="animation-delay:.15s" cx="450" cy="27" r="7" fill="var(--indigo)"/><text x="450" y="16" font-size="12" fill="var(--indigo)" text-anchor="middle">cron / scheduled</text>
+            <circle class="v-halo" cx="780" cy="27" r="8" fill="var(--jade)"/><circle class="v-pop" style="animation-delay:.3s" cx="780" cy="27" r="8" fill="var(--jade)"/><text x="780" y="16" font-size="12" fill="var(--jade)" text-anchor="middle">always-on flywheel</text>
             <text x="120" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">cheapest</text>
             <text x="780" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">compounds continuously</text>
+            <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M120 27 H780');animation-duration:4s"/>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 39 · COGNITUM SIDE (viz: comms) -->
+    <!-- 39 · COGNITUM SIDE (comms) -->
     <section class="slide" data-part="Putting it to work">
       <div class="inner">
         <p class="kick"><span class="n">05.4</span> The Cognitum side</p>
@@ -1316,28 +1303,23 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
           </div>
           <div class="di">
             <span class="cap">Comms · people and agents on one team</span>
-            <svg viewBox="0 0 420 220" role="img" aria-label="A CMO node connected to human reports and agent workers">
-              <defs><marker id="arC" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--border-2)"/></marker></defs>
+            <svg viewBox="0 0 420 220" role="img" aria-label="A CMO node connected to human reports and agent workers with live tasks">
               <rect x="160" y="16" width="100" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
               <text x="210" y="41" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">CMO</text>
               <g stroke="var(--border-2)" stroke-width="1.4" fill="none">
-                <path d="M210 56 L70 110"/><path d="M210 56 L163 110"/><path d="M210 56 L257 110"/><path d="M210 56 L350 110"/>
+                <path class="v-draw" d="M210 56 L70 110"/><path class="v-draw" d="M210 56 L163 110"/><path class="v-draw" d="M210 56 L257 110"/><path class="v-draw" d="M210 56 L350 110"/>
               </g>
-              <!-- humans -->
-              <g>
-                <rect x="30" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
-                <circle cx="52" cy="134" r="8" fill="var(--muted)"/><text x="86" y="130" font-size="10" class="vlbl-t">person</text><text x="86" y="144" font-size="9" class="vlbl-f">report</text>
-                <rect x="123" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
-                <circle cx="145" cy="134" r="8" fill="var(--muted)"/><text x="179" y="130" font-size="10" class="vlbl-t">person</text><text x="179" y="144" font-size="9" class="vlbl-f">report</text>
-              </g>
-              <!-- agents -->
-              <g>
-                <rect x="217" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
-                <rect x="231" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="273" y="130" font-size="10" fill="var(--jade)">agent</text><text x="273" y="144" font-size="8" class="vlbl-f">API scope</text>
-                <rect x="310" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
-                <rect x="324" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="366" y="130" font-size="10" fill="var(--jade)">agent</text><text x="366" y="144" font-size="8" class="vlbl-f">ads API</text>
-              </g>
-              <text x="210" y="190" text-anchor="middle" font-size="10" class="vlbl-f">status updates flow up · tasks flow down — human or agent, same channel</text>
+              <rect x="30" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
+              <circle cx="52" cy="134" r="8" fill="var(--muted)"/><text x="86" y="130" font-size="10" class="vlbl-t">person</text><text x="86" y="144" font-size="9" class="vlbl-f">report</text>
+              <rect x="123" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
+              <circle cx="145" cy="134" r="8" fill="var(--muted)"/><text x="179" y="130" font-size="10" class="vlbl-t">person</text><text x="179" y="144" font-size="9" class="vlbl-f">report</text>
+              <rect class="v-shim" x="217" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
+              <rect x="231" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="273" y="130" font-size="10" fill="var(--jade)">agent</text><text x="273" y="144" font-size="8" class="vlbl-f">API scope</text>
+              <rect class="v-shim" style="animation-delay:.6s" x="310" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
+              <rect x="324" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="366" y="130" font-size="10" fill="var(--jade)">agent</text><text x="366" y="144" font-size="8" class="vlbl-f">ads API</text>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 56 L257 110')"/>
+              <circle r="3.5" fill="var(--indigo)" class="v-tf" style="offset-path:path('M70 110 L210 56');animation-delay:1s"/>
+              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">status updates flow up · tasks flow down — human or agent, same channel</text>
             </svg>
           </div>
         </div>
@@ -1347,9 +1329,9 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <!-- 40 · DIVIDER 06 -->
     <section class="slide divider" data-part="Selling it">
       <div class="inner">
-        <div class="pnum">PART 06</div>
-        <h2>Selling it as a consultant</h2>
-        <p class="sub">Where this fits an engagement — and how to answer the hard questions.</p>
+        <div class="pnum rise">PART 06</div>
+        <h2 class="rise" style="animation-delay:.06s">Selling it as a consultant</h2>
+        <p class="sub rise" style="animation-delay:.12s">Where this fits an engagement — and how to answer the hard questions.</p>
         <div class="rule"></div>
         <div class="dchips"><span>the engagement</span><span>objections</span><span>your head start</span></div>
       </div>
@@ -1399,9 +1381,9 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Close">
       <div class="glow-b"></div>
       <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
-        <span class="kicker"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
-        <h1 style="margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-        <p class="title-sub" style="margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
+        <span class="kicker rise"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
+        <h1 class="rise" style="animation-delay:.08s; margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+        <p class="title-sub rise" style="animation-delay:.16s; margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
         <p class="src" style="text-align:center; margin-top:1.3rem">metaharness · @metaharness/darwin · @metaharness/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
       </div>
     </section>
@@ -1451,6 +1433,27 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
       return 0;
     }
 
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
     function render() {
       slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
       curEl.textContent = i + 1;
@@ -1459,11 +1462,12 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === n - 1;
       var active = slides[i];
-      if (active.getAttribute('data-chart') && !active.dataset.done) {
-        active.dataset.done = '1';
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
         var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
         var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
-        if (reduce) run(); else setTimeout(run, 240);
+        if (reduce) run(); else setTimeout(run, 260);
       }
     }
 
@@ -1506,6 +1510,53 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     document.getElementById('fsBtn').addEventListener('click', toggleFs);
     window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
     document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
 
     i = fromHash();
     fit();
