@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — a 60-minute, 43-slide deck on a fixed 16:9 stage that scales to fit (no scrolling). Arrow keys / space to navigate.">
+<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — a 60-minute, 43-slide deck on a fixed 16:9 stage (no scrolling) with custom SVG visualizations. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
   /* ============================================================
-     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v2, visual)
      Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
      Palette: blue-biased ink · indigo (cognition) · jade (lift)
+     Semantic (labeled only): amber / red for penalties & cost.
      Keys: ← →  navigate · Space next · F present · T theme
      ============================================================ */
 
@@ -18,7 +19,7 @@
     --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
     --text:#12151C; --muted:#566072; --faint:#8A93A5;
     --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
-    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09);
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
     --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
     --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
     --radius:14px; --radius-sm:9px;
@@ -28,20 +29,20 @@
       --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
       --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
       --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
-      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10);
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
     }
   }
   :root[data-theme="light"] {
     --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
     --text:#12151C; --muted:#566072; --faint:#8A93A5;
     --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
-    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09);
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
   }
   :root[data-theme="dark"] {
     --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
     --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
     --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
-    --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10);
+    --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
   }
 
   * { box-sizing: border-box; }
@@ -57,218 +58,208 @@
   a { color: var(--indigo); text-decoration: none; }
   strong { color: var(--text); font-weight: 640; }
   em { font-style: italic; color: var(--text); }
-  code {
-    font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2);
-    border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text);
-  }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
 
   /* ---------- scaled stage ---------- */
   .stagewrap { flex: 1; position: relative; overflow: hidden; }
-  .stage {
-    position: absolute; left: 50%; top: 50%;
-    width: 1280px; height: 720px; transform-origin: center center;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); }
   .stage::before {
     content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background-image:
-      linear-gradient(to right, var(--border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px);
     background-size: 64px 64px;
     -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
             mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
-    opacity: 0.32;
+    opacity: 0.3;
   }
 
-  .slide {
-    position: absolute; inset: 0; z-index: 1;
-    padding: 52px 74px;
-    display: flex; flex-direction: column; justify-content: center;
-    opacity: 0; visibility: hidden; pointer-events: none;
-    transition: opacity .45s ease;
-  }
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 46px 66px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
   .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
   @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
   .slide .inner { width: 100%; }
 
-  .kick {
-    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.15rem;
-  }
+  .kick { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
   .kick .n { color: var(--indigo); }
   .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
 
-  h2 { font-size: 2.05rem; line-height: 1.08; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.9rem; text-wrap: balance; }
-  h3 { font-size: 1.12rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.4rem; }
-  p { margin: 0 0 0.85rem; font-size: 1.02rem; }
+  h2 { font-size: 1.95rem; line-height: 1.08; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.08rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 0.98rem; }
   p:last-child { margin-bottom: 0; }
-  .lead { font-size: 1.26rem; color: var(--muted); line-height: 1.45; }
+  .lead { font-size: 1.16rem; color: var(--muted); line-height: 1.42; }
   .mut { color: var(--muted); }
-  .small { font-size: 0.9rem; }
+  .small { font-size: 0.86rem; }
 
   /* ---------- title / close ---------- */
   .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
   .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
   .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
-  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.8rem; font-size: 1.05rem; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
   .title-brand .mark { width: 30px; height: 30px; }
   .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono);
-    font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-    background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.5rem;
-  }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
   .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); }
-  h1 { font-size: 4.2rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.2rem; max-width: 16ch; text-wrap: balance; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
   h1 .g { color: var(--jade); }
-  .title-sub { font-size: 1.32rem; color: var(--muted); max-width: 60ch; line-height: 1.45; }
-  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.9rem; }
+  .title-sub { font-size: 1.28rem; color: var(--muted); max-width: 60ch; line-height: 1.42; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
   .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
   .chip b { color: var(--indigo); font-weight: 600; }
   .chip span { color: var(--faint); }
 
-  /* ---------- section divider ---------- */
+  /* ---------- divider ---------- */
   .divider { align-items: flex-start; }
-  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 1rem; }
-  .divider h2 { font-size: 3.4rem; max-width: 20ch; }
-  .divider .sub { font-size: 1.2rem; color: var(--muted); margin-top: 0.8rem; max-width: 52ch; }
-  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.6rem; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.16rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.68rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.7rem; }
 
   /* ---------- layout ---------- */
-  .grid { display: grid; gap: 0.9rem; }
+  .grid { display: grid; gap: 0.85rem; }
   .g2 { grid-template-columns: repeat(2,1fr); }
   .g3 { grid-template-columns: repeat(3,1fr); }
   .g4 { grid-template-columns: repeat(4,1fr); }
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; align-items: center; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
   .split.top { align-items: start; }
-  .split.w6 { grid-template-columns: 1.15fr 0.85fr; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
-  .card .tag { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.6rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
   .card .tag.j { color: var(--jade); }
-  .card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  .card p { color: var(--muted); font-size: 0.88rem; margin: 0; }
 
-  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
-  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.5rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.3rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
   .stat .num.i { color: var(--indigo); }
-  .stat .k { margin-top: 0.5rem; font-size: 0.84rem; color: var(--muted); line-height: 1.32; }
+  .stat .k { margin-top: 0.45rem; font-size: 0.82rem; color: var(--muted); line-height: 1.3; }
 
-  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.65rem; }
-  ul.clean li { position: relative; padding-left: 1.45rem; color: var(--muted); font-size: 1rem; line-height: 1.4; }
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 0.96rem; line-height: 1.38; }
   ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
   ul.clean li.j::before { background: var(--jade); }
   ul.clean li b { color: var(--text); }
-  ul.clean.sm li { font-size: 0.92rem; }
+  ul.clean.sm li { font-size: 0.88rem; padding-left: 1.25rem; }
 
-  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.2rem; }
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
   .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
-  .callout p { margin: 0; font-size: 0.98rem; }
-  .callout .h { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
+  .callout p { margin: 0; font-size: 0.94rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
 
-  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.8rem 2rem; }
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
   .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
-  .bigquote p { font-size: 2rem; line-height: 1.26; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
-  .bigquote.sm p { font-size: 1.5rem; }
-  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.15rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote p { font-size: 1.85rem; line-height: 1.24; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.4rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
 
-  /* architecture flow — horizontal */
+  /* diagram container + svg */
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); }
+  .vlbl-t { fill: var(--text); }
+  .vlbl-f { fill: var(--faint); }
+
+  /* architecture flow */
   .flow { display: flex; align-items: stretch; gap: 0; }
-  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.85rem 0.9rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.35rem; }
-  .node .badge { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.16rem 0.45rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
   .node.j .badge { background: var(--jade); }
-  .node b { font-size: 0.9rem; letter-spacing: -0.01em; }
-  .node span { font-size: 0.74rem; color: var(--muted); font-family: var(--font-mono); }
+  .node b { font-size: 0.86rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.7rem; color: var(--muted); font-family: var(--font-mono); }
   .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
-  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.5rem; font-size: 0.85rem; }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
 
   /* surfaces */
-  .surfaces { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.6rem; }
-  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.7rem 0.8rem; }
-  .surf .f { font-family: var(--font-mono); font-size: 0.78rem; color: var(--indigo); display: block; }
-  .surf .d { font-size: 0.76rem; color: var(--muted); line-height: 1.3; }
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.76rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.74rem; color: var(--muted); line-height: 1.28; }
   .surf.ro { border-style: dashed; }
   .surf.ro .f { color: var(--jade); }
 
   /* steps */
-  .steps { display: grid; gap: 0.5rem; }
-  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.95rem; }
-  .step .idx { font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.55rem; height: 1.55rem; border-radius: 6px; display: grid; place-items: center; }
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
   .step.a .idx { background: var(--indigo); }
   .step.b .idx { background: var(--jade); }
-  .step b { font-size: 0.94rem; }
-  .step p { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.85rem; }
+  .step b { font-size: 0.9rem; }
+  .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.82rem; }
 
-  /* chart */
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.5rem; }
-  .panel .cap { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
-  .panel .ttl { font-weight: 620; margin-bottom: 1.1rem; letter-spacing: -0.01em; }
-  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; align-items: end; height: 250px; }
-  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.5rem; text-align: center; }
-  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 7px 7px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  /* bar chart */
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
   .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
-  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; color: var(--text); font-variant-numeric: tabular-nums; }
-  .bar .lab { font-size: 0.74rem; color: var(--muted); line-height: 1.25; }
-  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.04em; margin-top: 0.12rem; }
+  .bar .col .v { position: absolute; top: -1.5rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.86rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.72rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
 
-  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.15rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6; color: var(--text); }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.55; color: var(--text); }
   pre .c { color: var(--faint); }
   pre .cmd { color: var(--jade); }
   pre .flag { color: var(--indigo); }
 
   /* pipeline */
   .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
-  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.8rem 0.85rem; }
-  .pstep .s { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
-  .pstep b { display: block; margin: 0.28rem 0 0.22rem; letter-spacing: -0.01em; font-size: 0.94rem; }
-  .pstep p { font-size: 0.78rem; color: var(--muted); margin: 0; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.9rem; }
+  .pstep p { font-size: 0.74rem; color: var(--muted); margin: 0; }
 
-  /* q&a rows */
-  .qa { display: grid; gap: 0.6rem; }
-  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 1rem; }
-  .qa .q { font-weight: 620; margin: 0 0 0.2rem; font-size: 0.96rem; }
-  .qa .a { margin: 0; color: var(--muted); font-size: 0.85rem; line-height: 1.38; }
+  /* q&a */
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 0.92rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.82rem; line-height: 1.35; }
 
-  /* comparison */
-  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.2rem; align-items: stretch; }
-  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1.2rem 1.3rem; }
+  /* versus */
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
   .vcol.d { border-top: 3px solid var(--indigo); }
   .vcol.f { border-top: 3px solid var(--jade); }
-  .vcol h3 { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
   .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
   .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
 
   /* agenda */
-  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 2rem; }
-  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: baseline; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
-  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.9rem; }
-  .arow .at { font-size: 1rem; }
-  .arow .am { font-family: var(--font-mono); font-size: 0.78rem; color: var(--faint); }
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.88rem; }
+  .arow .at { font-size: 0.98rem; }
+  .arow .am { font-family: var(--font-mono); font-size: 0.76rem; color: var(--faint); }
 
-  .src { font-family: var(--font-mono); font-size: 0.68rem; color: var(--faint); margin-top: 0.9rem; }
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; }
   .src a { color: var(--muted); }
-  .two-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem 1.6rem; }
 
-  /* ---------- chrome ---------- */
+  /* chrome */
   .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
   .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
-  .topright { position: fixed; top: 0.85rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
-  .btn { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.38rem 0.68rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .btn:hover { color: var(--text); border-color: var(--border-2); }
-
-  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.55rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
-  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
-  .navbar .part { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .navbar .part b { color: var(--indigo); }
   .navbar .spacer { flex: 1; }
-  .hint { font-family: var(--font-mono); font-size: 0.62rem; color: var(--faint); letter-spacing: 0.05em; }
-  .counter { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .counter b { color: var(--text); }
   .arrows { display: flex; gap: 0.4rem; }
-  .arr { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
   .arr:hover { border-color: var(--indigo); color: var(--indigo); }
   .arr[disabled] { opacity: 0.35; cursor: default; }
-  .zone { position: absolute; top: 0; bottom: 0; width: 10%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
   .zone.l { left: 0; } .zone.r { right: 0; }
   @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
 </style>
@@ -313,7 +304,7 @@
     <section class="slide" data-part="Welcome">
       <div class="inner">
         <p class="kick"><span class="n">Agenda</span> Where the next hour goes</p>
-        <h2 style="margin-bottom:1.2rem">Six parts, roughly sixty minutes</h2>
+        <h2 style="margin-bottom:1rem">Six parts, roughly sixty minutes</h2>
         <div class="agenda">
           <div class="arow"><span class="an">01</span><span class="at">The big idea — why the harness, not the model</span><span class="am">~8 min</span></div>
           <div class="arow"><span class="an">02</span><span class="at">MetaHarness — the factory</span><span class="am">~10 min</span></div>
@@ -322,7 +313,7 @@
           <div class="arow"><span class="an">05</span><span class="at">Putting it to work with a client</span><span class="am">~10 min</span></div>
           <div class="arow"><span class="an">06</span><span class="at">Selling it — playbook &amp; objections</span><span class="am">~10 min</span></div>
         </div>
-        <p class="src">Navigate with ← → or Space · press <strong>F</strong> for fullscreen · <strong>T</strong> to switch theme.</p>
+        <div class="callout i" style="margin-top:1.1rem"><div class="h">How to read this deck</div><p>Every part opens with a divider, ends with something you can say to a client. Ask questions any time — the top progress bar is click-to-jump if we need to double back. Controls: <strong>← →</strong> or Space · <strong>F</strong> fullscreen · <strong>T</strong> theme.</p></div>
       </div>
     </section>
 
@@ -333,52 +324,123 @@
         <h2>The big idea</h2>
         <p class="sub">Why the smartest move in agents right now is to stop chasing bigger models.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>the problem</span><span>the thesis</span><span>the cheapest lever</span><span>the three projects</span></div>
       </div>
     </section>
 
-    <!-- 4 · THE PROBLEM -->
+    <!-- 4 · THE PROBLEM (viz: three gaps) -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <p class="kick"><span class="n">01.1</span> The problem</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>Every repo wants a repo-aware agent — and every agent burns money</h2>
-            <p class="lead">Generic assistants don't know your codebase, your funnel, or your data. Tuning one by hand is slow; the obvious fix — a bigger model — is the expensive one.</p>
+            <p class="mut">A generic assistant doesn't know your codebase, your funnel, or your data. Hand-tuning one is slow and doesn't stick. And the obvious fix — reach for a bigger model — is the expensive one, which is a problem precisely where agents live longest.</p>
+            <ul class="clean" style="margin-top:0.8rem">
+              <li><b>Context gap</b> — off-the-shelf agents have no idea how your system actually works.</li>
+              <li class="j"><b>Cost gap</b> — in a long-running app, LLM tokens are the single biggest line item.</li>
+              <li><b>Trust gap</b> — "it gets better over time" is usually an unfalsifiable claim.</li>
+            </ul>
           </div>
-          <ul class="clean">
-            <li><b>Context gap</b> — an off-the-shelf agent has no idea how your system actually works.</li>
-            <li class="j"><b>Cost gap</b> — in a long-running app, LLM usage is your single biggest line item.</li>
-            <li><b>Trust gap</b> — "it gets better over time" is usually an unfalsifiable claim.</li>
-          </ul>
+          <div class="di">
+            <span class="cap">The three gaps a harness has to close</span>
+            <svg viewBox="0 0 400 250" role="img" aria-label="Three gaps: context, cost, trust">
+              <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <!-- context -->
+              <g>
+                <rect x="20" y="24" width="150" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <text x="34" y="48" font-size="13" class="vlbl-t" font-weight="600">Generic agent</text>
+                <text x="34" y="66" font-size="11" class="vlbl-f">no repo knowledge</text>
+                <line x1="170" y1="52" x2="250" y2="52" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ar1)"/>
+                <text x="176" y="42" font-size="10" fill="var(--crit)">context gap</text>
+                <rect x="252" y="24" width="128" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <text x="266" y="48" font-size="13" class="vlbl-t" font-weight="600">Your system</text>
+                <text x="266" y="66" font-size="11" class="vlbl-f">the real context</text>
+              </g>
+              <!-- cost -->
+              <g transform="translate(0,86)">
+                <text x="20" y="34" font-size="11" fill="var(--amber)">cost gap</text>
+                <rect x="20" y="42" width="360" height="16" rx="8" fill="var(--surface-2)" stroke="var(--border)"/>
+                <rect x="20" y="42" width="300" height="16" rx="8" fill="var(--crit)" opacity="0.8"/>
+                <text x="330" y="55" font-size="11" class="vlbl">LLM $$$</text>
+              </g>
+              <!-- trust -->
+              <g transform="translate(0,168)">
+                <text x="20" y="26" font-size="11" fill="var(--indigo)">trust gap</text>
+                <text x="20" y="52" font-size="14" class="vlbl">"it improves over time"</text>
+                <text x="243" y="52" font-size="18" fill="var(--crit)">?</text>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 · THE THESIS -->
+    <!-- 5 · THESIS (viz: freeze/evolve rings) -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
-        <div class="bigquote i">
-          <p>Don't buy a bigger brain. Build a better harness around the one you have.</p>
-          <div class="who">the MetaHarness thesis</div>
+        <div class="split v">
+          <div>
+            <div class="bigquote i"><p>Don't buy a bigger brain. Build a better harness around the one you have.</p><div class="who">the MetaHarness thesis</div></div>
+            <p class="mut" style="margin-top:1rem">The model's weights stay <strong>frozen</strong>. Everything <em>around</em> it — how it plans, what context it sees, which tools it may call, when it retries, what it remembers — is the <strong>harness</strong>. That's the part you evolve, and it's cheap to change.</p>
+          </div>
+          <div class="di sq">
+            <span class="cap">Frozen core, evolving harness</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A frozen model core surrounded by an evolving harness ring">
+              <circle cx="150" cy="150" r="128" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="7 7" opacity="0.85"/>
+              <g font-size="11" fill="var(--indigo)" text-anchor="middle">
+                <circle cx="150" cy="22" r="5" fill="var(--indigo)"/><text x="150" y="14">planner</text>
+                <circle cx="278" cy="150" r="5" fill="var(--indigo)"/><text x="256" y="140">tools</text>
+                <circle cx="150" cy="278" r="5" fill="var(--indigo)"/><text x="150" y="296">memory</text>
+                <circle cx="22" cy="150" r="5" fill="var(--indigo)"/><text x="44" y="140">context</text>
+              </g>
+              <path d="M150 40 A110 110 0 0 1 260 150" fill="none" stroke="var(--indigo)" stroke-width="2" marker-end="url(#arRing)"/>
+              <defs><marker id="arRing" markerWidth="9" markerHeight="9" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--indigo)"/></marker></defs>
+              <circle cx="150" cy="150" r="62" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <path d="M143 150 v-8 a7 7 0 0 1 14 0 v8 M138 150 h24 v20 h-24 z" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linejoin="round"/>
+              <text x="150" y="205" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MODEL · frozen</text>
+              <text x="150" y="150" text-anchor="middle" font-size="0"></text>
+            </svg>
+          </div>
         </div>
-        <p class="lead" style="margin-top:1.4rem; max-width:70ch">The model's weights stay <strong>frozen</strong>. Everything <em>around</em> the model — how it plans, what context it sees, which tools it may call, when it retries — is the <strong>harness</strong>. That's what you evolve.</p>
       </div>
     </section>
 
-    <!-- 6 · CHEAPEST LEVER -->
+    <!-- 6 · CHEAPEST LEVER (viz: pareto) -->
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <p class="kick"><span class="n">01.3</span> Why the harness is the cheapest lever</p>
-        <div class="split">
+        <div class="split vr top">
           <div>
             <h2>Cheapest capable model, best possible answer</h2>
-            <p class="mut">The competitive advantage isn't only that it's smart — it's that it's the <strong>cheapest</strong> way to reach the best answer. Use a small model wherever it suffices, escalate to a frontier model only when a task truly demands it. That gap is your margin.</p>
+            <p class="mut">The edge isn't only that it's smart — it's that it's the <strong>cheapest</strong> route to the best answer. Small model where it suffices; escalate to a frontier model only when a task truly needs it.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li class="j"><b>The gap is your margin</b> — every task solved on a cheap model is money kept.</li>
+              <li><b>It compounds</b> — matters most for always-on apps, where tokens dominate cost.</li>
+              <li class="j"><b>No weights touched</b> — you move the frontier by changing the wrapper.</li>
+            </ul>
           </div>
-          <div class="grid g2">
-            <div class="stat"><div class="num">~56&times;</div><div class="k">cheaper than frontier-only on SWE-bench Verified</div></div>
-            <div class="stat"><div class="num i">7.6&times;</div><div class="k">resolution lift on SWE-bench Lite from harness alone</div></div>
-            <div class="stat"><div class="num">$0.15</div><div class="k">per instance on the flagship cascade run</div></div>
-            <div class="stat"><div class="num i">0</div><div class="k">changes to model weights required</div></div>
+          <div class="di">
+            <span class="cap">Cost vs. capability — the Pareto frontier</span>
+            <svg viewBox="0 0 420 270" role="img" aria-label="Scatter of models by cost and capability, MetaHarness on the frontier">
+              <!-- axes -->
+              <line x1="46" y1="24" x2="46" y2="224" stroke="var(--border-2)" stroke-width="1.5"/>
+              <line x1="46" y1="224" x2="404" y2="224" stroke="var(--border-2)" stroke-width="1.5"/>
+              <text x="46" y="246" font-size="11" class="vlbl-f">low cost</text>
+              <text x="404" y="246" font-size="11" class="vlbl-f" text-anchor="end">high cost →</text>
+              <text x="30" y="150" font-size="11" class="vlbl-f" transform="rotate(-90 30 150)" text-anchor="middle">capability →</text>
+              <!-- frontier curve -->
+              <path d="M70 200 Q90 90 150 78 Q320 60 380 56" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.6"/>
+              <!-- cheap weak models -->
+              <circle cx="86" cy="188" r="6" fill="var(--muted)"/><text x="96" y="192" font-size="10" class="vlbl-f">small model</text>
+              <circle cx="120" cy="150" r="6" fill="var(--muted)"/>
+              <!-- frontier-only -->
+              <circle cx="360" cy="66" r="8" fill="var(--crit)"/><text x="350" y="60" font-size="10.5" fill="var(--crit)" text-anchor="end">frontier-only · $$$</text>
+              <!-- metaharness cascade -->
+              <circle cx="150" cy="80" r="9" fill="var(--jade)"/><circle cx="150" cy="80" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
+              <text x="164" y="76" font-size="11" fill="var(--jade)" font-weight="600">MetaHarness</text>
+              <text x="164" y="90" font-size="10" class="vlbl-f">~56× cheaper</text>
+            </svg>
           </div>
         </div>
       </div>
@@ -388,11 +450,26 @@
     <section class="slide" data-part="The big idea">
       <div class="inner">
         <p class="kick"><span class="n">01.4</span> The three projects</p>
-        <h2 style="margin-bottom:1.1rem">What you're being certified on</h2>
+        <h2 style="margin-bottom:0.9rem">What you're being certified on</h2>
         <div class="grid g3">
-          <div class="card"><div class="tag">the factory</div><h3>metaharness</h3><p>Wraps a repo or stack in a branded, publishable agent harness with its own <code>npx</code> CLI.</p></div>
+          <div class="card"><div class="tag">the factory</div><h3>metaharness</h3><p>Wraps a repo or a live stack in a branded, publishable agent harness with its own <code>npx</code> CLI.</p></div>
           <div class="card"><div class="tag j">the engine</div><h3>@metaharness/darwin</h3><p>Evolves that harness — mutates policy surfaces, keeps only what measurably improves.</p></div>
           <div class="card"><div class="tag">the proof</div><h3>@metaharness/flywheel</h3><p>Runs the loop continually and promotes only proven lift — with signed, replayable receipts.</p></div>
+        </div>
+        <div class="di plain" style="margin-top:0.9rem">
+          <svg viewBox="0 0 900 60" role="img" aria-label="Factory produces a harness, Darwin evolves it, Flywheel proves it">
+            <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <g font-size="14" text-anchor="middle">
+              <rect x="20" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--indigo)"/><text x="120" y="36" fill="var(--indigo)">metaharness — build</text>
+              <line x1="224" y1="31" x2="286" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <rect x="290" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="390" y="36" fill="var(--jade)">darwin — improve</text>
+              <line x1="494" y1="31" x2="556" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <rect x="560" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="660" y="36" fill="var(--jade)">flywheel — prove</text>
+              <path d="M760 31 h40 a12 12 0 0 1 12 12 v-24 a12 12 0 0 0 -12 12 z" fill="none"/>
+              <line x1="762" y1="31" x2="824" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <text x="864" y="36" fill="var(--muted)">ship</text>
+            </g>
+          </svg>
         </div>
         <p class="src">All three: open source, MIT · github.com/ruvnet/metaharness · npm @metaharness/*</p>
       </div>
@@ -405,6 +482,7 @@
         <h2>MetaHarness — the factory</h2>
         <p class="sub">A factory for agent harnesses. Not another agent framework.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>wraps your stack</span><span>one kernel · nine hosts</span><span>governed by default</span><span>the numbers</span></div>
       </div>
     </section>
 
@@ -412,12 +490,17 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.1</span> What it is</p>
-        <div class="split">
+        <div class="split v top">
           <div>
             <h2>From a repository to a publishable agent — in under a minute</h2>
-            <p class="lead">MetaHarness reads a codebase and mints a complete, npm-publishable harness with its own <code>npx</code> CLI, branded as yours.</p>
+            <p class="mut">MetaHarness reads a codebase and mints a complete, npm-publishable harness with its own <code>npx</code> CLI, branded as yours. It's a <strong>factory</strong>, not a framework — it produces the product, then gets out of the way.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li><b>Static &amp; deterministic</b> — it scans your repo; it never executes your code.</li>
+              <li class="j"><b>Yours to own</b> — output is a versioned npm package you publish and govern.</li>
+              <li><b>Byte-identical Studio</b> — a client-side playground mirrors the CLI exactly.</li>
+            </ul>
           </div>
-          <div class="grid" style="align-content:center">
+          <div class="di plain" style="gap:0.9rem; align-content:start">
             <div class="callout i"><div class="h">The one-liner</div><p>"The meta-harness for AI agents — scaffold your own focused, branded agent harness with its own <code>npx</code> CLI."</p></div>
             <div class="grid g2">
               <div class="stat"><div class="num i">&lt;60s</div><div class="k">repo → publishable harness</div></div>
@@ -428,16 +511,32 @@
       </div>
     </section>
 
-    <!-- 10 · WRAPS YOUR STACK -->
+    <!-- 10 · WRAPS YOUR STACK (viz: nested wrap) -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.2</span> It wraps what you already run</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>Point it at your stack, tell Claude to evolve it</h2>
             <p class="mut">Reuven's framing: the harness <strong>wraps your other systems</strong>. You already have a funnel, ads, data, and marketing APIs. Point MetaHarness at them and tell Claude to build a harness around them — then evolve it.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li><b>Your systems stay put</b> — the harness sits around them, not instead of them.</li>
+              <li class="j"><b>Governance is the outer layer</b> — an MCP policy wraps every tool call.</li>
+              <li><b>Nothing bespoke to maintain</b> — it's an npm dependency, versioned like any other.</li>
+            </ul>
           </div>
-          <div class="callout"><div class="h">Safe by construction</div><p>Analysis is <strong>static and deterministic</strong> — it scans your repo, it never executes your code. The output ships as a versioned npm dependency you own, publish, and govern like any other.</p></div>
+          <div class="di sq">
+            <span class="cap">A harness is a wrapper, not a rewrite</span>
+            <svg viewBox="0 0 320 260" role="img" aria-label="Your stack wrapped by a harness, wrapped by governance">
+              <rect x="14" y="14" width="292" height="232" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="6 6"/>
+              <text x="160" y="34" text-anchor="middle" font-size="11" fill="var(--indigo)">GOVERNANCE · MCP default-deny</text>
+              <rect x="46" y="50" width="228" height="164" rx="13" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
+              <text x="160" y="70" text-anchor="middle" font-size="11" fill="var(--jade)">HARNESS · agents · tools · retries</text>
+              <rect x="84" y="88" width="152" height="102" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="160" y="128" text-anchor="middle" font-size="13" class="vlbl-t" font-weight="600">YOUR STACK</text>
+              <text x="160" y="150" text-anchor="middle" font-size="11" class="vlbl-f">funnel · ads · data · APIs</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -446,7 +545,7 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.3</span> How the pieces stack</p>
-        <h2 style="margin-bottom:1.1rem">One kernel, your branding on top</h2>
+        <h2 style="margin-bottom:0.9rem">One shared kernel, your branding on top</h2>
         <div class="flow">
           <div class="node"><span class="badge">you</span><b>Your stack</b><span>funnel · ads · data</span></div>
           <div class="harrow">&rarr;</div>
@@ -458,7 +557,13 @@
           <div class="harrow">&rarr;</div>
           <div class="node"><span class="badge">host</span><b>Host adapter</b><span>→ LLM providers</span></div>
         </div>
-        <p class="mut small" style="margin-top:1.1rem; max-width:80ch">The <code>@metaharness/kernel</code> (Rust compiled to WASM + NAPI-RS) is shared across every generated harness. Your content and branding stay proprietary; the kernel handles the plumbing.</p>
+        <div class="split v top" style="margin-top:1rem; gap:1.4rem">
+          <p class="mut small" style="margin:0">The <code>@metaharness/kernel</code> (Rust compiled to WASM + NAPI-RS) is shared across every generated harness — it handles the plumbing so your content and branding stay proprietary.</p>
+          <ul class="clean sm" style="margin:0">
+            <li><b>Deterministic language detection</b> from lockfiles — Rust, TS, Python, Go.</li>
+            <li class="j"><b>Same output everywhere</b> — the host adapter is the only thing that changes per platform.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -466,17 +571,19 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.4</span> What ships in the box</p>
-        <div class="grid g2" style="gap:0.9rem 2rem">
+        <div class="grid g2" style="gap:0.7rem 2rem">
           <ul class="clean">
-            <li><b>Multi-host output</b> — one harness, nine platforms including CI.</li>
-            <li class="j"><b>Governance built in</b> — MCP default-deny, signed releases, SBOMs.</li>
+            <li><b>Multi-host output</b> — one harness, nine platforms including non-interactive CI.</li>
+            <li class="j"><b>Governance built in</b> — MCP default-deny, Ed25519-signed releases, SBOMs.</li>
+            <li><b>Pre-flight scoring</b> — fitness, tool safety, and cost-per-run before you commit.</li>
           </ul>
           <ul class="clean">
-            <li><b>Pre-flight scoring</b> — fitness, safety, and cost-per-run before you commit.</li>
-            <li class="j"><b>19 vertical templates</b> — coding, trading, legal, support, research…</li>
+            <li class="j"><b>19 vertical templates</b> — coding, trading, legal, support, research, education…</li>
+            <li><b>21 <code>harness</code> subcommands</b> — the whole lifecycle from one CLI.</li>
+            <li class="j"><b>DRACO benchmark</b> — grades research quality: grounding, coverage, faithfulness.</li>
           </ul>
         </div>
-        <div class="grid g4" style="margin-top:1.1rem">
+        <div class="grid g4" style="margin-top:0.9rem">
           <div class="stat"><div class="num i">568</div><div class="k">passing tests · 67 files</div></div>
           <div class="stat"><div class="num i">16</div><div class="k">green CI jobs</div></div>
           <div class="stat"><div class="num i">21</div><div class="k"><code>harness</code> subcommands</div></div>
@@ -485,21 +592,50 @@
       </div>
     </section>
 
-    <!-- 13 · NINE HOSTS -->
+    <!-- 13 · NINE HOSTS (viz: hub-spoke) -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.5</span> Runs on nine hosts</p>
-        <h2 style="margin-bottom:1.1rem">Write the harness once, run it anywhere</h2>
-        <div class="grid g3">
-          <div class="card"><h3>Claude Code</h3><p>The interactive default.</p></div>
-          <div class="card"><h3>OpenAI Codex</h3><p>Codex-host adapter.</p></div>
-          <div class="card"><h3>pi.dev</h3><p>Hosted agent runtime.</p></div>
-          <div class="card"><h3>Hermes</h3><p>Nous Research host.</p></div>
-          <div class="card"><h3>OpenClaw · OpenCode</h3><p>Open-source hosts.</p></div>
-          <div class="card"><h3>RVM</h3><p>Hardware-isolated sandbox.</p></div>
-          <div class="card"><h3>GitHub Copilot</h3><p>Copilot integration.</p></div>
-          <div class="card"><h3>GitHub Actions</h3><p>Non-interactive CI/CD.</p></div>
-          <div class="card"><div class="tag j">byte-identical</div><h3>Studio</h3><p>100% client-side, no backend.</p></div>
+        <div class="split vr top">
+          <div>
+            <h2>Write the harness once, run it anywhere</h2>
+            <p class="mut">The kernel is constant; only the host adapter changes. So the same harness runs interactively, in CI, or in a hardware-isolated sandbox — without a rewrite.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li class="j"><b>Interactive</b> — Claude Code, Codex, Copilot, OpenCode.</li>
+              <li><b>Hosted &amp; research</b> — pi.dev, Hermes (Nous), OpenClaw.</li>
+              <li class="j"><b>Locked-down</b> — RVM sandbox, and GitHub Actions for CI/CD.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">One kernel · nine adapters</span>
+            <svg viewBox="0 0 420 300" role="img" aria-label="Kernel at center connected to nine hosts">
+              <defs></defs>
+              <!-- spokes -->
+              <g stroke="var(--border-2)" stroke-width="1.3">
+                <line x1="210" y1="150" x2="210" y2="40"/><line x1="210" y1="150" x2="320" y2="70"/>
+                <line x1="210" y1="150" x2="372" y2="150"/><line x1="210" y1="150" x2="320" y2="230"/>
+                <line x1="210" y1="150" x2="210" y2="260"/><line x1="210" y1="150" x2="100" y2="230"/>
+                <line x1="210" y1="150" x2="48" y2="150"/><line x1="210" y1="150" x2="100" y2="70"/>
+                <line x1="210" y1="150" x2="140" y2="150"/>
+              </g>
+              <!-- host nodes -->
+              <g font-size="10.5" fill="var(--muted)" text-anchor="middle">
+                <circle cx="210" cy="34" r="5" fill="var(--indigo)"/><text x="210" y="22">Claude Code</text>
+                <circle cx="326" cy="66" r="5" fill="var(--indigo)"/><text x="344" y="58">Codex</text>
+                <circle cx="378" cy="150" r="5" fill="var(--indigo)"/><text x="378" y="138">pi.dev</text>
+                <circle cx="326" cy="234" r="5" fill="var(--indigo)"/><text x="344" y="252">Hermes</text>
+                <circle cx="210" cy="266" r="5" fill="var(--indigo)"/><text x="210" y="284">OpenClaw</text>
+                <circle cx="94" cy="234" r="5" fill="var(--indigo)"/><text x="74" y="252">RVM</text>
+                <circle cx="42" cy="150" r="5" fill="var(--indigo)"/><text x="44" y="138">Copilot</text>
+                <circle cx="94" cy="66" r="5" fill="var(--indigo)"/><text x="74" y="58">OpenCode</text>
+                <circle cx="150" cy="112" r="5" fill="var(--indigo)"/><text x="120" y="106">Actions</text>
+              </g>
+              <!-- kernel -->
+              <circle cx="210" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="210" y="147" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">kernel</text>
+              <text x="210" y="161" text-anchor="middle" font-size="8.5" class="vlbl-f">Rust→WASM</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -508,16 +644,17 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.6</span> Governance &amp; safety</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>Ship an agent your security team will sign off on</h2>
-            <p class="mut">Governance isn't bolted on afterwards — it's part of the generated output, so an agent is a dependency you can audit like any other.</p>
+            <p class="mut">Governance isn't bolted on afterward — it's part of the generated output, so an agent is a dependency you can audit like any other package in your tree.</p>
           </div>
           <ul class="clean">
             <li class="j"><b>MCP default-deny</b> — the tool server refuses anything not explicitly allowed.</li>
-            <li class="j"><b>Ed25519 witness-signed releases</b> — provenance you can verify.</li>
+            <li class="j"><b>Ed25519 witness-signed releases</b> — cryptographic provenance you can verify.</li>
             <li class="j"><b>SPDX-2.3 SBOM</b> — a full bill of materials per release.</li>
-            <li class="j"><b><code>harness mcp-scan</code></b> — static MCP threat-model for PR review.</li>
+            <li class="j"><b><code>harness mcp-scan</code></b> — a static MCP threat model, ready for PR review.</li>
+            <li><b>SLSA L2 provenance</b> — supply-chain attestation via workload identity.</li>
           </ul>
         </div>
       </div>
@@ -527,11 +664,11 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.7</span> Day-to-day commands</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>A small, memorable CLI</h2>
             <p class="mut">After scaffolding, the whole lifecycle is a handful of <code>harness</code> subcommands — plus two analysis tools you run <em>before</em> you commit.</p>
-            <div class="callout i" style="margin-top:0.4rem"><div class="h">Pre-flight</div><p><code>metaharness score &lt;repo&gt;</code> → fitness, build likelihood, tool safety, cost-per-run. <code>harness genome &lt;repo&gt;</code> → readiness analysis.</p></div>
+            <div class="callout i" style="margin-top:0.5rem"><div class="h">Pre-flight</div><p><code>metaharness score &lt;repo&gt;</code> → fitness, build likelihood, tool safety, cost-per-run. <code>harness genome &lt;repo&gt;</code> → readiness analysis.</p></div>
           </div>
           <pre><span class="c"># health &amp; release gates</span>
 <span class="cmd">harness</span> doctor        <span class="c"># environment check</span>
@@ -544,18 +681,36 @@
       </div>
     </section>
 
-    <!-- 16 · THE NUMBERS -->
+    <!-- 16 · THE NUMBERS (viz: cost bars) -->
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.8</span> The case, in numbers</p>
-        <h2 style="margin-bottom:1.2rem">Same benchmark, a fraction of the cost</h2>
-        <div class="grid g4">
-          <div class="stat"><div class="num">55.6%</div><div class="k">SWE-bench Verified (500) resolved by the GLM→Opus cascade</div></div>
-          <div class="stat"><div class="num">~$0.15</div><div class="k">cost per instance on that run</div></div>
-          <div class="stat"><div class="num">51.3%</div><div class="k">the Lite-cascade baseline it beats</div></div>
-          <div class="stat"><div class="num i">L2</div><div class="k">SLSA provenance · CodeQL + cargo/npm audit</div></div>
+        <div class="split vr top">
+          <div>
+            <h2>Same benchmark, a fraction of the cost</h2>
+            <div class="grid g2" style="margin-top:0.6rem; gap:0.6rem">
+              <div class="stat"><div class="num">55.6%</div><div class="k">SWE-bench Verified (500) resolved</div></div>
+              <div class="stat"><div class="num i">51.3%</div><div class="k">the Lite-cascade baseline it beats</div></div>
+            </div>
+            <p class="mut small" style="margin-top:0.7rem">The GLM→Opus empty-patch cascade resolves more of the benchmark than the baseline — for cents, not dollars, per instance. Cost is the headline, not a footnote.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Cost per instance · log scale</span>
+            <svg viewBox="0 0 420 200" role="img" aria-label="MetaHarness ~$0.15 versus frontier-only $1 to $20 per instance">
+              <text x="14" y="40" font-size="12" fill="var(--jade)">MetaHarness cascade</text>
+              <rect x="14" y="48" width="60" height="22" rx="6" fill="var(--jade)"/>
+              <text x="82" y="64" font-size="12" class="vlbl-t" font-weight="600">~$0.15</text>
+              <text x="14" y="112" font-size="12" fill="var(--crit)">frontier-only</text>
+              <rect x="14" y="120" width="388" height="22" rx="6" fill="var(--surface-2)" stroke="var(--border)"/>
+              <rect x="14" y="120" width="388" height="22" rx="6" fill="var(--crit)" opacity="0.82"/>
+              <text x="396" y="136" font-size="12" fill="var(--surface)" text-anchor="end" font-weight="600">$1 – $20</text>
+              <line x1="14" y1="164" x2="402" y2="164" stroke="var(--border)"/>
+              <text x="14" y="184" font-size="11" fill="var(--jade)" font-weight="600">≈ 56× cheaper</text>
+              <text x="402" y="184" font-size="10.5" class="vlbl-f" text-anchor="end">Darwin runs: $0.01–$0.74 / instance</text>
+            </svg>
+          </div>
         </div>
-        <p class="src">v0.1.x beta · GLM→Opus empty-patch cascade · DRACO benchmark tracks cross-domain research quality (grounding, coverage, balance, cleanliness, faithfulness).</p>
+        <p class="src">v0.1.x beta · SLSA L2 provenance · CodeQL + cargo/npm audit · a live leaderboard tracks the Pareto frontier.</p>
       </div>
     </section>
 
@@ -563,13 +718,13 @@
     <section class="slide" data-part="MetaHarness">
       <div class="inner">
         <p class="kick"><span class="n">02.9</span> The Pareto-frontier family</p>
-        <h2 style="margin-bottom:1.1rem">Three ways to push cost down without losing quality</h2>
+        <h2 style="margin-bottom:0.9rem">Three levers to push cost down without losing quality</h2>
         <div class="grid g3">
-          <div class="card"><div class="tag j">evolve</div><h3>Darwin</h3><p>Self-mutates the harness config, tests in sandboxes, keeps only measurable wins. <em>Today's focus.</em></p></div>
-          <div class="card"><div class="tag">distill</div><h3>Weight-EFT</h3><p>Distills expensive frontier models into tuned cheaper ones (GLM/Qwen via LoRA), so you escalate less often.</p></div>
+          <div class="card"><div class="tag j">evolve</div><h3>Darwin</h3><p>Self-mutates the harness, tests in sandboxes, keeps only measurable wins. <em>Today's focus.</em></p></div>
+          <div class="card"><div class="tag">distill</div><h3>Weight-EFT</h3><p>Distills frontier models into tuned cheaper ones (GLM/Qwen via LoRA), so you escalate less often.</p></div>
           <div class="card"><div class="tag">route</div><h3>Router</h3><p>Learns from your eval logs which model handles each task, routing to the cheapest capable option.</p></div>
         </div>
-        <p class="src">A live cost-performance leaderboard tracks the Pareto frontier — which harness resolves the most benchmark per dollar.</p>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">How to frame it for a client</div><p>They stack. <strong>Route</strong> to the cheapest model that can do the job, <strong>distill</strong> the expensive one so the cheap tier gets smarter, and <strong>evolve</strong> the harness around all of it. A live leaderboard tracks who resolves the most benchmark per dollar.</p></div>
       </div>
     </section>
 
@@ -580,17 +735,19 @@
         <h2>Darwin — the engine</h2>
         <p class="sub">"Freeze the model, evolve the harness" — made mechanical.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>seven surfaces</span><span>archive tree</span><span>score &amp; gate</span><span>the lift</span></div>
       </div>
     </section>
 
     <!-- 19 · DARWIN ONE LINE -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
-        <div class="split">
+        <div class="split v">
           <div>
             <p class="kick"><span class="n">03.1</span> @metaharness/darwin</p>
             <h2>Evolve the operating system around a frozen model</h2>
             <p class="mut">One policy surface mutates per generation. Each variant runs in a sandbox, gets scored, and is promoted only if it clears four hard gates — so improvement is measured, never assumed.</p>
+            <p class="mut small" style="margin-top:0.4rem">Validated on real SWE-bench bug-fixing — not a toy loop. Latest: <code>v0.8.0</code>, MIT © rUv.</p>
           </div>
           <div class="bigquote i" style="align-self:center"><p>"Out of a hundred evolutions, this is the best one. The ones that work, it evolves more. The ones that don't are dead ends."</p><div class="who">Reuven Cohen</div></div>
         </div>
@@ -601,96 +758,194 @@
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.2</span> The seven mutation surfaces</p>
-        <h2 style="margin-bottom:1rem">Exactly one changes per generation</h2>
-        <div class="surfaces">
-          <div class="surf"><span class="f">planner.ts</span><span class="d">Decomposes a task into steps</span></div>
-          <div class="surf"><span class="f">context_builder.ts</span><span class="d">Ranks file relevance</span></div>
-          <div class="surf"><span class="f">reviewer.ts</span><span class="d">Risk-file &amp; test review</span></div>
-          <div class="surf"><span class="f">retry_policy.ts</span><span class="d">Classifies failures, retries</span></div>
-          <div class="surf"><span class="f">tool_policy.ts</span><span class="d">Command allowlist &amp; order</span></div>
-          <div class="surf"><span class="f">memory_policy.ts</span><span class="d">Which outcomes to retain</span></div>
-          <div class="surf ro"><span class="f">score_policy.ts</span><span class="d">Weights — read-only to a variant</span></div>
-          <div class="surf ro"><span class="f">isolation</span><span class="d">One change → one clean signal</span></div>
+        <div class="split v top">
+          <div>
+            <h2 style="margin-bottom:0.7rem">Exactly one changes per generation</h2>
+            <p class="mut small">Isolating a single change keeps the causal signal clean — you know precisely which surface moved the score, and by how much. Six are writable by a variant; <code>score_policy</code> is read-only, so a variant can't grade its own homework.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Why one at a time</div><p>Change two things and a win is unattributable. Darwin trades speed for a clean gradient.</p></div>
+          </div>
+          <div class="surfaces">
+            <div class="surf"><span class="f">planner.ts</span><span class="d">decomposes a task</span></div>
+            <div class="surf"><span class="f">context_builder.ts</span><span class="d">ranks file relevance</span></div>
+            <div class="surf"><span class="f">reviewer.ts</span><span class="d">risk &amp; test review</span></div>
+            <div class="surf"><span class="f">retry_policy.ts</span><span class="d">classifies &amp; retries</span></div>
+            <div class="surf"><span class="f">tool_policy.ts</span><span class="d">allowlist &amp; order</span></div>
+            <div class="surf"><span class="f">memory_policy.ts</span><span class="d">what to retain</span></div>
+            <div class="surf ro"><span class="f">score_policy.ts</span><span class="d">weights · read-only</span></div>
+            <div class="surf ro"><span class="f">1 per generation</span><span class="d">clean causal signal</span></div>
+          </div>
         </div>
-        <p class="src">Changing a single surface at a time keeps the causal signal clean — you know exactly which change moved the score.</p>
       </div>
     </section>
 
-    <!-- 21 · ARCHIVE TREE -->
+    <!-- 21 · ARCHIVE TREE (viz) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.3</span> The archive tree</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>Not a greedy climb — a population</h2>
-            <p class="mut">Variants live in an <strong>archive tree</strong>, not a single best branch. Selection can revisit a weaker ancestor that turns out to seed a stronger lineage — exactly like biological evolution, where a dead end for one trait is the origin of another.</p>
+            <p class="mut">Variants live in an <strong>archive tree</strong>, not a single best branch. Selection can revisit a weaker ancestor that turns out to seed a stronger lineage — exactly like biology, where a dead end for one trait is the origin of another.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Keeps "losers" around</b> — a low scorer may carry a mutation that pays off later.</li>
+              <li><b>Opt-in strategies</b> — quality-diversity, Pareto selection, crossover, MAP-Elites.</li>
+              <li class="j"><b>Reproducible core</b> — every extra is a toggle over a frozen, seeded baseline.</li>
+            </ul>
           </div>
-          <ul class="clean">
-            <li class="j"><b>Keeps losers around</b> — a low scorer may carry a mutation that pays off two generations later.</li>
-            <li><b>Opt-in strategies</b> — quality-diversity, Pareto selection, crossover, MAP-Elites, curriculum learning.</li>
-            <li class="j"><b>Reproducible core</b> — every extra is a toggle over a frozen, seeded baseline.</li>
-          </ul>
+          <div class="di">
+            <span class="cap">A weak ancestor can seed the winner</span>
+            <svg viewBox="0 0 420 250" role="img" aria-label="Evolution tree with a highlighted winning lineage and faded dead ends">
+              <g stroke-width="2" fill="none">
+                <path d="M40 125 L140 70" stroke="var(--border-2)"/>
+                <path d="M40 125 L140 185" stroke="var(--jade)"/>
+                <path d="M140 70 L250 44" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path d="M140 70 L250 104" stroke="var(--border-2)"/>
+                <path d="M140 185 L250 158" stroke="var(--jade)"/>
+                <path d="M140 185 L250 214" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path d="M250 158 L370 132" stroke="var(--jade)"/>
+                <path d="M250 104 L370 78" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+              </g>
+              <g>
+                <circle cx="40" cy="125" r="8" fill="var(--muted)"/>
+                <circle cx="140" cy="70" r="7" fill="var(--muted)"/>
+                <circle cx="140" cy="185" r="8" fill="var(--jade)"/>
+                <circle cx="250" cy="44" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="48" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle cx="250" cy="104" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="108" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle cx="250" cy="158" r="8" fill="var(--jade)"/>
+                <circle cx="250" cy="214" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="218" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle cx="370" cy="132" r="11" fill="var(--jade)"/><circle cx="370" cy="132" r="11" fill="none" stroke="var(--surface)" stroke-width="2"/>
+                <circle cx="370" cy="78" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="370" y="82" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+              </g>
+              <text x="40" y="150" text-anchor="middle" font-size="10" class="vlbl-f">root</text>
+              <text x="140" y="209" text-anchor="middle" font-size="9.5" fill="var(--jade)">weak ancestor</text>
+              <text x="370" y="158" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">winner</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 22 · FOUR STEPS -->
+    <!-- 22 · FOUR STEPS (viz: loop) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.4</span> One generation, four steps</p>
-        <div class="split top">
-          <div class="steps">
-            <div class="step"><span class="idx">1</span><div><b>Mutate</b><p>Change exactly one surface → a child variant.</p></div></div>
-            <div class="step"><span class="idx">2</span><div><b>Sandbox</b><p>Run it shell-free, secrets scrubbed from the environment.</p></div></div>
-            <div class="step a"><span class="idx">3</span><div><b>Score</b><p>Weighted sum of six 0–1 terms, minus penalties.</p></div></div>
-            <div class="step b"><span class="idx">4</span><div><b>Promote</b><p>Replace the parent only if every gate holds; else it stays as an ancestor.</p></div></div>
+        <div class="split vr top">
+          <div class="di sq">
+            <span class="cap">The generation loop</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="Cyclic loop: mutate, sandbox, score, promote">
+              <defs><marker id="arL" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g fill="none" stroke="var(--border-2)" stroke-width="2">
+                <path d="M186 66 A100 100 0 0 1 234 114" marker-end="url(#arL)"/>
+                <path d="M234 186 A100 100 0 0 1 186 234" marker-end="url(#arL)"/>
+                <path d="M114 234 A100 100 0 0 1 66 186" marker-end="url(#arL)"/>
+                <path d="M66 114 A100 100 0 0 1 114 66" marker-end="url(#arL)"/>
+              </g>
+              <g text-anchor="middle">
+                <circle cx="150" cy="48" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="150" y="52" font-size="12" class="vlbl-t">Mutate</text>
+                <circle cx="252" cy="150" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="252" y="154" font-size="11" class="vlbl-t">Sandbox</text>
+                <circle cx="150" cy="252" r="26" fill="var(--surface)" stroke="var(--indigo)" stroke-width="2"/><text x="150" y="256" font-size="12" fill="var(--indigo)">Score</text>
+                <circle cx="48" cy="150" r="26" fill="var(--surface)" stroke="var(--jade)" stroke-width="2"/><text x="48" y="154" font-size="11" fill="var(--jade)">Promote</text>
+                <text x="150" y="146" font-size="10" class="vlbl-f">1 GENERATION</text>
+                <text x="150" y="162" font-size="10" class="vlbl-f">×N children</text>
+              </g>
+            </svg>
           </div>
           <div>
-            <h3 style="margin-bottom:0.6rem">Everything lands in <code>.metaharness/</code></h3>
+            <ul class="clean" style="margin-bottom:0.8rem">
+              <li><b>Mutate</b> — change exactly one surface → a child variant.</li>
+              <li><b>Sandbox</b> — run it shell-free, secrets scrubbed from the environment.</li>
+              <li class="j"><b>Score</b> — six 0–1 quality terms, minus penalties.</li>
+              <li class="j"><b>Promote</b> — replace the parent only if every gate holds; else keep it as an ancestor.</li>
+            </ul>
+            <h3 style="margin-bottom:0.3rem">Everything lands in <code>.metaharness/</code></h3>
             <ul class="clean sm">
-              <li><code>archive.json</code> — the population tree</li>
-              <li><code>lineage.json</code> — graph for visualization</li>
-              <li><code>variants/</code> — one dir per variant</li>
-              <li><code>runs/</code> — traces &amp; scores</li>
-              <li class="j"><code>reports/winner.json</code> — the best result</li>
+              <li><code>archive.json</code> · <code>lineage.json</code> — the population &amp; its graph</li>
+              <li class="j"><code>runs/</code> · <code>reports/winner.json</code> — traces, scores, the best result</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 23 · SCORING -->
+    <!-- 23 · SCORING (viz: waterfall) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.5</span> The scoring model</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>Reward the outcome, punish the risk</h2>
-            <p class="mut">A base score — the weighted sum of six 0–1 quality terms — minus a penalty layer that makes unsafe or wasteful behaviour uncompetitive by construction.</p>
+            <p class="mut">A base score — the weighted sum of six 0–1 quality terms — minus a penalty layer that makes unsafe or wasteful behaviour uncompetitive by construction. A variant literally can't win by cutting a dangerous corner.</p>
+            <ul class="clean sm" style="margin-top:0.6rem">
+              <li class="j"><b>Six quality terms</b> feed the base score.</li>
+              <li><b>Five penalties</b> subtract for risk &amp; waste.</li>
+              <li class="j"><b>Net score</b> is what the gate compares.</li>
+            </ul>
           </div>
-          <div class="grid g2" style="gap:0.6rem">
-            <div class="stat"><div class="num" style="color:var(--crit); font-size:1.9rem">−0.30</div><div class="k">secret exposure</div></div>
-            <div class="stat"><div class="num" style="color:var(--crit); font-size:1.9rem">−0.25</div><div class="k">destructive actions</div></div>
-            <div class="stat"><div class="num" style="color:var(--amber); font-size:1.9rem">−0.20</div><div class="k">hallucinated files</div></div>
-            <div class="stat"><div class="num" style="color:var(--amber); font-size:1.9rem">−0.15</div><div class="k">tool loops</div></div>
+          <div class="di">
+            <span class="cap">Base score, minus penalties (labeled)</span>
+            <svg viewBox="0 0 420 220" role="img" aria-label="Waterfall: base score reduced by five penalties to a net score">
+              <line x1="40" y1="20" x2="40" y2="180" stroke="var(--border)"/>
+              <line x1="40" y1="180" x2="410" y2="180" stroke="var(--border)"/>
+              <text x="34" y="30" font-size="9" class="vlbl-f" text-anchor="end">1.0</text>
+              <text x="34" y="184" font-size="9" class="vlbl-f" text-anchor="end">0</text>
+              <!-- base -->
+              <rect x="54" y="30" width="46" height="150" rx="4" fill="var(--jade)"/>
+              <text x="77" y="196" font-size="9" class="vlbl" text-anchor="middle">base</text>
+              <!-- penalties -->
+              <g font-size="8.5" text-anchor="middle">
+                <rect x="120" y="30" width="34" height="45" rx="3" fill="var(--crit)"/><text x="137" y="196" fill="var(--crit)">−.30</text>
+                <rect x="168" y="30" width="34" height="38" rx="3" fill="var(--crit)" opacity="0.85"/><text x="185" y="196" fill="var(--crit)">−.25</text>
+                <rect x="216" y="30" width="34" height="30" rx="3" fill="var(--amber)"/><text x="233" y="196" fill="var(--amber)">−.20</text>
+                <rect x="264" y="30" width="34" height="23" rx="3" fill="var(--amber)" opacity="0.85"/><text x="281" y="196" fill="var(--amber)">−.15</text>
+                <rect x="312" y="30" width="34" height="15" rx="3" fill="var(--amber)" opacity="0.7"/><text x="329" y="196" fill="var(--amber)">−.10</text>
+              </g>
+              <!-- net -->
+              <rect x="362" y="112" width="40" height="68" rx="4" fill="var(--indigo)"/>
+              <text x="382" y="196" font-size="9" fill="var(--indigo)" text-anchor="middle">net</text>
+            </svg>
           </div>
         </div>
-        <p class="src">Also −0.10 for cost overrun. A variant literally can't win by cutting a dangerous corner.</p>
+        <p class="src">Penalties: secret exposure −0.30 · destructive −0.25 · hallucinated files −0.20 · tool loops −0.15 · cost overrun −0.10.</p>
       </div>
     </section>
 
-    <!-- 24 · PROMOTION GATE -->
+    <!-- 24 · PROMOTION GATE (viz: funnel) -->
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.6</span> The promotion gate</p>
-        <h2 style="margin-bottom:1rem">All four clauses must hold — or the child doesn't replace the parent</h2>
-        <div class="grid g4">
-          <div class="card"><div class="tag j">1</div><h3>Score improves</h3><p>Beats the parent by at least the delta.</p></div>
-          <div class="card"><div class="tag j">2</div><h3>Safety ≥ 0.95</h3><p>On the independent safety check.</p></div>
-          <div class="card"><div class="tag j">3</div><h3>No regression</h3><p>Test pass rate never drops.</p></div>
-          <div class="card"><div class="tag j">4</div><h3>Zero blocked</h3><p>No blocked actions during the run.</p></div>
+        <div class="split vr top">
+          <div>
+            <h2>Four gates. All must hold, or the parent stands.</h2>
+            <p class="mut">This is what turns "it improved" into a fact rather than a vibe — a promotion is a claim with four preconditions, checked every time.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Score improves</b> over the parent by at least the delta.</li>
+              <li class="j"><b>Safety ≥ 0.95</b> on the independent check.</li>
+              <li class="j"><b>No regression</b> — test pass rate never drops.</li>
+              <li class="j"><b>Zero blocked</b> actions during the run.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">Many variants in · few promoted out</span>
+            <svg viewBox="0 0 420 230" role="img" aria-label="Variants filtered through four gates, one promoted">
+              <!-- incoming variants -->
+              <g fill="var(--muted)">
+                <circle cx="24" cy="60" r="5"/><circle cx="24" cy="90" r="5"/><circle cx="24" cy="120" r="5"/><circle cx="24" cy="150" r="5"/><circle cx="24" cy="180" r="5"/>
+              </g>
+              <text x="24" y="210" font-size="9.5" class="vlbl-f" text-anchor="middle">variants</text>
+              <!-- gates -->
+              <g stroke="var(--border-2)" stroke-width="2"><line x1="110" y1="30" x2="110" y2="200"/><line x1="190" y1="30" x2="190" y2="200"/><line x1="270" y1="30" x2="270" y2="200"/><line x1="350" y1="30" x2="350" y2="200"/></g>
+              <g font-size="8.5" fill="var(--muted)" text-anchor="middle"><text x="110" y="24">score</text><text x="190" y="24">safety</text><text x="270" y="24">no-reg</text><text x="350" y="24">0-block</text></g>
+              <!-- flow lines (surviving path) -->
+              <path d="M30 120 H110 M110 120 H190 M190 120 H270 M270 120 H350 M350 120 H400" fill="none" stroke="var(--jade)" stroke-width="2"/>
+              <!-- dropped -->
+              <g stroke="var(--crit)" stroke-width="1.4" opacity="0.6"><path d="M110 120 l16 40"/><path d="M190 120 l16 -46"/><path d="M270 120 l16 42"/></g>
+              <g fill="var(--crit)" opacity="0.6"><circle cx="128" cy="164" r="4"/><circle cx="208" cy="72" r="4"/><circle cx="288" cy="164" r="4"/></g>
+              <!-- promoted -->
+              <circle cx="400" cy="120" r="9" fill="var(--jade)"/><circle cx="400" cy="120" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
+              <text x="400" y="210" font-size="9.5" fill="var(--jade)" text-anchor="middle">promoted</text>
+            </svg>
+          </div>
         </div>
-        <p class="src">This is what makes "it improved" a fact rather than a vibe — a promotion is a claim with four preconditions.</p>
       </div>
     </section>
 
@@ -698,15 +953,17 @@
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.7</span> The safety model</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>Two independent checks, before code ever runs</h2>
             <p class="mut">Letting a system rewrite its own policies only works if it can't rewrite them into something dangerous. Darwin gates every variant twice, then runs it with no shell and no secrets.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Belt and suspenders</div><p>Static inspection catches the file; code validation catches the payload; the sandbox contains the blast radius; the score penalizes the attempt. Four layers, any one of which stops a bad variant.</p></div>
           </div>
           <ul class="clean">
             <li class="j"><b><code>inspectVariant()</code></b> — disqualifies unapproved files, blocked names (<code>.env</code>, <code>.git</code>, <code>secret</code>), symlinks, and dangerous patterns (<code>eval</code>, <code>fetch</code>, <code>child_process</code>).</li>
             <li class="j"><b><code>validateGeneratedCode()</code></b> — gates any LLM-written code before it touches disk.</li>
-            <li><b>Shell-free sandbox</b> — no command injection; scrubbed env exposes only PATH + identifiers, never secrets.</li>
+            <li><b>Shell-free sandbox</b> — no command injection; a scrubbed env exposes only PATH + identifiers, never secrets.</li>
+            <li><b>Score penalties</b> — even a variant that slips through loses on the scoreboard.</li>
           </ul>
         </div>
       </div>
@@ -716,7 +973,7 @@
     <section class="slide" data-part="Darwin" data-chart="1">
       <div class="inner">
         <p class="kick"><span class="n">03.8</span> The harness does the lifting</p>
-        <div class="split top">
+        <div class="split v top">
           <div class="panel">
             <div class="cap">SWE-bench Lite · 300 instances · official harness</div>
             <div class="ttl">Same frozen model, three harnesses</div>
@@ -727,9 +984,13 @@
             </div>
           </div>
           <div>
-            <h2 style="font-size:1.7rem">Why the numbers move</h2>
-            <p class="mut">Open-loop resolves <strong>7.7%</strong>. A closed-loop repair harness roughly doubles it to <strong>15.3%</strong>. Tiered escalation — cheap first, frontier only when needed — reaches <strong>58.3%</strong>, at <strong>~$0.01–$0.74</strong> per instance versus <strong>$1–20</strong> frontier-only.</p>
-            <p class="mut"><strong>The weights never changed. The harness did.</strong></p>
+            <h2 style="font-size:1.6rem">Why the numbers move</h2>
+            <p class="mut">Open-loop, the model resolves <strong>7.7%</strong>. A closed-loop repair harness roughly doubles it to <strong>15.3%</strong>. Tiered escalation — cheap first, frontier only when needed — reaches <strong>58.3%</strong>.</p>
+            <ul class="clean sm" style="margin-top:0.4rem">
+              <li class="j"><b>~$0.01–$0.74</b> / instance vs. <b>$1–20</b> frontier-only.</li>
+              <li><b>7.6× the resolution</b> from the wrapper alone.</li>
+            </ul>
+            <p class="mut" style="margin-top:0.5rem"><strong>The weights never changed. The harness did.</strong></p>
           </div>
         </div>
       </div>
@@ -739,12 +1000,47 @@
     <section class="slide" data-part="Darwin">
       <div class="inner">
         <p class="kick"><span class="n">03.9</span> GEPA · prompt-policy learning</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>Evolving the words, not just the wiring</h2>
-            <p class="mut"><code>@metaharness/darwin/gepa</code> evolves a <strong>genome</strong> of text components — planner preambles, tool descriptions — via reflection on per-instance feedback. It's the same freeze-and-evolve idea, applied to prompts.</p>
+            <p class="mut"><code>@metaharness/darwin/gepa</code> evolves a <strong>genome</strong> of text components — planner preambles, tool descriptions — via reflection on per-instance feedback. Same freeze-and-evolve idea, applied to prompts.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Proof it isn't hand-waving</div><p><code>cand-6</code> was the first <strong>holdout-confirmed</strong> promoted genome — accepted under strict promotion: no regression on the gold set, and cost-per-resolved no worse than before.</p></div>
           </div>
-          <div class="callout"><div class="h">Proof it isn't hand-waving</div><p><code>cand-6</code> was the first <strong>holdout-confirmed</strong> promoted genome — accepted under strict promotion: no regression on the gold set, and cost-per-resolved no worse than before.</p></div>
+          <div class="di">
+            <span class="cap">A genome of text components, evolving</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A strip of prompt components mutating across generations">
+              <g font-size="9.5" text-anchor="middle">
+                <text x="40" y="28" class="vlbl-f">gen 0</text>
+                <text x="210" y="28" class="vlbl-f">gen n</text>
+                <text x="380" y="28" fill="var(--jade)">cand-6 ✓</text>
+              </g>
+              <g>
+                <rect x="20" y="40" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="104" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1.3" fill="none">
+                <path d="M66 53 H180"/><path d="M66 85 H180"/><path d="M66 117 H180"/><path d="M66 149 H180"/>
+              </g>
+              <g>
+                <rect x="184" y="40" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect x="184" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="184" y="104" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect x="184" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              </g>
+              <g stroke="var(--jade)" stroke-width="1.6" fill="none">
+                <path d="M230 53 H350"/><path d="M230 85 H350"/><path d="M230 117 H350"/><path d="M230 149 H350"/>
+              </g>
+              <g>
+                <rect x="354" y="40" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="72" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="104" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="136" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+              </g>
+              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">reflect on per-instance feedback → mutate components → keep confirmed wins</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -756,19 +1052,35 @@
         <h2>Flywheel — the proof</h2>
         <p class="sub">Turning "self-improving" from a claim into a receipt.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>frozen gate</span><span>anti-Goodhart</span><span>signed receipts</span><span>the digital twin</span></div>
       </div>
     </section>
 
-    <!-- 29 · FLYWHEEL ONE LINE -->
+    <!-- 29 · FLYWHEEL ONE LINE (viz: wheel) -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
-        <div class="split">
+        <div class="split vr">
           <div>
             <p class="kick"><span class="n">04.1</span> @metaharness/flywheel</p>
             <h2>Perpetual motion — and a receipt for every gain</h2>
             <p class="mut">Darwin finds the cheapest, best <em>model</em> for a task. The Flywheel asks the best <em>process</em> — running continually, rewriting its own code, promoting only what proves measurable lift.</p>
+            <p class="mut small" style="margin-top:0.4rem"><code>v0.1.7</code> · ESM, fully typed · runtime dependency: Node's native crypto, nothing else.</p>
           </div>
-          <div class="bigquote" style="align-self:center"><p>"Always looking, always evolving, always trying to make it better."</p><div class="who">Reuven Cohen · on the flywheel</div></div>
+          <div class="di sq">
+            <span class="cap">The loop that never stops</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A flywheel spinning through propose, evaluate, gate, promote, compound">
+              <defs><marker id="arF" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <circle cx="150" cy="150" r="118" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+              <g stroke="var(--border-2)" stroke-width="2"><line x1="150" y1="60" x2="150" y2="240"/><line x1="60" y1="150" x2="240" y2="150"/><line x1="86" y1="86" x2="214" y2="214"/><line x1="214" y1="86" x2="86" y2="214"/></g>
+              <path d="M150 20 A130 130 0 0 1 268 108" fill="none" stroke="var(--jade)" stroke-width="2.5" marker-end="url(#arF)"/>
+              <circle cx="150" cy="150" r="34" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="150" y="147" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">24/7</text>
+              <text x="150" y="163" text-anchor="middle" font-size="8.5" class="vlbl-f">momentum</text>
+              <g font-size="9.5" fill="var(--muted)" text-anchor="middle">
+                <text x="150" y="46">propose</text><text x="262" y="153">evaluate</text><text x="150" y="262">gate</text><text x="40" y="153">promote</text>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -783,33 +1095,55 @@
           <div class="card"><div class="tag">anti-Goodhart</div><h3>Holdout + anchor</h3><p>Must win on test sets it was never optimized against.</p></div>
           <div class="card"><div class="tag j">provenance</div><h3>Ed25519 receipts</h3><p>Signed promotions ship with a replay bundle.</p></div>
         </div>
-        <p class="src">Minimal by design — ESM, fully typed, runtime dependency is Node's native crypto and nothing else.</p>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">Why "minimal" is a feature</div><p>Small enough to trust and audit end-to-end — one runtime dependency, a frozen gate, and a signed trail. The whole point is that a skeptic can read it and reproduce it, not take your word.</p></div>
       </div>
     </section>
 
-    <!-- 31 · ANTI-GOODHART -->
+    <!-- 31 · ANTI-GOODHART (viz) -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <p class="kick"><span class="n">04.3</span> Anti-Goodhart construction</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>You can't game a metric you can't see</h2>
             <p class="mut">"When a measure becomes a target, it ceases to be a good measure." Flywheel defuses that: a candidate is optimized on one set but must <strong>prove itself on others it never touched.</strong></p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Holdout set</b> — unseen during optimization; catches overfitting.</li>
+              <li class="j"><b>Anchor set</b> — a fixed reference that guards against silent regressions.</li>
+              <li><b>Clear both, or no promotion</b> — a lucky run on the training slice isn't enough.</li>
+            </ul>
           </div>
-          <ul class="clean">
-            <li class="j"><b>Holdout set</b> — unseen during optimization; catches overfitting.</li>
-            <li class="j"><b>Anchor set</b> — a fixed reference that guards against silent regressions.</li>
-            <li><b>Clear both, or no promotion</b> — a lucky run on the training slice isn't enough.</li>
-          </ul>
+          <div class="di">
+            <span class="cap">Optimize on one, prove on two</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A candidate optimized on train must clear holdout and anchor to be promoted">
+              <defs><marker id="arG" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <rect x="18" y="72" width="104" height="60" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <text x="70" y="98" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">TRAIN</text>
+              <text x="70" y="116" text-anchor="middle" font-size="9.5" class="vlbl-f">optimize here</text>
+              <line x1="124" y1="102" x2="170" y2="70" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line x1="124" y1="102" x2="170" y2="134" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect x="176" y="40" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <text x="236" y="62" text-anchor="middle" font-size="11" fill="var(--jade)">HOLDOUT ✓</text>
+              <text x="236" y="80" text-anchor="middle" font-size="9" class="vlbl-f">never seen</text>
+              <rect x="176" y="112" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <text x="236" y="134" text-anchor="middle" font-size="11" fill="var(--jade)">ANCHOR ✓</text>
+              <text x="236" y="152" text-anchor="middle" font-size="9" class="vlbl-f">fixed reference</text>
+              <line x1="298" y1="66" x2="336" y2="98" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line x1="298" y1="138" x2="336" y2="106" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect x="338" y="80" width="66" height="48" rx="10" fill="var(--jade)"/>
+              <text x="371" y="102" text-anchor="middle" font-size="10.5" fill="var(--surface)" font-weight="600">PROMOTE</text>
+              <text x="371" y="118" text-anchor="middle" font-size="8.5" fill="var(--surface)">if both ✓</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 32 · SKEPTIC + CODE -->
+    <!-- 32 · SKEPTIC + LIFT CURVE (viz) -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <p class="kick"><span class="n">04.4</span> What you hand a skeptic</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <ul class="clean">
               <li class="j"><b>A lift curve</b> — improvement you can see, not assert.</li>
@@ -817,19 +1151,26 @@
               <li class="j"><b>A replay bundle</b> — reproduce the result on another machine.</li>
               <li class="j"><b>Signed receipts</b> — Ed25519 proof the run is the run.</li>
             </ul>
-          </div>
-          <pre><span class="c">// one verifiable improvement loop</span>
-<span class="cmd">import</span> { runFlywheelGenerations }
-  <span class="cmd">from</span> <span class="flag">'@metaharness/flywheel'</span>;
-
-<span class="cmd">const</span> out = <span class="cmd">await</span> runFlywheelGenerations({
-  rootPolicy,      <span class="c">// where we start</span>
-  proposer,        <span class="c">// makes candidates</span>
-  evaluator,       <span class="c">// scores four axes</span>
-  promotionRules,  <span class="c">// the frozen gate</span>
-  signer,          <span class="c">// Ed25519 receipts</span>
+            <pre style="margin-top:0.8rem"><span class="cmd">const</span> out = <span class="cmd">await</span> runFlywheelGenerations({
+  rootPolicy, proposer, evaluator,
+  promotionRules, signer,
 });
 out.liftCurve; out.lineage; out.replayBundle;</pre>
+          </div>
+          <div class="di">
+            <span class="cap">Lift curve · cumulative, per generation</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A rising lift curve; jade dots are promotions, faint marks are rejected attempts">
+              <line x1="42" y1="18" x2="42" y2="176" stroke="var(--border)"/>
+              <line x1="42" y1="176" x2="406" y2="176" stroke="var(--border)"/>
+              <g stroke="var(--border)" stroke-width="1" opacity="0.5"><line x1="42" y1="130" x2="406" y2="130"/><line x1="42" y1="84" x2="406" y2="84"/><line x1="42" y1="40" x2="406" y2="40"/></g>
+              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.10"/>
+              <g fill="var(--jade)"><circle cx="112" cy="140" r="4.5"/><circle cx="182" cy="104" r="4.5"/><circle cx="252" cy="72" r="4.5"/><circle cx="322" cy="72" r="4.5"/><circle cx="392" cy="44" r="6"/></g>
+              <g stroke="var(--faint)" stroke-width="1.2" opacity="0.55"><path d="M144 150 l6 6 M150 150 l-6 6"/><path d="M286 82 l6 6 M292 82 l-6 6"/></g>
+              <text x="224" y="198" font-size="10" class="vlbl-f" text-anchor="middle">generations →   (✕ = rejected attempt)</text>
+              <text x="392" y="36" font-size="10" fill="var(--jade)" text-anchor="middle" font-weight="600">lift</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -837,11 +1178,17 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <!-- 33 · DIGITAL TWIN -->
     <section class="slide" data-part="Flywheel">
       <div class="inner">
-        <div class="bigquote">
-          <p>"It's a digital twin. I'm recreating competitors — how they market, how they grow — and it runs 24/7, figuring out where it can make you more profitable."</p>
-          <div class="who">Reuven Cohen</div>
+        <div class="split v">
+          <div class="bigquote"><p>"It's a digital twin. I'm recreating competitors — how they market, how they grow — and it runs 24/7, figuring out where it can make you more profitable."</p><div class="who">Reuven Cohen</div></div>
+          <div>
+            <p class="mut">Left running, the Flywheel is less a script than a <strong>standing capability</strong>: it models the competition, weighs every option, and never stops looking for lift.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Compounds across a season</b> — knowledge carries into the next fiscal year.</li>
+              <li><b>Survives turnover</b> — a departed expert's techniques stay baked into the twin.</li>
+              <li class="j"><b>Per-customer</b> — point a fresh twin at each client's market and data.</li>
+            </ul>
+          </div>
         </div>
-        <p class="lead" style="margin-top:1.3rem; max-width:72ch">Left running, the Flywheel is less a script than a <strong>standing capability</strong>: it models the competition, weighs every option, and never stops looking for lift.</p>
       </div>
     </section>
 
@@ -849,26 +1196,27 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Flywheel">
       <div class="inner">
         <p class="kick"><span class="n">04.5</span> Two engines, two jobs</p>
-        <h2 style="margin-bottom:1rem">Where Darwin ends and Flywheel begins</h2>
+        <h2 style="margin-bottom:0.9rem">Where Darwin ends and Flywheel begins</h2>
         <div class="versus">
           <div class="vcol d"><h3>DARWIN — discover</h3>
             <ul class="clean sm">
               <li>Mutates seven policy surfaces</li>
               <li>Explores a population of variants</li>
               <li>Finds the cheapest capable path</li>
-              <li>Answer: <b>which model &amp; wiring?</b></li>
+              <li>Answers: <b>which model &amp; wiring?</b></li>
             </ul>
           </div>
-          <div class="vmid">+</div>
+          <div class="vmid">then</div>
           <div class="vcol f"><h3>FLYWHEEL — prove &amp; sustain</h3>
             <ul class="clean sm">
               <li class="j">Frozen gate, immutable during a run</li>
               <li class="j">Compounding, auditable lineage</li>
               <li class="j">Runs perpetually, signs every gain</li>
-              <li class="j">Answer: <b>did it really improve?</b></li>
+              <li class="j">Answers: <b>did it really improve?</b></li>
             </ul>
           </div>
         </div>
+        <div class="callout" style="margin-top:0.9rem"><div class="h">One sentence</div><p>Darwin explores the space of harnesses; Flywheel is the frozen gate and signed ledger around promotion. You need both — discovery without proof is a guess; proof without discovery has nothing to promote.</p></div>
       </div>
     </section>
 
@@ -879,6 +1227,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
         <h2>Putting it to work</h2>
         <p class="sub">From an npm install to a client outcome.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>the marketing loop</span><span>getting started</span><span>three deployments</span><span>the Cognitum service</span></div>
       </div>
     </section>
 
@@ -886,11 +1235,11 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Putting it to work">
       <div class="inner">
         <p class="kick"><span class="n">05.1</span> The whiteboard example</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>The marketing feedback loop</h2>
             <p class="lead">The example Reuven demoed live — four moves from "my stack" to "self-improving."</p>
-            <div class="callout" style="margin-top:0.3rem"><div class="h">The line to remember</div><p style="font-weight:560">"A click funnel that <em>proves its own lift.</em> Creating a funnel is easy. Optimizing one is hard."</p></div>
+            <div class="callout" style="margin-top:0.4rem"><div class="h">The line to remember</div><p style="font-weight:560">"A click funnel that <em>proves its own lift.</em> Creating a funnel is easy. Optimizing one is hard."</p></div>
           </div>
           <div class="steps">
             <div class="step"><span class="idx">1</span><div><b>Point it at what you run</b><p>Funnel, ads, analytics, marketing APIs.</p></div></div>
@@ -906,11 +1255,15 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Putting it to work">
       <div class="inner">
         <p class="kick"><span class="n">05.2</span> Getting a client started</p>
-        <div class="split top">
+        <div class="split v top">
           <div>
             <h2>"Point Claude at it and say make my marketing better"</h2>
             <p class="mut">Fork the repo (so it's selectable in Claude), point Claude Code at it, and describe the outcome. It scaffolds the harness; you wire in the data and APIs, and let it run.</p>
-            <p class="mut small">"Integrate the data you already have, make sure it has API access — the rest just works. It's meant to do its thing."</p>
+            <ul class="clean sm" style="margin-top:0.6rem">
+              <li><b>Fork first</b> — takes a few minutes to appear as an option in Claude.</li>
+              <li class="j"><b>Integrate what exists</b> — data + API access is all it needs.</li>
+              <li><b>Then leave it</b> — "the rest just works; it's meant to do its thing."</li>
+            </ul>
           </div>
           <pre><span class="c"># in Claude Code, on a fork of ruvnet/metaharness</span>
 <span class="cmd">&gt;</span> Use <span class="flag">@metaharness/flywheel</span>,
@@ -918,8 +1271,8 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
   to build the world's best-performing
   click-funnel system.
 
-<span class="c"># then: integrate data + APIs, let the</span>
-<span class="c"># flywheel run.</span></pre>
+<span class="c"># → it scaffolds agents, policy, UI.</span>
+<span class="c"># then: integrate data + APIs, let it run.</span></pre>
         </div>
       </div>
     </section>
@@ -928,26 +1281,65 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Putting it to work">
       <div class="inner">
         <p class="kick"><span class="n">05.3</span> Three ways to run it</p>
-        <h2 style="margin-bottom:1rem">Match the deployment to the client's appetite</h2>
+        <h2 style="margin-bottom:0.8rem">Match the deployment to the client's appetite</h2>
         <div class="grid g3">
           <div class="card"><div class="tag">simplest</div><h3>Local</h3><p>On your own machine — great for building, testing, and one-off evolutions.</p></div>
           <div class="card"><div class="tag">scheduled</div><h3>Claude schedule</h3><p>A cloud version on a cron — hourly, daily. Cheaper, but no perpetual motion; it runs, then stops.</p></div>
           <div class="card"><div class="tag j">always-on</div><h3>Your cloud + Flywheel</h3><p>Reuven's own setup: infra that ties into everything and runs the Flywheel perpetually.</p></div>
         </div>
-        <p class="src">Cron is cheaper; perpetual motion compounds. The trade-off is cost vs. continuous improvement.</p>
+        <div class="di plain" style="margin-top:0.9rem">
+          <svg viewBox="0 0 900 54" role="img" aria-label="A spectrum from cheaper scheduled runs to continuous perpetual motion">
+            <line x1="30" y1="27" x2="870" y2="27" stroke="var(--border-2)" stroke-width="2"/>
+            <circle cx="120" cy="27" r="7" fill="var(--muted)"/><text x="120" y="16" font-size="12" fill="var(--muted)" text-anchor="middle">local</text>
+            <circle cx="450" cy="27" r="7" fill="var(--indigo)"/><text x="450" y="16" font-size="12" fill="var(--indigo)" text-anchor="middle">cron / scheduled</text>
+            <circle cx="780" cy="27" r="8" fill="var(--jade)"/><text x="780" y="16" font-size="12" fill="var(--jade)" text-anchor="middle">always-on flywheel</text>
+            <text x="120" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">cheapest</text>
+            <text x="780" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">compounds continuously</text>
+          </svg>
+        </div>
       </div>
     </section>
 
-    <!-- 39 · COGNITUM SIDE -->
+    <!-- 39 · COGNITUM SIDE (viz: comms) -->
     <section class="slide" data-part="Putting it to work">
       <div class="inner">
         <p class="kick"><span class="n">05.4</span> The Cognitum side</p>
-        <div class="split top">
+        <div class="split vr top">
           <div>
             <h2>The hosted layer around the open source</h2>
             <p class="mut">Beyond the repo there's a service that makes the same building blocks easier to adopt. In the <strong>Cognitum dashboard</strong>, <strong>Meta&nbsp;LLM</strong> exposes flywheels, pods, and agents behind an API key — point Claude at it and go.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Grab an API key</b>, point it at the API, get to work.</li>
+              <li><b>Comms</b> — agents work alongside people, managed like team members.</li>
+              <li class="j"><b>Privileged agents</b> — e.g. permission to update ads through an API.</li>
+            </ul>
           </div>
-          <div class="callout i"><div class="h">Comms — agents alongside people</div><p>A CMO or CIO gets a team that mixes human reports and agents. Each agent has its own privileges — say, permission to update ads through an API — and is managed like a member of the org, not a black box.</p></div>
+          <div class="di">
+            <span class="cap">Comms · people and agents on one team</span>
+            <svg viewBox="0 0 420 220" role="img" aria-label="A CMO node connected to human reports and agent workers">
+              <defs><marker id="arC" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--border-2)"/></marker></defs>
+              <rect x="160" y="16" width="100" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <text x="210" y="41" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">CMO</text>
+              <g stroke="var(--border-2)" stroke-width="1.4" fill="none">
+                <path d="M210 56 L70 110"/><path d="M210 56 L163 110"/><path d="M210 56 L257 110"/><path d="M210 56 L350 110"/>
+              </g>
+              <!-- humans -->
+              <g>
+                <rect x="30" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="52" cy="134" r="8" fill="var(--muted)"/><text x="86" y="130" font-size="10" class="vlbl-t">person</text><text x="86" y="144" font-size="9" class="vlbl-f">report</text>
+                <rect x="123" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="145" cy="134" r="8" fill="var(--muted)"/><text x="179" y="130" font-size="10" class="vlbl-t">person</text><text x="179" y="144" font-size="9" class="vlbl-f">report</text>
+              </g>
+              <!-- agents -->
+              <g>
+                <rect x="217" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="231" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="273" y="130" font-size="10" fill="var(--jade)">agent</text><text x="273" y="144" font-size="8" class="vlbl-f">API scope</text>
+                <rect x="310" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="324" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="366" y="130" font-size="10" fill="var(--jade)">agent</text><text x="366" y="144" font-size="8" class="vlbl-f">ads API</text>
+              </g>
+              <text x="210" y="190" text-anchor="middle" font-size="10" class="vlbl-f">status updates flow up · tasks flow down — human or agent, same channel</text>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -959,6 +1351,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
         <h2>Selling it as a consultant</h2>
         <p class="sub">Where this fits an engagement — and how to answer the hard questions.</p>
         <div class="rule"></div>
+        <div class="dchips"><span>the engagement</span><span>objections</span><span>your head start</span></div>
       </div>
     </section>
 
@@ -966,7 +1359,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Selling it">
       <div class="inner">
         <p class="kick"><span class="n">06.1</span> The engagement, five moves</p>
-        <h2 style="margin-bottom:1rem">One workflow you can walk any client down</h2>
+        <h2 style="margin-bottom:0.9rem">One workflow you can walk any client down</h2>
         <div class="pipe">
           <div class="pstep"><span class="s">Assess</span><b>Score</b><p><code>metaharness score</code> — fit &amp; cost.</p></div>
           <div class="pstep"><span class="s">Generate</span><b>Wrap</b><p>Harness around funnel, ads &amp; data.</p></div>
@@ -974,7 +1367,13 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
           <div class="pstep"><span class="s">Verify</span><b>Prove</b><p>Flywheel — confirm &amp; sign the lift.</p></div>
           <div class="pstep"><span class="s">Sustain</span><b>Run 24/7</b><p>Leave it on; it keeps optimizing.</p></div>
         </div>
-        <div class="callout" style="margin-top:1rem"><div class="h">The through-line to repeat back</div><p><strong>The harness, not the model, is the cheapest lever.</strong> Darwin discovers the cheapest capable path; Flywheel proves, records, and never stops improving it.</p></div>
+        <div class="split v top" style="margin-top:0.9rem; gap:1.4rem">
+          <div class="callout"><div class="h">The through-line</div><p><strong>The harness, not the model, is the cheapest lever.</strong> Darwin discovers the cheapest capable path; Flywheel proves, records, and never stops improving it.</p></div>
+          <ul class="clean sm" style="margin:0">
+            <li><b>Consulting fit</b> — reuse the same loop across clients and markets.</li>
+            <li class="j"><b>Get to insight faster</b> — but always ship: a live pilot beats endless hypotheticals.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -982,12 +1381,17 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     <section class="slide" data-part="Selling it">
       <div class="inner">
         <p class="kick"><span class="n">06.2</span> Answers to have ready</p>
-        <div class="qa">
-          <div class="row"><p class="q">"Why not just use a bigger model?"</p><p class="a">The harness is the cheaper lever — 7.7% → 58.3% by changing only the wrapper, at ~1/56th of frontier-only cost.</p></div>
-          <div class="row"><p class="q">"'Self-improving' sounds like hype. Prove it."</p><p class="a">Flywheel promotions clear holdout + anchor tests, use an immutable gate, and ship Ed25519-signed, replayable receipts.</p></div>
-          <div class="row"><p class="q">"Is it safe to let it rewrite its own policies?"</p><p class="a">Two independent checks, a shell-free sandbox with secrets scrubbed, and penalties that make unsafe variants uncompetitive.</p></div>
-          <div class="row"><p class="q">"What will it cost to run?"</p><p class="a">You get a cost estimate before scaffolding. Darwin runs land around $0.01–$0.74 per instance vs. $1–20 frontier-only.</p></div>
+        <div class="split v top" style="gap:1.4rem">
+          <div class="qa">
+            <div class="row"><p class="q">"Why not just use a bigger model?"</p><p class="a">The harness is the cheaper lever — 7.7% → 58.3% by changing only the wrapper, at ~1/56th of frontier-only cost.</p></div>
+            <div class="row"><p class="q">"'Self-improving' sounds like hype."</p><p class="a">Flywheel promotions clear holdout + anchor tests, use an immutable gate, and ship signed, replayable receipts.</p></div>
+          </div>
+          <div class="qa">
+            <div class="row"><p class="q">"Is it safe to let it rewrite itself?"</p><p class="a">Two independent checks, a shell-free sandbox with secrets scrubbed, and penalties that make unsafe variants uncompetitive.</p></div>
+            <div class="row"><p class="q">"What will it cost to run?"</p><p class="a">You get an estimate before scaffolding. Darwin runs land ~$0.01–$0.74 per instance vs. $1–20 frontier-only.</p></div>
+          </div>
         </div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">On the noise</div><p>A vocal minority will always push back — the silent majority is in the download counts. Focus energy on the customers, not the critics.</p></div>
       </div>
     </section>
 
@@ -998,7 +1402,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
         <span class="kicker"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
         <h1 style="margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
         <p class="title-sub" style="margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
-        <p class="src" style="text-align:center; margin-top:1.4rem">metaharness · @metaharness/darwin · @metaharness/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
+        <p class="src" style="text-align:center; margin-top:1.3rem">metaharness · @metaharness/darwin · @metaharness/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
       </div>
     </section>
 
@@ -1035,7 +1439,6 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     var nextBtn = document.getElementById('next');
     totalEl.textContent = n;
 
-    // scale the fixed 1280x720 stage to fit
     function fit() {
       var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
       stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
@@ -1076,12 +1479,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     nextBtn.addEventListener('click', next);
     document.getElementById('zoneL').addEventListener('click', prev);
     document.getElementById('zoneR').addEventListener('click', next);
-
-    // click the top track to seek
-    document.getElementById('ptrack').addEventListener('click', function (e) {
-      var r = (e.clientX) / window.innerWidth;
-      go(Math.round(r * (n - 1)));
-    });
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
 
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -1101,15 +1499,9 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
       if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
     }, { passive: true });
 
-    function currentTheme() {
-      if (root.dataset.theme) return root.dataset.theme;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
     function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
-    function toggleFs() {
-      if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); }
-      else if (document.exitFullscreen) { document.exitFullscreen(); }
-    }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
     document.getElementById('themeBtn').addEventListener('click', toggleTheme);
     document.getElementById('fsBtn').addEventListener('click', toggleFs);
     window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
