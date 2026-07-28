@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — animated 60-minute, 43-slide deck. Each part divider has a large animated graphic (visible at every viewport width). Arrow keys / space to navigate.">
+<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — animated 60-minute, 43-slide deck with an animated hero emblem, distinct flywheel graphics, a DNA-helix Darwin divider, and a cost/capability Pareto chart. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
@@ -37,7 +37,7 @@
   :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
 
   * { box-sizing: border-box; }
-  html { font-size: 17.5px; }
+  html { font-size: 19px; }
   html, body { margin: 0; height: 100%; }
   body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
   ::selection { background: var(--indigo); color: #fff; }
@@ -84,6 +84,10 @@
   .chip b { color: var(--indigo); font-weight: 600; }
   .chip span { color: var(--faint); }
   .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
 
   .divider { align-items: flex-start; }
   .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
@@ -295,24 +299,58 @@
   <div class="stage" id="stage">
 
     <!-- 1 · TITLE -->
-    <section class="slide" data-part="Welcome">
+    <section class="slide hero" data-part="Welcome">
       <div class="glow-a"></div><div class="glow-b"></div>
       <div class="inner">
-        <div class="title-brand rise">
-          <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
-            <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
-            <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-          Cognitum <small>Consultants</small>
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum <small>Consultants</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Consultant Certification · 29 Jul 2026</span>
+          <h1 class="rise" style="animation-delay:.1s">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">The <strong>MetaHarness</strong> ecosystem — the factory and its two engines, <strong>Darwin</strong> &amp; <strong>Flywheel</strong> — the way Reuven Cohen walks a client through it.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>metaharness</b><span>the factory</span></span>
+            <span class="chip"><b>darwin</b><span>the engine</span></span>
+            <span class="chip"><b>flywheel</b><span>the proof</span></span>
+          </div>
         </div>
-        <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Consultant Certification · Cohort orientation · 29 Jul 2026</span>
-        <h1 class="rise" style="animation-delay:.1s">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-        <p class="title-sub rise" style="animation-delay:.18s">A working session on the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it.</p>
-        <div class="chips rise" style="animation-delay:.26s">
-          <span class="chip"><b>metaharness</b><span>the factory</span></span>
-          <span class="chip"><b>@metaharness/darwin</b><span>the engine</span></span>
-          <span class="chip"><b>@metaharness/flywheel</b><span>the proof</span></span>
+        <div class="heroviz">
+          <svg viewBox="0 0 440 440" role="img" aria-label="An animated emblem: a glowing frozen core inside orbiting harness rings">
+            <defs>
+              <radialGradient id="hcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/>
+                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
+            <g class="v-spin">
+              <circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
+              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR">
+              <circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.65"/>
+              <circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/>
+            </g>
+            <g class="v-spinS"><circle cx="220" cy="220" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.2" stroke-dasharray="1 11" opacity="0.5"/></g>
+            <circle r="5.5" fill="var(--jade)" class="v-t" style="offset-path:path('M220 220 m -150 0 a 150 150 0 1 0 300 0 a 150 150 0 1 0 -300 0');animation-duration:5.5s"/>
+            <circle r="4.5" fill="var(--indigo)" style="offset-path:path('M220 220 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0');offset-distance:0%;animation:vtravel 4s linear infinite reverse"/>
+            <circle class="v-halo" cx="220" cy="220" r="74" fill="var(--jade)"/>
+            <circle class="v-pulse" cx="220" cy="220" r="74" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <g class="v-spinS">
+              <circle cx="220" cy="220" r="44" fill="none" stroke="var(--indigo)" stroke-width="3"/>
+              <path d="M220 176v18 M220 246v18 M176 220h18 M246 220h18" stroke="var(--indigo)" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <circle class="v-pulse" cx="220" cy="220" r="15" fill="var(--jade)"/>
+            <circle class="v-float" cx="74" cy="96" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="372" cy="356" r="5.5" fill="var(--indigo)"/>
+          </svg>
         </div>
       </div>
     </section>
@@ -437,7 +475,11 @@
         <div class="split vr top">
           <div>
             <h2>Cheapest capable model, best possible answer</h2>
-            <p class="mut">The edge isn't only that it's smart — it's that it's the <strong>cheapest</strong> route to the best answer. Small model where it suffices; escalate to a frontier model only when a task truly needs it.</p>
+            <ul class="clean">
+              <li><b>Cheapest route to the best answer</b> — not just smart, cheap.</li>
+              <li class="j"><b>Small model where it suffices</b>; escalate only when a task truly needs it.</li>
+              <li><b>That gap is your margin</b> — and it compounds in always-on apps.</li>
+            </ul>
             <div class="grid g2" style="margin-top:0.7rem; gap:0.6rem">
               <div class="stat"><div class="num"><span class="count" data-to="56" data-pre="~" data-suf="×">0</span></div><div class="k">cheaper than frontier-only</div></div>
               <div class="stat"><div class="num i"><span class="count" data-to="7.6" data-dp="1" data-suf="×">0</span></div><div class="k">resolution lift, harness alone</div></div>
@@ -445,20 +487,25 @@
           </div>
           <div class="di">
             <span class="cap">Cost vs. capability — the Pareto frontier</span>
-            <svg viewBox="0 0 420 262" role="img" aria-label="Scatter of models by cost and capability; MetaHarness sits on the frontier">
-              <line x1="46" y1="24" x2="46" y2="216" stroke="var(--border-2)" stroke-width="1.5"/>
-              <line x1="46" y1="216" x2="404" y2="216" stroke="var(--border-2)" stroke-width="1.5"/>
-              <text x="52" y="236" font-size="11" class="vlbl-f">low cost</text>
-              <text x="404" y="236" font-size="11" class="vlbl-f" text-anchor="end">high cost →</text>
-              <text x="30" y="130" font-size="11" class="vlbl-f" transform="rotate(-90 30 130)" text-anchor="middle">capability →</text>
-              <path class="v-draw" d="M70 196 Q92 92 152 80 Q320 60 384 54" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 6" opacity="0.65"/>
-              <circle class="v-pop" cx="86" cy="184" r="6" fill="var(--muted)"/><text x="96" y="188" font-size="10" class="vlbl-f">small model</text>
-              <circle class="v-pop" style="animation-delay:.1s" cx="120" cy="150" r="6" fill="var(--muted)"/>
-              <circle class="v-pop" style="animation-delay:.2s" cx="360" cy="64" r="8" fill="var(--crit)"/><text x="350" y="58" font-size="10.5" fill="var(--crit)" text-anchor="end">frontier-only · $$$</text>
-              <circle class="v-halo" cx="152" cy="80" r="9" fill="var(--jade)"/>
-              <circle class="v-pop" style="animation-delay:.35s" cx="152" cy="80" r="9" fill="var(--jade)"/><circle cx="152" cy="80" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
-              <text x="166" y="76" font-size="11" fill="var(--jade)" font-weight="600">MetaHarness</text>
-              <text x="166" y="90" font-size="10" class="vlbl-f">~56× cheaper</text>
+            <svg viewBox="0 0 440 300" role="img" aria-label="MetaHarness reaches frontier-only capability at a fraction of the cost">
+              <g stroke="var(--border)" stroke-width="1" opacity="0.5" stroke-dasharray="3 6">
+                <line x1="54" y1="68" x2="418" y2="68"/><line x1="54" y1="128" x2="418" y2="128"/><line x1="54" y1="188" x2="418" y2="188"/>
+              </g>
+              <line x1="54" y1="26" x2="54" y2="248" stroke="var(--border-2)" stroke-width="1.5"/>
+              <line x1="54" y1="248" x2="418" y2="248" stroke="var(--border-2)" stroke-width="1.5"/>
+              <path d="M74 224 Q120 108 158 92 Q290 58 404 54 L404 248 L74 248 Z" fill="var(--jade)" opacity="0.08"/>
+              <path class="v-draw" d="M74 224 Q120 108 158 92 Q290 58 404 54" fill="none" stroke="var(--jade)" stroke-width="2.5" opacity="0.75"/>
+              <line x1="172" y1="92" x2="352" y2="74" stroke="var(--border-2)" stroke-width="1.5" stroke-dasharray="4 5"/>
+              <text x="262" y="62" font-size="11.5" class="vlbl-f" text-anchor="middle">same capability · far less cost</text>
+              <circle class="v-pop" cx="104" cy="206" r="6.5" fill="var(--muted)"/><text x="118" y="211" font-size="12" class="vlbl-f">small model</text>
+              <circle class="v-pop" style="animation-delay:.2s" cx="366" cy="72" r="9" fill="var(--crit)"/><text x="366" y="50" font-size="12" fill="var(--crit)" text-anchor="middle" font-weight="600">frontier-only</text>
+              <circle class="v-halo" cx="158" cy="92" r="10" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:.35s" cx="158" cy="92" r="10" fill="var(--jade)"/><circle cx="158" cy="92" r="10" fill="none" stroke="var(--surface)" stroke-width="2.5"/>
+              <text x="178" y="112" font-size="13" fill="var(--jade)" font-weight="600">MetaHarness</text>
+              <text x="178" y="129" font-size="11.5" class="vlbl-f">~56× cheaper</text>
+              <text x="60" y="268" font-size="11.5" class="vlbl-f">low cost</text>
+              <text x="414" y="268" font-size="11.5" class="vlbl-f" text-anchor="end">high cost →</text>
+              <text x="36" y="138" font-size="11.5" class="vlbl-f" transform="rotate(-90 36 138)" text-anchor="middle">capability →</text>
             </svg>
           </div>
         </div>
@@ -778,22 +825,22 @@
           <div class="dchips"><span>seven surfaces</span><span>archive tree</span><span>score &amp; gate</span><span>the lift</span></div>
         </div>
         <div class="dviz">
-          <svg viewBox="0 0 300 340" role="img" aria-label="An animated DNA double helix representing evolution">
+          <svg viewBox="0 0 300 360" role="img" aria-label="An animated DNA double helix">
             <g class="v-float">
-              <polyline class="v-draw" points="150,30 132,65 120,100 132,135 150,170 132,205 120,240 132,275 150,310" fill="none" stroke="var(--indigo)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-              <polyline class="v-draw" style="animation-delay:.2s" points="150,30 168,65 180,100 168,135 150,170 168,205 180,240 168,275 150,310" fill="none" stroke="var(--jade)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-              <g stroke-width="3" stroke-linecap="round">
-                <line class="v-shim" x1="132" y1="65" x2="168" y2="65" stroke="var(--border-2)"/>
-                <line class="v-shim" style="animation-delay:.25s" x1="120" y1="100" x2="180" y2="100" stroke="var(--jade)"/>
-                <line class="v-shim" style="animation-delay:.5s" x1="132" y1="135" x2="168" y2="135" stroke="var(--border-2)"/>
-                <line class="v-shim" style="animation-delay:.75s" x1="132" y1="205" x2="168" y2="205" stroke="var(--border-2)"/>
-                <line class="v-shim" style="animation-delay:1s" x1="120" y1="240" x2="180" y2="240" stroke="var(--indigo)"/>
-                <line class="v-shim" style="animation-delay:1.25s" x1="132" y1="275" x2="168" y2="275" stroke="var(--border-2)"/>
+              <polyline class="v-draw" points="150,30 182,45 202,60 202,75 182,90 150,105 118,120 98,135 98,150 118,165 150,180 182,195 202,210 202,225 182,240 150,255 118,270 98,285 98,300 118,315 150,330" fill="none" stroke="var(--indigo)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <polyline class="v-draw" style="animation-delay:.25s" points="150,30 118,45 98,60 98,75 118,90 150,105 182,120 202,135 202,150 182,165 150,180 118,195 98,210 98,225 118,240 150,255 182,270 202,285 202,300 182,315 150,330" fill="none" stroke="var(--jade)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <g stroke-linecap="round">
+                <line class="v-shim" x1="98" y1="60" x2="202" y2="60" stroke="var(--jade)" stroke-width="3.5"/>
+                <line class="v-shim" style="animation-delay:.2s" x1="118" y1="90" x2="182" y2="90" stroke="var(--jade)" stroke-width="3"/>
+                <line class="v-shim" style="animation-delay:.4s" x1="118" y1="120" x2="182" y2="120" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:.6s" x1="98" y1="150" x2="202" y2="150" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:.8s" x1="98" y1="210" x2="202" y2="210" stroke="var(--jade)" stroke-width="3.5"/>
+                <line class="v-shim" style="animation-delay:1s" x1="118" y1="240" x2="182" y2="240" stroke="var(--jade)" stroke-width="3"/>
+                <line class="v-shim" style="animation-delay:1.2s" x1="118" y1="270" x2="182" y2="270" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:1.4s" x1="98" y1="300" x2="202" y2="300" stroke="var(--border-2)" stroke-width="2"/>
               </g>
-              <g>
-                <circle class="v-pop" cx="120" cy="100" r="5" fill="var(--jade)"/><circle class="v-pop" cx="180" cy="100" r="5" fill="var(--jade)"/>
-                <circle class="v-pop" style="animation-delay:.9s" cx="120" cy="240" r="5" fill="var(--indigo)"/><circle class="v-pop" style="animation-delay:.9s" cx="180" cy="240" r="5" fill="var(--indigo)"/>
-              </g>
+              <g fill="var(--indigo)"><circle class="v-pop" cx="202" cy="60" r="5.5"/><circle class="v-pop" style="animation-delay:.3s" cx="98" cy="150" r="5.5"/><circle class="v-pop" style="animation-delay:.6s" cx="202" cy="210" r="5.5"/><circle class="v-pop" style="animation-delay:.9s" cx="98" cy="300" r="5.5"/></g>
+              <g fill="var(--jade)"><circle class="v-pop" cx="98" cy="60" r="5.5"/><circle class="v-pop" style="animation-delay:.3s" cx="202" cy="150" r="5.5"/><circle class="v-pop" style="animation-delay:.6s" cx="98" cy="210" r="5.5"/><circle class="v-pop" style="animation-delay:.9s" cx="202" cy="300" r="5.5"/></g>
             </g>
           </svg>
         </div>
@@ -807,8 +854,12 @@
           <div>
             <p class="kick"><span class="n">03.1</span> @metaharness/darwin</p>
             <h2>Evolve the operating system around a frozen model</h2>
-            <p class="mut">One policy surface mutates per generation. Each variant runs in a sandbox, gets scored, and is promoted only if it clears four hard gates — so improvement is measured, never assumed.</p>
-            <p class="mut small" style="margin-top:0.4rem">Validated on real SWE-bench bug-fixing — not a toy loop. Latest: <code>v0.8.0</code>, MIT © rUv.</p>
+            <ul class="clean">
+              <li><b>One surface mutates</b> per generation — a clean signal.</li>
+              <li class="j"><b>Sandbox → score → gate</b> — promote only measured wins.</li>
+              <li><b>Four hard gates</b> — improvement is measured, never assumed.</li>
+            </ul>
+            <p class="mut small" style="margin-top:0.5rem">Validated on real SWE-bench bug-fixing. <code>v0.8.0</code> · MIT © rUv.</p>
           </div>
           <div class="bigquote i" style="align-self:center"><p>"Out of a hundred evolutions, this is the best one. The ones that work, it evolves more. The ones that don't are dead ends."</p><div class="who">Reuven Cohen</div></div>
         </div>
@@ -1128,23 +1179,34 @@
         <div class="split vr">
           <div>
             <p class="kick"><span class="n">04.1</span> @metaharness/flywheel</p>
-            <h2>Perpetual motion — and a receipt for every gain</h2>
-            <p class="mut">Darwin finds the cheapest, best <em>model</em> for a task. The Flywheel asks the best <em>process</em> — running continually, rewriting its own code, promoting only what proves measurable lift.</p>
-            <p class="mut small" style="margin-top:0.4rem"><code>v0.1.7</code> · ESM, fully typed · runtime dependency: Node's native crypto, nothing else.</p>
+            <h2>Perpetual motion — a receipt for every gain</h2>
+            <ul class="clean">
+              <li><b>Darwin picks the cheapest, best <em>model</em></b> for a task.</li>
+              <li class="j"><b>Flywheel finds the best <em>process</em></b> — running continually.</li>
+              <li class="j"><b>Rewrites its own code</b>; promotes only proven lift.</li>
+              <li><b>Minimal &amp; auditable</b> — ESM, typed; only Node crypto at runtime.</li>
+            </ul>
           </div>
           <div class="di sq">
-            <span class="cap">The loop that never stops</span>
-            <svg viewBox="0 0 300 300" role="img" aria-label="A continuously spinning flywheel">
-              <g class="v-spin">
-                <circle cx="150" cy="150" r="118" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
-                <g stroke="var(--border-2)" stroke-width="2"><line x1="150" y1="60" x2="150" y2="240"/><line x1="60" y1="150" x2="240" y2="150"/><line x1="86" y1="86" x2="214" y2="214"/><line x1="214" y1="86" x2="86" y2="214"/></g>
-                <circle cx="150" cy="32" r="6" fill="var(--jade)"/><circle cx="150" cy="268" r="6" fill="var(--jade)"/>
-                <circle cx="32" cy="150" r="6" fill="var(--jade)"/><circle cx="268" cy="150" r="6" fill="var(--jade)"/>
+            <span class="cap">A wheel that compounds every turn</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A spinning momentum ring around a compounding-lift core">
+              <defs><marker id="fw29" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <g class="v-spin"><circle cx="150" cy="150" r="120" fill="none" stroke="var(--jade)" stroke-width="3.5" stroke-dasharray="13 13"/></g>
+              <path class="v-draw" d="M150 24 A126 126 0 0 1 252 82" fill="none" stroke="var(--jade)" stroke-width="3" marker-end="url(#fw29)"/>
+              <g text-anchor="middle" font-size="11" fill="var(--muted)">
+                <circle cx="150" cy="30" r="7" fill="var(--indigo)"/><text x="150" y="17">propose</text>
+                <circle cx="270" cy="150" r="7" fill="var(--indigo)"/><text x="270" y="137">evaluate</text>
+                <circle cx="150" cy="270" r="7" fill="var(--jade)"/><text x="150" y="289">gate</text>
+                <circle cx="30" cy="150" r="7" fill="var(--jade)"/><text x="30" y="137">promote</text>
               </g>
-              <circle cx="150" cy="150" r="34" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
-              <text x="150" y="147" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">24/7</text>
-              <text x="150" y="163" text-anchor="middle" font-size="8.5" class="vlbl-f">momentum</text>
-              <g font-size="9.5" fill="var(--muted)" text-anchor="middle"><text x="150" y="46">propose</text><text x="262" y="153">evaluate</text><text x="150" y="262">gate</text><text x="40" y="153">promote</text></g>
+              <circle class="v-pulse" cx="150" cy="150" r="54" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="150" y="118" text-anchor="middle" font-size="10.5" fill="var(--jade)" font-weight="600">compounds</text>
+              <g>
+                <rect class="v-gy" x="126" y="152" width="11" height="18" rx="2" fill="var(--jade)" opacity="0.55"/>
+                <rect class="v-gy" style="animation-delay:.15s" x="143" y="142" width="11" height="28" rx="2" fill="var(--jade)" opacity="0.8"/>
+                <rect class="v-gy" style="animation-delay:.3s" x="160" y="130" width="11" height="40" rx="2" fill="var(--jade)"/>
+              </g>
+              <text x="150" y="188" text-anchor="middle" font-size="9" fill="var(--faint)">lift / turn</text>
             </svg>
           </div>
         </div>
@@ -1229,7 +1291,7 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
               <line x1="42" y1="18" x2="42" y2="176" stroke="var(--border)"/>
               <line x1="42" y1="176" x2="406" y2="176" stroke="var(--border)"/>
               <g stroke="var(--border)" stroke-width="1" opacity="0.5"><line x1="42" y1="130" x2="406" y2="130"/><line x1="42" y1="84" x2="406" y2="84"/><line x1="42" y1="40" x2="406" y2="40"/></g>
-              <path class="v-fade" d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.10"/>
+              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.12"/>
               <path class="v-draw" d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
               <g fill="var(--jade)"><circle class="v-pop" style="animation-delay:.5s" cx="112" cy="140" r="4.5"/><circle class="v-pop" style="animation-delay:.7s" cx="182" cy="104" r="4.5"/><circle class="v-pop" style="animation-delay:.9s" cx="252" cy="72" r="4.5"/><circle class="v-pop" style="animation-delay:1.1s" cx="322" cy="72" r="4.5"/></g>
               <circle class="v-halo" cx="392" cy="44" r="6" fill="var(--jade)"/>
@@ -1406,23 +1468,25 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
           </div>
           <div class="di">
             <span class="cap">Comms · people and agents on one team</span>
-            <svg viewBox="0 0 420 220" role="img" aria-label="A CMO node connected to human reports and agent workers with live tasks">
-              <rect x="160" y="16" width="100" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
-              <text x="210" y="41" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">CMO</text>
-              <g stroke="var(--border-2)" stroke-width="1.4" fill="none">
-                <path class="v-draw" d="M210 56 L70 110"/><path class="v-draw" d="M210 56 L163 110"/><path class="v-draw" d="M210 56 L257 110"/><path class="v-draw" d="M210 56 L350 110"/>
+            <svg viewBox="0 0 440 230" role="img" aria-label="A CMO node connected to human reports and agent workers with live tasks">
+              <rect x="172" y="14" width="96" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <text x="220" y="39" text-anchor="middle" font-size="13" fill="var(--indigo)" font-weight="600">CMO</text>
+              <g stroke="var(--border-2)" stroke-width="1.5" fill="none">
+                <path class="v-draw" d="M220 54 L64 112"/><path class="v-draw" d="M220 54 L172 112"/><path class="v-draw" d="M220 54 L280 112"/><path class="v-draw" d="M220 54 L388 112"/>
               </g>
-              <rect x="30" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
-              <circle cx="52" cy="134" r="8" fill="var(--muted)"/><text x="86" y="130" font-size="10" class="vlbl-t">person</text><text x="86" y="144" font-size="9" class="vlbl-f">report</text>
-              <rect x="123" y="112" width="80" height="44" rx="9" fill="var(--surface)" stroke="var(--border-2)"/>
-              <circle cx="145" cy="134" r="8" fill="var(--muted)"/><text x="179" y="130" font-size="10" class="vlbl-t">person</text><text x="179" y="144" font-size="9" class="vlbl-f">report</text>
-              <rect class="v-shim" x="217" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
-              <rect x="231" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="273" y="130" font-size="10" fill="var(--jade)">agent</text><text x="273" y="144" font-size="8" class="vlbl-f">API scope</text>
-              <rect class="v-shim" style="animation-delay:.6s" x="310" y="112" width="80" height="44" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/>
-              <rect x="324" y="126" width="16" height="16" rx="4" fill="var(--jade)"/><text x="366" y="130" font-size="10" fill="var(--jade)">agent</text><text x="366" y="144" font-size="8" class="vlbl-f">ads API</text>
-              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 56 L257 110')"/>
-              <circle r="3.5" fill="var(--indigo)" class="v-tf" style="offset-path:path('M70 110 L210 56');animation-delay:1s"/>
-              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">status updates flow up · tasks flow down — human or agent, same channel</text>
+              <g text-anchor="middle">
+                <rect x="16" y="112" width="96" height="66" rx="10" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="64" cy="132" r="9" fill="var(--muted)"/><text x="64" y="156" font-size="12" class="vlbl-t">Person</text><text x="64" y="170" font-size="10" class="vlbl-f">reports</text>
+                <rect x="124" y="112" width="96" height="66" rx="10" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="172" cy="132" r="9" fill="var(--muted)"/><text x="172" y="156" font-size="12" class="vlbl-t">Person</text><text x="172" y="170" font-size="10" class="vlbl-f">reports</text>
+                <rect class="v-shim" x="232" y="112" width="96" height="66" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="272" y="124" width="16" height="16" rx="4" fill="var(--jade)"/><text x="280" y="156" font-size="12" fill="var(--jade)" font-weight="600">Agent</text><text x="280" y="170" font-size="10" class="vlbl-f">ads API</text>
+                <rect class="v-shim" style="animation-delay:.6s" x="340" y="112" width="96" height="66" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="380" y="124" width="16" height="16" rx="4" fill="var(--jade)"/><text x="388" y="156" font-size="12" fill="var(--jade)" font-weight="600">Agent</text><text x="388" y="170" font-size="10" class="vlbl-f">API scope</text>
+              </g>
+              <circle r="4" fill="var(--jade)" class="v-tf" style="offset-path:path('M220 54 L280 112')"/>
+              <circle r="4" fill="var(--indigo)" class="v-tf" style="offset-path:path('M64 112 L220 54');animation-delay:1s"/>
+              <text x="220" y="210" text-anchor="middle" font-size="11" class="vlbl-f">status up · tasks down — human or agent, same channel</text>
             </svg>
           </div>
         </div>
