@@ -10,12 +10,16 @@ the cheapest-model-best-answer thesis, the 24/7 flywheel, and how to actually st
 
 | File | Format | Use it for |
 | --- | --- | --- |
-| [`index.html`](index.html) | **Slide deck** | Presenting on screen. 16 slides, keyboard-navigable. |
+| [`index.html`](index.html) | **Slide deck** | Presenting on screen. 43 slides across 6 parts, sized for a ~60-minute slot. |
 | [`long-form.html`](long-form.html) | **Scrolling doc** | Reading / reference / sharing as a page. |
 
 Both are single, self-contained HTML files — no build step, no dependencies. They
 support light/dark themes (follows the OS setting, with a manual toggle) and respect
 reduced-motion preferences.
+
+The deck renders on a **fixed 1280×720 stage that scales to fit the viewport**, so every
+slide fills the screen and **nothing ever scrolls or clips** — on a laptop, a projector,
+or a phone.
 
 ### Presenting the deck
 

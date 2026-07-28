@@ -3,15 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — presented as a navigable slide deck (arrow keys / space).">
+<meta name="description" content="Cognitum Consultants cohort orientation — MetaHarness, Darwin & Flywheel — a 60-minute, 43-slide deck on a fixed 16:9 stage that scales to fit (no scrolling). Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Consultants · MetaHarness Orientation</title>
 <style>
   /* ============================================================
-     COGNITUM CONSULTANTS — ORIENTATION · SLIDE DECK
-     Dark-first, minimal technical treatment.
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
      Palette: blue-biased ink · indigo (cognition) · jade (lift)
-     Type: system sans for prose · system mono for labels & data
      Keys: ← →  navigate · Space next · F present · T theme
      ============================================================ */
 
@@ -46,505 +45,782 @@
   }
 
   * { box-sizing: border-box; }
+  html { font-size: 16px; }
   html, body { margin: 0; height: 100%; }
   body {
     background: var(--ink); color: var(--text);
-    font-family: var(--font-sans); font-size: clamp(15px, 1.1vw + 8px, 20px); line-height: 1.55;
+    font-family: var(--font-sans); line-height: 1.5;
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-    overflow: hidden;
+    overflow: hidden; display: flex; flex-direction: column; height: 100vh;
   }
   ::selection { background: var(--indigo); color: #fff; }
   a { color: var(--indigo); text-decoration: none; }
-  a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 3px; }
   strong { color: var(--text); font-weight: 640; }
   em { font-style: italic; color: var(--text); }
   code {
     font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2);
-    border: 1px solid var(--border); padding: 0.08em 0.38em; border-radius: 5px; color: var(--text);
+    border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text);
   }
 
-  /* ---------- deck frame ---------- */
-  .deck { position: fixed; inset: 0; overflow: hidden; }
-  .deck::before {
+  /* ---------- scaled stage ---------- */
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  .stage {
+    position: absolute; left: 50%; top: 50%;
+    width: 1280px; height: 720px; transform-origin: center center;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .stage::before {
     content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
     background-image:
       linear-gradient(to right, var(--border) 1px, transparent 1px),
       linear-gradient(to bottom, var(--border) 1px, transparent 1px);
     background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 42%, #000 30%, transparent 85%);
-            mask-image: radial-gradient(ellipse 75% 75% at 50% 42%, #000 30%, transparent 85%);
-    opacity: 0.35;
+    -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
+            mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%);
+    opacity: 0.32;
   }
 
   .slide {
     position: absolute; inset: 0; z-index: 1;
-    display: grid; place-items: center;
-    padding: clamp(2.6rem, 6vh, 4.5rem) clamp(1.5rem, 6vw, 5rem) clamp(4.2rem, 9vh, 5.5rem);
+    padding: 52px 74px;
+    display: flex; flex-direction: column; justify-content: center;
     opacity: 0; visibility: hidden; pointer-events: none;
-    transform: translateY(14px) scale(0.995);
-    transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+    transition: opacity .45s ease;
   }
-  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-  .slide.prev { transform: translateY(-14px) scale(0.995); }
-  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .2s ease; transform: none; } .slide.prev { transform: none; } }
-
-  .inner { width: min(1040px, 100%); max-height: 100%; overflow-y: auto; overflow-x: hidden; }
-  .inner::-webkit-scrollbar { width: 8px; }
-  .inner::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
 
   .kick {
     font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.4rem;
+    color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.15rem;
   }
   .kick .n { color: var(--indigo); }
   .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
 
-  h2 {
-    font-size: clamp(1.7rem, 4.4vw, 3rem); line-height: 1.08; letter-spacing: -0.025em;
-    font-weight: 690; margin: 0 0 1.1rem; text-wrap: balance;
-  }
-  h3 { font-size: clamp(1.05rem, 1.5vw, 1.28rem); letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.5rem; }
-  p { margin: 0 0 1rem; }
-  .lead { font-size: clamp(1.05rem, 1.7vw, 1.42rem); color: var(--muted); line-height: 1.5; }
-  .lead:last-child { margin-bottom: 0; }
+  h2 { font-size: 2.05rem; line-height: 1.08; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.9rem; text-wrap: balance; }
+  h3 { font-size: 1.12rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.85rem; font-size: 1.02rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.26rem; color: var(--muted); line-height: 1.45; }
   .mut { color: var(--muted); }
+  .small { font-size: 0.9rem; }
 
-  /* ---------- title slide ---------- */
-  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
-  .glow-a { width: 48vw; height: 48vw; left: -14vw; top: -18vw; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
-  .glow-b { width: 42vw; height: 42vw; right: -14vw; bottom: -16vw; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
-  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 2rem; font-size: 1.05rem; }
+  /* ---------- title / close ---------- */
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.8rem; font-size: 1.05rem; }
   .title-brand .mark { width: 30px; height: 30px; }
-  .title-brand small {
-    font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2);
-  }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
   .kicker {
     display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono);
     font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-    background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.8rem;
+    background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.5rem;
   }
   .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); }
-  h1 {
-    font-size: clamp(2.6rem, 8vw, 5.6rem); line-height: 0.96; letter-spacing: -0.038em;
-    font-weight: 720; margin: 0 0 1.4rem; max-width: 15ch; text-wrap: balance;
-  }
+  h1 { font-size: 4.2rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.2rem; max-width: 16ch; text-wrap: balance; }
   h1 .g { color: var(--jade); }
-  .title-sub { font-size: clamp(1.05rem, 2vw, 1.4rem); color: var(--muted); max-width: 54ch; line-height: 1.5; }
-  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.2rem; }
-  .chip {
-    font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem;
-    background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px;
-  }
+  .title-sub { font-size: 1.32rem; color: var(--muted); max-width: 60ch; line-height: 1.45; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.9rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
   .chip b { color: var(--indigo); font-weight: 600; }
   .chip span { color: var(--faint); }
 
-  /* ---------- layout helpers ---------- */
-  .grid { display: grid; gap: 1rem; }
+  /* ---------- section divider ---------- */
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 1rem; }
+  .divider h2 { font-size: 3.4rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.2rem; color: var(--muted); margin-top: 0.8rem; max-width: 52ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.6rem; }
+
+  /* ---------- layout ---------- */
+  .grid { display: grid; gap: 0.9rem; }
   .g2 { grid-template-columns: repeat(2,1fr); }
   .g3 { grid-template-columns: repeat(3,1fr); }
   .g4 { grid-template-columns: repeat(4,1fr); }
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem,4vw,2.6rem); align-items: center; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; align-items: center; }
   .split.top { align-items: start; }
-  @media (max-width: 820px){ .split, .g3, .g4 { grid-template-columns: 1fr; } .g4 { grid-template-columns: repeat(2,1fr); } }
+  .split.w6 { grid-template-columns: 1.15fr 0.85fr; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem 1.2rem; }
-  .card .tag { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.7rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.6rem; }
   .card .tag.j { color: var(--jade); }
-  .card p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+  .card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
-  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
-  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: clamp(1.8rem,4.2vw,2.7rem); line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.5rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
   .stat .num.i { color: var(--indigo); }
-  .stat .k { margin-top: 0.55rem; font-size: 0.86rem; color: var(--muted); line-height: 1.35; }
+  .stat .k { margin-top: 0.5rem; font-size: 0.84rem; color: var(--muted); line-height: 1.32; }
 
-  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
-  ul.clean li { position: relative; padding-left: 1.5rem; color: var(--muted); font-size: 1rem; }
-  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.65rem; }
+  ul.clean li { position: relative; padding-left: 1.45rem; color: var(--muted); font-size: 1rem; line-height: 1.4; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
   ul.clean li.j::before { background: var(--jade); }
   ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.92rem; }
 
-  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.1rem 1.3rem; }
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.2rem; }
   .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
-  .callout p { margin: 0; }
-  .callout .h { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .callout p { margin: 0; font-size: 0.98rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
 
-  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: clamp(1.4rem,4vw,2.4rem); }
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.8rem 2rem; }
   .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
-  .bigquote p { font-size: clamp(1.35rem,3.2vw,2.4rem); line-height: 1.28; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
-  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.3rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote p { font-size: 2rem; line-height: 1.26; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.5rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.15rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
 
-  .quote { border-left: 2px solid var(--border-2); padding-left: 1.2rem; }
-  .quote p { font-size: 1.02rem; line-height: 1.45; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
-  .quote .who { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
-
-  /* architecture flow */
-  .arch { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1rem,3vw,1.6rem); overflow: auto; }
-  .flow { display: flex; flex-direction: column; min-width: 260px; }
-  .node { display: flex; align-items: center; gap: 0.8rem; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.7rem 0.95rem; background: var(--surface-2); }
-  .node .badge { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.2rem 0.5rem; border-radius: 5px; flex: none; font-weight: 600; }
+  /* architecture flow — horizontal */
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.85rem 0.9rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.35rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.16rem 0.45rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
   .node.j .badge { background: var(--jade); }
-  .node .body b { display: block; font-size: 0.92rem; }
-  .node .body span { font-size: 0.8rem; color: var(--muted); font-family: var(--font-mono); }
+  .node b { font-size: 0.9rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.74rem; color: var(--muted); font-family: var(--font-mono); }
   .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
-  .arrow { display: flex; justify-content: center; color: var(--faint); font-family: var(--font-mono); padding: 0.25rem 0; font-size: 0.8rem; }
-  .arrow span { transform: rotate(90deg); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.5rem; font-size: 0.85rem; }
 
   /* surfaces */
   .surfaces { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.6rem; }
-  @media (max-width: 820px){ .surfaces { grid-template-columns: repeat(2,1fr); } }
-  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.8rem 0.9rem; }
-  .surf .f { font-family: var(--font-mono); font-size: 0.8rem; color: var(--indigo); display: block; }
-  .surf .d { font-size: 0.8rem; color: var(--muted); line-height: 1.35; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.7rem 0.8rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.78rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.76rem; color: var(--muted); line-height: 1.3; }
   .surf.ro { border-style: dashed; }
   .surf.ro .f { color: var(--jade); }
 
   /* steps */
-  .steps { display: grid; gap: 0.55rem; }
-  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.85rem 1rem; }
-  .step .idx { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.6rem; height: 1.6rem; border-radius: 6px; display: grid; place-items: center; flex: none; }
+  .steps { display: grid; gap: 0.5rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.95rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.55rem; height: 1.55rem; border-radius: 6px; display: grid; place-items: center; }
   .step.a .idx { background: var(--indigo); }
   .step.b .idx { background: var(--jade); }
-  .step b { font-size: 0.96rem; }
-  .step p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.88rem; }
+  .step b { font-size: 0.94rem; }
+  .step p { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.85rem; }
 
   /* chart */
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.1rem,3vw,1.7rem); }
-  .panel .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
-  .panel .ttl { font-weight: 620; margin-bottom: 1.3rem; letter-spacing: -0.01em; }
-  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; align-items: end; height: clamp(170px, 30vh, 240px); }
-  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.55rem; text-align: center; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.5rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1.1rem; letter-spacing: -0.01em; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; align-items: end; height: 250px; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.5rem; text-align: center; }
   .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 7px 7px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
   .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
   .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; color: var(--text); font-variant-numeric: tabular-nums; }
   .bar .lab { font-size: 0.74rem; color: var(--muted); line-height: 1.25; }
-  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; margin-top: 0.15rem; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.04em; margin-top: 0.12rem; }
 
-  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.2rem; overflow-x: auto; margin: 0; font-family: var(--font-mono); font-size: clamp(0.72rem, 1vw, 0.86rem); line-height: 1.65; color: var(--text); }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.15rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6; color: var(--text); }
   pre .c { color: var(--faint); }
   pre .cmd { color: var(--jade); }
   pre .flag { color: var(--indigo); }
 
   /* pipeline */
-  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.55rem; }
-  @media (max-width: 820px){ .pipe { grid-template-columns: 1fr 1fr; } }
-  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.85rem 0.9rem; }
-  .pstep .s { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
-  .pstep b { display: block; margin: 0.3rem 0 0.25rem; letter-spacing: -0.01em; font-size: 0.98rem; }
-  .pstep p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.8rem 0.85rem; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.28rem 0 0.22rem; letter-spacing: -0.01em; font-size: 0.94rem; }
+  .pstep p { font-size: 0.78rem; color: var(--muted); margin: 0; }
 
-  .qa { display: grid; gap: 0.7rem; }
-  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.85rem 1.05rem; }
-  .qa .q { font-weight: 620; margin: 0 0 0.25rem; font-size: 0.98rem; }
-  .qa .a { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.4; }
+  /* q&a rows */
+  .qa { display: grid; gap: 0.6rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 1rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.2rem; font-size: 0.96rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.85rem; line-height: 1.38; }
 
-  .src { font-family: var(--font-mono); font-size: 0.68rem; color: var(--faint); margin-top: 1rem; }
+  /* comparison */
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.2rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1.2rem 1.3rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); }
+  .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  /* agenda */
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: baseline; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.9rem; }
+  .arow .at { font-size: 1rem; }
+  .arow .am { font-family: var(--font-mono); font-size: 0.78rem; color: var(--faint); }
+
+  .src { font-family: var(--font-mono); font-size: 0.68rem; color: var(--faint); margin-top: 0.9rem; }
   .src a { color: var(--muted); }
+  .two-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem 1.6rem; }
 
-  /* ---------- chrome: progress, nav, dots ---------- */
-  .progress { position: fixed; top: 0; left: 0; height: 3px; z-index: 40; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
-
-  .topright { position: fixed; top: 0.9rem; right: 1rem; z-index: 40; display: flex; gap: 0.5rem; }
-  .btn {
-    font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
-    background: color-mix(in srgb, var(--surface) 80%, transparent); color: var(--muted);
-    border: 1px solid var(--border); border-radius: 999px; padding: 0.4rem 0.7rem; cursor: pointer;
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  }
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.85rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.38rem 0.68rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .btn:hover { color: var(--text); border-color: var(--border-2); }
 
-  .navbar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; display: flex; align-items: center; gap: 1rem; padding: 0.7rem clamp(1rem, 4vw, 2rem); }
-  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.55rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
   .navbar .spacer { flex: 1; }
-  .dots { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; justify-content: center; max-width: 55vw; }
-  .dot-b { width: 8px; height: 8px; border-radius: 50%; background: var(--border-2); border: none; padding: 0; cursor: pointer; transition: transform .2s, background .2s; }
-  .dot-b:hover { background: var(--muted); }
-  .dot-b.on { background: var(--indigo); transform: scale(1.35); }
+  .hint { font-family: var(--font-mono); font-size: 0.62rem; color: var(--faint); letter-spacing: 0.05em; }
   .counter { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .counter b { color: var(--text); }
   .arrows { display: flex; gap: 0.4rem; }
-  .arr { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
   .arr:hover { border-color: var(--indigo); color: var(--indigo); }
   .arr[disabled] { opacity: 0.35; cursor: default; }
-
-  /* edge click zones for presenting */
-  .zone { position: fixed; top: 0; bottom: 3.6rem; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 10%; z-index: 30; cursor: pointer; background: transparent; border: none; }
   .zone.l { left: 0; } .zone.r { right: 0; }
-  @media (max-width: 720px){ .zone { display: none; } .dots { display: none; } }
-
-  .hint { font-family: var(--font-mono); font-size: 0.64rem; color: var(--faint); letter-spacing: 0.06em; }
-  @media (max-width: 720px){ .hint { display: none; } }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
 </style>
 </head>
 <body>
 
-<div class="progress" id="progress"></div>
-
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
 <div class="topright">
   <button class="btn" id="themeBtn" type="button">Theme</button>
   <button class="btn" id="fsBtn" type="button">Present</button>
 </div>
 
-<button class="zone l" id="zoneL" aria-label="Previous slide" tabindex="-1"></button>
-<button class="zone r" id="zoneR" aria-label="Next slide" tabindex="-1"></button>
+<div class="stagewrap" id="stagewrap">
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
 
-<div class="deck" id="deck">
-
-  <!-- 1 · TITLE -->
-  <section class="slide" data-kick="">
-    <div class="glow-a" aria-hidden="true"></div>
-    <div class="glow-b" aria-hidden="true"></div>
-    <div class="inner">
-      <div class="title-brand">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
-          <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
-          <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-        Cognitum <small>Consultants</small>
-      </div>
-      <span class="kicker"><span class="dot"></span>Consultant Certification · Cohort orientation</span>
-      <h1>Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-      <p class="title-sub">A day-one map of the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it.</p>
-      <div class="chips">
-        <span class="chip"><b>metaharness</b><span>the factory</span></span>
-        <span class="chip"><b>@metaharness/darwin</b><span>the engine</span></span>
-        <span class="chip"><b>@metaharness/flywheel</b><span>the proof</span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2 · BRIEFING -->
-  <section class="slide" data-kick="Today's briefing">
-    <div class="inner">
-      <p class="kick"><span class="n">01</span> Today's briefing</p>
-      <div class="split top">
-        <div>
-          <h2>What you'll walk out able to do</h2>
-          <p class="lead">Three linked open-source projects from <span class="mono" style="font-size:0.9em">ruvnet/metaharness</span>. By the end you can explain each to a client, place it in the workflow, and cite the numbers.</p>
+    <!-- 1 · TITLE -->
+    <section class="slide" data-part="Welcome">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="title-brand">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+            <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          Cognitum <small>Consultants</small>
         </div>
-        <ul class="clean">
-          <li><b>Name the factory.</b> What MetaHarness wraps, and why a business points it at their own funnel, ads, and data.</li>
-          <li class="j"><b>Explain the thesis.</b> Why freezing the model and evolving the harness is the cheapest path to the best answer.</li>
-          <li><b>Read the loop.</b> "100 evolutions — keep the winners, kill the dead ends."</li>
-          <li class="j"><b>Defend the claim.</b> Flywheel's receipts and 24/7 motion answer "prove it."</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · METAHARNESS -->
-  <section class="slide" data-kick="metaharness · the factory">
-    <div class="inner">
-      <p class="kick"><span class="n">02</span> metaharness · the factory</p>
-      <div class="split">
-        <div>
-          <h2>A factory that wraps your systems in a self-improving harness</h2>
-          <p class="lead">It reads a repo — or your existing stack — and mints a complete, npm-publishable agent harness with its own <code>npx</code> CLI, branded as yours, in under a minute.</p>
-          <p class="mut">Reuven's framing: the harness <strong>wraps</strong> your funnel, ads, data, and APIs. You point it at them and tell Claude to build a harness and evolve it. Analysis is static and deterministic — it scans, never executes your code.</p>
+        <span class="kicker"><span class="dot"></span>Consultant Certification · Cohort orientation · 29 Jul 2026</span>
+        <h1>Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+        <p class="title-sub">A working session on the <strong>MetaHarness</strong> ecosystem — the agent-harness factory and its two engines, <strong>Darwin</strong> and <strong>Flywheel</strong> — explained the way Reuven Cohen walks a client through it.</p>
+        <div class="chips">
+          <span class="chip"><b>metaharness</b><span>the factory</span></span>
+          <span class="chip"><b>@metaharness/darwin</b><span>the engine</span></span>
+          <span class="chip"><b>@metaharness/flywheel</b><span>the proof</span></span>
         </div>
-        <div class="grid" style="align-content:center">
-          <div class="callout i"><div class="h">The one-liner</div><p>"The meta-harness for AI agents — scaffold your own focused, branded agent harness with its own <code>npx</code> CLI."</p></div>
-          <div class="grid g2">
-            <div class="stat"><div class="num i">&lt;60s</div><div class="k">repo to publishable harness</div></div>
-            <div class="stat"><div class="num i">9</div><div class="k">agent hosts it runs on</div></div>
+      </div>
+    </section>
+
+    <!-- 2 · AGENDA -->
+    <section class="slide" data-part="Welcome">
+      <div class="inner">
+        <p class="kick"><span class="n">Agenda</span> Where the next hour goes</p>
+        <h2 style="margin-bottom:1.2rem">Six parts, roughly sixty minutes</h2>
+        <div class="agenda">
+          <div class="arow"><span class="an">01</span><span class="at">The big idea — why the harness, not the model</span><span class="am">~8 min</span></div>
+          <div class="arow"><span class="an">02</span><span class="at">MetaHarness — the factory</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">03</span><span class="at">Darwin — the evolution engine</span><span class="am">~12 min</span></div>
+          <div class="arow"><span class="an">04</span><span class="at">Flywheel — the proof &amp; the receipts</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">05</span><span class="at">Putting it to work with a client</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">06</span><span class="at">Selling it — playbook &amp; objections</span><span class="am">~10 min</span></div>
+        </div>
+        <p class="src">Navigate with ← → or Space · press <strong>F</strong> for fullscreen · <strong>T</strong> to switch theme.</p>
+      </div>
+    </section>
+
+    <!-- 3 · DIVIDER 01 -->
+    <section class="slide divider" data-part="The big idea">
+      <div class="inner">
+        <div class="pnum">PART 01</div>
+        <h2>The big idea</h2>
+        <p class="sub">Why the smartest move in agents right now is to stop chasing bigger models.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <!-- 4 · THE PROBLEM -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.1</span> The problem</p>
+        <div class="split top">
+          <div>
+            <h2>Every repo wants a repo-aware agent — and every agent burns money</h2>
+            <p class="lead">Generic assistants don't know your codebase, your funnel, or your data. Tuning one by hand is slow; the obvious fix — a bigger model — is the expensive one.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · ARCHITECTURE -->
-  <section class="slide" data-kick="How the pieces stack">
-    <div class="inner">
-      <p class="kick"><span class="n">03</span> How the pieces stack</p>
-      <div class="split top">
-        <div class="arch">
-          <div class="flow">
-            <div class="node"><span class="badge">you</span><div class="body"><b>Your stack</b><span>funnel · ads · data · APIs</span></div></div>
-            <div class="arrow"><span>&rarr;</span></div>
-            <div class="node"><span class="badge">factory</span><div class="body"><b>agent-harness-generator</b><span>wraps it in a harness</span></div></div>
-            <div class="arrow"><span>&rarr;</span></div>
-            <div class="node"><span class="badge">out</span><div class="body"><b>Your harness (.zip)</b><span>npx &lt;you&gt; · agents · policies</span></div></div>
-            <div class="arrow"><span>&rarr;</span></div>
-            <div class="node kernel j"><span class="badge">core</span><div class="body"><b>@metaharness/kernel</b><span>Rust &rarr; WASM + NAPI-RS</span></div></div>
-            <div class="arrow"><span>&rarr;</span></div>
-            <div class="node"><span class="badge">host</span><div class="body"><b>Host adapter &rarr; LLM providers</b><span>Claude Code · Codex · CI · …</span></div></div>
-          </div>
-        </div>
-        <div>
-          <h3 style="margin-bottom:0.8rem">What ships in the box</h3>
           <ul class="clean">
-            <li><b>Multi-host output</b> — Claude Code, Codex, pi.dev, Hermes, OpenClaw, RVM, Copilot, OpenCode, GitHub Actions.</li>
-            <li class="j"><b>Governance built in</b> — MCP default-deny, Ed25519 signed releases, SPDX SBOMs, <code>harness mcp-scan</code>.</li>
-            <li><b>Pre-flight scoring</b> — <code>metaharness score</code> reports fitness, safety, and cost-per-run before you commit.</li>
-            <li class="j"><b>19 vertical templates</b> — coding, trading, legal, support, research, education, and more.</li>
+            <li><b>Context gap</b> — an off-the-shelf agent has no idea how your system actually works.</li>
+            <li class="j"><b>Cost gap</b> — in a long-running app, LLM usage is your single biggest line item.</li>
+            <li><b>Trust gap</b> — "it gets better over time" is usually an unfalsifiable claim.</li>
           </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5 · FLAGSHIP NUMBERS -->
-  <section class="slide" data-kick="The case, in numbers">
-    <div class="inner">
-      <p class="kick"><span class="n">04</span> The case, in numbers</p>
-      <h2 style="margin-bottom:1.4rem">Same benchmark, a fraction of the cost</h2>
-      <div class="grid g4">
-        <div class="stat"><div class="num">55.6%</div><div class="k">SWE-bench Verified (500) resolved by the GLM&rarr;Opus cascade</div></div>
-        <div class="stat"><div class="num">~$0.15</div><div class="k">cost per instance on that run</div></div>
-        <div class="stat"><div class="num">~56&times;</div><div class="k">cheaper than frontier-only, beating the 51.3% Lite-cascade baseline</div></div>
-        <div class="stat"><div class="num i">568</div><div class="k">passing tests · 16 green CI jobs · CodeQL + audits</div></div>
-      </div>
-      <p class="src">Source · github.com/ruvnet/metaharness — v0.1.x beta, SLSA L2 provenance. Studio runs 100% client-side, no account or telemetry.</p>
-    </div>
-  </section>
-
-  <!-- 6 · REUVEN QUOTE -->
-  <section class="slide" data-kick="In Reuven's words">
-    <div class="inner">
-      <p class="kick"><span class="n">05</span> In Reuven's words</p>
-      <div class="bigquote">
-        <p>"You point the Meta Harness and Darwin at your services and tell Claude to evolve it. Out of a hundred evolutions, it says: <span style="color:var(--jade)">this is the best one.</span> The ones that work, it evolves more. The ones that don't are dead ends. Kind of like evolution."</p>
-        <div class="who">Reuven Cohen · MetaHarness</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 · MARKETING LOOP -->
-  <section class="slide" data-kick="The marketing feedback loop">
-    <div class="inner">
-      <p class="kick"><span class="n">06</span> The whiteboard example</p>
-      <div class="split top">
-        <div>
-          <h2>The marketing feedback loop</h2>
-          <p class="lead">The example Reuven demoed to the cohort — four moves from "my stack" to "self-improving."</p>
-          <div class="callout" style="margin-top:0.4rem"><div class="h">The line to remember</div><p style="font-weight:560">"A click funnel that <em>proves its own lift</em>. Creating a funnel is easy. Optimizing one is hard."</p></div>
+    <!-- 5 · THE THESIS -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <div class="bigquote i">
+          <p>Don't buy a bigger brain. Build a better harness around the one you have.</p>
+          <div class="who">the MetaHarness thesis</div>
         </div>
-        <div class="steps">
-          <div class="step"><span class="idx">1</span><div><b>Point it at what you already run</b><p>Funnel, ads, analytics, marketing APIs — MetaHarness wraps them.</p></div></div>
-          <div class="step"><span class="idx">2</span><div><b>State the problem in plain English</b><p>"I need better conversions." Claude builds a harness and starts evolving.</p></div></div>
-          <div class="step a"><span class="idx">3</span><div><b>Darwin runs the evolutions</b><p>Keeps what measurably works, abandons the dead ends.</p></div></div>
-          <div class="step b"><span class="idx">4</span><div><b>Flywheel keeps it running</b><p>Left on, it optimizes 24/7 — always evolving.</p></div></div>
+        <p class="lead" style="margin-top:1.4rem; max-width:70ch">The model's weights stay <strong>frozen</strong>. Everything <em>around</em> the model — how it plans, what context it sees, which tools it may call, when it retries — is the <strong>harness</strong>. That's what you evolve.</p>
+      </div>
+    </section>
+
+    <!-- 6 · CHEAPEST LEVER -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.3</span> Why the harness is the cheapest lever</p>
+        <div class="split">
+          <div>
+            <h2>Cheapest capable model, best possible answer</h2>
+            <p class="mut">The competitive advantage isn't only that it's smart — it's that it's the <strong>cheapest</strong> way to reach the best answer. Use a small model wherever it suffices, escalate to a frontier model only when a task truly demands it. That gap is your margin.</p>
+          </div>
+          <div class="grid g2">
+            <div class="stat"><div class="num">~56&times;</div><div class="k">cheaper than frontier-only on SWE-bench Verified</div></div>
+            <div class="stat"><div class="num i">7.6&times;</div><div class="k">resolution lift on SWE-bench Lite from harness alone</div></div>
+            <div class="stat"><div class="num">$0.15</div><div class="k">per instance on the flagship cascade run</div></div>
+            <div class="stat"><div class="num i">0</div><div class="k">changes to model weights required</div></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 8 · DARWIN INTRO + SURFACES -->
-  <section class="slide" data-kick="@metaharness/darwin">
-    <div class="inner">
-      <p class="kick"><span class="n">07</span> @metaharness/darwin · the engine</p>
-      <div class="split top" style="margin-bottom:1.3rem">
-        <div>
-          <h2>Darwin evolves the OS around a frozen model</h2>
-          <p class="lead">One policy surface mutates per generation; only measured wins are kept. The payoff is the <strong>cheapest capable model</strong> reaching the best answer — that's the margin.</p>
+    <!-- 7 · THREE PROJECTS -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.4</span> The three projects</p>
+        <h2 style="margin-bottom:1.1rem">What you're being certified on</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag">the factory</div><h3>metaharness</h3><p>Wraps a repo or stack in a branded, publishable agent harness with its own <code>npx</code> CLI.</p></div>
+          <div class="card"><div class="tag j">the engine</div><h3>@metaharness/darwin</h3><p>Evolves that harness — mutates policy surfaces, keeps only what measurably improves.</p></div>
+          <div class="card"><div class="tag">the proof</div><h3>@metaharness/flywheel</h3><p>Runs the loop continually and promotes only proven lift — with signed, replayable receipts.</p></div>
         </div>
-        <div class="bigquote i" style="align-self:center"><p>Freeze the model.<br>Evolve the harness.</p><div class="who">the thesis, in five words</div></div>
+        <p class="src">All three: open source, MIT · github.com/ruvnet/metaharness · npm @metaharness/*</p>
       </div>
-      <h3 style="margin-bottom:0.7rem">The seven mutation surfaces</h3>
-      <div class="surfaces">
-        <div class="surf"><span class="f">planner.ts</span><span class="d">Decomposes a task</span></div>
-        <div class="surf"><span class="f">context_builder.ts</span><span class="d">Ranks file relevance</span></div>
-        <div class="surf"><span class="f">reviewer.ts</span><span class="d">Risk &amp; test review</span></div>
-        <div class="surf"><span class="f">retry_policy.ts</span><span class="d">Classifies, retries</span></div>
-        <div class="surf"><span class="f">tool_policy.ts</span><span class="d">Allowlist &amp; ordering</span></div>
-        <div class="surf"><span class="f">memory_policy.ts</span><span class="d">What to retain</span></div>
-        <div class="surf"><span class="f">score_policy.ts</span><span class="d">Weights (variant-read)</span></div>
-        <div class="surf ro"><span class="f">+ archive tree</span><span class="d">Weak ancestors seed winners</span></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 9 · DARWIN LOOP + GATE -->
-  <section class="slide" data-kick="Darwin · loop & gate">
-    <div class="inner">
-      <p class="kick"><span class="n">08</span> Darwin · the loop &amp; the gate</p>
-      <div class="split top">
-        <div>
-          <h3 style="margin-bottom:0.8rem">One generation, four steps</h3>
+    <!-- 8 · DIVIDER 02 -->
+    <section class="slide divider" data-part="MetaHarness">
+      <div class="inner">
+        <div class="pnum">PART 02</div>
+        <h2>MetaHarness — the factory</h2>
+        <p class="sub">A factory for agent harnesses. Not another agent framework.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <!-- 9 · WHAT IT IS -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.1</span> What it is</p>
+        <div class="split">
+          <div>
+            <h2>From a repository to a publishable agent — in under a minute</h2>
+            <p class="lead">MetaHarness reads a codebase and mints a complete, npm-publishable harness with its own <code>npx</code> CLI, branded as yours.</p>
+          </div>
+          <div class="grid" style="align-content:center">
+            <div class="callout i"><div class="h">The one-liner</div><p>"The meta-harness for AI agents — scaffold your own focused, branded agent harness with its own <code>npx</code> CLI."</p></div>
+            <div class="grid g2">
+              <div class="stat"><div class="num i">&lt;60s</div><div class="k">repo → publishable harness</div></div>
+              <div class="stat"><div class="num i">9</div><div class="k">agent hosts it runs on</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · WRAPS YOUR STACK -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.2</span> It wraps what you already run</p>
+        <div class="split top">
+          <div>
+            <h2>Point it at your stack, tell Claude to evolve it</h2>
+            <p class="mut">Reuven's framing: the harness <strong>wraps your other systems</strong>. You already have a funnel, ads, data, and marketing APIs. Point MetaHarness at them and tell Claude to build a harness around them — then evolve it.</p>
+          </div>
+          <div class="callout"><div class="h">Safe by construction</div><p>Analysis is <strong>static and deterministic</strong> — it scans your repo, it never executes your code. The output ships as a versioned npm dependency you own, publish, and govern like any other.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · ARCHITECTURE -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.3</span> How the pieces stack</p>
+        <h2 style="margin-bottom:1.1rem">One kernel, your branding on top</h2>
+        <div class="flow">
+          <div class="node"><span class="badge">you</span><b>Your stack</b><span>funnel · ads · data</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">factory</span><b>Generator</b><span>wraps it up</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">out</span><b>Your harness</b><span>npx · agents · policy</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node kernel j"><span class="badge">core</span><b>kernel</b><span>Rust→WASM</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">host</span><b>Host adapter</b><span>→ LLM providers</span></div>
+        </div>
+        <p class="mut small" style="margin-top:1.1rem; max-width:80ch">The <code>@metaharness/kernel</code> (Rust compiled to WASM + NAPI-RS) is shared across every generated harness. Your content and branding stay proprietary; the kernel handles the plumbing.</p>
+      </div>
+    </section>
+
+    <!-- 12 · WHAT SHIPS -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.4</span> What ships in the box</p>
+        <div class="grid g2" style="gap:0.9rem 2rem">
+          <ul class="clean">
+            <li><b>Multi-host output</b> — one harness, nine platforms including CI.</li>
+            <li class="j"><b>Governance built in</b> — MCP default-deny, signed releases, SBOMs.</li>
+          </ul>
+          <ul class="clean">
+            <li><b>Pre-flight scoring</b> — fitness, safety, and cost-per-run before you commit.</li>
+            <li class="j"><b>19 vertical templates</b> — coding, trading, legal, support, research…</li>
+          </ul>
+        </div>
+        <div class="grid g4" style="margin-top:1.1rem">
+          <div class="stat"><div class="num i">568</div><div class="k">passing tests · 67 files</div></div>
+          <div class="stat"><div class="num i">16</div><div class="k">green CI jobs</div></div>
+          <div class="stat"><div class="num i">21</div><div class="k"><code>harness</code> subcommands</div></div>
+          <div class="stat"><div class="num i">19</div><div class="k">vertical templates</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · NINE HOSTS -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.5</span> Runs on nine hosts</p>
+        <h2 style="margin-bottom:1.1rem">Write the harness once, run it anywhere</h2>
+        <div class="grid g3">
+          <div class="card"><h3>Claude Code</h3><p>The interactive default.</p></div>
+          <div class="card"><h3>OpenAI Codex</h3><p>Codex-host adapter.</p></div>
+          <div class="card"><h3>pi.dev</h3><p>Hosted agent runtime.</p></div>
+          <div class="card"><h3>Hermes</h3><p>Nous Research host.</p></div>
+          <div class="card"><h3>OpenClaw · OpenCode</h3><p>Open-source hosts.</p></div>
+          <div class="card"><h3>RVM</h3><p>Hardware-isolated sandbox.</p></div>
+          <div class="card"><h3>GitHub Copilot</h3><p>Copilot integration.</p></div>
+          <div class="card"><h3>GitHub Actions</h3><p>Non-interactive CI/CD.</p></div>
+          <div class="card"><div class="tag j">byte-identical</div><h3>Studio</h3><p>100% client-side, no backend.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · GOVERNANCE -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.6</span> Governance &amp; safety</p>
+        <div class="split top">
+          <div>
+            <h2>Ship an agent your security team will sign off on</h2>
+            <p class="mut">Governance isn't bolted on afterwards — it's part of the generated output, so an agent is a dependency you can audit like any other.</p>
+          </div>
+          <ul class="clean">
+            <li class="j"><b>MCP default-deny</b> — the tool server refuses anything not explicitly allowed.</li>
+            <li class="j"><b>Ed25519 witness-signed releases</b> — provenance you can verify.</li>
+            <li class="j"><b>SPDX-2.3 SBOM</b> — a full bill of materials per release.</li>
+            <li class="j"><b><code>harness mcp-scan</code></b> — static MCP threat-model for PR review.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · DAY TO DAY -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.7</span> Day-to-day commands</p>
+        <div class="split top">
+          <div>
+            <h2>A small, memorable CLI</h2>
+            <p class="mut">After scaffolding, the whole lifecycle is a handful of <code>harness</code> subcommands — plus two analysis tools you run <em>before</em> you commit.</p>
+            <div class="callout i" style="margin-top:0.4rem"><div class="h">Pre-flight</div><p><code>metaharness score &lt;repo&gt;</code> → fitness, build likelihood, tool safety, cost-per-run. <code>harness genome &lt;repo&gt;</code> → readiness analysis.</p></div>
+          </div>
+          <pre><span class="c"># health &amp; release gates</span>
+<span class="cmd">harness</span> doctor        <span class="c"># environment check</span>
+<span class="cmd">harness</span> validate      <span class="c"># run all release gates</span>
+<span class="cmd">harness</span> sign / verify <span class="c"># witness manifest</span>
+<span class="cmd">harness</span> mcp-scan      <span class="c"># threat analysis</span>
+<span class="cmd">harness</span> sbom          <span class="c"># SPDX bill of materials</span>
+<span class="cmd">harness</span> threat-model  <span class="c"># MCP risk artifact</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · THE NUMBERS -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.8</span> The case, in numbers</p>
+        <h2 style="margin-bottom:1.2rem">Same benchmark, a fraction of the cost</h2>
+        <div class="grid g4">
+          <div class="stat"><div class="num">55.6%</div><div class="k">SWE-bench Verified (500) resolved by the GLM→Opus cascade</div></div>
+          <div class="stat"><div class="num">~$0.15</div><div class="k">cost per instance on that run</div></div>
+          <div class="stat"><div class="num">51.3%</div><div class="k">the Lite-cascade baseline it beats</div></div>
+          <div class="stat"><div class="num i">L2</div><div class="k">SLSA provenance · CodeQL + cargo/npm audit</div></div>
+        </div>
+        <p class="src">v0.1.x beta · GLM→Opus empty-patch cascade · DRACO benchmark tracks cross-domain research quality (grounding, coverage, balance, cleanliness, faithfulness).</p>
+      </div>
+    </section>
+
+    <!-- 17 · OPTIMIZATION FAMILY -->
+    <section class="slide" data-part="MetaHarness">
+      <div class="inner">
+        <p class="kick"><span class="n">02.9</span> The Pareto-frontier family</p>
+        <h2 style="margin-bottom:1.1rem">Three ways to push cost down without losing quality</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag j">evolve</div><h3>Darwin</h3><p>Self-mutates the harness config, tests in sandboxes, keeps only measurable wins. <em>Today's focus.</em></p></div>
+          <div class="card"><div class="tag">distill</div><h3>Weight-EFT</h3><p>Distills expensive frontier models into tuned cheaper ones (GLM/Qwen via LoRA), so you escalate less often.</p></div>
+          <div class="card"><div class="tag">route</div><h3>Router</h3><p>Learns from your eval logs which model handles each task, routing to the cheapest capable option.</p></div>
+        </div>
+        <p class="src">A live cost-performance leaderboard tracks the Pareto frontier — which harness resolves the most benchmark per dollar.</p>
+      </div>
+    </section>
+
+    <!-- 18 · DIVIDER 03 -->
+    <section class="slide divider" data-part="Darwin">
+      <div class="inner">
+        <div class="pnum">PART 03</div>
+        <h2>Darwin — the engine</h2>
+        <p class="sub">"Freeze the model, evolve the harness" — made mechanical.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <!-- 19 · DARWIN ONE LINE -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <div class="split">
+          <div>
+            <p class="kick"><span class="n">03.1</span> @metaharness/darwin</p>
+            <h2>Evolve the operating system around a frozen model</h2>
+            <p class="mut">One policy surface mutates per generation. Each variant runs in a sandbox, gets scored, and is promoted only if it clears four hard gates — so improvement is measured, never assumed.</p>
+          </div>
+          <div class="bigquote i" style="align-self:center"><p>"Out of a hundred evolutions, this is the best one. The ones that work, it evolves more. The ones that don't are dead ends."</p><div class="who">Reuven Cohen</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · SEVEN SURFACES -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.2</span> The seven mutation surfaces</p>
+        <h2 style="margin-bottom:1rem">Exactly one changes per generation</h2>
+        <div class="surfaces">
+          <div class="surf"><span class="f">planner.ts</span><span class="d">Decomposes a task into steps</span></div>
+          <div class="surf"><span class="f">context_builder.ts</span><span class="d">Ranks file relevance</span></div>
+          <div class="surf"><span class="f">reviewer.ts</span><span class="d">Risk-file &amp; test review</span></div>
+          <div class="surf"><span class="f">retry_policy.ts</span><span class="d">Classifies failures, retries</span></div>
+          <div class="surf"><span class="f">tool_policy.ts</span><span class="d">Command allowlist &amp; order</span></div>
+          <div class="surf"><span class="f">memory_policy.ts</span><span class="d">Which outcomes to retain</span></div>
+          <div class="surf ro"><span class="f">score_policy.ts</span><span class="d">Weights — read-only to a variant</span></div>
+          <div class="surf ro"><span class="f">isolation</span><span class="d">One change → one clean signal</span></div>
+        </div>
+        <p class="src">Changing a single surface at a time keeps the causal signal clean — you know exactly which change moved the score.</p>
+      </div>
+    </section>
+
+    <!-- 21 · ARCHIVE TREE -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.3</span> The archive tree</p>
+        <div class="split top">
+          <div>
+            <h2>Not a greedy climb — a population</h2>
+            <p class="mut">Variants live in an <strong>archive tree</strong>, not a single best branch. Selection can revisit a weaker ancestor that turns out to seed a stronger lineage — exactly like biological evolution, where a dead end for one trait is the origin of another.</p>
+          </div>
+          <ul class="clean">
+            <li class="j"><b>Keeps losers around</b> — a low scorer may carry a mutation that pays off two generations later.</li>
+            <li><b>Opt-in strategies</b> — quality-diversity, Pareto selection, crossover, MAP-Elites, curriculum learning.</li>
+            <li class="j"><b>Reproducible core</b> — every extra is a toggle over a frozen, seeded baseline.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · FOUR STEPS -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.4</span> One generation, four steps</p>
+        <div class="split top">
           <div class="steps">
             <div class="step"><span class="idx">1</span><div><b>Mutate</b><p>Change exactly one surface → a child variant.</p></div></div>
-            <div class="step"><span class="idx">2</span><div><b>Sandbox</b><p>Shell-free, secrets scrubbed from the environment.</p></div></div>
-            <div class="step a"><span class="idx">3</span><div><b>Score</b><p>Six 0–1 terms, minus penalties for unsafe or wasteful behaviour.</p></div></div>
-            <div class="step b"><span class="idx">4</span><div><b>Promote</b><p>Replace the parent only if every gate holds.</p></div></div>
+            <div class="step"><span class="idx">2</span><div><b>Sandbox</b><p>Run it shell-free, secrets scrubbed from the environment.</p></div></div>
+            <div class="step a"><span class="idx">3</span><div><b>Score</b><p>Weighted sum of six 0–1 terms, minus penalties.</p></div></div>
+            <div class="step b"><span class="idx">4</span><div><b>Promote</b><p>Replace the parent only if every gate holds; else it stays as an ancestor.</p></div></div>
+          </div>
+          <div>
+            <h3 style="margin-bottom:0.6rem">Everything lands in <code>.metaharness/</code></h3>
+            <ul class="clean sm">
+              <li><code>archive.json</code> — the population tree</li>
+              <li><code>lineage.json</code> — graph for visualization</li>
+              <li><code>variants/</code> — one dir per variant</li>
+              <li><code>runs/</code> — traces &amp; scores</li>
+              <li class="j"><code>reports/winner.json</code> — the best result</li>
+            </ul>
           </div>
         </div>
-        <div>
-          <h3 style="margin-bottom:0.8rem">The promotion gate — all four must hold</h3>
-          <ul class="clean">
-            <li class="j"><b>Score improves</b> over the parent by the delta.</li>
-            <li class="j"><b>Safety ≥ 0.95</b> on an independent check.</li>
-            <li class="j"><b>No test regression</b> — pass rate never drops.</li>
-            <li class="j"><b>Zero blocked actions</b> during the run.</li>
-          </ul>
-          <div class="callout i" style="margin-top:1rem"><div class="h">Two independent safety checks</div><p style="font-size:0.9rem"><code>inspectVariant()</code> blocks unapproved files, symlinks, and dangerous patterns; <code>validateGeneratedCode()</code> gates LLM code before it touches disk. Penalties bite: secret exposure −0.30, destructive −0.25.</p></div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 10 · DARWIN CHART -->
-  <section class="slide" data-kick="Darwin · the lift" data-chart="1">
-    <div class="inner">
-      <p class="kick"><span class="n">09</span> The harness does the lifting</p>
-      <div class="split top">
-        <div class="panel">
-          <div class="cap">SWE-bench Lite · 300 instances · official harness</div>
-          <div class="ttl">Same frozen model, three harnesses</div>
-          <div class="bars">
-            <div class="bar"><div class="col" data-h="13"><span class="v">7.7%</span></div><div class="lab">Open-loop<b>BASELINE</b></div></div>
-            <div class="bar"><div class="col" data-h="26"><span class="v">15.3%</span></div><div class="lab">Closed-loop<b>+REPAIR</b></div></div>
-            <div class="bar hi"><div class="col" data-h="100"><span class="v">58.3%</span></div><div class="lab">Tiered<b>CHEAP&rarr;FRONTIER</b></div></div>
+    <!-- 23 · SCORING -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.5</span> The scoring model</p>
+        <div class="split top">
+          <div>
+            <h2>Reward the outcome, punish the risk</h2>
+            <p class="mut">A base score — the weighted sum of six 0–1 quality terms — minus a penalty layer that makes unsafe or wasteful behaviour uncompetitive by construction.</p>
+          </div>
+          <div class="grid g2" style="gap:0.6rem">
+            <div class="stat"><div class="num" style="color:var(--crit); font-size:1.9rem">−0.30</div><div class="k">secret exposure</div></div>
+            <div class="stat"><div class="num" style="color:var(--crit); font-size:1.9rem">−0.25</div><div class="k">destructive actions</div></div>
+            <div class="stat"><div class="num" style="color:var(--amber); font-size:1.9rem">−0.20</div><div class="k">hallucinated files</div></div>
+            <div class="stat"><div class="num" style="color:var(--amber); font-size:1.9rem">−0.15</div><div class="k">tool loops</div></div>
           </div>
         </div>
-        <div>
-          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem)">Why the numbers move</h2>
-          <p class="mut">Open-loop resolves <strong>7.7%</strong>. A closed-loop repair harness roughly doubles it to <strong>15.3%</strong>. Tiered escalation — cheap first, frontier only when needed — reaches <strong>58.3%</strong>, at <strong>~$0.01–$0.74</strong> per instance versus <strong>$1–20</strong> frontier-only.</p>
-          <p class="mut" style="margin:0"><strong>The weights never changed. The harness did.</strong></p>
-        </div>
+        <p class="src">Also −0.10 for cost overrun. A variant literally can't win by cutting a dangerous corner.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 11 · FLYWHEEL -->
-  <section class="slide" data-kick="@metaharness/flywheel">
-    <div class="inner">
-      <p class="kick"><span class="n">10</span> @metaharness/flywheel · the proof</p>
-      <div class="split top" style="margin-bottom:1.2rem">
-        <div>
-          <h2>Perpetual motion — and a receipt for every gain</h2>
-          <p class="lead">Darwin finds the cheapest, best <em>model</em>. The Flywheel asks the best <em>process</em> — running 24/7, rewriting its own code, promoting only proven lift.</p>
+    <!-- 24 · PROMOTION GATE -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.6</span> The promotion gate</p>
+        <h2 style="margin-bottom:1rem">All four clauses must hold — or the child doesn't replace the parent</h2>
+        <div class="grid g4">
+          <div class="card"><div class="tag j">1</div><h3>Score improves</h3><p>Beats the parent by at least the delta.</p></div>
+          <div class="card"><div class="tag j">2</div><h3>Safety ≥ 0.95</h3><p>On the independent safety check.</p></div>
+          <div class="card"><div class="tag j">3</div><h3>No regression</h3><p>Test pass rate never drops.</p></div>
+          <div class="card"><div class="tag j">4</div><h3>Zero blocked</h3><p>No blocked actions during the run.</p></div>
         </div>
-        <div class="bigquote" style="align-self:center"><p>"Always looking, always evolving, always trying to make it better."</p><div class="who">Reuven Cohen · on the flywheel</div></div>
+        <p class="src">This is what makes "it improved" a fact rather than a vibe — a promotion is a claim with four preconditions.</p>
       </div>
-      <div class="grid g4">
-        <div class="card"><div class="tag">Immutable rule</div><h3>Frozen gate</h3><p><code>meetsPromotionRule</code> can't drift mid-run.</p></div>
-        <div class="card"><div class="tag">Compounding</div><h3>Lineage</h3><p>Each generation stands on the last winner.</p></div>
-        <div class="card"><div class="tag">Anti-Goodhart</div><h3>Holdout + anchor</h3><p>Wins on sets it never optimized against.</p></div>
-        <div class="card"><div class="tag j">Provenance</div><h3>Ed25519 receipts</h3><p>Signed promotions + replay bundle.</p></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 12 · FLYWHEEL SKEPTIC + DIGITAL TWIN -->
-  <section class="slide" data-kick="Flywheel · prove it">
-    <div class="inner">
-      <p class="kick"><span class="n">11</span> What you hand a skeptic</p>
-      <div class="split top">
-        <div>
+    <!-- 25 · SAFETY -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.7</span> The safety model</p>
+        <div class="split top">
+          <div>
+            <h2>Two independent checks, before code ever runs</h2>
+            <p class="mut">Letting a system rewrite its own policies only works if it can't rewrite them into something dangerous. Darwin gates every variant twice, then runs it with no shell and no secrets.</p>
+          </div>
           <ul class="clean">
-            <li class="j"><b>A lift curve</b> — improvement you can see, not assert.</li>
-            <li class="j"><b>A promotion lineage</b> — the chain of winners, and why each passed.</li>
-            <li class="j"><b>A replay bundle</b> — reproduce it on another machine.</li>
-            <li class="j"><b>Signed receipts</b> — Ed25519 proof the run is the run.</li>
+            <li class="j"><b><code>inspectVariant()</code></b> — disqualifies unapproved files, blocked names (<code>.env</code>, <code>.git</code>, <code>secret</code>), symlinks, and dangerous patterns (<code>eval</code>, <code>fetch</code>, <code>child_process</code>).</li>
+            <li class="j"><b><code>validateGeneratedCode()</code></b> — gates any LLM-written code before it touches disk.</li>
+            <li><b>Shell-free sandbox</b> — no command injection; scrubbed env exposes only PATH + identifiers, never secrets.</li>
           </ul>
-          <div class="callout" style="margin-top:1rem"><div class="h">The digital twin</div><p style="font-size:0.94rem">Left running, it models a competitor — how they market and grow — and keeps searching, 24/7, for where you can be more profitable.</p></div>
         </div>
-        <pre><span class="c">// one verifiable improvement loop</span>
-<span class="cmd">import</span> { runFlywheelGenerations } <span class="cmd">from</span> <span class="flag">'@metaharness/flywheel'</span>;
+      </div>
+    </section>
+
+    <!-- 26 · LIFT CHART -->
+    <section class="slide" data-part="Darwin" data-chart="1">
+      <div class="inner">
+        <p class="kick"><span class="n">03.8</span> The harness does the lifting</p>
+        <div class="split top">
+          <div class="panel">
+            <div class="cap">SWE-bench Lite · 300 instances · official harness</div>
+            <div class="ttl">Same frozen model, three harnesses</div>
+            <div class="bars">
+              <div class="bar"><div class="col" data-h="13"><span class="v">7.7%</span></div><div class="lab">Open-loop<b>BASELINE</b></div></div>
+              <div class="bar"><div class="col" data-h="26"><span class="v">15.3%</span></div><div class="lab">Closed-loop<b>+REPAIR</b></div></div>
+              <div class="bar hi"><div class="col" data-h="100"><span class="v">58.3%</span></div><div class="lab">Tiered<b>CHEAP→FRONTIER</b></div></div>
+            </div>
+          </div>
+          <div>
+            <h2 style="font-size:1.7rem">Why the numbers move</h2>
+            <p class="mut">Open-loop resolves <strong>7.7%</strong>. A closed-loop repair harness roughly doubles it to <strong>15.3%</strong>. Tiered escalation — cheap first, frontier only when needed — reaches <strong>58.3%</strong>, at <strong>~$0.01–$0.74</strong> per instance versus <strong>$1–20</strong> frontier-only.</p>
+            <p class="mut"><strong>The weights never changed. The harness did.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 · GEPA -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.9</span> GEPA · prompt-policy learning</p>
+        <div class="split top">
+          <div>
+            <h2>Evolving the words, not just the wiring</h2>
+            <p class="mut"><code>@metaharness/darwin/gepa</code> evolves a <strong>genome</strong> of text components — planner preambles, tool descriptions — via reflection on per-instance feedback. It's the same freeze-and-evolve idea, applied to prompts.</p>
+          </div>
+          <div class="callout"><div class="h">Proof it isn't hand-waving</div><p><code>cand-6</code> was the first <strong>holdout-confirmed</strong> promoted genome — accepted under strict promotion: no regression on the gold set, and cost-per-resolved no worse than before.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 28 · DIVIDER 04 -->
+    <section class="slide divider" data-part="Flywheel">
+      <div class="inner">
+        <div class="pnum">PART 04</div>
+        <h2>Flywheel — the proof</h2>
+        <p class="sub">Turning "self-improving" from a claim into a receipt.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <!-- 29 · FLYWHEEL ONE LINE -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <div class="split">
+          <div>
+            <p class="kick"><span class="n">04.1</span> @metaharness/flywheel</p>
+            <h2>Perpetual motion — and a receipt for every gain</h2>
+            <p class="mut">Darwin finds the cheapest, best <em>model</em> for a task. The Flywheel asks the best <em>process</em> — running continually, rewriting its own code, promoting only what proves measurable lift.</p>
+          </div>
+          <div class="bigquote" style="align-self:center"><p>"Always looking, always evolving, always trying to make it better."</p><div class="who">Reuven Cohen · on the flywheel</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 30 · FOUR PROPERTIES -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.2</span> Four properties that make it trustworthy</p>
+        <div class="grid g4">
+          <div class="card"><div class="tag">immutable rule</div><h3>Frozen gate</h3><p><code>meetsPromotionRule</code> can't drift mid-run to flatter a candidate.</p></div>
+          <div class="card"><div class="tag">compounding</div><h3>Lineage</h3><p>Each generation builds on the last promoted winner — season over season.</p></div>
+          <div class="card"><div class="tag">anti-Goodhart</div><h3>Holdout + anchor</h3><p>Must win on test sets it was never optimized against.</p></div>
+          <div class="card"><div class="tag j">provenance</div><h3>Ed25519 receipts</h3><p>Signed promotions ship with a replay bundle.</p></div>
+        </div>
+        <p class="src">Minimal by design — ESM, fully typed, runtime dependency is Node's native crypto and nothing else.</p>
+      </div>
+    </section>
+
+    <!-- 31 · ANTI-GOODHART -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.3</span> Anti-Goodhart construction</p>
+        <div class="split top">
+          <div>
+            <h2>You can't game a metric you can't see</h2>
+            <p class="mut">"When a measure becomes a target, it ceases to be a good measure." Flywheel defuses that: a candidate is optimized on one set but must <strong>prove itself on others it never touched.</strong></p>
+          </div>
+          <ul class="clean">
+            <li class="j"><b>Holdout set</b> — unseen during optimization; catches overfitting.</li>
+            <li class="j"><b>Anchor set</b> — a fixed reference that guards against silent regressions.</li>
+            <li><b>Clear both, or no promotion</b> — a lucky run on the training slice isn't enough.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 32 · SKEPTIC + CODE -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.4</span> What you hand a skeptic</p>
+        <div class="split top">
+          <div>
+            <ul class="clean">
+              <li class="j"><b>A lift curve</b> — improvement you can see, not assert.</li>
+              <li class="j"><b>A promotion lineage</b> — the chain of winners, and why each passed.</li>
+              <li class="j"><b>A replay bundle</b> — reproduce the result on another machine.</li>
+              <li class="j"><b>Signed receipts</b> — Ed25519 proof the run is the run.</li>
+            </ul>
+          </div>
+          <pre><span class="c">// one verifiable improvement loop</span>
+<span class="cmd">import</span> { runFlywheelGenerations }
+  <span class="cmd">from</span> <span class="flag">'@metaharness/flywheel'</span>;
 
 <span class="cmd">const</span> out = <span class="cmd">await</span> runFlywheelGenerations({
   rootPolicy,      <span class="c">// where we start</span>
@@ -554,85 +830,187 @@
   signer,          <span class="c">// Ed25519 receipts</span>
 });
 out.liftCurve; out.lineage; out.replayBundle;</pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- 13 · GETTING STARTED -->
-  <section class="slide" data-kick="Getting a client started">
-    <div class="inner">
-      <p class="kick"><span class="n">12</span> Getting a client started</p>
-      <div class="split top">
-        <div>
-          <h2>"Point Claude at it and say make my marketing better"</h2>
-          <p class="mut">Fork the repo (or use the npm packages), point Claude Code at it, describe the outcome. It scaffolds the harness; you wire in data + APIs and let it run.</p>
-          <pre><span class="c"># in Claude Code, on a fork of ruvnet/metaharness</span>
-<span class="cmd">&gt;</span> Use <span class="flag">@metaharness/flywheel</span>, <span class="flag">@metaharness/darwin</span> and
-  <span class="flag">metaharness</span> to build the world's best
-  click-funnel system.</pre>
         </div>
-        <div>
-          <h3 style="margin-bottom:0.7rem">Three ways to run it</h3>
-          <div class="grid" style="gap:0.7rem">
-            <div class="card"><div class="tag">Simplest</div><h3>Local</h3><p>On your machine — building, testing, one-off evolutions.</p></div>
-            <div class="card"><div class="tag">Scheduled</div><h3>Claude schedule</h3><p>Cloud cron — hourly/daily. Cheaper, but no perpetual motion.</p></div>
-            <div class="card"><div class="tag j">Always-on</div><h3>Your cloud + Flywheel</h3><p>Reuven's setup — runs perpetually, always adapting.</p></div>
+      </div>
+    </section>
+
+    <!-- 33 · DIGITAL TWIN -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <div class="bigquote">
+          <p>"It's a digital twin. I'm recreating competitors — how they market, how they grow — and it runs 24/7, figuring out where it can make you more profitable."</p>
+          <div class="who">Reuven Cohen</div>
+        </div>
+        <p class="lead" style="margin-top:1.3rem; max-width:72ch">Left running, the Flywheel is less a script than a <strong>standing capability</strong>: it models the competition, weighs every option, and never stops looking for lift.</p>
+      </div>
+    </section>
+
+    <!-- 34 · DARWIN VS FLYWHEEL -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.5</span> Two engines, two jobs</p>
+        <h2 style="margin-bottom:1rem">Where Darwin ends and Flywheel begins</h2>
+        <div class="versus">
+          <div class="vcol d"><h3>DARWIN — discover</h3>
+            <ul class="clean sm">
+              <li>Mutates seven policy surfaces</li>
+              <li>Explores a population of variants</li>
+              <li>Finds the cheapest capable path</li>
+              <li>Answer: <b>which model &amp; wiring?</b></li>
+            </ul>
           </div>
-          <div class="callout i" style="margin-top:0.8rem"><div class="h">The Cognitum side</div><p style="font-size:0.88rem">The hosted layer: <strong>Meta LLM</strong> (flywheels, pods, agents behind an API key) and <strong>comms</strong> — agents working alongside people, each with their own privileges.</p></div>
+          <div class="vmid">+</div>
+          <div class="vcol f"><h3>FLYWHEEL — prove &amp; sustain</h3>
+            <ul class="clean sm">
+              <li class="j">Frozen gate, immutable during a run</li>
+              <li class="j">Compounding, auditable lineage</li>
+              <li class="j">Runs perpetually, signs every gain</li>
+              <li class="j">Answer: <b>did it really improve?</b></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 14 · FIT TOGETHER -->
-  <section class="slide" data-kick="How they fit together">
-    <div class="inner">
-      <p class="kick"><span class="n">13</span> How they fit together</p>
-      <h2 style="margin-bottom:1.2rem">One workflow, three roles</h2>
-      <div class="pipe">
-        <div class="pstep"><span class="s">Assess</span><b>Score</b><p>Is it a fit, and what will it cost?</p></div>
-        <div class="pstep"><span class="s">Generate</span><b>Wrap</b><p>Harness around your funnel, ads &amp; data.</p></div>
-        <div class="pstep"><span class="s">Improve</span><b>Evolve · Darwin</b><p>Keep winners, kill dead ends.</p></div>
-        <div class="pstep"><span class="s">Verify</span><b>Prove · Flywheel</b><p>Confirm lift; sign the promotion.</p></div>
-        <div class="pstep"><span class="s">Sustain</span><b>Run 24/7</b><p>Leave it on; it keeps optimizing.</p></div>
+    <!-- 35 · DIVIDER 05 -->
+    <section class="slide divider" data-part="Putting it to work">
+      <div class="inner">
+        <div class="pnum">PART 05</div>
+        <h2>Putting it to work</h2>
+        <p class="sub">From an npm install to a client outcome.</p>
+        <div class="rule"></div>
       </div>
-      <div class="callout" style="margin-top:1.2rem"><div class="h">The through-line to repeat back</div><p>All three share one bet: <strong>the harness, not the model, is the cheapest lever.</strong> Darwin <em>discovers</em> the cheapest capable path; Flywheel <em>proves, records, and never stops improving</em> it. That's how "our agent gets better over time" becomes a claim you can audit.</p></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 15 · Q&A -->
-  <section class="slide" data-kick="Client-facing Q&amp;A">
-    <div class="inner">
-      <p class="kick"><span class="n">14</span> Answers to have ready</p>
-      <div class="qa">
-        <div class="row"><p class="q">How do I even start?</p><p class="a">Fork <code>ruvnet/metaharness</code>, point Claude Code at it, and say what you want. It scaffolds; you wire in data + APIs.</p></div>
-        <div class="row"><p class="q">Why not just use a bigger model?</p><p class="a">The harness is the cheaper lever — 7.7% → 58.3% by changing only the wrapper, at ~1/56th of frontier-only cost.</p></div>
-        <div class="row"><p class="q">"Self-improving" sounds like hype. Prove it.</p><p class="a">Flywheel promotions clear holdout + anchor tests, use an immutable gate, and ship Ed25519-signed, replayable receipts.</p></div>
-        <div class="row"><p class="q">Does it run once, or keep improving?</p><p class="a">Your choice — a cheaper scheduled cron, or the flywheel running perpetually on your own infra.</p></div>
+    <!-- 36 · MARKETING LOOP -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.1</span> The whiteboard example</p>
+        <div class="split top">
+          <div>
+            <h2>The marketing feedback loop</h2>
+            <p class="lead">The example Reuven demoed live — four moves from "my stack" to "self-improving."</p>
+            <div class="callout" style="margin-top:0.3rem"><div class="h">The line to remember</div><p style="font-weight:560">"A click funnel that <em>proves its own lift.</em> Creating a funnel is easy. Optimizing one is hard."</p></div>
+          </div>
+          <div class="steps">
+            <div class="step"><span class="idx">1</span><div><b>Point it at what you run</b><p>Funnel, ads, analytics, marketing APIs.</p></div></div>
+            <div class="step"><span class="idx">2</span><div><b>State the problem plainly</b><p>"I need better conversions."</p></div></div>
+            <div class="step a"><span class="idx">3</span><div><b>Darwin runs evolutions</b><p>Keeps winners, abandons dead ends.</p></div></div>
+            <div class="step b"><span class="idx">4</span><div><b>Flywheel keeps it running</b><p>Optimizes 24/7, always evolving.</p></div></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 16 · CLOSE -->
-  <section class="slide" data-kick="">
-    <div class="glow-b" aria-hidden="true"></div>
-    <div class="inner" style="text-align:center">
-      <span class="kicker" style="margin-inline:auto"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
-      <h1 style="margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
-      <p class="title-sub" style="margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
-      <p class="src" style="text-align:center">metaharness · @metaharness/darwin · @metaharness/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
-    </div>
-  </section>
+    <!-- 37 · GETTING STARTED -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.2</span> Getting a client started</p>
+        <div class="split top">
+          <div>
+            <h2>"Point Claude at it and say make my marketing better"</h2>
+            <p class="mut">Fork the repo (so it's selectable in Claude), point Claude Code at it, and describe the outcome. It scaffolds the harness; you wire in the data and APIs, and let it run.</p>
+            <p class="mut small">"Integrate the data you already have, make sure it has API access — the rest just works. It's meant to do its thing."</p>
+          </div>
+          <pre><span class="c"># in Claude Code, on a fork of ruvnet/metaharness</span>
+<span class="cmd">&gt;</span> Use <span class="flag">@metaharness/flywheel</span>,
+  <span class="flag">@metaharness/darwin</span> and <span class="flag">metaharness</span>
+  to build the world's best-performing
+  click-funnel system.
 
+<span class="c"># then: integrate data + APIs, let the</span>
+<span class="c"># flywheel run.</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 38 · THREE WAYS TO RUN -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.3</span> Three ways to run it</p>
+        <h2 style="margin-bottom:1rem">Match the deployment to the client's appetite</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag">simplest</div><h3>Local</h3><p>On your own machine — great for building, testing, and one-off evolutions.</p></div>
+          <div class="card"><div class="tag">scheduled</div><h3>Claude schedule</h3><p>A cloud version on a cron — hourly, daily. Cheaper, but no perpetual motion; it runs, then stops.</p></div>
+          <div class="card"><div class="tag j">always-on</div><h3>Your cloud + Flywheel</h3><p>Reuven's own setup: infra that ties into everything and runs the Flywheel perpetually.</p></div>
+        </div>
+        <p class="src">Cron is cheaper; perpetual motion compounds. The trade-off is cost vs. continuous improvement.</p>
+      </div>
+    </section>
+
+    <!-- 39 · COGNITUM SIDE -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.4</span> The Cognitum side</p>
+        <div class="split top">
+          <div>
+            <h2>The hosted layer around the open source</h2>
+            <p class="mut">Beyond the repo there's a service that makes the same building blocks easier to adopt. In the <strong>Cognitum dashboard</strong>, <strong>Meta&nbsp;LLM</strong> exposes flywheels, pods, and agents behind an API key — point Claude at it and go.</p>
+          </div>
+          <div class="callout i"><div class="h">Comms — agents alongside people</div><p>A CMO or CIO gets a team that mixes human reports and agents. Each agent has its own privileges — say, permission to update ads through an API — and is managed like a member of the org, not a black box.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 40 · DIVIDER 06 -->
+    <section class="slide divider" data-part="Selling it">
+      <div class="inner">
+        <div class="pnum">PART 06</div>
+        <h2>Selling it as a consultant</h2>
+        <p class="sub">Where this fits an engagement — and how to answer the hard questions.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <!-- 41 · PLAYBOOK -->
+    <section class="slide" data-part="Selling it">
+      <div class="inner">
+        <p class="kick"><span class="n">06.1</span> The engagement, five moves</p>
+        <h2 style="margin-bottom:1rem">One workflow you can walk any client down</h2>
+        <div class="pipe">
+          <div class="pstep"><span class="s">Assess</span><b>Score</b><p><code>metaharness score</code> — fit &amp; cost.</p></div>
+          <div class="pstep"><span class="s">Generate</span><b>Wrap</b><p>Harness around funnel, ads &amp; data.</p></div>
+          <div class="pstep"><span class="s">Improve</span><b>Evolve</b><p>Darwin — keep winners, kill dead ends.</p></div>
+          <div class="pstep"><span class="s">Verify</span><b>Prove</b><p>Flywheel — confirm &amp; sign the lift.</p></div>
+          <div class="pstep"><span class="s">Sustain</span><b>Run 24/7</b><p>Leave it on; it keeps optimizing.</p></div>
+        </div>
+        <div class="callout" style="margin-top:1rem"><div class="h">The through-line to repeat back</div><p><strong>The harness, not the model, is the cheapest lever.</strong> Darwin discovers the cheapest capable path; Flywheel proves, records, and never stops improving it.</p></div>
+      </div>
+    </section>
+
+    <!-- 42 · OBJECTIONS -->
+    <section class="slide" data-part="Selling it">
+      <div class="inner">
+        <p class="kick"><span class="n">06.2</span> Answers to have ready</p>
+        <div class="qa">
+          <div class="row"><p class="q">"Why not just use a bigger model?"</p><p class="a">The harness is the cheaper lever — 7.7% → 58.3% by changing only the wrapper, at ~1/56th of frontier-only cost.</p></div>
+          <div class="row"><p class="q">"'Self-improving' sounds like hype. Prove it."</p><p class="a">Flywheel promotions clear holdout + anchor tests, use an immutable gate, and ship Ed25519-signed, replayable receipts.</p></div>
+          <div class="row"><p class="q">"Is it safe to let it rewrite its own policies?"</p><p class="a">Two independent checks, a shell-free sandbox with secrets scrubbed, and penalties that make unsafe variants uncompetitive.</p></div>
+          <div class="row"><p class="q">"What will it cost to run?"</p><p class="a">You get a cost estimate before scaffolding. Darwin runs land around $0.01–$0.74 per instance vs. $1–20 frontier-only.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 43 · CLOSE -->
+    <section class="slide" data-part="Close">
+      <div class="glow-b"></div>
+      <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
+        <span class="kicker"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
+        <h1 style="margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+        <p class="title-sub" style="margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
+        <p class="src" style="text-align:center; margin-top:1.4rem">metaharness · @metaharness/darwin · @metaharness/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
+      </div>
+    </section>
+
+  </div>
 </div>
 
 <nav class="navbar">
   <span class="foot-brand">Cognitum · Orientation</span>
-  <span class="hint">← → navigate · F present</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate · F present · T theme</span>
   <span class="spacer"></span>
-  <div class="dots" id="dots"></div>
-  <span class="spacer"></span>
-  <span class="counter"><b id="cur">1</b> / <span id="total">16</span></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
   <div class="arrows">
     <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
     <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
@@ -642,7 +1020,9 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
 <script>
   (function () {
     var root = document.documentElement;
-    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
     var n = slides.length;
     var i = 0;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -650,21 +1030,17 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     var progress = document.getElementById('progress');
     var curEl = document.getElementById('cur');
     var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
     var prevBtn = document.getElementById('prev');
     var nextBtn = document.getElementById('next');
-    var dotsWrap = document.getElementById('dots');
     totalEl.textContent = n;
 
-    // dots
-    var dots = slides.map(function (s, idx) {
-      var b = document.createElement('button');
-      b.className = 'dot-b';
-      b.type = 'button';
-      b.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
-      b.addEventListener('click', function () { go(idx); });
-      dotsWrap.appendChild(b);
-      return b;
-    });
+    // scale the fixed 1280x720 stage to fit
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
 
     function fromHash() {
       var m = (location.hash || '').match(/(\d+)/);
@@ -673,30 +1049,24 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     }
 
     function render() {
-      slides.forEach(function (s, idx) {
-        s.classList.toggle('active', idx === i);
-        s.classList.toggle('prev', idx < i);
-      });
-      dots.forEach(function (d, idx) { d.classList.toggle('on', idx === i); });
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
       curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
       progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === n - 1;
-
-      // animate chart on its slide
       var active = slides[i];
       if (active.getAttribute('data-chart') && !active.dataset.done) {
         active.dataset.done = '1';
         var cols = active.querySelectorAll('.bars .col');
         var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
-        if (reduce) run(); else setTimeout(run, 220);
+        if (reduce) run(); else setTimeout(run, 240);
       }
     }
 
     function go(x) {
       i = Math.max(0, Math.min(n - 1, x));
-      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1));
-      else location.hash = '#' + (i + 1);
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
       render();
     }
     function next() { go(i + 1); }
@@ -706,6 +1076,12 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
     nextBtn.addEventListener('click', next);
     document.getElementById('zoneL').addEventListener('click', prev);
     document.getElementById('zoneR').addEventListener('click', next);
+
+    // click the top track to seek
+    document.getElementById('ptrack').addEventListener('click', function (e) {
+      var r = (e.clientX) / window.innerWidth;
+      go(Math.round(r * (n - 1)));
+    });
 
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -718,7 +1094,6 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
       else if (k === 't' || k === 'T') { toggleTheme(); }
     });
 
-    // touch swipe
     var sx = 0, sy = 0;
     document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
     document.addEventListener('touchend', function (e) {
@@ -726,21 +1101,22 @@ out.liftCurve; out.lineage; out.replayBundle;</pre>
       if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
     }, { passive: true });
 
-    // theme + fullscreen
     function currentTheme() {
       if (root.dataset.theme) return root.dataset.theme;
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
     function toggleFs() {
-      if (!document.fullscreenElement) { (document.documentElement.requestFullscreen || function(){})(); }
+      if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); }
       else if (document.exitFullscreen) { document.exitFullscreen(); }
     }
     document.getElementById('themeBtn').addEventListener('click', toggleTheme);
     document.getElementById('fsBtn').addEventListener('click', toggleFs);
     window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
 
     i = fromHash();
+    fit();
     render();
   })();
 </script>
