@@ -26,6 +26,19 @@ Business operations and promotions agent for Cognitum Consultants
 ## Commands
 
 - `doctor` — Health-check the harness: kernel load, MCP wiring, memory backend, host adapter.
+- `metrics <rows.json>` — Analyst tool: prior/current KPI rows → findings (delta, % change, direction, thin-data flags).
+- `promo <bet.json>` — Promoter tool: a bet → a measurable promotion brief with break-even, projected net, and a day-7 kill-switch (`--json` for raw).
+- `tools` — Print the MCP tool schemas as JSON.
+- `mcp start` — Run the MCP stdio server (JSON-RPC over stdio) exposing `kpi_snapshot` + `promotion_brief`.
+
+## Tools (MCP)
+
+The harness ships a real MCP stdio server (`bin/lib/mcp.js`, dependency-free) wired into `.claude/settings.json`:
+
+| Tool | Backs agent | Does |
+|---|---|---|
+| `kpi_snapshot` | `analyst` | Turns raw KPI rows into quantified findings. |
+| `promotion_brief` | `promoter` | Turns a bet into a promotion with break-even + kill-switch math. |
 
 ## Architecture
 

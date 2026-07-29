@@ -10,6 +10,8 @@
 
 import { loadKernel } from '@metaharness/kernel';
 import adapter from '@metaharness/host-claude-code';
+import { kpiSnapshot, promotionBrief, formatBrief } from './lib/ops.js';
+import { serve, toolManifest } from './lib/mcp.js';
 
 const HARNESS_NAME = 'cognitum-ops-agent';
 
@@ -50,6 +52,37 @@ async function doctor() {
  * Dispatch one CLI invocation. Exported (not just run on import) so a test can
  * drive it without spawning a subprocess. Returns the intended exit code.
  */
+/** `cognitum-ops-agent metrics <file.json>` — analyst tool: rows → findings. */
+async function metrics(args) {
+  const rows = await readJsonArg(args[0]);
+  const out = kpiSnapshot(rows);
+  console.log(JSON.stringify(out, null, 2));
+  return 0;
+}
+
+/** `cognitum-ops-agent promo <file.json>` — promoter tool: bet → measurable brief. */
+async function promo(args) {
+  const input = await readJsonArg(args[0]);
+  const brief = promotionBrief(input);
+  console.log(args.includes('--json') ? JSON.stringify(brief, null, 2) : formatBrief(brief));
+  return 0;
+}
+
+/** `cognitum-ops-agent tools` — print the MCP tool schemas as JSON. */
+async function tools() {
+  console.log(JSON.stringify(toolManifest(), null, 2));
+  return 0;
+}
+
+/** Read a JSON argument from a file path, or from stdin when arg is "-" / absent. */
+async function readJsonArg(pathArg) {
+  const { readFile } = await import('node:fs/promises');
+  if (pathArg && pathArg !== '-') return JSON.parse(await readFile(pathArg, 'utf8'));
+  const chunks = [];
+  for await (const c of process.stdin) chunks.push(c);
+  return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+}
+
 export async function run(argv) {
   const cmd = argv[0] ?? 'init';
   switch (cmd) {
@@ -57,6 +90,16 @@ export async function run(argv) {
       return init();
     case 'doctor':
       return doctor();
+    case 'metrics':
+      return metrics(argv.slice(1));
+    case 'promo':
+      return promo(argv.slice(1));
+    case 'tools':
+      return tools();
+    case 'mcp':
+      // `mcp start` (or bare `mcp`) runs the stdio JSON-RPC server; it blocks.
+      serve();
+      return new Promise(() => {});
     case '--version':
     case '-v': {
       const kernel = await loadKernel();
@@ -65,7 +108,7 @@ export async function run(argv) {
     }
     case '--help':
     case '-h':
-      console.log(`Usage: ${HARNESS_NAME} <command>\n\n  init     boot the kernel + host adapter (default)\n  doctor   verify the install end-to-end\n  --version  print the kernel version`);
+      console.log(`Usage: ${HARNESS_NAME} <command>\n\n  init       boot the kernel + host adapter (default)\n  doctor     verify the install end-to-end\n  metrics <f.json>   analyst tool: KPI rows -> findings\n  promo <f.json>     promoter tool: bet -> measurable promotion brief (--json for raw)\n  tools      print the MCP tool schemas as JSON\n  mcp start  run the MCP stdio server (JSON-RPC over stdio)\n  --version  print the kernel version`);
       return 0;
     default:
       console.error(`Unknown command: ${cmd}. Try \`${HARNESS_NAME} --help\`.`);

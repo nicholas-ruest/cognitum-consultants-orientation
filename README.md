@@ -33,6 +33,24 @@ cognitum-ops-agent doctor
 
 This harness ships with the **claude-code** adapter.
 
+## Real tools (not just prompts)
+
+The agents are backed by dependency-free, tested domain logic, callable from the CLI or over MCP:
+
+```bash
+# Analyst tool — KPI rows -> findings
+echo '[{"metric":"MRR","current":132000,"prior":120000}]' | cognitum-ops-agent metrics -
+
+# Promoter tool — a bet -> a measurable promotion brief with a kill-switch
+echo '{"name":"Q3 referral push","unitMargin":40,"budget":2000,"audienceSize":10000,"baselineConvRate":0.02,"targetLiftPct":35}' \
+  | cognitum-ops-agent promo -
+
+# The same tools over MCP (JSON-RPC stdio), used by the claude-code host
+cognitum-ops-agent mcp start
+```
+
+`mcp start` is a real MCP stdio server exposing `kpi_snapshot` and `promotion_brief`; it's wired into `.claude/settings.json`.
+
 ## Evolving the harness
 
 This harness integrates [`@metaharness/darwin`](https://www.npmjs.com/package/@metaharness/darwin). Run `npm run evolve:dry` for a fast, offline self-improvement pass, or `npm run evolve` to score variants against the test suite. The model stays frozen; only the harness's operating policy evolves, and only measured improvements are kept.
