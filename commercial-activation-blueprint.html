@@ -1,0 +1,1013 @@
+<title>Cognitum Consultants · Commercial Activation Blueprint</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — COMMERCIAL ACTIVATION BLUEPRINT
+     Certified Partner deck. Companion to the MetaHarness Orientation.
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --amber-wash:rgba(182,122,18,0.10); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --amber-wash:rgba(231,177,92,0.12); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --amber-wash:rgba(182,122,18,0.10); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --amber-wash:rgba(231,177,92,0.12); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 3.7rem; line-height: 0.98; letter-spacing: -0.036em; font-weight: 720; margin: 0 0 1.1rem; max-width: 15ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.32rem; color: var(--muted); max-width: 46ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.1rem; max-width: 18ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 50ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 380px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card .tag.a { color: var(--amber); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li.a::before { background: var(--amber); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout.a { border-left-color: var(--amber); background: var(--amber-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  /* two-approach panels (SMB / Enterprise) */
+  .approaches { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .appr { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+  .appr .top { padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.65rem; }
+  .appr.d .top { border-top: 3px solid var(--indigo); }
+  .appr.f .top { border-top: 3px solid var(--jade); }
+  .appr .top .ic { width: 30px; height: 30px; flex: none; }
+  .appr .top b { font-size: 1.15rem; letter-spacing: -0.01em; }
+  .appr .top .rev { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; color: var(--faint); }
+  .appr .body { padding: 0.75rem 1.1rem 0.95rem; display: grid; gap: 0.6rem; }
+  .appr .row .lab { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.12rem; }
+  .appr .row .val { font-size: 0.97rem; color: var(--text); line-height: 1.32; }
+  .appr .row .val span { color: var(--muted); }
+  .appr .foot { margin-top: 0.15rem; padding-top: 0.6rem; border-top: 1px dashed var(--border-2); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.02em; color: var(--muted); display: flex; align-items: baseline; justify-content: space-between; }
+  .appr .foot b { font-size: 1.15rem; }
+  .appr.d .foot b { color: var(--indigo); } .appr.f .foot b { color: var(--jade); }
+  .slide.active .appr { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .appr:nth-child(2){animation-delay:.1s}
+
+  /* comparison table */
+  .cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.98rem; }
+  .cmp th, .cmp td { padding: 0.5rem 0.9rem; text-align: left; }
+  .cmp thead th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border-2); }
+  .cmp thead th.smb { color: var(--indigo); text-align: center; }
+  .cmp thead th.ent { color: var(--jade); text-align: center; }
+  .cmp tbody td { border-bottom: 1px solid var(--border); }
+  .cmp tbody td.rl { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--faint); text-transform: uppercase; }
+  .cmp tbody td.c { text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .cmp tbody td.c.i { color: var(--text); }
+  .cmp tbody tr.tot td { border-bottom: none; padding-top: 0.7rem; }
+  .cmp tbody tr.tot td.rl { color: var(--text); font-weight: 640; letter-spacing: 0.02em; }
+  .cmp tbody tr.tot td.c { font-family: var(--font-mono); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.01em; }
+  .cmp tbody tr.tot td.c.smb { color: var(--indigo); }
+  .cmp tbody tr.tot td.c.ent { color: var(--jade); }
+  .cmp-wrap { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 0.5rem 0.4rem 0.7rem; overflow-x: auto; }
+  .cmp .entcol { background: var(--jade-wash); }
+
+  /* horizontal step flow */
+  .pipe { display: grid; gap: 0.5rem; }
+  .pipe.p6 { grid-template-columns: repeat(6,1fr); }
+  .pipe.p5 { grid-template-columns: repeat(5,1fr); }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.7rem 0.75rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--indigo); text-transform: uppercase; }
+  .pstep .s.j { color: var(--jade); } .pstep .s.a { color: var(--amber); }
+  .pstep .pic { width: 26px; height: 26px; margin: 0.15rem 0 0.35rem; color: var(--muted); }
+  .pstep b { display: block; margin: 0.1rem 0 0.24rem; letter-spacing: -0.01em; font-size: 0.92rem; line-height: 1.14; }
+  .pstep p { font-size: 0.78rem; color: var(--muted); margin: 0; line-height: 1.28; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.08s}.slide.active .pstep:nth-child(3){animation-delay:.16s}.slide.active .pstep:nth-child(4){animation-delay:.24s}.slide.active .pstep:nth-child(5){animation-delay:.32s}.slide.active .pstep:nth-child(6){animation-delay:.4s}
+
+  /* revenue split bar */
+  .revsplit { display: flex; gap: 0.35rem; height: 88px; margin-bottom: 1rem; }
+  .revseg { border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; position: relative; overflow: hidden; }
+  .revseg .pct { font-family: var(--font-mono); font-weight: 700; font-size: 2.1rem; letter-spacing: -0.02em; line-height: 1; }
+  .revseg.big { flex: 70; background: linear-gradient(135deg, var(--indigo), var(--indigo-dim)); box-shadow: 0 0 34px -12px var(--indigo); }
+  .revseg.mid { flex: 12.5; background: linear-gradient(135deg, var(--jade), var(--jade-dim)); }
+  .revseg.sm { flex: 12.5; background: linear-gradient(135deg, var(--amber), #caa24e); }
+  .revseg .pct.s2 { font-size: 1.15rem; }
+  .slide.active .revseg { animation: growx 1s cubic-bezier(.2,.7,.2,1) backwards; transform-origin: left; }
+  .slide.active .revseg.mid { animation-delay: .25s; } .slide.active .revseg.sm { animation-delay: .4s; }
+  .rsplit-legend { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 0.75rem; }
+  .rleg { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .rleg .h { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .rleg.a-i .h { color: var(--indigo); } .rleg.a-j .h { color: var(--jade); } .rleg.a-a .h { color: var(--amber); }
+  .rleg p { font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.3; }
+
+  /* people cards */
+  .people { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+  .person { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1.15rem 1.2rem; position: relative; overflow: hidden; }
+  .person.d { border-top: 3px solid var(--indigo); } .person.a { border-top: 3px solid var(--amber); } .person.n { border-top: 3px solid var(--faint); }
+  .person .nm { font-size: 2.1rem; font-weight: 720; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.35rem; }
+  .person .role { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em; margin-bottom: 0.7rem; line-height: 1.2; }
+  .person.d .role { color: var(--indigo); } .person.a .role { color: var(--amber); } .person.n .role { color: var(--muted); }
+  .person p { font-size: 0.92rem; color: var(--muted); margin: 0; line-height: 1.36; }
+  .slide.active .person { animation: rise .55s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .person:nth-child(2){animation-delay:.1s}.slide.active .person:nth-child(3){animation-delay:.2s}
+
+  /* hub-and-spoke channels */
+  .hub { display: grid; grid-template-columns: 1fr 0.7fr 1fr; gap: 0.7rem 1.4rem; align-items: center; }
+  .spoke { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.7rem 0.9rem; display: flex; gap: 0.7rem; align-items: flex-start; }
+  .spoke .sic { width: 24px; height: 24px; flex: none; color: var(--indigo); margin-top: 0.1rem; }
+  .spoke.j .sic { color: var(--jade); }
+  .spoke b { font-size: 0.98rem; display: block; letter-spacing: -0.01em; }
+  .spoke p { font-size: 0.8rem; color: var(--muted); margin: 0.1rem 0 0; line-height: 1.3; }
+  .hubcore { grid-row: span 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.5rem; border: 1px solid var(--jade); border-radius: var(--radius); background: var(--jade-wash); padding: 1.1rem 0.8rem; }
+  .hubcore svg { width: 46px; height: 46px; }
+  .hubcore b { font-size: 1.02rem; letter-spacing: -0.01em; }
+  .hubcore span { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .slide.active .spoke { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .spoke:nth-child(3){animation-delay:.1s}.slide.active .spoke:nth-child(4){animation-delay:.16s}.slide.active .spoke:nth-child(5){animation-delay:.22s}
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.06rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .btn:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; display: flex; align-items: center; gap: 0.5rem; }
+  .navbar .foot-brand svg { width: 15px; height: 15px; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .arr:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes growx { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, ul.clean li, .pstep, .arow, .rise, .divider .rule, .approaches .appr, .revseg, .person, .spoke { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t { offset-distance: 100% !important; }
+  }
+</style>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+
+    <!-- 1 · TITLE -->
+    <section class="slide hero" data-part="Welcome">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum <small>Consultants</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Certified Partner Blueprint · 29 Jul 2026</span>
+          <h1 class="rise" style="animation-delay:.1s">From technical certification to <span class="g">commercial activation.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">The Certified Partner blueprint for <strong>structuring deals</strong>, <strong>scaling deployments</strong>, and capturing outsized revenue through the Cognitum ecosystem.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>price</b><span>the framework</span></span>
+            <span class="chip"><b>deploy</b><span>the playbooks</span></span>
+            <span class="chip"><b>earn</b><span>the split</span></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 440 440" role="img" aria-label="An animated emblem: a certified core inside orbiting commercial rings, lifting to revenue">
+            <defs>
+              <radialGradient id="hcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/>
+                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
+            <g class="v-spin">
+              <circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
+              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR">
+              <circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.65"/>
+              <circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/>
+            </g>
+            <g class="v-spinS"><circle cx="220" cy="220" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.2" stroke-dasharray="1 11" opacity="0.5"/></g>
+            <circle r="5.5" fill="var(--jade)" class="v-t" style="offset-path:path('M220 220 m -150 0 a 150 150 0 1 0 300 0 a 150 150 0 1 0 -300 0');animation-duration:5.5s"/>
+            <circle r="4.5" fill="var(--indigo)" style="offset-path:path('M220 220 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0');offset-distance:0%;animation:vtravel 4s linear infinite reverse"/>
+            <circle class="v-halo" cx="220" cy="220" r="74" fill="var(--jade)"/>
+            <circle class="v-pulse" cx="220" cy="220" r="74" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <!-- certified badge core -->
+            <g class="v-spinS">
+              <circle cx="220" cy="220" r="44" fill="none" stroke="var(--indigo)" stroke-width="3"/>
+            </g>
+            <path d="M206 220l9 9 19-20" fill="none" stroke="var(--jade)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="v-float" cx="74" cy="96" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="372" cy="356" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · AGENDA -->
+    <section class="slide" data-part="Welcome">
+      <div class="inner">
+        <p class="kick"><span class="n">Agenda</span> The activation path, end to end</p>
+        <h2 style="margin-bottom:1rem">Six parts, from price sheet to signed pilot</h2>
+        <div class="agenda">
+          <div class="arow"><span class="an">01</span><span class="at">The pricing framework — two philosophies</span><span class="am">SMB · Enterprise</span></div>
+          <div class="arow"><span class="an">02</span><span class="at">Vertical playbooks — where the value lands</span><span class="am">drones · home</span></div>
+          <div class="arow"><span class="an">03</span><span class="at">Engagement &amp; compensation — the 70/12.5/12.5 split</span><span class="am">the receipts</span></div>
+          <div class="arow"><span class="an">04</span><span class="at">The SmartphoneKey channel — zero-COGS licensing</span><span class="am">the flywheel</span></div>
+          <div class="arow"><span class="an">05</span><span class="at">Staying certified &amp; connected</span><span class="am">the support net</span></div>
+          <div class="arow"><span class="an">06</span><span class="at">Initiating the partnership — first pilot SOW</span><span class="am">the close</span></div>
+        </div>
+        <div class="callout i" style="margin-top:1.1rem"><div class="h">How to read this deck</div><p>Every part opens with a divider and closes on something you can put in front of a client. Every deployment clears a <strong>$45,000 minimum baseline</strong>. Controls: <strong>← →</strong> or Space · <strong>F</strong> fullscreen · <strong>T</strong> theme.</p></div>
+      </div>
+    </section>
+
+    <!-- 3 · DIVIDER 01 -->
+    <section class="slide divider" data-part="The pricing framework">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 01</div>
+          <h2 class="rise" style="animation-delay:.06s">The pricing framework</h2>
+          <p class="sub rise" style="animation-delay:.12s">Every deployment starts at a $45k baseline — then scales across two distinct pricing philosophies.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>the baseline</span><span>SMB hybrid</span><span>enterprise CapEx</span><span>four levers</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A $45k baseline splitting into two scaling paths">
+            <g class="v-spin">
+              <circle cx="170" cy="160" r="140" fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-dasharray="8 13" opacity="0.8"/>
+              <circle cx="170" cy="20" r="7" fill="var(--indigo)"/><circle cx="310" cy="160" r="7" fill="var(--indigo)"/>
+              <circle cx="170" cy="300" r="7" fill="var(--indigo)"/><circle cx="30" cy="160" r="7" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR"><circle cx="170" cy="160" r="104" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="4 15" opacity="0.6"/></g>
+            <circle class="v-pulse" cx="170" cy="160" r="66" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <text x="170" y="150" text-anchor="middle" font-size="26" fill="var(--jade)" font-weight="700">$45k</text>
+            <text x="170" y="176" text-anchor="middle" font-size="11" fill="var(--muted)">baseline</text>
+            <text x="170" y="230" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">MINIMUM DEPLOYMENT</text>
+            <circle class="v-float" cx="58" cy="66" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.1s" cx="288" cy="252" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · TWO PRICING PHILOSOPHIES (pg2) -->
+    <section class="slide" data-part="The pricing framework">
+      <div class="inner">
+        <p class="kick"><span class="n">01.1</span> Deployments scale across two philosophies</p>
+        <div class="approaches">
+          <div class="appr d">
+            <div class="top">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20V9l8-5 8 5v11" stroke="var(--indigo)" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="var(--indigo)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <b>The SMB Approach</b><span class="rev">~$5M manufacturer</span>
+            </div>
+            <div class="body">
+              <div class="row"><div class="lab">Model</div><div class="val">Hybrid — <span>Developer SDK + per-unit royalty</span></div></div>
+              <div class="row"><div class="lab">Strategic goal</div><div class="val"><span>Protect client working capital while capturing upside as unit volume grows.</span></div></div>
+              <div class="row"><div class="lab">Structure</div><div class="val"><span>Low-friction access with quarterly audits on pay-as-you-ship production rights.</span></div></div>
+              <div class="foot"><span>Year 1 value</span><b>$155,000</b></div>
+            </div>
+          </div>
+          <div class="appr f">
+            <div class="top">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21V7l6-3v17M9 21V4l6 3v14M15 21V7l6 3v11" stroke="var(--jade)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <b>The Enterprise Approach</b><span class="rev">~$100M manufacturer</span>
+            </div>
+            <div class="body">
+              <div class="row"><div class="lab">Model</div><div class="val">Predictable — <span>corporate site license + volume brackets + SLA</span></div></div>
+              <div class="row"><div class="lab">Strategic goal</div><div class="val"><span>Protect enterprise gross margins by shifting variable BOM costs to fixed OpEx.</span></div></div>
+              <div class="row"><div class="lab">Structure</div><div class="val"><span>Pre-paid volume brackets with dedicated solutions engineering and 24/7 SLAs.</span></div></div>
+              <div class="foot"><span>Year 1 value</span><b>$1,000,000</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><p><strong>The pivot:</strong> SMBs pay to protect cash flow; enterprises pay to make a volatile line item predictable. Same core IP, two entirely different buying reasons.</p></div>
+      </div>
+    </section>
+
+    <!-- 5 · DRONE ECONOMICS TABLE (pg3) -->
+    <section class="slide" data-part="The pricing framework">
+      <div class="inner">
+        <p class="kick"><span class="n">01.2</span> Worked example · drone manufacturing</p>
+        <h2 style="font-size:1.7rem;margin-bottom:0.7rem">Variable software BOMs become predictable enterprise OpEx</h2>
+        <div class="cmp-wrap">
+          <table class="cmp">
+            <thead><tr><th></th><th class="smb">SMB</th><th class="ent entcol">Enterprise</th></tr></thead>
+            <tbody>
+              <tr><td class="rl">Profile</td><td class="c">$5M mfr · 250–1k units/yr</td><td class="c i entcol">$100M mfr · 5k–20k+ units/yr</td></tr>
+              <tr><td class="rl">SDK access</td><td class="c">5 developer seats ($35k)</td><td class="c i entcol">Unlimited global seats ($250k)</td></tr>
+              <tr><td class="rl">Integration / support</td><td class="c">$25k NRE pilot</td><td class="c i entcol">$150k dedicated support SLA</td></tr>
+              <tr><td class="rl">Production rights</td><td class="c">Tiered royalties ($150–$400/unit)</td><td class="c i entcol">Bracketed ($600k up to 15k units)</td></tr>
+              <tr><td class="rl">Effective unit cost</td><td class="c">up to $400 / drone</td><td class="c i entcol">~$60 / unit</td></tr>
+              <tr class="tot"><td class="rl">Total Year 1 value</td><td class="c smb">$155,000</td><td class="c ent entcol">$1,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="src">At volume, bracketed licensing drops the effective unit cost from ~$400 to ~$60 — a 6.5× swing that funds the enterprise premium.</p>
+      </div>
+    </section>
+
+    <!-- 6 · FOUR COMMERCIAL LEVERS (pg6) -->
+    <section class="slide" data-part="The pricing framework">
+      <div class="inner">
+        <p class="kick"><span class="n">01.3</span> The MetaHarness licensing structure</p>
+        <div class="split v top">
+          <div>
+            <h2 style="font-size:1.75rem">Four levers scale every deal off one core IP</h2>
+            <p class="mut">RuvStack technology stays controlled exclusively by Cognitum. Everything a partner negotiates is a setting on top of it — never a fork of it.</p>
+            <div class="grid g2" style="margin-top:0.9rem">
+              <div class="card"><div class="tag">Lever 01 · Use cases</div><p>Specific application value — drone-fleet coordination vs. home automation.</p></div>
+              <div class="card"><div class="tag j">Lever 02 · Royalty mechanics</div><p>Per-device micro-royalties vs. pre-paid CapEx block brackets.</p></div>
+              <div class="card"><div class="tag">Lever 03 · User / developer count</div><p>5-seat SDKs up to unlimited global corporate master licenses.</p></div>
+              <div class="card"><div class="tag j">Lever 04 · Company size</div><p>Adjusts the baseline entry cost — SMB vs. Enterprise.</p></div>
+            </div>
+          </div>
+          <div class="di plain">
+            <svg viewBox="0 0 360 340" role="img" aria-label="Four licensing layers stacked over a Cognitum-controlled core IP">
+              <!-- core IP -->
+              <g class="v-pop">
+                <rect x="120" y="250" width="120" height="60" rx="8" fill="var(--surface-2)" stroke="var(--jade)" stroke-width="2"/>
+                <text x="180" y="277" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">Core IP</text>
+                <text x="180" y="294" text-anchor="middle" font-size="9.5" fill="var(--muted)">RuvStack · Cognitum</text>
+              </g>
+              <!-- four layers -->
+              <g class="v-gy" style="animation-delay:.1s"><rect x="96" y="196" width="168" height="34" rx="7" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.4"/><text x="180" y="217" text-anchor="middle" font-size="10.5" fill="var(--text)">Company size</text></g>
+              <g class="v-gy" style="animation-delay:.2s"><rect x="84" y="150" width="192" height="34" rx="7" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.4"/><text x="180" y="171" text-anchor="middle" font-size="10.5" fill="var(--text)">User / developer count</text></g>
+              <g class="v-gy" style="animation-delay:.3s"><rect x="72" y="104" width="216" height="34" rx="7" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.4"/><text x="180" y="125" text-anchor="middle" font-size="10.5" fill="var(--text)">Royalty mechanics</text></g>
+              <g class="v-gy" style="animation-delay:.4s"><rect x="60" y="58" width="240" height="34" rx="7" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.4"/><text x="180" y="79" text-anchor="middle" font-size="10.5" fill="var(--text)">Use cases</text></g>
+              <line class="v-dash" x1="180" y1="250" x2="180" y2="40" stroke="var(--border-2)" stroke-width="1.2" opacity="0.5"/>
+              <rect x="250" y="14" width="104" height="30" rx="6" fill="var(--amber-wash)" stroke="var(--amber)" stroke-width="1.2"/>
+              <text x="302" y="33" text-anchor="middle" font-size="9.5" fill="var(--amber)" font-weight="600">$45k floor</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · DIVIDER 02 -->
+    <section class="slide divider" data-part="Vertical playbooks">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 02</div>
+          <h2 class="rise" style="animation-delay:.06s">Vertical playbooks</h2>
+          <p class="sub rise" style="animation-delay:.12s">The same licensing structure lands differently in each market. Sell the value the buyer already feels.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>home automation</span><span>hardware → subscription</span><span>the margin hook</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A hardware sensor transforming into a recurring subscription stream">
+            <g class="v-spinR"><circle cx="170" cy="160" r="120" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="4 15" opacity="0.55"/></g>
+            <rect class="v-pop" x="70" y="128" width="64" height="64" rx="10" fill="var(--surface)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="102" y="164" text-anchor="middle" font-size="9" fill="var(--indigo)">PIR /</text>
+            <text x="102" y="176" text-anchor="middle" font-size="9" fill="var(--indigo)">radar</text>
+            <path class="v-dash" d="M140 160H200" stroke="var(--jade)" stroke-width="2" marker-end=""/>
+            <g class="v-pop" style="animation-delay:.3s">
+              <circle cx="242" cy="160" r="40" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="242" y="156" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="700">$120</text>
+              <text x="242" y="172" text-anchor="middle" font-size="8.5" fill="var(--muted)">/user/yr</text>
+            </g>
+            <text x="170" y="240" text-anchor="middle" font-size="11" fill="var(--muted)">software replaces the sensor</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · HOME AUTOMATION SMB vs RESIDEO (pg4) -->
+    <section class="slide" data-part="Vertical playbooks">
+      <div class="inner">
+        <p class="kick"><span class="n">02.1</span> Home automation · cost savings → subscription enablement</p>
+        <div class="approaches">
+          <div class="appr d">
+            <div class="top">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20V9l8-5 8 5v11" stroke="var(--indigo)" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="var(--indigo)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <b>SMB Home Automation</b><span class="rev">~$5M rev</span>
+            </div>
+            <div class="body">
+              <div class="row"><div class="lab">Primary need</div><div class="val">Fast time-to-market.</div></div>
+              <div class="row"><div class="lab">Value anchor</div><div class="val"><span>Eliminating the need for $5–$8 physical PIR/radar sensors.</span></div></div>
+              <div class="row"><div class="lab">Model</div><div class="val"><span>$20k SDK + $15k NRE + low unit royalties ($1.00–$2.50/device).</span></div></div>
+              <div class="foot"><span>Year 1 value</span><b>$90,000</b></div>
+            </div>
+          </div>
+          <div class="appr f">
+            <div class="top">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21V7l6-3v17M9 21V4l6 3v14M15 21V7l6 3v11" stroke="var(--jade)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <b>Resideo-Scale Enterprise</b><span class="rev">~$6B rev</span>
+            </div>
+            <div class="body">
+              <div class="row"><div class="lab">Primary need</div><div class="val"><span>Mass-market cost efficiency and cloud reduction.</span></div></div>
+              <div class="row"><div class="lab">Value anchor</div><div class="val"><span>Processing analytics at the edge to eliminate AWS/Azure overhead.</span></div></div>
+              <div class="row"><div class="lab">The margin hook</div><div class="val"><span>~$0.30/device/yr lets Resideo launch premium “camera-free security” subscriptions at $120/yr per user.</span></div></div>
+              <div class="foot"><span>Year 1 ACV</span><b>$2,500,000</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:0.9rem"><p><strong>The margin hook in one line:</strong> Cognitum charges pennies per device so the partner can sell a $120/year subscription on top. You’re not selling software — you’re unlocking their recurring revenue.</p></div>
+      </div>
+    </section>
+
+    <!-- 9 · DIVIDER 03 -->
+    <section class="slide divider" data-part="Engagement &amp; compensation">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 03</div>
+          <h2 class="rise" style="animation-delay:.06s">Engagement &amp; compensation</h2>
+          <p class="sub rise" style="animation-delay:.12s">Clear ownership from opportunity to deployment — and a split that pays the partner for the engineering.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>6-step workflow</span><span>70 / 12.5 / 12.5</span><span>3-year lock</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A revenue split heavily weighted toward the partner">
+            <g class="v-spin">
+              <circle cx="170" cy="160" r="120" fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-dasharray="8 13" opacity="0.7"/>
+              <circle cx="170" cy="40" r="6" fill="var(--indigo)"/><circle cx="290" cy="160" r="6" fill="var(--indigo)"/>
+            </g>
+            <circle cx="170" cy="160" r="86" fill="none" stroke="var(--border)" stroke-width="20"/>
+            <circle class="v-draw" cx="170" cy="160" r="86" fill="none" stroke="var(--indigo)" stroke-width="20" stroke-dasharray="378 540" stroke-linecap="round" transform="rotate(-90 170 160)"/>
+            <text x="170" y="152" text-anchor="middle" font-size="34" fill="var(--indigo)" font-weight="700">70%</text>
+            <text x="170" y="178" text-anchor="middle" font-size="11" fill="var(--muted)">to the partner</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · ENGAGEMENT WORKFLOW (pg5) -->
+    <section class="slide" data-part="Engagement &amp; compensation">
+      <div class="inner">
+        <p class="kick"><span class="n">03.1</span> The partner engagement workflow</p>
+        <h2 style="font-size:1.6rem;margin-bottom:0.85rem">Clear ownership from opportunity to deployment</h2>
+        <div class="pipe p6">
+          <div class="pstep"><span class="s">Step 1</span><b>Opportunity arises</b><p>Sourced internally by Cognitum or externally by the partner.</p></div>
+          <div class="pstep"><span class="s">Step 2</span><b>Joint assessment</b><p>Collaborative qualification and technical scoping.</p></div>
+          <div class="pstep"><span class="s">Step 3</span><b>Tech &amp; deployment modeling</b><p>Mapping RuvStack to client silicon/hardware.</p></div>
+          <div class="pstep"><span class="s a">Step 4</span><b>SOW &amp; quote generation</b><p>Cognitum designs the commercial vehicle.</p></div>
+          <div class="pstep"><span class="s">Step 5</span><b>Quote delivery</b><p>Partner presents the localized SOW to the client.</p></div>
+          <div class="pstep"><span class="s j">Step 6</span><b>Engagement &amp; deployment</b><p>Partner leads localized firmware engineering and integration.</p></div>
+        </div>
+        <div class="grid g3" style="margin-top:1rem">
+          <div class="callout i"><div class="h">Cognitum owns</div><p>Commercial structuring &amp; the SOW/quote (step 4).</p></div>
+          <div class="callout"><div class="h">Partner owns</div><p>Client relationship, localized firmware &amp; integration.</p></div>
+          <div class="callout a"><div class="h">Shared</div><p>Qualification, scoping &amp; deployment modeling.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · REVENUE SPLIT (pg7) -->
+    <section class="slide" data-part="Engagement &amp; compensation">
+      <div class="inner">
+        <p class="kick"><span class="n">03.2</span> Certified Partners capture the majority of deployment revenue</p>
+        <div class="revsplit">
+          <div class="revseg big"><div class="pct">70%</div></div>
+          <div class="revseg mid"><div class="pct s2">12.5%</div></div>
+          <div class="revseg sm"><div class="pct s2">12.5%</div></div>
+        </div>
+        <div class="rsplit-legend">
+          <div class="rleg a-i"><div class="h">70% of NRE / deployment fees</div><p>Compensates the partner for time, effort, localized firmware engineering, and silicon mapping.</p></div>
+          <div class="rleg a-j"><div class="h">12.5% of annual licensing fees</div><p>Rewards ongoing account management and multi-year contract retention.</p></div>
+          <div class="rleg a-a"><div class="h">12.5% of lifetime royalties</div><p>Passive income for monitoring quarterly shipping logs and ensuring compliance (if applicable).</p></div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><p><strong>Why it’s weighted this way:</strong> the deployment engineering is the hard part and the partner does it — so the split front-loads the partner on NRE, then keeps them earning on licensing and royalties for the life of the account.</p></div>
+      </div>
+    </section>
+
+    <!-- 12 · 3-YEAR PROJECTION (pg8) -->
+    <section class="slide" data-part="Engagement &amp; compensation">
+      <div class="inner">
+        <p class="kick"><span class="n">03.3</span> A 3-year lock reveals the scaling potential</p>
+        <h2 style="font-size:1.6rem;margin-bottom:0.7rem">Same split, two accounts — a 35× spread in partner earnings</h2>
+        <div class="split" style="gap:1.3rem">
+          <div class="di" style="gap:0.55rem">
+            <span class="cap" style="color:var(--indigo)">SMB account · 3-year lock</span>
+            <div class="small" style="display:grid;gap:0.4rem;font-variant-numeric:tabular-nums">
+              <div style="display:flex;justify-content:space-between"><span class="mut">NRE (70% of $15k)</span><b>$10,500</b></div>
+              <div style="display:flex;justify-content:space-between"><span class="mut">License (12.5% of $20k/yr)</span><b>$7,500</b></div>
+              <div style="display:flex;justify-content:space-between"><span class="mut">Royalties (12.5% of $55k/yr)</span><b>$20,625</b></div>
+            </div>
+            <div style="border-top:1px solid var(--border);margin-top:0.2rem;padding-top:0.55rem;display:flex;justify-content:space-between;align-items:baseline"><span class="mut small">Total 3-year earnings</span><b style="font-family:var(--font-mono);font-size:1.5rem;color:var(--indigo)">$38,625</b></div>
+          </div>
+          <div class="di" style="gap:0.55rem;border-color:var(--jade);box-shadow:0 0 0 1px var(--jade-wash)">
+            <span class="cap" style="color:var(--jade)">Resideo account · 3-year lock</span>
+            <div class="small" style="display:grid;gap:0.4rem;font-variant-numeric:tabular-nums">
+              <div style="display:flex;justify-content:space-between"><span class="mut">NRE/SLA (70% of $250k/yr)</span><b>$525,000</b></div>
+              <div style="display:flex;justify-content:space-between"><span class="mut">License (12.5% of $2.25M/yr)</span><b>$843,750</b></div>
+              <div style="display:flex;justify-content:space-between"><span class="mut">Royalties</span><b>N/A (bracketed)</b></div>
+            </div>
+            <div style="border-top:1px solid var(--border);margin-top:0.2rem;padding-top:0.55rem;display:flex;justify-content:space-between;align-items:baseline"><span class="mut small">Total 3-year earnings</span><b style="font-family:var(--font-mono);font-size:1.5rem;color:var(--jade)">$1,368,750</b></div>
+          </div>
+        </div>
+        <p class="src">One enterprise logo on a 3-year lock is worth ~35 SMB accounts in partner compensation — the reason enterprise qualification is worth the longer sales cycle.</p>
+      </div>
+    </section>
+
+    <!-- 13 · DIVIDER 04 -->
+    <section class="slide divider" data-part="The SmartphoneKey channel">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 04</div>
+          <h2 class="rise" style="animation-delay:.06s">The SmartphoneKey channel</h2>
+          <p class="sub rise" style="animation-delay:.12s">A zero-COGS, volume-driven licensing channel — software only, metered on every shipped unit.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>zero hardware COGS</span><span>two channels</span><span>camera-free presence</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="Units shipping in the field, each metering a royalty back">
+            <g class="v-spinS"><circle cx="170" cy="160" r="120" fill="none" stroke="var(--indigo)" stroke-width="1.2" stroke-dasharray="1 12" opacity="0.5"/></g>
+            <circle class="v-halo" cx="170" cy="160" r="60" fill="var(--jade)"/>
+            <circle class="v-pulse" cx="170" cy="160" r="60" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <path d="M150 148h40v26h-40z" fill="none" stroke="var(--jade)" stroke-width="2.4"/>
+            <text x="170" y="205" text-anchor="middle" font-size="10.5" fill="var(--jade)" font-weight="600">EVERY UNIT METERS</text>
+            <circle class="v-float" cx="70" cy="80" r="4" fill="var(--indigo)"/>
+            <circle class="v-float" style="animation-delay:1s" cx="272" cy="240" r="5" fill="var(--jade)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · ZERO-COGS CHANNEL (pg9) -->
+    <section class="slide" data-part="The SmartphoneKey channel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.1</span> SmartphoneKey · a zero-COGS licensing channel</p>
+        <h2 style="font-size:1.55rem;margin-bottom:0.85rem">Software-only, volume-driven — the billable event is the shipped unit</h2>
+        <div class="pipe p5">
+          <div class="pstep"><span class="s">Licensor</span><b>Cognitum One</b><p>Zero hardware COGS, software only.</p></div>
+          <div class="pstep"><span class="s">Licensee</span><b>SmartphoneKey</b><p>White-label product + SDK, pays the royalty.</p></div>
+          <div class="pstep"><span class="s">Channel reach</span><b>Industry partners</b><p>Access-control OEMs, senior living, hospitality.</p></div>
+          <div class="pstep"><span class="s a">Differentiation</span><b>Build &amp; ship</b><p>Partner adds its own stack/brand, owns GTM.</p></div>
+          <div class="pstep"><span class="s j">Billable event</span><b>Units in the field</b><p>Every shipped unit meters the royalty.</p></div>
+        </div>
+        <div class="grid g2" style="margin-top:1rem">
+          <div class="callout i"><div class="h">Channel 1</div><p>Per-unit / subscription royalty through the partner’s own products.</p></div>
+          <div class="callout"><div class="h">Channel 2</div><p>Direct via the Cognitum One Marketplace.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · ARCHITECTURE BRIEF (pg10) -->
+    <section class="slide" data-part="The SmartphoneKey channel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.2</span> The architectural brief · camera-free presence intelligence</p>
+        <h2 style="font-size:1.5rem;margin-bottom:0.8rem">It rides entirely on infrastructure the client already owns</h2>
+        <div class="pipe p5" style="align-items:stretch">
+          <div class="pstep"><span class="s">Input zone</span><b>Existing Wi-Fi</b><p>Customer infra — Wi-Fi 6 / 6E / 7 · 802.11bf, CSI-capable.</p></div>
+          <div class="pstep"><span class="s">On-site</span><b>RuView — sensing</b><p>Reads Wi-Fi CSI → presence, occupancy, pose, vital signs.</p></div>
+          <div class="pstep"><span class="s">On-site</span><b>RuFlo — orchestration</b><p>Policies, rules, consensus, false-positive suppression, webhooks.</p></div>
+          <div class="pstep"><span class="s j">On-site</span><b>RuVector — memory</b><p>Phase 2 — per-unit baselines, anomaly scoring, self-learning loop.</p></div>
+          <div class="pstep"><span class="s a">Cloud / edge</span><b>SmartphoneKey Cloud</b><p>Cloudflare Workers, B2C/B2B OpenAPI, JWT + X-API-Key.</p></div>
+        </div>
+        <div class="grid g2" style="margin-top:1rem">
+          <div class="callout"><div class="h">Output zone</div><p>Access control &amp; ops — operator dashboards, partner webhooks &amp; alerts, Apple / Google Wallet keys, app-free door unlock.</p></div>
+          <div class="callout i"><div class="h">The pitch, four words</div><p><strong>Camera-free · software-only · on-site/local · no Cognitum hardware.</strong></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · DIVIDER 05 -->
+    <section class="slide divider" data-part="Staying certified &amp; connected">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 05</div>
+          <h2 class="rise" style="animation-delay:.06s">Staying certified &amp; connected</h2>
+          <p class="sub rise" style="animation-delay:.12s">Elite partner status is earned continuously — and backed by named humans and real-time channels.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>CE credits</span><span>escalation paths</span><span>real-time comms</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A certification gauge holding at full and cycling">
+            <g class="v-spinR"><circle cx="170" cy="160" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="3 16" opacity="0.5"/></g>
+            <circle cx="170" cy="160" r="80" fill="none" stroke="var(--border)" stroke-width="14"/>
+            <circle class="v-draw" cx="170" cy="160" r="80" fill="none" stroke="var(--jade)" stroke-width="14" stroke-dasharray="452 502" stroke-linecap="round" transform="rotate(-90 170 160)"/>
+            <text x="170" y="150" text-anchor="middle" font-size="30" fill="var(--jade)" font-weight="700">100%</text>
+            <text x="170" y="176" text-anchor="middle" font-size="10.5" fill="var(--muted)">10 core modules</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · CERTIFICATION & ENABLEMENT (pg11) -->
+    <section class="slide" data-part="Staying certified &amp; connected">
+      <div class="inner">
+        <p class="kick"><span class="n">05.1</span> Elite status = continuous technical + commercial alignment</p>
+        <div class="grid g2" style="margin-bottom:0.9rem">
+          <div class="di"><span class="cap" style="color:var(--jade)">Cognitum University certification</span>
+            <div style="display:flex;align-items:center;gap:0.9rem">
+              <div style="font-family:var(--font-mono);font-size:2.4rem;font-weight:700;color:var(--jade);line-height:1">100%</div>
+              <p class="mut small" style="margin:0">Successful completion of the <strong>10 core</strong> Cognitum University modules.</p>
+            </div>
+          </div>
+          <div class="di"><span class="cap" style="color:var(--indigo)">Ongoing enablement</span>
+            <div style="display:flex;align-items:center;gap:0.9rem">
+              <div style="font-family:var(--font-mono);font-size:2.4rem;font-weight:700;color:var(--indigo);line-height:1">2<span style="font-size:1rem;color:var(--muted)"> /mo</span></div>
+              <p class="mut small" style="margin:0"><strong>2 Continuing Education (CE) credits</strong> required per month.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><div class="h">Format</div><p>Available weekly via live in-person / online sessions, or downloadable / viewable formats (validated with a quiz).</p></div>
+        <div class="callout a" style="margin-top:0.6rem"><div class="h">Immediate next step</div><p><strong>August 12 (Friday)</strong> CE session — “Sales: Targeting, Examples, and First Engagement.”</p></div>
+      </div>
+    </section>
+
+    <!-- 18 · ESCALATION PATHS (pg12) -->
+    <section class="slide" data-part="Staying certified &amp; connected">
+      <div class="inner">
+        <p class="kick"><span class="n">05.2</span> Your dedicated escalation paths</p>
+        <h2 style="font-size:1.6rem;margin-bottom:0.9rem">Three named humans inside the Cognitum core team</h2>
+        <div class="people">
+          <div class="person d">
+            <div class="nm">Chris</div>
+            <div class="role">Customers &amp; Pricing</div>
+            <p>Commercial structuring, quote generation, and enterprise deal modeling.</p>
+          </div>
+          <div class="person a">
+            <div class="nm">Rob</div>
+            <div class="role">Information &amp; Access</div>
+            <p>Repository access, training materials, documentation, and Cognitum University support.</p>
+          </div>
+          <div class="person n">
+            <div class="nm">Nick</div>
+            <div class="role">Product &amp; Development</div>
+            <p>Core engineering escalation, RuView / RuFlo roadmap, and architecture briefs.</p>
+          </div>
+        </div>
+        <div class="callout i" style="margin-top:1rem"><p><strong>Rule of thumb:</strong> a pricing question goes to Chris, an access question to Rob, a roadmap or architecture question to Nick — no ticket bounces between three inboxes.</p></div>
+      </div>
+    </section>
+
+    <!-- 19 · COMMS CHANNELS (pg13) -->
+    <section class="slide" data-part="Staying certified &amp; connected">
+      <div class="inner">
+        <p class="kick"><span class="n">05.3</span> The ecosystem stays synchronized in real time</p>
+        <div class="hub">
+          <div class="spoke"><svg class="sic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 0 0-8 13l-1 5 5-1a9 9 0 1 0 4-17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><div><b>Real-time triage</b><p>Dedicated partner WhatsApp thread.</p></div></div>
+          <div class="hubcore">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="3.2" stroke="var(--jade)" stroke-width="1.6"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke="var(--jade)" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="10.4" stroke="var(--jade)" stroke-width="1" stroke-dasharray="2 3" opacity="0.6"/></svg>
+            <b>Certified Partner</b><span>the hub</span>
+          </div>
+          <div class="spoke j"><svg class="sic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 18 17H6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 11v5M9.5 13.5 12 11l2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Product updates</b><p>Cognitum PDC (Product Development Center) releases.</p></div></div>
+          <div class="spoke"><svg class="sic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 9v5c0 1.5 2.2 3 5 3s5-1.5 5-3V9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><div><b>Education</b><p>Direct links for weekly classes and CE modules.</p></div></div>
+          <div class="spoke j"><svg class="sic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-2v-6h4M4 13h4v6H6a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><div><b>Support</b><p>Centralized channels for new information, documentation, and technical support ticketing.</p></div></div>
+        </div>
+        <div class="callout" style="margin-top:1rem"><p>Four dedicated channels, one hub. Triage is instant, updates are pushed, education is one link away, and support is a single ticket queue — the partner never wonders <em>where</em> to ask.</p></div>
+      </div>
+    </section>
+
+    <!-- 20 · CLOSE (pg14) -->
+    <section class="slide hero" data-part="The close">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <span class="kicker rise"><span class="dot"></span>Initiating the partnership</span>
+          <h1 class="rise" style="animation-delay:.08s">Let’s structure your <span class="g">first pilot SOW.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.16s">The RuvStack architecture is proven. The pricing framework scales. The compensation model prioritizes your engineering expertise. We’re ready to open the floor to specific deployment and pricing scenarios.</p>
+          <div class="chips rise" style="animation-delay:.24s">
+            <span class="chip"><b>$45k</b><span>minimum baseline</span></span>
+            <span class="chip"><b>70%</b><span>partner on NRE</span></span>
+            <span class="chip"><b>Aug 12</b><span>next CE session</span></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 440 440" role="img" aria-label="A partnership handshake locking into an orbiting activation ring">
+            <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
+            <g class="v-spin"><circle cx="220" cy="220" r="188" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 16" opacity="0.7"/><circle cx="220" cy="32" r="6" fill="var(--indigo)"/><circle cx="408" cy="220" r="6" fill="var(--jade)"/></g>
+            <g class="v-spinR"><circle cx="220" cy="220" r="150" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 18" opacity="0.6"/></g>
+            <circle class="v-halo" cx="220" cy="220" r="86" fill="var(--jade)"/>
+            <circle class="v-pulse" cx="220" cy="220" r="86" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <path d="M180 224l14-14a10 10 0 0 1 14 0l6 6 6-6a10 10 0 0 1 14 0l14 14-24 24a10 10 0 0 1-14 0z" fill="none" stroke="var(--indigo)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M206 220l9 9 19-20" fill="none" stroke="var(--jade)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="v-float" cx="86" cy="120" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="356" cy="330" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="navbar">
+  <span class="foot-brand">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.2" fill="var(--jade)"/></svg>
+    Cognitum · Commercial Activation
+  </span>
+  <span class="part" id="partLbl"></span>
+  <span class="spacer"></span>
+  <span class="hint">← → navigate · F present · T theme</span>
+  <span class="counter"><b id="cur">1</b> / <span id="tot">20</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">‹</button>
+    <button class="arr" id="next" aria-label="Next slide">›</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var stage = document.getElementById('stage');
+  var wrap = document.getElementById('stagewrap');
+  var idx = 0, n = slides.length;
+  var cur = document.getElementById('cur'), tot = document.getElementById('tot');
+  var progress = document.getElementById('progress'), partLbl = document.getElementById('partLbl');
+  var prev = document.getElementById('prev'), next = document.getElementById('next');
+  tot.textContent = n;
+
+  function fit(){
+    var pad = 24;
+    var s = Math.min((wrap.clientWidth - pad) / 1280, (wrap.clientHeight - pad) / 720);
+    s = Math.max(0.2, s);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+
+  function show(i){
+    idx = Math.max(0, Math.min(n - 1, i));
+    slides.forEach(function(sl, k){ sl.classList.toggle('active', k === idx); });
+    cur.textContent = idx + 1;
+    progress.style.width = ((idx) / (n - 1) * 100) + '%';
+    partLbl.innerHTML = '<b>' + String(idx + 1).padStart(2,'0') + '</b> · ' + (slides[idx].getAttribute('data-part') || '');
+    prev.disabled = idx === 0;
+    next.disabled = idx === n - 1;
+  }
+  function go(d){ show(idx + d); }
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); go(-1); }
+    else if (e.key === ' '){ e.preventDefault(); go(1); }
+    else if (e.key === 'Home'){ e.preventDefault(); show(0); }
+    else if (e.key === 'End'){ e.preventDefault(); show(n - 1); }
+    else if (e.key === 'f' || e.key === 'F'){ toggleFs(); }
+    else if (e.key === 't' || e.key === 'T'){ toggleTheme(); }
+  });
+
+  prev.addEventListener('click', function(){ go(-1); });
+  next.addEventListener('click', function(){ go(1); });
+  document.getElementById('zoneL').addEventListener('click', function(){ go(-1); });
+  document.getElementById('zoneR').addEventListener('click', function(){ go(1); });
+  document.getElementById('ptrack').addEventListener('click', function(e){
+    var r = this.getBoundingClientRect();
+    show(Math.round((e.clientX - r.left) / r.width * (n - 1)));
+  });
+
+  // theme
+  var themeOverride = null;
+  function apply(){
+    var root = document.documentElement;
+    if (themeOverride){ root.setAttribute('data-theme', themeOverride); }
+    else { root.removeAttribute('data-theme'); }
+  }
+  function toggleTheme(){
+    var dark = themeOverride ? themeOverride === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    themeOverride = dark ? 'light' : 'dark';
+    apply();
+  }
+  document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+
+  // fullscreen
+  function toggleFs(){
+    if (!document.fullscreenElement){ (document.documentElement.requestFullscreen||function(){})(); }
+    else if (document.exitFullscreen){ document.exitFullscreen(); }
+  }
+  document.getElementById('fsBtn').addEventListener('click', toggleFs);
+
+  // swipe
+  var tx = 0, ty = 0;
+  wrap.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  wrap.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){ go(dx < 0 ? 1 : -1); }
+  }, {passive:true});
+
+  window.addEventListener('resize', fit);
+  fit(); show(0);
+
+  // ===== particle background =====
+  var canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, pts, DPR;
+  function rgb(){
+    var d = themeOverride ? themeOverride === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return d ? {a:'135,144,255', b:'79,214,160', line: d} : {a:'78,82,224', b:'14,158,104', line:false};
+  }
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var count = Math.max(26, Math.min(64, Math.round(W * H / 26000)));
+    pts = [];
+    for (var i = 0; i < count; i++){
+      pts.push({ x: Math.random()*W, y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.28, vy: (Math.random()-0.5)*0.28,
+        r: Math.random()*1.6 + 0.6, c: Math.random() > 0.62 ? 'b' : 'a' });
+    }
+  }
+  function frame(){
+    var col = rgb();
+    ctx.clearRect(0,0,W,H);
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      for (var j = i + 1; j < pts.length; j++){
+        var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = dx*dx + dy*dy;
+        if (d < 15000){
+          ctx.strokeStyle = 'rgba(' + col.a + ',' + (0.12 * (1 - d/15000)) + ')';
+          ctx.lineWidth = 0.6;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+        }
+      }
+      ctx.fillStyle = 'rgba(' + (p.c === 'a' ? col.a : col.b) + ',0.7)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  if (!reduce){ requestAnimationFrame(frame); }
+  else {
+    var col = rgb();
+    for (var i = 0; i < pts.length; i++){ var p = pts[i];
+      ctx.fillStyle = 'rgba(' + (p.c === 'a' ? col.a : col.b) + ',0.6)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill(); }
+  }
+})();
+</script>
