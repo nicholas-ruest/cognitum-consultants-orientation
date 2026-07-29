@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "generator": "0.1.0",
+  "template": "vertical:business",
+  "template_version": "0.0.0",
+  "vars": {
+    "name": "cognitum-ops-agent",
+    "description": "Business operations and promotions agent for Cognitum Consultants",
+    "host": "claude-code"
+  },
+  "hosts": [
+    "claude-code"
+  ],
+  "files": {
+    ".claude/commands/doctor.md": "2f1475fa0ed34729cb2ed9d6cecf29e99781da0a56afef133361e3ff0a17bb52",
+    ".claude/settings.json": "d85548e65b09dc50886b52bffc412199c2d3ab1ce14abf5259827d28c013992c",
+    ".claude/skills/quarterly-plan/SKILL.md": "96c013c497720c21c04583f59e545266c027712d87fb346304178c99be272511",
+    ".claude-plugin/plugin.json": "8a3f3ffa692f81e29168da5995f0b6c963953e748edcd25d71ea7e54015f81d2",
+    "CLAUDE.md": "2823f4c951b388f3a387b298c0642b41c433a3975b5b811ffb495fdbe75b156d",
+    "README.md": "c0cf4983ae36283533c1de80a285f746c999a5b1b1b7fc98d8f0ac41204801a1",
+    "__tests__/smoke.test.ts": "3a09fb6df8faee8178f450b11f9729182efccfc0cd478f369864d777b9a4c0b6",
+    "bin/cli.js": "5e8dd321a135b2fb3e8d9abba5a692f40a0129ab9c366117c5f383ab73d1cacb",
+    "package.json": "97da25770eb1e6b2802abbdda7fc02f50702e19aeeabce4885d16645305255af",
+    "src/agents/analyst.ts": "4145b5a1bd001b283e6a4cf8408d359aec38c85b61695498ccc331672df46a62",
+    "src/agents/ops-coordinator.ts": "9f8c16ed52279ba1a50255b074f085c6199aa0bb330a0709afe0253db62fa57f",
+    "src/agents/strategist.ts": "13e91b48747f9024f69fd86d636397dcba795ef553fd572ff40e7abb32026954",
+    "src/init.ts": "81e5350efef615c27938149c1e7b9f988e27bd6367d7132e54ca93cf9b14b908",
+    "tsconfig.json": "8b4e730a1aa39162ac574455d7a98e1881f5313ca80ffe503b9652dcf0c76b9d",
+    "vitest.config.ts": "e9e94875611ab1cd602c1f6923902c2dab7953a75ac022962973639d1937587a",
+    "LICENSE": "d895717587b7b208d9f12cf1b6c19fabff95cff73329d5138c0731e0cff5312f",
+    ".claude/skills/evolve/SKILL.md": "8ac6c9cdc10d656683a2780bfcbf97295d40303965619c2160360c30eb0ab004"
+  },
+  "generated_at": "2026-07-29T14:37:21.375Z",
+  "meta": {
+    "surface": "cli"
+  }
+}

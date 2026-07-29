@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx cognitum-ops-agent*)",
+      "mcp__cognitum-ops-agent__*",
+      "mcp__metrics__*"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
+  "mcpServers": {
+    "cognitum-ops-agent": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "cognitum-ops-agent@latest",
+        "mcp",
+        "start"
+      ]
+    },
+    "metrics": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "cognitum-ops-agent@latest",
+        "mcp",
+        "metrics"
+      ]
+    }
+  }
+}
