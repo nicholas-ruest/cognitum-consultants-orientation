@@ -12,6 +12,7 @@ the cheapest-model-best-answer thesis, the 24/7 flywheel, and how to actually st
 | --- | --- | --- |
 | [`index.html`](index.html) | **Slide deck** | Presenting on screen. 43 slides across 6 parts, sized for a ~60-minute slot. |
 | [`long-form.html`](long-form.html) | **Scrolling doc** | Reading / reference / sharing as a page. |
+| [`ruvector.html`](ruvector.html) | **Slide deck** | A companion 34-slide overview of **RuVector** (persistent vector + graph memory for AI agents), built in the exact same design system. |
 
 Both are single, self-contained HTML files — no build step, no dependencies. They
 support light/dark themes (follows the OS setting, with a manual toggle) and respect
