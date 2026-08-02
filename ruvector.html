@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="RuVector technical overview — persistent, adaptive vector + graph memory for AI agents. A 34-slide animated deck in the MetaHarness deck's design system. Arrow keys / space to navigate.">
+<meta name="description" content="RuVector technical overview — persistent, adaptive vector + graph memory for AI agents. A 34-slide animated deck. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
 <title>RuVector · Technical Overview</title>
 <style>
@@ -368,7 +368,7 @@
           <div class="arow"><span class="an">05</span><span class="at">Using RuVector</span><span class="am">CLI &amp; API</span></div>
           <div class="arow"><span class="an">06</span><span class="at">Ecosystem &amp; getting started</span><span class="am">where it fits</span></div>
         </div>
-        <div class="callout i" style="margin-top:1.1rem"><div class="h">The one-liner</div><p>"High-performance vector database for Node.js with automatic native/WASM fallback" — a local-first memory substrate for agents. MIT · by rUv · powers Cognitum.</p></div>
+        <div class="callout i" style="margin-top:1.1rem"><div class="h">The one-liner</div><p>"High-performance vector database for Node.js with automatic native/WASM fallback" — a local-first memory substrate for agents. By rUv · powers Cognitum.</p></div>
       </div>
     </section>
 
@@ -486,7 +486,7 @@
             <div class="stat"><div class="num i"><span class="count" data-to="4">0</span></div><div class="k">memory types, one runtime</div></div>
             <div class="stat"><div class="num i"><span class="count" data-to="384">0</span></div><div class="k">embedding dimensions (MiniLM)</div></div>
             <div class="stat"><div class="num">0</div><div class="k">API keys required</div></div>
-            <div class="stat"><div class="num i">MIT</div><div class="k">licensed · by rUv</div></div>
+            <div class="stat"><div class="num i">HNSW</div><div class="k">+ flat index options</div></div>
           </div>
         </div>
       </div>
@@ -517,20 +517,34 @@
           <div class="dchips"><span>vector + graph</span><span>native / WASM</span><span>the numbers</span></div>
         </div>
         <div class="dviz">
-          <svg viewBox="0 0 360 320" role="img" aria-label="An HNSW graph with a search path descending through layers">
-            <g stroke="var(--border-2)" stroke-width="1.2" fill="none" opacity="0.7">
-              <path class="v-draw" d="M60 70 H300 M90 70 L150 70 M210 70 L270 70"/>
-              <path class="v-draw" style="animation-delay:.2s" d="M60 160 H300 M60 160 L120 160 M180 160 L300 160"/>
-              <path class="v-draw" style="animation-delay:.4s" d="M40 250 H320"/>
+          <svg viewBox="0 0 380 320" role="img" aria-label="A stacked, layered HNSW index with a search path descending through the planes">
+            <!-- stacked planes -->
+            <path class="v-pop" d="M150 44 L348 44 L306 80 L108 80 Z" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
+            <path class="v-pop" style="animation-delay:.15s" d="M150 134 L348 134 L306 170 L108 170 Z" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/>
+            <path class="v-pop" style="animation-delay:.3s" d="M150 224 L348 224 L306 260 L108 260 Z" fill="var(--surface-2)" stroke="var(--border-2)" stroke-width="1.6"/>
+            <!-- within-plane edges -->
+            <g stroke="var(--border-2)" stroke-width="1.1" opacity="0.7">
+              <line x1="206" y1="62" x2="276" y2="62"/>
+              <line x1="184" y1="152" x2="300" y2="152"/>
+              <line x1="172" y1="242" x2="300" y2="242"/>
             </g>
+            <!-- non-path nodes -->
             <g fill="var(--muted)">
-              <circle class="v-pop" cx="60" cy="70" r="6"/><circle class="v-pop" style="animation-delay:.1s" cx="150" cy="70" r="6"/><circle class="v-pop" style="animation-delay:.2s" cx="300" cy="70" r="6"/>
-              <circle class="v-pop" style="animation-delay:.2s" cx="60" cy="160" r="6"/><circle class="v-pop" style="animation-delay:.3s" cx="120" cy="160" r="6"/><circle class="v-pop" style="animation-delay:.4s" cx="180" cy="160" r="6"/><circle class="v-pop" style="animation-delay:.5s" cx="300" cy="160" r="6"/>
-              <circle class="v-pop" style="animation-delay:.4s" cx="40" cy="250" r="6"/><circle class="v-pop" style="animation-delay:.5s" cx="120" cy="250" r="6"/><circle class="v-pop" style="animation-delay:.6s" cx="250" cy="250" r="6"/><circle class="v-pop" style="animation-delay:.7s" cx="320" cy="250" r="6"/>
+              <circle class="v-pop" style="animation-delay:.4s" cx="276" cy="62" r="5.5"/>
+              <circle class="v-pop" style="animation-delay:.5s" cx="184" cy="152" r="5.5"/><circle class="v-pop" style="animation-delay:.55s" cx="300" cy="152" r="5.5"/>
+              <circle class="v-pop" style="animation-delay:.6s" cx="172" cy="242" r="5.5"/><circle class="v-pop" style="animation-delay:.65s" cx="300" cy="242" r="5.5"/>
             </g>
-            <g stroke="var(--jade)" stroke-width="2.5" fill="none"><path class="v-draw" style="animation-delay:.7s" d="M150 70 L120 160 L120 250"/></g>
-            <g fill="var(--jade)"><circle class="v-pop" style="animation-delay:.8s" cx="150" cy="70" r="7"/><circle class="v-pop" style="animation-delay:.9s" cx="120" cy="160" r="7"/><circle class="v-halo" cx="120" cy="250" r="8"/><circle class="v-pop" style="animation-delay:1s" cx="120" cy="250" r="8"/></g>
-            <g font-size="10" fill="var(--faint)" text-anchor="end"><text x="332" y="74">layer 2</text><text x="332" y="140">layer 1</text><text x="332" y="234">layer 0</text></g>
+            <!-- descending search path -->
+            <path class="v-draw" style="animation-delay:.7s" d="M206 62 L244 152 L244 242" stroke="var(--jade)" stroke-width="2.5" fill="none"/>
+            <g fill="var(--jade)">
+              <circle class="v-pop" style="animation-delay:.8s" cx="206" cy="62" r="7"/>
+              <circle class="v-pop" style="animation-delay:.9s" cx="244" cy="152" r="7"/>
+              <circle class="v-halo" cx="244" cy="242" r="8"/><circle class="v-pop" style="animation-delay:1s" cx="244" cy="242" r="8"/>
+            </g>
+            <!-- layer labels in a clear left gutter -->
+            <g font-size="11" fill="var(--faint)" text-anchor="start">
+              <text x="16" y="66">layer 2</text><text x="16" y="156">layer 1</text><text x="16" y="246">layer 0</text>
+            </g>
           </svg>
         </div>
       </div>
@@ -672,7 +686,7 @@
           <div class="stat"><div class="num i"><span class="count" data-to="581">0</span></div><div class="k">forks</div></div>
           <div class="stat"><div class="num">v0.2.40</div><div class="k">latest on npm &amp; crates.io</div></div>
         </div>
-        <p class="src">Rust 1.77+ · ONNX / Candle embeddings · HNSW · hypergraph · MIT © rUv · homepage ruv.io</p>
+        <p class="src">Rust 1.77+ · ONNX / Candle embeddings · HNSW · hypergraph · by rUv · homepage ruv.io</p>
       </div>
     </section>
 
@@ -1240,7 +1254,7 @@
         <span class="kicker"><span class="dot"></span>RuVector · by rUv · powers Cognitum</span>
         <h1 style="margin-inline:auto">Memory that<br><span class="g">outlives the session.</span></h1>
         <p class="title-sub" style="margin-inline:auto">Persistent, adaptive, local-first memory for AI agents — vector and graph in one Rust substrate. <code>npm i ruvector</code></p>
-        <p class="src" style="text-align:center; margin-top:1.3rem">github.com/ruvnet/RuVector · npm ruvector · crates.io ruvector-core · v0.2.40 · MIT</p>
+        <p class="src" style="text-align:center; margin-top:1.3rem">github.com/ruvnet/RuVector · npm ruvector · crates.io ruvector-core · v0.2.40</p>
       </div>
     </section>
 
