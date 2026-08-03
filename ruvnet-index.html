@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ruvnet index — 50 repos ranked by popularity, with stars, downloads, and the benchmark proof from each repo. An animated leaderboard deck. Arrow keys / space to navigate.">
+<meta name="color-scheme" content="dark light">
+<title>ruvnet index · 50 repos ranked</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+
+  /* ---------- leaderboard ---------- */
+  .lb { display: grid; gap: 0.55rem; }
+  .lbrow { display: grid; grid-template-columns: 2.6rem 1fr auto; gap: 1rem; align-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 1rem; }
+  .lbrow .rk { font-family: var(--font-mono); font-size: 1.05rem; color: var(--faint); font-variant-numeric: tabular-nums; text-align: right; }
+  .lbrow .nm b { font-size: 1.08rem; letter-spacing: -0.01em; }
+  .lbrow .nm .tagm { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--border-2); border-radius: 999px; padding: 0.08rem 0.4rem; margin-left: 0.4rem; }
+  .lbrow .nm p { margin: 0.12rem 0 0; font-size: 0.9rem; color: var(--muted); line-height: 1.32; }
+  .lbrow .bd { display: flex; gap: 1rem; align-items: baseline; white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .lbrow .bd .st { color: var(--jade); font-size: 1.02rem; font-weight: 600; }
+  .lbrow .bd .dl { color: var(--indigo); font-size: 0.92rem; }
+  .lbrow .bd.mute { color: var(--faint); font-size: 1.1rem; }
+  .slide.active .lbrow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .lbrow:nth-child(2){animation-delay:.06s}.slide.active .lbrow:nth-child(3){animation-delay:.12s}.slide.active .lbrow:nth-child(4){animation-delay:.18s}.slide.active .lbrow:nth-child(5){animation-delay:.24s}.slide.active .lbrow:nth-child(6){animation-delay:.3s}.slide.active .lbrow:nth-child(7){animation-delay:.36s}
+
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
+  .pod .rkbig { font-family: var(--font-mono); font-size: 1.9rem; font-weight: 600; letter-spacing: -0.02em; color: var(--faint); line-height: 1; }
+  .pod h3 { font-size: 1.5rem; letter-spacing: -0.02em; margin: 0; }
+  .pod .bd { display: flex; gap: 1rem; align-items: baseline; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .pod .bd .st { color: var(--jade); font-size: 1.25rem; font-weight: 600; }
+  .pod .bd .dl { color: var(--indigo); font-size: 1rem; }
+  .pod p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.94rem; line-height: 1.4; }
+  .pod1 { border-top: 3px solid var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 40px -18px var(--jade); }
+  .pod1 .rkbig { color: var(--jade); }
+  .pod2 { border-top: 3px solid var(--indigo); } .pod2 .rkbig { color: var(--indigo); }
+  .pod3 { border-top: 3px solid var(--border-2); }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+    <!-- 1 · TITLE -->
+    <section class="slide hero" data-part="The index">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            ruvnet <small>index</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>50 repos · ranked by reach</span>
+          <h1 class="rise" style="animation-delay:.1s">The receipts,<br><span class="g">ranked.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">Fifty ruvnet projects, sorted by popularity — each carrying the <strong>concrete benchmark proof</strong> found in its own repo.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>★</b><span>stars</span></span>
+            <span class="chip"><b>↓</b><span>downloads</span></span>
+            <span class="chip"><b>receipts</b><span>benchmark proof</span></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 440 440" role="img" aria-label="A ranked-bar emblem inside orbiting rings">
+            <defs>
+              <radialGradient id="hcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/>
+                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
+            <g class="v-spin">
+              <circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
+              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR">
+              <circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.6"/>
+              <circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/>
+            </g>
+            <circle class="v-pulse" cx="220" cy="220" r="86" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <g>
+              <rect class="v-gy" x="184" y="196" width="14" height="40" rx="3" fill="var(--jade)" opacity="0.6"/>
+              <rect class="v-gy" style="animation-delay:.15s" x="204" y="180" width="14" height="56" rx="3" fill="var(--jade)" opacity="0.8"/>
+              <rect class="v-gy" style="animation-delay:.3s" x="224" y="160" width="14" height="76" rx="3" fill="var(--jade)"/>
+              <rect class="v-gy" style="animation-delay:.45s" x="244" y="188" width="14" height="48" rx="3" fill="var(--indigo-dim)"/>
+            </g>
+            <text x="220" y="266" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">ranked</text>
+            <circle class="v-float" cx="74" cy="96" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="372" cy="356" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · PODIUM -->
+    <section class="slide" data-part="The index">
+      <div class="inner">
+        <p class="kick"><span class="n">Top 3</span> The most-starred projects</p>
+        <div class="grid g3" style="align-items:stretch">
+          <div class="pod pod1">
+            <div class="rkbig">01</div>
+            <h3>RuView</h3>
+            <div class="bd"><span class="st">★ 88,300</span><span class="dl">↓ 11,700</span></div>
+            <p>82.69% MM-Fi pose (beats MultiFormer 72.25%); 164,183 CSI emb/s on an M4 Pro.</p>
+          </div>
+          <div class="pod pod2">
+            <div class="rkbig">02</div>
+            <h3>ruflo</h3>
+            <div class="bd"><span class="st">★ 66,882</span><span class="dl">↓ 7,974</span></div>
+            <p>AgentDB ~1.9× faster than brute force @20k vectors; recall@10 ≈0.99; 100+ agents.</p>
+          </div>
+          <div class="pod pod3">
+            <div class="rkbig">03</div>
+            <h3>RuVector</h3>
+            <div class="bd"><span class="st">★ 4,403</span><span class="dl">↓ 580</span></div>
+            <p>Rust agent-memory DB; ships cargo bench suites (HNSW, LSM-ANN, temporal) to run yourself.</p>
+          </div>
+        </div>
+        <p class="src" style="margin-top:1rem">Sorted by stars · "downloads" = repo fork count · benchmark facts taken from each repo's own README.</p>
+      </div>
+    </section>
+
+    <!-- 3 · HIGHLIGHTS -->
+    <section class="slide" data-part="The index">
+      <div class="inner">
+        <p class="kick"><span class="n">Receipts</span> The benchmark proofs that stand out</p>
+        <h2 style="margin-bottom:1rem">Numbers with a source</h2>
+        <div class="grid g3">
+          <div class="stat"><div class="num"><span class="count" data-to="84.8" data-dp="1" data-suf="%">0</span></div><div class="k"><b>ruv-FANN</b> SWE-Bench solve rate — beats Claude 3.7 (70.3%)</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="82.69" data-dp="2" data-suf="%">0</span></div><div class="k"><b>RuView</b> MM-Fi torso-PCK@20 pose from Wi-Fi</div></div>
+          <div class="stat"><div class="num"><span class="count" data-to="300" data-suf="×">0</span></div><div class="k"><b>agentic-flow</b> faster pattern retrieval (150ms→0.5ms)</div></div>
+          <div class="stat"><div class="num i">&lt;1ms</div><div class="k"><b>agentdb</b> 100k-vector search vs ~150ms SQLite</div></div>
+          <div class="stat"><div class="num"><span class="count" data-to="83" data-suf="×">0</span></div><div class="k"><b>agenticow</b> faster snapshots · 3000× smaller</div></div>
+          <div class="stat"><div class="num i">878/878</div><div class="k"><b>rudevolution</b> Claude Code modules parse (100%)</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · RANKS 4–10 -->
+    <section class="slide" data-part="Ranks 4–10">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 4–10</span> ★ stars · ↓ downloads</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">04</span><div class="nm"><b>agentic-flow</b><p>SONA +55% quality · 300× faster retrieval · 60% cost cut</p></div><span class="bd"><span class="st">★ 785</span><span class="dl">↓ 171</span></span></div>
+          <div class="lbrow"><span class="rk">05</span><div class="nm"><b>metaharness</b><p>DRACO: frontier-quality research at ~1/10 the cost · Darwin on SWE-bench Lite</p></div><span class="bd"><span class="st">★ 541</span><span class="dl">↓ 66</span></span></div>
+          <div class="lbrow"><span class="rk">06</span><div class="nm"><b>sparc</b><p>SPARC development-methodology framework · no numeric benchmark</p></div><span class="bd"><span class="st">★ 472</span><span class="dl">↓ 90</span></span></div>
+          <div class="lbrow"><span class="rk">07</span><div class="nm"><b>open-claude-code</b><p>1,581 tests · 8,314 lines · 903+ nightly regression tests</p></div><span class="bd"><span class="st">★ 467</span><span class="dl">↓ 165</span></span></div>
+          <div class="lbrow"><span class="rk">08</span><div class="nm"><b>ruv-FANN</b><p>84.8% SWE-Bench (vs 70.3% Claude 3.7 / 65.2% GPT-4) · 2.8–4.4× faster</p></div><span class="bd"><span class="st">★ 372</span><span class="dl">↓ 108</span></span></div>
+          <div class="lbrow"><span class="rk">09</span><div class="nm"><b>dspy.ts</b><p>TypeScript port of Stanford DSPy · no numeric benchmark in README</p></div><span class="bd"><span class="st">★ 268</span><span class="dl">↓ 35</span></span></div>
+          <div class="lbrow"><span class="rk">10</span><div class="nm"><b>SynthLang</b><p>Up to 70% token/cost cut · 233% faster (targets, not measured)</p></div><span class="bd"><span class="st">★ 264</span><span class="dl">↓ 62</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · RANKS 11–17 -->
+    <section class="slide" data-part="Ranks 11–17">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 11–17</span> ★ stars · ↓ downloads</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">11</span><div class="nm"><b>daa</b><p>Decentralized-agent Rust SDK · pinned crate versions (0.2.x) · no runtime benchmark</p></div><span class="bd"><span class="st">★ 248</span><span class="dl">↓ 44</span></span></div>
+          <div class="lbrow"><span class="rk">12</span><div class="nm"><b>ruvnet</b> <span class="tagm">profile</span><p>Account-level profile &amp; stats hub</p></div><span class="bd"><span class="st">★ 238</span><span class="dl">↓ 34</span></span></div>
+          <div class="lbrow"><span class="rk">13</span><div class="nm"><b>QuDAG</b><p>ML-KEM-768 · ML-DSA · DAG consensus · no benchmark table located</p></div><span class="bd"><span class="st">★ 193</span><span class="dl">↓ 60</span></span></div>
+          <div class="lbrow"><span class="rk">14</span><div class="nm"><b>SAFLA</b><p>172,000+ operations/second memory pipeline</p></div><span class="bd"><span class="st">★ 158</span><span class="dl">↓ 60</span></span></div>
+          <div class="lbrow"><span class="rk">15</span><div class="nm"><b>midstream</b><p>Criterion (Ryzen 9 7950X): DTW 128² ~38µs · QUIC 0-RTT ~180µs</p></div><span class="bd"><span class="st">★ 132</span><span class="dl">↓ 39</span></span></div>
+          <div class="lbrow"><span class="rk">16</span><div class="nm"><b>rvm</b><p>945 tests / 14 crates · 6 GPU backends · sub-10µs partition switch</p></div><span class="bd"><span class="st">★ 125</span><span class="dl">↓ 27</span></span></div>
+          <div class="lbrow"><span class="rk">17</span><div class="nm"><b>rudevolution</b><p>Decompiles Claude Code: 878/878 modules parse · 95.7% var-name recovery</p></div><span class="bd"><span class="st">★ 124</span><span class="dl">↓ 28</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · RANKS 18–24 -->
+    <section class="slide" data-part="Ranks 18–24">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 18–24</span> ★ stars · ↓ downloads</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">18</span><div class="nm"><b>sublinear-time-solver</b><p>Sublinear path stays ~flat as n 64→1024 while linear grows · 11M+ tasks/s</p></div><span class="bd"><span class="st">★ 86</span><span class="dl">↓ 36</span></span></div>
+          <div class="lbrow"><span class="rk">19</span><div class="nm"><b>agentdb</b><p>100k-vector search &lt;1ms vs ~150ms SQLite · +36% quality lift</p></div><span class="bd"><span class="st">★ 85</span><span class="dl">↓ 13</span></span></div>
+          <div class="lbrow"><span class="rk">20</span><div class="nm"><b>symbolic-scribe</b><p>WASM: token count ~230ns (4.3M ops/s) · 79 native tests</p></div><span class="bd"><span class="st">★ 85</span><span class="dl">↓ 23</span></span></div>
+          <div class="lbrow"><span class="rk">21</span><div class="nm"><b>Synaptic-Mesh</b><p>Self-described "~90% complete" prototype · roadmap claims</p></div><span class="bd"><span class="st">★ 80</span><span class="dl">↓ 20</span></span></div>
+          <div class="lbrow"><span class="rk">22</span><div class="nm"><b>ruvbot</b><p>Chatbot demo project · no benchmark data</p></div><span class="bd"><span class="st">★ 50</span><span class="dl">↓ 13</span></span></div>
+          <div class="lbrow"><span class="rk">23</span><div class="nm"><b>agentic-security</b><p>Integration with "120+ AI models" · no detection benchmark</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">24</span><div class="nm"><b>agenticow</b><p>83× faster / 3000× smaller snapshots · branch ~0.5ms / 162 bytes</p></div><span class="bd mute">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · RANKS 25–31 -->
+    <section class="slide" data-part="Ranks 25–31">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 25–31</span> the long tail — proof over popularity</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">25</span><div class="nm"><b>musica</b><p>Feature/status table only · no numeric benchmark</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">26</span><div class="nm"><b>rupixel</b><p>8/8 correct on an 8-page Wikipedia test · ~0.5–0.6ms query</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">27</span><div class="nm"><b>drupaljs</b><p>Drupal-style CMS clone · no benchmark data</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">28</span><div class="nm"><b>helix</b><p>22 crates · 153 tests · clippy/audit clean (v0.1.0, unratified)</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">29</span><div class="nm"><b>skygraph</b><p>Real-time 60fps rendering · 5-second ADS-B polling</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">30</span><div class="nm"><b>ruv-neural</b><p>Validated on EEG + simulator · "not yet clinically validated"</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">31</span><div class="nm"><b>AgentBBS</b><p>Hosts a "CVE-Bench Arena" with signed public leaderboard scores</p></div><span class="bd mute">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · RANKS 32–38 -->
+    <section class="slide" data-part="Ranks 32–38">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 32–38</span> the long tail — proof over popularity</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">32</span><div class="nm"><b>rufield</b><p>Benchmark runner, but all v0.1 numbers labeled "SYNTHETIC"</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">33</span><div class="nm"><b>rvFACE</b><p>PyTorch→Rust parity, max err ~1e-7 · native 176ms · WASM 1.42MB</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">34</span><div class="nm"><b>CVE-bench</b><p>5 validated CVEs · solver resolves 1/4 (25%) at ~$0.28/instance</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">35</span><div class="nm"><b>PhotonLayer</b><p>MNIST 73.05% @64px (16× fewer px) · gradient mask 83.30%</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">36</span><div class="nm"><b>rvcsi</b><p>170 tests, 0 failures · clippy-clean · #![forbid(unsafe_code)]</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">37</span><div class="nm"><b>worldgraph</b><p>Architecture/spec repo · no quantitative benchmark</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">38</span><div class="nm"><b>Repo-Explainer</b><p>9-phase pipeline runs end-to-end in about 6 minutes</p></div><span class="bd mute">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · RANKS 39–45 -->
+    <section class="slide" data-part="Ranks 39–45">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 39–45</span> the long tail — proof over popularity</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">39</span><div class="nm"><b>ruv-drone</b><p>Simulated 4-drone SAR: &lt;240s over a 400×400m field (synthetic)</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">40</span><div class="nm"><b>hackerone</b><p>Vuln classify 91% confidence · 30 calls/min · mock-mode by default</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">41</span><div class="nm"><b>RuLake</b><p>~1ms per lookup at 100,000 items · 32× less RAM than raw</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">42</span><div class="nm"><b>rvdna</b><p>Genomics toolkit (20-SNP risk, 64-dim vectors) · no benchmark</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">43</span><div class="nm"><b>ruqu</b><p>WASM quantum simulator, up to ~25 qubits in-browser</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">44</span><div class="nm"><b>RuCelium</b><p>Pinned-SHA import · inherits rufield's "SYNTHETIC" caveat</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">45</span><div class="nm"><b>retort</b><p>Eval harness: 10 experiments × 8 languages × 4+ Claude variants</p></div><span class="bd mute">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · RANKS 46–50 -->
+    <section class="slide" data-part="Ranks 46–50">
+      <div class="inner">
+        <p class="kick"><span class="n">Ranks 46–50</span> the long tail — proof over popularity</p>
+        <div class="lb">
+          <div class="lbrow"><span class="rk">46</span><div class="nm"><b>SonicChamber</b><p>Full USCT reconstruction in ~130ms in-browser via WASM</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">47</span><div class="nm"><b>ruvn</b><p>6-stage research pipeline · 9 supported AI-host adapters</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">48</span><div class="nm"><b>experiments</b><p>Fork hosting SWE-bench submission logs · no original data</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">49</span><div class="nm"><b>rvQR</b><p>Optical QR file transfer: 40KB in ~16s · 2.5–10KB/s</p></div><span class="bd mute">—</span></div>
+          <div class="lbrow"><span class="rk">50</span><div class="nm"><b>unsorry</b><p>5 mathlib-absent theorems proved · 3 red-team rounds (self-reported)</p></div><span class="bd mute">—</span></div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">Reading the tail</div><p>Below 50 stars we drop the numbers on purpose — down here the <strong>receipt matters more than the reach</strong>. Several of these ship the sharpest, most reproducible proofs in the whole set.</p></div>
+      </div>
+    </section>
+
+    <!-- 11 · CLOSE -->
+    <section class="slide" data-part="Close">
+      <div class="glow-b"></div>
+      <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
+        <span class="kicker"><span class="dot"></span>ruvnet index · 50 repos</span>
+        <h1 style="margin-inline:auto">The receipts,<br><span class="g">ranked.</span></h1>
+        <p class="title-sub" style="margin-inline:auto">Sorted by stars · downloads and stars shown for the 22 most-popular · every entry backed by the benchmark proof in its own repo.</p>
+        <p class="src" style="text-align:center; margin-top:1.3rem">★ stars · ↓ downloads · figures from each repo's README</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">ruvnet · index</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate · F present · T theme</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+</body>
+</html>
