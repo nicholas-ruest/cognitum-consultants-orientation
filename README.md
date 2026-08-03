@@ -14,7 +14,7 @@ the cheapest-model-best-answer thesis, the 24/7 flywheel, and how to actually st
 | [`long-form.html`](long-form.html) | **Scrolling doc** | Reading / reference / sharing as a page. |
 | [`ruvector.html`](ruvector.html) | **Slide deck** | A companion 34-slide overview of **RuVector** (persistent vector + graph memory for AI agents), built in the exact same design system. |
 | [`ruview.html`](ruview.html) | **Slide deck** | A companion 34-slide overview of **RuView** (camera-free WiFi spatial sensing — presence, vitals, pose from CSI), in the same design system. |
-| [`ruvnet-index.html`](ruvnet-index.html) | **Leaderboard deck** | An 11-slide ranking of 50 ruvnet repos by popularity — stars, downloads, and the benchmark proof from each repo — in the same design system. |
+| [`ruvnet-index.html`](ruvnet-index.html) | **Ecosystem deck** | "The receipts" — a download/builder headline for the open Cognitum ecosystem, then a devoted, repo-grounded slide for each of 50 ruvnet projects (stars, downloads, and the proof from each repo). |
 
 Both are single, self-contained HTML files — no build step, no dependencies. They
 support light/dark themes (follows the OS setting, with a manual toggle) and respect

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ruvnet index — 50 repos ranked by popularity, with stars, downloads, and the benchmark proof from each repo. An animated leaderboard deck. Arrow keys / space to navigate.">
+<meta name="description" content="Cognitum — the receipts. The open ecosystem's download & builder headline, plus a devoted repo-grounded slide for each of 50 ruvnet projects. An animated deck. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
-<title>ruvnet index · 50 repos ranked</title>
+<title>Cognitum · the receipts</title>
 <style>
   /* ============================================================
      COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
@@ -242,31 +242,14 @@
   @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
 
 
-  /* ---------- leaderboard ---------- */
-  .lb { display: grid; gap: 0.55rem; }
-  .lbrow { display: grid; grid-template-columns: 2.6rem 1fr auto; gap: 1rem; align-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 1rem; }
-  .lbrow .rk { font-family: var(--font-mono); font-size: 1.05rem; color: var(--faint); font-variant-numeric: tabular-nums; text-align: right; }
-  .lbrow .nm b { font-size: 1.08rem; letter-spacing: -0.01em; }
-  .lbrow .nm .tagm { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--border-2); border-radius: 999px; padding: 0.08rem 0.4rem; margin-left: 0.4rem; }
-  .lbrow .nm p { margin: 0.12rem 0 0; font-size: 0.9rem; color: var(--muted); line-height: 1.32; }
-  .lbrow .bd { display: flex; gap: 1rem; align-items: baseline; white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .lbrow .bd .st { color: var(--jade); font-size: 1.02rem; font-weight: 600; }
-  .lbrow .bd .dl { color: var(--indigo); font-size: 0.92rem; }
-  .lbrow .bd.mute { color: var(--faint); font-size: 1.1rem; }
-  .slide.active .lbrow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
-  .slide.active .lbrow:nth-child(2){animation-delay:.06s}.slide.active .lbrow:nth-child(3){animation-delay:.12s}.slide.active .lbrow:nth-child(4){animation-delay:.18s}.slide.active .lbrow:nth-child(5){animation-delay:.24s}.slide.active .lbrow:nth-child(6){animation-delay:.3s}.slide.active .lbrow:nth-child(7){animation-delay:.36s}
-
-  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
-  .pod .rkbig { font-family: var(--font-mono); font-size: 1.9rem; font-weight: 600; letter-spacing: -0.02em; color: var(--faint); line-height: 1; }
-  .pod h3 { font-size: 1.5rem; letter-spacing: -0.02em; margin: 0; }
-  .pod .bd { display: flex; gap: 1rem; align-items: baseline; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .pod .bd .st { color: var(--jade); font-size: 1.25rem; font-weight: 600; }
-  .pod .bd .dl { color: var(--indigo); font-size: 1rem; }
-  .pod p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.94rem; line-height: 1.4; }
-  .pod1 { border-top: 3px solid var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 40px -18px var(--jade); }
-  .pod1 .rkbig { color: var(--jade); }
-  .pod2 { border-top: 3px solid var(--indigo); } .pod2 .rkbig { color: var(--indigo); }
-  .pod3 { border-top: 3px solid var(--border-2); }
+  /* ---------- ecosystem / receipts ---------- */
+  .proj-badges { display: inline-flex; gap: 0.9rem; margin-left: 0.6rem; font-family: var(--font-mono); font-variant-numeric: tabular-nums; vertical-align: middle; }
+  .proj-badges .st { color: var(--jade); font-size: 1rem; font-weight: 600; }
+  .proj-badges .dl { color: var(--indigo); font-size: 0.9rem; }
+  .stat { position: relative; }
+  .stat .mark { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .stat .mark.modelled { color: var(--faint); }
+  .stat .mark.validated { color: var(--jade); }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -324,224 +307,543 @@
   <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
   <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
   <div class="stage" id="stage">
-    <!-- 1 · TITLE -->
-    <section class="slide hero" data-part="The index">
+    <!-- 1 · HEADLINE -->
+    <section class="slide" data-part="The ecosystem">
       <div class="glow-a"></div><div class="glow-b"></div>
       <div class="inner">
+        <p class="kick"><span class="n">Cognitum</span> the open ecosystem, in other people's hands</p>
+        <h2 style="font-size:2.5rem; max-width:24ch; margin-bottom:0.6rem">Millions of downloads, hundreds of thousands of builders</h2>
+        <p class="lead" style="max-width:74ch; margin-bottom:1.1rem">The open Cognitum ecosystem is already in other people's hands. Counted where we can count it — and marked where a figure is modelled instead.</p>
+        <div class="grid g4">
+          <div class="stat"><div class="mark modelled">† modelled</div><div class="num"><span class="count" data-to="51" data-suf="M+">0</span></div><div class="k">Total software downloads across the Cognitum ecosystem to date</div></div>
+          <div class="stat"><div class="mark modelled">† modelled</div><div class="num"><span class="count" data-to="16" data-suf="M+">0</span></div><div class="k">Downloads in June 2026 alone — a viral uptick on an already hyper-engaged ecosystem</div></div>
+          <div class="stat"><div class="mark validated">validated midpoint</div><div class="num i"><span class="count" data-to="362" data-suf="K">0</span></div><div class="k">Monthly active ruFlo installations</div></div>
+          <div class="stat"><div class="mark modelled">† modelled</div><div class="num"><span class="count" data-to="100" data-suf="K+">0</span></div><div class="k">Active community members via the Agentics Foundation</div></div>
+        </div>
+        <div class="callout i" style="margin-top:1rem">
+          <div class="h">Built by</div>
+          <p><strong>Reuven Cohen (rUv)</strong> — our Founder, CAIO, and the most-downloaded Agentic Engineer on the planet. <a href="https://cognitum.one/team" target="_blank" rel="noopener">cognitum.one/team&nbsp;↗</a> &nbsp;·&nbsp; coined the term <strong>"Agentic Engineer"</strong> &nbsp;·&nbsp; Founder of the <strong>Agentics Foundation</strong>.</p>
+        </div>
+        <p class="src" style="margin-top:0.7rem">† Marked figures are modelled, not directly measured.</p>
+      </div>
+    </section>
+
+    <!-- 2 · THE RECEIPTS -->
+    <section class="slide hero" data-part="The receipts">
+      <div class="glow-b"></div>
+      <div class="inner">
         <div class="herotext">
-          <div class="title-brand rise">
-            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
-              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
-              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-            ruvnet <small>index</small>
-          </div>
-          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>50 repos · ranked by reach</span>
-          <h1 class="rise" style="animation-delay:.1s">The receipts,<br><span class="g">ranked.</span></h1>
-          <p class="title-sub rise" style="animation-delay:.18s">Fifty ruvnet projects, sorted by popularity — each carrying the <strong>concrete benchmark proof</strong> found in its own repo.</p>
-          <div class="chips rise" style="animation-delay:.26s">
+          <span class="kicker rise"><span class="dot"></span>50 open-source projects · one per slide</span>
+          <h1 class="rise" style="animation-delay:.08s">The receipts.</h1>
+          <p class="title-sub rise" style="animation-delay:.16s">Fifty ruvnet projects — most-downloaded first. Each slide: <strong>what it is</strong>, plus the <strong>concrete proof</strong> from its own repo.</p>
+          <div class="chips rise" style="animation-delay:.24s">
             <span class="chip"><b>★</b><span>stars</span></span>
             <span class="chip"><b>↓</b><span>downloads</span></span>
-            <span class="chip"><b>receipts</b><span>benchmark proof</span></span>
+            <span class="chip"><b>the receipt</b><span>benchmark proof</span></span>
           </div>
         </div>
         <div class="heroviz">
-          <svg viewBox="0 0 440 440" role="img" aria-label="A ranked-bar emblem inside orbiting rings">
-            <defs>
-              <radialGradient id="hcore" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/>
-                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/>
-                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
+          <svg viewBox="0 0 440 440" role="img" aria-label="A bar-chart receipts emblem inside orbiting rings">
+            <defs><radialGradient id="hcore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/><stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/><stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/></radialGradient></defs>
             <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
-            <g class="v-spin">
-              <circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
-              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/>
-            </g>
-            <g class="v-spinR">
-              <circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.6"/>
-              <circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/>
-            </g>
+            <g class="v-spin"><circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/><circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/></g>
+            <g class="v-spinR"><circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.6"/><circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/></g>
             <circle class="v-pulse" cx="220" cy="220" r="86" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
-            <g>
-              <rect class="v-gy" x="184" y="196" width="14" height="40" rx="3" fill="var(--jade)" opacity="0.6"/>
-              <rect class="v-gy" style="animation-delay:.15s" x="204" y="180" width="14" height="56" rx="3" fill="var(--jade)" opacity="0.8"/>
-              <rect class="v-gy" style="animation-delay:.3s" x="224" y="160" width="14" height="76" rx="3" fill="var(--jade)"/>
-              <rect class="v-gy" style="animation-delay:.45s" x="244" y="188" width="14" height="48" rx="3" fill="var(--indigo-dim)"/>
-            </g>
-            <text x="220" y="266" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">ranked</text>
-            <circle class="v-float" cx="74" cy="96" r="4.5" fill="var(--jade)"/>
-            <circle class="v-float" style="animation-delay:1.2s" cx="372" cy="356" r="5.5" fill="var(--indigo)"/>
+            <g><rect class="v-gy" x="184" y="196" width="14" height="40" rx="3" fill="var(--jade)" opacity="0.6"/><rect class="v-gy" style="animation-delay:.15s" x="204" y="180" width="14" height="56" rx="3" fill="var(--jade)" opacity="0.8"/><rect class="v-gy" style="animation-delay:.3s" x="224" y="160" width="14" height="76" rx="3" fill="var(--jade)"/><rect class="v-gy" style="animation-delay:.45s" x="244" y="188" width="14" height="48" rx="3" fill="var(--indigo-dim)"/></g>
+            <text x="220" y="266" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">receipts</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 2 · PODIUM -->
-    <section class="slide" data-part="The index">
-      <div class="inner">
-        <p class="kick"><span class="n">Top 3</span> The most-starred projects</p>
-        <div class="grid g3" style="align-items:stretch">
-          <div class="pod pod1">
-            <div class="rkbig">01</div>
-            <h3>RuView</h3>
-            <div class="bd"><span class="st">★ 88,300</span><span class="dl">↓ 11,700</span></div>
-            <p>82.69% MM-Fi pose (beats MultiFormer 72.25%); 164,183 CSI emb/s on an M4 Pro.</p>
-          </div>
-          <div class="pod pod2">
-            <div class="rkbig">02</div>
-            <h3>ruflo</h3>
-            <div class="bd"><span class="st">★ 66,882</span><span class="dl">↓ 7,974</span></div>
-            <p>AgentDB ~1.9× faster than brute force @20k vectors; recall@10 ≈0.99; 100+ agents.</p>
-          </div>
-          <div class="pod pod3">
-            <div class="rkbig">03</div>
-            <h3>RuVector</h3>
-            <div class="bd"><span class="st">★ 4,403</span><span class="dl">↓ 580</span></div>
-            <p>Rust agent-memory DB; ships cargo bench suites (HNSW, LSM-ANN, temporal) to run yourself.</p>
-          </div>
-        </div>
-        <p class="src" style="margin-top:1rem">Sorted by stars · "downloads" = repo fork count · benchmark facts taken from each repo's own README.</p>
-      </div>
-    </section>
+    <!-- ============ PROJECT SLIDES ============ -->
 
-    <!-- 3 · HIGHLIGHTS -->
-    <section class="slide" data-part="The index">
-      <div class="inner">
-        <p class="kick"><span class="n">Receipts</span> The benchmark proofs that stand out</p>
-        <h2 style="margin-bottom:1rem">Numbers with a source</h2>
-        <div class="grid g3">
-          <div class="stat"><div class="num"><span class="count" data-to="84.8" data-dp="1" data-suf="%">0</span></div><div class="k"><b>ruv-FANN</b> SWE-Bench solve rate — beats Claude 3.7 (70.3%)</div></div>
-          <div class="stat"><div class="num i"><span class="count" data-to="82.69" data-dp="2" data-suf="%">0</span></div><div class="k"><b>RuView</b> MM-Fi torso-PCK@20 pose from Wi-Fi</div></div>
-          <div class="stat"><div class="num"><span class="count" data-to="300" data-suf="×">0</span></div><div class="k"><b>agentic-flow</b> faster pattern retrieval (150ms→0.5ms)</div></div>
-          <div class="stat"><div class="num i">&lt;1ms</div><div class="k"><b>agentdb</b> 100k-vector search vs ~150ms SQLite</div></div>
-          <div class="stat"><div class="num"><span class="count" data-to="83" data-suf="×">0</span></div><div class="k"><b>agenticow</b> faster snapshots · 3000× smaller</div></div>
-          <div class="stat"><div class="num i">878/878</div><div class="k"><b>rudevolution</b> Claude Code modules parse (100%)</div></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">01 / 50</span> WiFi sensing</p>
+      <div class="split v top"><div>
+        <h2>RuView <span class="proj-badges"><span class="st">★ 88,300</span><span class="dl">↓ 11,700</span></span></h2>
+        <p class="lead">Turns ordinary Wi-Fi into a camera-free spatial-sensing system — presence, vital signs, and pose from Channel State Information.</p>
+        <ul class="clean"><li><b>Sees through walls &amp; in the dark</b> from cheap ESP32 radios.</li><li class="j"><b>No cameras, no wearables</b> — private by construction.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num"><span class="count" data-to="82.69" data-dp="2" data-suf="%">0</span></div><div class="k">MM-Fi torso-PCK@20 pose — beats MultiFormer (72.25%)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>82.3% held-out CSI-triplet accuracy; 164,183 embeddings/s on an M4 Pro; ESP32-C6 sync match 99.56%.</p></div>
+      </div></div></div></section>
 
-    <!-- 4 · RANKS 4–10 -->
-    <section class="slide" data-part="Ranks 4–10">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 4–10</span> ★ stars · ↓ downloads</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">04</span><div class="nm"><b>agentic-flow</b><p>SONA +55% quality · 300× faster retrieval · 60% cost cut</p></div><span class="bd"><span class="st">★ 785</span><span class="dl">↓ 171</span></span></div>
-          <div class="lbrow"><span class="rk">05</span><div class="nm"><b>metaharness</b><p>DRACO: frontier-quality research at ~1/10 the cost · Darwin on SWE-bench Lite</p></div><span class="bd"><span class="st">★ 541</span><span class="dl">↓ 66</span></span></div>
-          <div class="lbrow"><span class="rk">06</span><div class="nm"><b>sparc</b><p>SPARC development-methodology framework · no numeric benchmark</p></div><span class="bd"><span class="st">★ 472</span><span class="dl">↓ 90</span></span></div>
-          <div class="lbrow"><span class="rk">07</span><div class="nm"><b>open-claude-code</b><p>1,581 tests · 8,314 lines · 903+ nightly regression tests</p></div><span class="bd"><span class="st">★ 467</span><span class="dl">↓ 165</span></span></div>
-          <div class="lbrow"><span class="rk">08</span><div class="nm"><b>ruv-FANN</b><p>84.8% SWE-Bench (vs 70.3% Claude 3.7 / 65.2% GPT-4) · 2.8–4.4× faster</p></div><span class="bd"><span class="st">★ 372</span><span class="dl">↓ 108</span></span></div>
-          <div class="lbrow"><span class="rk">09</span><div class="nm"><b>dspy.ts</b><p>TypeScript port of Stanford DSPy · no numeric benchmark in README</p></div><span class="bd"><span class="st">★ 268</span><span class="dl">↓ 35</span></span></div>
-          <div class="lbrow"><span class="rk">10</span><div class="nm"><b>SynthLang</b><p>Up to 70% token/cost cut · 233% faster (targets, not measured)</p></div><span class="bd"><span class="st">★ 264</span><span class="dl">↓ 62</span></span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">02 / 50</span> agent orchestration</p>
+      <div class="split v top"><div>
+        <h2>ruFlo <span class="proj-badges"><span class="st">★ 66,882</span><span class="dl">↓ 7,974</span></span></h2>
+        <p class="lead">"The original agent meta-harness" — turns Claude Code into a collaborative multi-agent swarm with persistent memory and self-learning.</p>
+        <ul class="clean"><li><b>100+ specialized agents</b>, background workers, cross-machine federation.</li><li class="j"><b>MCP-native</b>, security-hardened, built for autonomous workflows.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~1.9×</div><div class="k">AgentDB faster than brute force @20k vectors (recall@10 ≈0.99)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>3.2–4.7× faster at N=5k; ~210–314 MCP tools; 4–6+ tool calls firing in parallel per turn.</p></div>
+      </div></div></div></section>
 
-    <!-- 5 · RANKS 11–17 -->
-    <section class="slide" data-part="Ranks 11–17">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 11–17</span> ★ stars · ↓ downloads</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">11</span><div class="nm"><b>daa</b><p>Decentralized-agent Rust SDK · pinned crate versions (0.2.x) · no runtime benchmark</p></div><span class="bd"><span class="st">★ 248</span><span class="dl">↓ 44</span></span></div>
-          <div class="lbrow"><span class="rk">12</span><div class="nm"><b>ruvnet</b> <span class="tagm">profile</span><p>Account-level profile &amp; stats hub</p></div><span class="bd"><span class="st">★ 238</span><span class="dl">↓ 34</span></span></div>
-          <div class="lbrow"><span class="rk">13</span><div class="nm"><b>QuDAG</b><p>ML-KEM-768 · ML-DSA · DAG consensus · no benchmark table located</p></div><span class="bd"><span class="st">★ 193</span><span class="dl">↓ 60</span></span></div>
-          <div class="lbrow"><span class="rk">14</span><div class="nm"><b>SAFLA</b><p>172,000+ operations/second memory pipeline</p></div><span class="bd"><span class="st">★ 158</span><span class="dl">↓ 60</span></span></div>
-          <div class="lbrow"><span class="rk">15</span><div class="nm"><b>midstream</b><p>Criterion (Ryzen 9 7950X): DTW 128² ~38µs · QUIC 0-RTT ~180µs</p></div><span class="bd"><span class="st">★ 132</span><span class="dl">↓ 39</span></span></div>
-          <div class="lbrow"><span class="rk">16</span><div class="nm"><b>rvm</b><p>945 tests / 14 crates · 6 GPU backends · sub-10µs partition switch</p></div><span class="bd"><span class="st">★ 125</span><span class="dl">↓ 27</span></span></div>
-          <div class="lbrow"><span class="rk">17</span><div class="nm"><b>rudevolution</b><p>Decompiles Claude Code: 878/878 modules parse · 95.7% var-name recovery</p></div><span class="bd"><span class="st">★ 124</span><span class="dl">↓ 28</span></span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">03 / 50</span> agent memory</p>
+      <div class="split v top"><div>
+        <h2>RuVector <span class="proj-badges"><span class="st">★ 4,403</span><span class="dl">↓ 580</span></span></h2>
+        <p class="lead">A Rust agent-memory database — persistent, adaptive vector <em>and</em> graph storage that lives inside the agent, no external DB.</p>
+        <ul class="clean"><li><b>Four memory types</b> — working, episodic, semantic, procedural.</li><li class="j"><b>HNSW + hypergraph</b> with local ONNX embeddings.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Ships dedicated cargo bench suites — core HNSW search, LSM-ANN high-write, temporal-coherence recall — that the README tells you to <strong>run yourself</strong> rather than quoting a headline number.</p></div>
+      </div></div></div></section>
 
-    <!-- 6 · RANKS 18–24 -->
-    <section class="slide" data-part="Ranks 18–24">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 18–24</span> ★ stars · ↓ downloads</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">18</span><div class="nm"><b>sublinear-time-solver</b><p>Sublinear path stays ~flat as n 64→1024 while linear grows · 11M+ tasks/s</p></div><span class="bd"><span class="st">★ 86</span><span class="dl">↓ 36</span></span></div>
-          <div class="lbrow"><span class="rk">19</span><div class="nm"><b>agentdb</b><p>100k-vector search &lt;1ms vs ~150ms SQLite · +36% quality lift</p></div><span class="bd"><span class="st">★ 85</span><span class="dl">↓ 13</span></span></div>
-          <div class="lbrow"><span class="rk">20</span><div class="nm"><b>symbolic-scribe</b><p>WASM: token count ~230ns (4.3M ops/s) · 79 native tests</p></div><span class="bd"><span class="st">★ 85</span><span class="dl">↓ 23</span></span></div>
-          <div class="lbrow"><span class="rk">21</span><div class="nm"><b>Synaptic-Mesh</b><p>Self-described "~90% complete" prototype · roadmap claims</p></div><span class="bd"><span class="st">★ 80</span><span class="dl">↓ 20</span></span></div>
-          <div class="lbrow"><span class="rk">22</span><div class="nm"><b>ruvbot</b><p>Chatbot demo project · no benchmark data</p></div><span class="bd"><span class="st">★ 50</span><span class="dl">↓ 13</span></span></div>
-          <div class="lbrow"><span class="rk">23</span><div class="nm"><b>agentic-security</b><p>Integration with "120+ AI models" · no detection benchmark</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">24</span><div class="nm"><b>agenticow</b><p>83× faster / 3000× smaller snapshots · branch ~0.5ms / 162 bytes</p></div><span class="bd mute">—</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">04 / 50</span> agentic workflow</p>
+      <div class="split v top"><div>
+        <h2>agentic-flow <span class="proj-badges"><span class="st">★ 785</span><span class="dl">↓ 171</span></span></h2>
+        <p class="lead">An agentic workflow engine with a self-learning "SONA" layer, Flash-Attention acceleration, and GNN query refinement.</p>
+        <ul class="clean"><li><b>SONA</b> learns patterns with &lt;1ms overhead.</li><li class="j"><b>Per-domain quality lift</b> — code +5.0%, reasoning +3.6%.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num">300×</div><div class="k">faster pattern retrieval (150ms → 0.5ms)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>SONA +55% quality (research); 60% cost cut ($720→$288/mo); Flash Attention 2.49–7.47× faster; GNN +12.4% recall.</p></div>
+      </div></div></div></section>
 
-    <!-- 7 · RANKS 25–31 -->
-    <section class="slide" data-part="Ranks 25–31">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 25–31</span> the long tail — proof over popularity</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">25</span><div class="nm"><b>musica</b><p>Feature/status table only · no numeric benchmark</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">26</span><div class="nm"><b>rupixel</b><p>8/8 correct on an 8-page Wikipedia test · ~0.5–0.6ms query</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">27</span><div class="nm"><b>drupaljs</b><p>Drupal-style CMS clone · no benchmark data</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">28</span><div class="nm"><b>helix</b><p>22 crates · 153 tests · clippy/audit clean (v0.1.0, unratified)</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">29</span><div class="nm"><b>skygraph</b><p>Real-time 60fps rendering · 5-second ADS-B polling</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">30</span><div class="nm"><b>ruv-neural</b><p>Validated on EEG + simulator · "not yet clinically validated"</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">31</span><div class="nm"><b>AgentBBS</b><p>Hosts a "CVE-Bench Arena" with signed public leaderboard scores</p></div><span class="bd mute">—</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">05 / 50</span> the harness factory</p>
+      <div class="split v top"><div>
+        <h2>metaharness <span class="proj-badges"><span class="st">★ 541</span><span class="dl">↓ 66</span></span></h2>
+        <p class="lead">A factory that scaffolds branded, cost-optimized agent harnesses — with Darwin self-evolution and the Flywheel proof loop.</p>
+        <ul class="clean"><li><b>Freeze the model, evolve the harness</b> — the cheapest lever.</li><li class="j"><b>Signed releases &amp; SBOMs</b> — governed by default.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~1/10</div><div class="k">the cost of a frontier model for frontier-quality research (DRACO)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Cites its own DRACO benchmark; Darwin self-evolution "validated on real SWE-bench Lite bug-fixing."</p></div>
+      </div></div></div></section>
 
-    <!-- 8 · RANKS 32–38 -->
-    <section class="slide" data-part="Ranks 32–38">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 32–38</span> the long tail — proof over popularity</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">32</span><div class="nm"><b>rufield</b><p>Benchmark runner, but all v0.1 numbers labeled "SYNTHETIC"</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">33</span><div class="nm"><b>rvFACE</b><p>PyTorch→Rust parity, max err ~1e-7 · native 176ms · WASM 1.42MB</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">34</span><div class="nm"><b>CVE-bench</b><p>5 validated CVEs · solver resolves 1/4 (25%) at ~$0.28/instance</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">35</span><div class="nm"><b>PhotonLayer</b><p>MNIST 73.05% @64px (16× fewer px) · gradient mask 83.30%</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">36</span><div class="nm"><b>rvcsi</b><p>170 tests, 0 failures · clippy-clean · #![forbid(unsafe_code)]</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">37</span><div class="nm"><b>worldgraph</b><p>Architecture/spec repo · no quantitative benchmark</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">38</span><div class="nm"><b>Repo-Explainer</b><p>9-phase pipeline runs end-to-end in about 6 minutes</p></div><span class="bd mute">—</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">06 / 50</span> methodology</p>
+      <div class="split v top"><div>
+        <h2>SPARC <span class="proj-badges"><span class="st">★ 472</span><span class="dl">↓ 90</span></span></h2>
+        <p class="lead">An agentic development-methodology framework — Specification, Pseudocode, Architecture, Refinement, Completion — for structured AI-assisted builds.</p>
+        <ul class="clean"><li><b>A process, not a product</b> — the discipline behind the swarm.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A development-methodology framework — no numeric benchmark, and it doesn't pretend to have one.</p></div>
+      </div></div></div></section>
 
-    <!-- 9 · RANKS 39–45 -->
-    <section class="slide" data-part="Ranks 39–45">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 39–45</span> the long tail — proof over popularity</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">39</span><div class="nm"><b>ruv-drone</b><p>Simulated 4-drone SAR: &lt;240s over a 400×400m field (synthetic)</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">40</span><div class="nm"><b>hackerone</b><p>Vuln classify 91% confidence · 30 calls/min · mock-mode by default</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">41</span><div class="nm"><b>RuLake</b><p>~1ms per lookup at 100,000 items · 32× less RAM than raw</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">42</span><div class="nm"><b>rvdna</b><p>Genomics toolkit (20-SNP risk, 64-dim vectors) · no benchmark</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">43</span><div class="nm"><b>ruqu</b><p>WASM quantum simulator, up to ~25 qubits in-browser</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">44</span><div class="nm"><b>RuCelium</b><p>Pinned-SHA import · inherits rufield's "SYNTHETIC" caveat</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">45</span><div class="nm"><b>retort</b><p>Eval harness: 10 experiments × 8 languages × 4+ Claude variants</p></div><span class="bd mute">—</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">07 / 50</span> tooling</p>
+      <div class="split v top"><div>
+        <h2>open-claude-code <span class="proj-badges"><span class="st">★ 467</span><span class="dl">↓ 165</span></span></h2>
+        <p class="lead">An open-source implementation of the Claude Code agent — the coding harness, out in the open.</p>
+        <ul class="clean"><li><b>Self-reported "100% functional"</b> across 61 files.</li><li class="j"><b>Nightly CI</b> keeps it honest.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i"><span class="count" data-to="1581">0</span></div><div class="k">tests · 8,314 lines</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>903+ regression tests run per release on nightly CI.</p></div>
+      </div></div></div></section>
 
-    <!-- 10 · RANKS 46–50 -->
-    <section class="slide" data-part="Ranks 46–50">
-      <div class="inner">
-        <p class="kick"><span class="n">Ranks 46–50</span> the long tail — proof over popularity</p>
-        <div class="lb">
-          <div class="lbrow"><span class="rk">46</span><div class="nm"><b>SonicChamber</b><p>Full USCT reconstruction in ~130ms in-browser via WASM</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">47</span><div class="nm"><b>ruvn</b><p>6-stage research pipeline · 9 supported AI-host adapters</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">48</span><div class="nm"><b>experiments</b><p>Fork hosting SWE-bench submission logs · no original data</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">49</span><div class="nm"><b>rvQR</b><p>Optical QR file transfer: 40KB in ~16s · 2.5–10KB/s</p></div><span class="bd mute">—</span></div>
-          <div class="lbrow"><span class="rk">50</span><div class="nm"><b>unsorry</b><p>5 mathlib-absent theorems proved · 3 red-team rounds (self-reported)</p></div><span class="bd mute">—</span></div>
-        </div>
-        <div class="callout i" style="margin-top:0.9rem"><div class="h">Reading the tail</div><p>Below 50 stars we drop the numbers on purpose — down here the <strong>receipt matters more than the reach</strong>. Several of these ship the sharpest, most reproducible proofs in the whole set.</p></div>
-      </div>
-    </section>
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">08 / 50</span> neural swarm</p>
+      <div class="split v top"><div>
+        <h2>ruv-FANN <span class="proj-badges"><span class="st">★ 372</span><span class="dl">↓ 108</span></span></h2>
+        <p class="lead">A Rust Fast-Artificial-Neural-Network library and neuro-divergent agent swarm — the engine that seeded claude-flow.</p>
+        <ul class="clean"><li><b>Sub-100ms decisions</b> at ~3,800 tasks/sec.</li><li class="j"><b>29% less memory</b> than baseline.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num"><span class="count" data-to="84.8" data-dp="1" data-suf="%">0</span></div><div class="k">SWE-Bench solve rate — vs 70.3% Claude 3.7, 65.2% GPT-4</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>+14.5pp over Claude 3.7; 32.3% fewer tokens; 2.8–4.4× faster.</p></div>
+      </div></div></div></section>
 
-    <!-- 11 · CLOSE -->
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">09 / 50</span> framework</p>
+      <div class="split v top"><div>
+        <h2>dspy.ts <span class="proj-badges"><span class="st">★ 268</span><span class="dl">↓ 35</span></span></h2>
+        <p class="lead">A TypeScript port of Stanford's DSPy — <em>programming</em>, not prompting, language models: declarative modules you compile and optimize.</p>
+        <ul class="clean"><li><b>Signatures &amp; optimizers</b> in the JS/TS ecosystem.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A faithful TypeScript port of Stanford DSPy — no numeric accuracy/speed benchmark stated in the visible README.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">10 / 50</span> prompt compression</p>
+      <div class="split v top"><div>
+        <h2>SynthLang <span class="proj-badges"><span class="st">★ 264</span><span class="dl">↓ 62</span></span></h2>
+        <p class="lead">A hyper-efficient prompt DSL that compresses instructions into far fewer tokens — cutting cost and latency.</p>
+        <ul class="clean"><li><b>Token/cost reduction</b> as a first-class goal.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">70%</div><div class="k">token/cost reduction — and 233% faster (stated as targets)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>&lt;500ms translation-latency and 99.9%-uptime targets — clearly labelled targets, not measured results.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">11 / 50</span> decentralized agents</p>
+      <div class="split v top"><div>
+        <h2>daa <span class="proj-badges"><span class="st">★ 248</span><span class="dl">↓ 44</span></span></h2>
+        <p class="lead">Decentralized Autonomous Agents — a Rust SDK for quantum-resistant, economically self-sustaining agents with distributed ML.</p>
+        <ul class="clean"><li><b>Self-managing</b>, no central oversight.</li><li class="j"><b>Economic self-sufficiency</b> baked in.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Ships specific, pinned crate versions (0.2.0 / 0.2.1) for its SDK components — no runtime benchmark numbers claimed.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">12 / 50</span> the profile</p>
+      <div class="split v top"><div>
+        <h2>ruvnet <span class="proj-badges"><span class="st">★ 238</span><span class="dl">↓ 34</span></span></h2>
+        <p class="lead">The account itself — the hub the whole ecosystem hangs off, and the profile that ties these fifty repos together.</p>
+        <ul class="clean"><li><b>One builder</b>, an ecosystem of receipts.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout i"><div class="h">the receipt</div><p>Account-level reach — the surface behind the ecosystem's download and star totals on the opening slide.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">13 / 50</span> comms &amp; crypto</p>
+      <div class="split v top"><div>
+        <h2>QuDAG <span class="proj-badges"><span class="st">★ 193</span><span class="dl">↓ 60</span></span></h2>
+        <p class="lead">A quantum-resistant distributed communication platform — post-quantum crypto and DAG consensus for autonomous AI agents and agent-run businesses.</p>
+        <ul class="clean"><li><b>ML-KEM-768 &amp; ML-DSA</b> — post-quantum by design.</li><li class="j"><b>DAG consensus</b>, peer-to-peer, no human in the loop.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A 60K-character protocol spec (ML-KEM-768, ML-DSA, DAG consensus) — architecture-first; no concrete benchmark table located.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">14 / 50</span> self-learning memory</p>
+      <div class="split v top"><div>
+        <h2>SAFLA <span class="proj-badges"><span class="st">★ 158</span><span class="dl">↓ 60</span></span></h2>
+        <p class="lead">Self-Aware Feedback Loop Algorithm — a purpose-built neural net that gives agents persistent memory, self-learning, and adaptive reasoning.</p>
+        <ul class="clean"><li><b>Learns from experience</b> across sessions.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num"><span class="count" data-to="172000">0</span>+</div><div class="k">operations / second through its memory pipeline</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Claims 172,000+ ops/sec for the memory pipeline.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">15 / 50</span> real-time streaming</p>
+      <div class="split v top"><div>
+        <h2>midstream <span class="proj-badges"><span class="st">★ 132</span><span class="dl">↓ 39</span></span></h2>
+        <p class="lead">A real-time streaming &amp; temporal-signal runtime — dynamic time-warping, scheduling, chaos metrics, and low-latency transport.</p>
+        <ul class="clean"><li><b>Criterion-benchmarked</b> on a Ryzen 9 7950X.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~38µs</div><div class="k">DTW (128×128) p50 · scheduler push/pop ~85/120ns</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Lyapunov exponent (1K pts) ~2.4ms; meta-learning self-update ~340µs; QUIC 0-RTT connect ~180µs.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">16 / 50</span> the agentic VM</p>
+      <div class="split v top"><div>
+        <h2>rvm <span class="proj-badges"><span class="st">★ 125</span><span class="dl">↓ 27</span></span></h2>
+        <p class="lead">The virtual machine built for the agentic age — replaces VMs with graph-structured "coherence domains" whose isolation follows how agents actually talk.</p>
+        <ul class="clean"><li><b>Sub-millisecond spawning</b> and dynamic re-isolation.</li><li class="j"><b>6 GPU backends</b> supported.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">&lt;10µs</div><div class="k">partition switching · &lt;50µs adaptive re-partition</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>945 passing tests across 14 crates.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">17 / 50</span> reverse-engineering</p>
+      <div class="split v top"><div>
+        <h2>rudevolution <span class="proj-badges"><span class="st">★ 124</span><span class="dl">↓ 28</span></span></h2>
+        <p class="lead">Decompiles Claude Code — reconstructs readable, analyzable modules from the shipped bundle.</p>
+        <ul class="clean"><li><b>Parses &amp; recovers names</b> at scale.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num">878/878</div><div class="k">output modules parse validly (100%)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>95.7% variable-name recovery; 27,477 declarations in 3.2s; 353,323 reference edges; 1,029 modules partitioned in 0.9s.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">18 / 50</span> algorithms</p>
+      <div class="split v top"><div>
+        <h2>sublinear-time-solver <span class="proj-badges"><span class="st">★ 86</span><span class="dl">↓ 36</span></span></h2>
+        <p class="lead">A sublinear-time solver for large sparse/diagonally-dominant linear systems — solving without touching the whole matrix.</p>
+        <ul class="clean"><li><b>Complexity-class proof</b>, not just a speed claim.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~flat</div><div class="k">sparse-closure path as n scales 64→1024, while linear grows 66.7µs→258µs</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Also claims a 98ns average scheduler-tick overhead and 11M+ tasks/sec.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">19 / 50</span> vector database</p>
+      <div class="split v top"><div>
+        <h2>agentdb <span class="proj-badges"><span class="st">★ 85</span><span class="dl">↓ 13</span></span></h2>
+        <p class="lead">An embedded vector + graph database for agents — HNSW search, product quantization, and GNN-attention reranking.</p>
+        <ul class="clean"><li><b>Tiny footprint</b> — ~96MB (PQ8) for 1M×384-dim vs ~1.5GB raw.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num">&lt;1ms</div><div class="k">100k-vector search — vs ~150ms SQLite</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>1M-vector HNSW query 2–5ms vs ~100ms brute force; 10k bulk insert &lt;100ms vs ~12s; +36% quality lift; GNN recall +12.4%.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">20 / 50</span> prompt compiler</p>
+      <div class="split v top"><div>
+        <h2>symbolic-scribe <span class="proj-badges"><span class="st">★ 85</span><span class="dl">↓ 23</span></span></h2>
+        <p class="lead">A prompt-engineering tool and compiler — turns natural language into structured, safety-checked prompt artifacts, entirely in the browser.</p>
+        <ul class="clean"><li><b>Multi-objective scoring</b> and risk assessment.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~230ns</div><div class="k">token counting (4.3M ops/s) · full optimize ~485µs</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>WASM latency suite; 79 native unit tests.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">21 / 50</span> neural mesh</p>
+      <div class="split v top"><div>
+        <h2>Synaptic-Mesh <span class="proj-badges"><span class="st">★ 80</span><span class="dl">↓ 20</span></span></h2>
+        <p class="lead">A distributed neural-mesh / peer-to-peer agent network — nodes that self-organize into a larger intelligence.</p>
+        <ul class="clean"><li><b>An honest work-in-progress.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Self-described as a "~90% complete" prototype — mostly planned/roadmap claims, no concrete performance numbers yet.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">22 / 50</span> demo</p>
+      <div class="split v top"><div>
+        <h2>ruvbot <span class="proj-badges"><span class="st">★ 50</span><span class="dl">↓ 13</span></span></h2>
+        <p class="lead">A chatbot demo — a small, approachable starting point rather than a benchmarked product.</p>
+        <ul class="clean"><li><b>A doorway</b>, not a datacenter.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A chatbot demo project — no benchmark data, and none claimed.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">23 / 50</span> security</p>
+      <div class="split v top"><div>
+        <h2>agentic-security</h2>
+        <p class="lead">An AI/LLM security-scanning toolkit that spans a wide range of models.</p>
+        <ul class="clean"><li><b>Broad model coverage</b> for red-teaming and checks.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Claims integration with "120+ AI models" — no quantitative security-detection benchmark given.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">24 / 50</span> agent state</p>
+      <div class="split v top"><div>
+        <h2>agenticow</h2>
+        <p class="lead">Copy-on-write branching and snapshots for agent state — fork a running agent's memory in microseconds.</p>
+        <ul class="clean"><li><b>Branch cost is constant</b> — ~0.5ms / 162 bytes regardless of base size.</li><li class="j"><b>Time-travel &amp; red-team sandboxes</b> on top.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num">83×</div><div class="k">faster · 3000× smaller snapshots (vs 496MB/67ms full-copy @1M)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Red-team sandbox rejects an exploit in 1.1ms with 0 vectors reaching the base; time-travel rewind 1.1ms, 24/24 states reachable.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">25 / 50</span> audio</p>
+      <div class="split v top"><div>
+        <h2>musica</h2>
+        <p class="lead">A real-time generative-music instrument with audio-reactive visuals — powered by spectral-graph mincut audio separation, not neural nets.</p>
+        <ul class="clean"><li><b>Sub-millisecond</b> separation, hearing-aid-grade.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>"Structure-first audio separation via dynamic mincut" — ships a feature/status table; no numeric benchmark stated.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">26 / 50</span> semantic search</p>
+      <div class="split v top"><div>
+        <h2>rupixel</h2>
+        <p class="lead">A document search engine that finds by meaning — over text <em>and</em> the visual look of page screenshots (MiniLM + CLIP, in Rust).</p>
+        <ul class="clean"><li><b>Text and visual</b> retrieval in one.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num">8/8</div><div class="k">correct on an 8-page Wikipedia test (7/8 in-browser)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Query speed ~0.5–0.6ms.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">27 / 50</span> CMS</p>
+      <div class="split v top"><div>
+        <h2>drupaljs</h2>
+        <p class="lead">A Drupal-style content-management system, reimagined in JavaScript.</p>
+        <ul class="clean"><li><b>Familiar CMS ideas</b>, modern JS stack.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A CMS clone project — no benchmark data, and none needed.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">28 / 50</span> personal health</p>
+      <div class="split v top"><div>
+        <h2>helix</h2>
+        <p class="lead">A private, local personal-health-intelligence platform — every record, signal, and result assembled into one "living dossier" that refuses to make things up.</p>
+        <ul class="clean"><li><b>Grounded answers</b> traceable to source data.</li><li class="j"><b>Runs locally</b> — private and continual.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>22 crates, 153 tests, 30 ADRs, "clippy/fmt/audit clean" — self-reported v0.1.0, explicitly unratified by clinical/regulatory review.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">29 / 50</span> airspace</p>
+      <div class="split v top"><div>
+        <h2>skygraph</h2>
+        <p class="lead">Real-time flight tracking and airspace visualization from live ADS-B data.</p>
+        <ul class="clean"><li><b>Live sky, as a graph.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">60fps</div><div class="k">real-time rendering · 5-second ADS-B polling</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Real-time 60fps rendering; no formal benchmark table.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">30 / 50</span> neurotech</p>
+      <div class="split v top"><div>
+        <h2>ruv-neural</h2>
+        <p class="lead">A neurotech research framework exploring 40 Hz gamma entrainment, citing external Nature (2024) findings.</p>
+        <ul class="clean"><li><b>Research-stage</b>, refreshingly honest about it.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Its quantum-sensor pipeline is "validated on EEG and a deterministic simulator — not yet clinically validated."</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">31 / 50</span> community</p>
+      <div class="split v top"><div>
+        <h2>AgentBBS</h2>
+        <p class="lead">A multiplayer AI community — humans in a web app, agents over SSH or MCP, sharing message boards, a marketplace, and a competitive benchmark Arena.</p>
+        <ul class="clean"><li><b>Humans and agents as equals</b>, cryptographically verified.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Hosts a "CVE-Bench Arena" with signed public leaderboard scores — the numbers live on the Arena, not in this repo.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">32 / 50</span> field sensing</p>
+      <div class="split v top"><div>
+        <h2>rufield</h2>
+        <p class="lead">A field-sensing / RF simulation harness with a proper benchmark runner — and unusual honesty about it.</p>
+        <ul class="clean"><li><b>F1 per task, p95 latency, provenance coverage.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Ships the runner but explicitly labels all v0.1 numbers "SYNTHETIC" — a simulator proof, not field-validated accuracy.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">33 / 50</span> vision</p>
+      <div class="split v top"><div>
+        <h2>rvFACE</h2>
+        <p class="lead">A face-recognition model ported PyTorch → Rust with bit-level parity — same verdicts, native speed.</p>
+        <ul class="clean"><li><b>Reproduces the upstream demo</b> exactly (score 78.2, same person).</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~1e-7</div><div class="k">max parity error on real weights · native inference 176ms</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>66 Rust tests; browser ~0.5s; WASM bundle 1.42MB gzipped.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">34 / 50</span> benchmark</p>
+      <div class="split v top"><div>
+        <h2>CVE-bench</h2>
+        <p class="lead">A benchmark of real CVE instances for security agents — with a reference solver and an honest yield report.</p>
+        <ul class="clean"><li><b>Measures, doesn't market.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">1 / 4</div><div class="k">CVEs resolved by the reference solver (25%) at ~$0.28/instance</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>5 validated CVE instances; a scaling run swept ~50 PyPI packages and validated just 1 new instance (~2% yield).</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">35 / 50</span> photonics</p>
+      <div class="split v top"><div>
+        <h2>PhotonLayer</h2>
+        <p class="lead">An optical-compute layer — learned optical masks for compressed sensing, tested on real MNIST.</p>
+        <ul class="clean"><li><b>Learned beats random</b> mask by +8.1pp.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">73.05%</div><div class="k">MNIST at 64px (16× fewer pixels, only −2.35pp vs full image)</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Gradient-trained mask reaches 83.30% (+10.25pp over hill-climbing).</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">36 / 50</span> RF sensing</p>
+      <div class="split v top"><div>
+        <h2>rvcsi</h2>
+        <p class="lead">The Wi-Fi CSI sensing crates — the RF runtime that sits under RuView, engineered for safety.</p>
+        <ul class="clean"><li><b>Memory-safe by policy</b> — <code>#![forbid(unsafe_code)]</code>.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">170</div><div class="k">workspace tests · 0 failures · clippy-clean</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Unsafe forbidden everywhere except one audited FFI shim.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">37 / 50</span> digital twin</p>
+      <div class="split v top"><div>
+        <h2>worldgraph</h2>
+        <p class="lead">A privacy-aware environmental digital twin — a Rust library that models rooms, sensors, and people as a typed, provenance-tracked graph, plus an agent to help build one.</p>
+        <ul class="clean"><li><b>Beliefs about occupancy</b>, with provenance.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>An architecture/spec repo — foundations and an AI coding agent; no quantitative benchmark in the README.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">38 / 50</span> tooling</p>
+      <div class="split v top"><div>
+        <h2>Repo-Explainer</h2>
+        <p class="lead">A content-generation tool that reads a codebase and explains it end-to-end through a multi-phase pipeline.</p>
+        <ul class="clean"><li><b>Nine phases</b>, one readable explanation.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~6 min</div><div class="k">end-to-end across all 9 phases</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>A content-generation tool — timing is the metric; no accuracy benchmark.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">39 / 50</span> robotics</p>
+      <div class="split v top"><div>
+        <h2>ruv-drone</h2>
+        <p class="lead">Multi-drone search-and-rescue coordination — planning coverage of a field with a small swarm.</p>
+        <ul class="clean"><li><b>Swarm coverage planning</b>, in simulation.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">&lt;240s</div><div class="k">simulated 4-drone SAR coverage of a 400×400m field</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>A synthetic scenario — not flight-tested, per the README's own scope table.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">40 / 50</span> security</p>
+      <div class="split v top"><div>
+        <h2>hackerone</h2>
+        <p class="lead">A safety-scoped vulnerability-triage tool that classifies findings — deliberately conservative by default.</p>
+        <ul class="clean"><li><b>Mock-mode by default</b>, hard rate limits.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">91%</div><div class="k">confidence on an example vulnerability classification</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Hard-coded 30 calls/minute; mock-mode by default — a safety-scoped tool, no live-benchmark numbers.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">41 / 50</span> agent memory</p>
+      <div class="split v top"><div>
+        <h2>RuLake</h2>
+        <p class="lead">Self-learning memory for agents that fronts your existing storage (S3, BigQuery, Snowflake) — cache-coherent recall without standing up a vector DB.</p>
+        <ul class="clean"><li><b>Learns from repeated queries</b> to accelerate lookups.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~1ms</div><div class="k">per lookup at 100,000 items · 32× less RAM than raw embeddings</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Cryptographically-verified recall at ~zero per-query cost.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">42 / 50</span> genomics</p>
+      <div class="split v top"><div>
+        <h2>rvdna</h2>
+        <p class="lead">A genomics toolkit — SNP-based risk scoring and compact genetic profile vectors.</p>
+        <ul class="clean"><li><b>20-SNP risk scoring</b>, 64-dim profiles.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A genomics toolkit — no quantitative accuracy/speed benchmark stated in the README.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">43 / 50</span> quantum</p>
+      <div class="split v top"><div>
+        <h2>ruqu</h2>
+        <p class="lead">An in-browser quantum-circuit simulator, compiled to WebAssembly.</p>
+        <ul class="clean"><li><b>Quantum, in a browser tab.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~25</div><div class="k">qubits supported in-browser</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>A WASM quantum simulator — no accuracy/speed benchmark table given.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">44 / 50</span> planetary sensing</p>
+      <div class="split v top"><div>
+        <h2>RuCelium</h2>
+        <p class="lead">"A network grown, not wired" — normalizes Wi-Fi, radar, thermal and more into one privacy-aware spec for camera-free ambient intelligence, from room to planetary scale.</p>
+        <ul class="clean"><li><b>Federated fabric</b> that verifies measurements and calibration.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Pins full commit history to a specific sister-repo SHA — and inherits rufield's "SYNTHETIC-labeled" benchmark caveat.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">45 / 50</span> evaluation</p>
+      <div class="split v top"><div>
+        <h2>retort</h2>
+        <p class="lead">An LLM evaluation harness — it <em>is</em> the measuring instrument, not the thing being measured.</p>
+        <ul class="clean"><li><b>Multi-task, multi-language, multi-model.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Ran 10 experiments across 2 tasks, 8 languages, and 4+ Claude model variants as its own evaluation dataset.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">46 / 50</span> imaging</p>
+      <div class="split v top"><div>
+        <h2>SonicChamber</h2>
+        <p class="lead">In-browser ultrasound computed tomography (USCT) — full acoustic image reconstruction, compiled to WebAssembly.</p>
+        <ul class="clean"><li><b>Medical-grade imaging</b>, in a browser.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">~130ms</div><div class="k">full USCT reconstruction, in-browser via WASM</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>Full reconstruction in ~130ms client-side.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">47 / 50</span> research agent</p>
+      <div class="split v top"><div>
+        <h2>ruvn</h2>
+        <p class="lead">A research agent that turns a question into a graded, cited evidence dossier — six specialist agents that search, grade, synthesize, and fact-check adversarially.</p>
+        <ul class="clean"><li><b>Every claim carries a citation.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A disciplined 6-stage research pipeline across 9 supported AI-host adapters; no performance benchmark — the discipline is the point.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">48 / 50</span> logs</p>
+      <div class="split v top"><div>
+        <h2>experiments</h2>
+        <p class="lead">A fork that hosts SWE-bench leaderboard submission logs — a record, not a product.</p>
+        <ul class="clean"><li><b>Receipts about other receipts.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>A fork hosting SWE-bench submission logs — no original benchmark data of its own.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">49 / 50</span> data transfer</p>
+      <div class="split v top"><div>
+        <h2>rvQR</h2>
+        <p class="lead">Optical file transfer over animated QR codes — move data screen-to-camera, no network required.</p>
+        <ul class="clean"><li><b>Air-gapped by design.</b></li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="stat"><div class="num i">40KB</div><div class="k">WASM binary (82 frames) transferred in ~16s</div></div>
+        <div class="callout"><div class="h">the receipt</div><p>2.3KB/5-frame demo in ~1s; throughput 2.5KB/s default, 10KB/s max.</p></div>
+      </div></div></div></section>
+
+    <section class="slide" data-part="Receipts"><div class="inner"><p class="kick"><span class="n">50 / 50</span> math &amp; proofs</p>
+      <div class="split v top"><div>
+        <h2>unsorry</h2>
+        <p class="lead">"SETI@home for maths proofs" — autonomous agents claim open goals and prove theorems in Lean 4, every contribution re-checked by the kernel.</p>
+        <ul class="clean"><li><b>No human in the correctness path</b> — the kernel is the judge.</li></ul>
+      </div><div class="di plain" style="align-content:start;gap:0.8rem">
+        <div class="callout"><div class="h">the receipt</div><p>Claims 5 mathlib-absent theorems proved and 3 adversarial red-team rounds passed (self-reported; kernel-verified by construction).</p></div>
+      </div></div></div></section>
+
+    <!-- CLOSE -->
     <section class="slide" data-part="Close">
       <div class="glow-b"></div>
       <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
-        <span class="kicker"><span class="dot"></span>ruvnet index · 50 repos</span>
-        <h1 style="margin-inline:auto">The receipts,<br><span class="g">ranked.</span></h1>
-        <p class="title-sub" style="margin-inline:auto">Sorted by stars · downloads and stars shown for the 22 most-popular · every entry backed by the benchmark proof in its own repo.</p>
-        <p class="src" style="text-align:center; margin-top:1.3rem">★ stars · ↓ downloads · figures from each repo's README</p>
+        <span class="kicker"><span class="dot"></span>Cognitum · the open ecosystem</span>
+        <h1 style="margin-inline:auto">The receipts,<br><span class="g">in other people's hands.</span></h1>
+        <p class="title-sub" style="margin-inline:auto">50 open-source projects · 51M+ downloads · each with the proof from its own repo. Built by Reuven Cohen (rUv).</p>
+        <p class="src" style="text-align:center; margin-top:1.3rem">★ stars · ↓ downloads · figures from each repo's README · † modelled totals marked on slide one</p>
       </div>
     </section>
 
@@ -549,7 +851,7 @@
 </div>
 
 <nav class="navbar">
-  <span class="foot-brand">ruvnet · index</span>
+  <span class="foot-brand">Cognitum · the receipts</span>
   <span class="part" id="partLbl"></span>
   <span class="hint">← → navigate · F present · T theme</span>
   <span class="spacer"></span>
