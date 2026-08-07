@@ -16,6 +16,7 @@ the cheapest-model-best-answer thesis, the 24/7 flywheel, and how to actually st
 | [`ruview.html`](ruview.html) | **Slide deck** | A companion 34-slide overview of **RuView** (camera-free WiFi spatial sensing — presence, vitals, pose from CSI), in the same design system. |
 | [`ruvnet-index.html`](ruvnet-index.html) | **Ecosystem deck** | "The receipts" — a download/builder headline for the open Cognitum ecosystem, then a devoted, repo-grounded slide for each of 50 ruvnet projects (stars, downloads, and the proof from each repo). |
 | [`ruflo.html`](ruflo.html) | **Slide deck** | A companion 23-slide overview of **Ruflo** (the original agent meta-harness for Claude Code and Codex — 100+ agents, coordinated swarms, self-learning memory, and secure federation from one `npx ruflo init`), in the same design system. |
+| [`metaharness-sectors.html`](metaharness-sectors.html) | **Briefing deck** | An in-depth 51-slide **MetaHarness consultant briefing** — the ruv stack (RuView, RuVector, ruvLLM, RuFlo, RVF) surfaced across **seven targeted sectors** (wireless, semiconductor, robotics, drones, home/industrial, security, networking) plus a Realtek/Ameba special case: value & fit, real clients in play, per-sector architecture, and the ruvnet open projects behind each use case. |
 
 Both are single, self-contained HTML files — no build step, no dependencies. They
 support light/dark themes (follows the OS setting, with a manual toggle) and respect
