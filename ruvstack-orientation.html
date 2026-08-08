@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cognitum Consultants cohort orientation — RuvStack, Darwin & Flywheel — animated 60-minute, 43-slide deck. Arrow keys / space to navigate.">
+<meta name="color-scheme" content="dark light">
+<title>Cognitum Consultants · RuvStack Orientation</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+
+    <!-- 1 · TITLE -->
+    <section class="slide hero" data-part="Welcome">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum <small>Consultants</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Consultant Certification · 29 Jul 2026</span>
+          <h1 class="rise" style="animation-delay:.1s">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">The <strong>RuvStack</strong> ecosystem — the factory and its two engines, <strong>Darwin</strong> &amp; <strong>Flywheel</strong> — the way Reuven Cohen walks a client through it.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>ruvstack</b><span>the factory</span></span>
+            <span class="chip"><b>darwin</b><span>the engine</span></span>
+            <span class="chip"><b>flywheel</b><span>the proof</span></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 440 440" role="img" aria-label="An animated emblem: a glowing frozen core inside orbiting harness rings">
+            <defs>
+              <radialGradient id="hcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/>
+                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
+            <g class="v-spin">
+              <circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
+              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR">
+              <circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.65"/>
+              <circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/>
+            </g>
+            <g class="v-spinS"><circle cx="220" cy="220" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.2" stroke-dasharray="1 11" opacity="0.5"/></g>
+            <circle r="5.5" fill="var(--jade)" class="v-t" style="offset-path:path('M220 220 m -150 0 a 150 150 0 1 0 300 0 a 150 150 0 1 0 -300 0');animation-duration:5.5s"/>
+            <circle r="4.5" fill="var(--indigo)" style="offset-path:path('M220 220 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0');offset-distance:0%;animation:vtravel 4s linear infinite reverse"/>
+            <circle class="v-halo" cx="220" cy="220" r="74" fill="var(--jade)"/>
+            <circle class="v-pulse" cx="220" cy="220" r="74" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <g class="v-spinS">
+              <circle cx="220" cy="220" r="44" fill="none" stroke="var(--indigo)" stroke-width="3"/>
+              <path d="M220 176v18 M220 246v18 M176 220h18 M246 220h18" stroke="var(--indigo)" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <circle class="v-pulse" cx="220" cy="220" r="15" fill="var(--jade)"/>
+            <circle class="v-float" cx="74" cy="96" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="372" cy="356" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · AGENDA -->
+    <section class="slide" data-part="Welcome">
+      <div class="inner">
+        <p class="kick"><span class="n">Agenda</span> Where the next hour goes</p>
+        <h2 style="margin-bottom:1rem">Six parts, roughly sixty minutes</h2>
+        <div class="agenda">
+          <div class="arow"><span class="an">01</span><span class="at">The big idea — why the harness, not the model</span><span class="am">~8 min</span></div>
+          <div class="arow"><span class="an">02</span><span class="at">RuvStack — the factory</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">03</span><span class="at">Darwin — the evolution engine</span><span class="am">~12 min</span></div>
+          <div class="arow"><span class="an">04</span><span class="at">Flywheel — the proof &amp; the receipts</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">05</span><span class="at">Putting it to work with a client</span><span class="am">~10 min</span></div>
+          <div class="arow"><span class="an">06</span><span class="at">Selling it — playbook &amp; objections</span><span class="am">~10 min</span></div>
+        </div>
+        <div class="callout i" style="margin-top:1.1rem"><div class="h">How to read this deck</div><p>Every part opens with a divider and ends with something you can say to a client. Ask questions any time — the top progress bar is click-to-jump if we double back. Controls: <strong>← →</strong> or Space · <strong>F</strong> fullscreen · <strong>T</strong> theme.</p></div>
+      </div>
+    </section>
+
+    <!-- 3 · DIVIDER 01 -->
+    <section class="slide divider" data-part="The big idea">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 01</div>
+          <h2 class="rise" style="animation-delay:.06s">The big idea</h2>
+          <p class="sub rise" style="animation-delay:.12s">Why the smartest move in agents right now is to stop chasing bigger models.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>the problem</span><span>the thesis</span><span>the cheapest lever</span><span>the three projects</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A frozen model core inside two rotating harness rings">
+            <g class="v-spin">
+              <circle cx="170" cy="160" r="140" fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-dasharray="8 13" opacity="0.8"/>
+              <circle cx="170" cy="20" r="7" fill="var(--indigo)"/><circle cx="310" cy="160" r="7" fill="var(--indigo)"/>
+              <circle cx="170" cy="300" r="7" fill="var(--indigo)"/><circle cx="30" cy="160" r="7" fill="var(--indigo)"/>
+            </g>
+            <g class="v-spinR"><circle cx="170" cy="160" r="104" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="4 15" opacity="0.6"/></g>
+            <circle class="v-pulse" cx="170" cy="160" r="66" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <path d="M158 156 v-10 a12 12 0 0 1 24 0 v10 M150 156 h40 v30 h-40 z" fill="none" stroke="var(--jade)" stroke-width="2.5" stroke-linejoin="round"/>
+            <text x="170" y="230" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">MODEL · frozen</text>
+            <circle class="v-float" cx="58" cy="66" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.1s" cx="288" cy="252" r="5.5" fill="var(--indigo)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · THE PROBLEM -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.1</span> The problem</p>
+        <div class="split v top">
+          <div>
+            <h2>Every repo wants a repo-aware agent — and every agent burns money</h2>
+            <p class="mut">A generic assistant doesn't know your codebase, your funnel, or your data. Hand-tuning one is slow and doesn't stick. And the obvious fix — reach for a bigger model — is the expensive one, precisely where agents live longest.</p>
+            <ul class="clean" style="margin-top:0.8rem">
+              <li><b>Context gap</b> — off-the-shelf agents have no idea how your system actually works.</li>
+              <li class="j"><b>Cost gap</b> — in a long-running app, LLM tokens are the single biggest line item.</li>
+              <li><b>Trust gap</b> — "it gets better over time" is usually an unfalsifiable claim.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">The three gaps a harness has to close</span>
+            <svg viewBox="0 0 400 250" role="img" aria-label="Three gaps: context, cost, trust">
+              <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <rect x="20" y="24" width="150" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="34" y="48" font-size="13" class="vlbl-t" font-weight="600">Generic agent</text>
+              <text x="34" y="66" font-size="11" class="vlbl-f">no repo knowledge</text>
+              <line class="v-draw" x1="170" y1="52" x2="250" y2="52" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ar1)"/>
+              <text x="176" y="42" font-size="10" fill="var(--crit)">context gap</text>
+              <rect x="252" y="24" width="128" height="56" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="266" y="48" font-size="13" class="vlbl-t" font-weight="600">Your system</text>
+              <text x="266" y="66" font-size="11" class="vlbl-f">the real context</text>
+              <text x="20" y="120" font-size="11" fill="var(--amber)">cost gap</text>
+              <rect x="20" y="128" width="360" height="16" rx="8" fill="var(--surface-2)" stroke="var(--border)"/>
+              <rect class="v-gx" x="20" y="128" width="300" height="16" rx="8" fill="var(--crit)" opacity="0.8"/>
+              <text x="330" y="141" font-size="11" class="vlbl">LLM $$$</text>
+              <text x="20" y="194" font-size="11" fill="var(--indigo)">trust gap</text>
+              <text x="20" y="220" font-size="14" class="vlbl">"it improves over time"</text>
+              <text x="243" y="220" font-size="18" fill="var(--crit)" class="v-shim">?</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · THESIS (rings) -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <div class="split v">
+          <div>
+            <div class="bigquote i"><p>Don't buy a bigger brain. Build a better harness around the one you have.</p><div class="who">the RuvStack thesis</div></div>
+            <p class="mut" style="margin-top:1rem">The model's weights stay <strong>frozen</strong>. Everything <em>around</em> it — how it plans, what context it sees, which tools it may call, when it retries, what it remembers — is the <strong>harness</strong>. That's the part you evolve, and it's cheap to change.</p>
+          </div>
+          <div class="di sq">
+            <span class="cap">Frozen core, evolving harness</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A frozen model core surrounded by an evolving harness ring">
+              <defs><marker id="arRing" markerWidth="9" markerHeight="9" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--indigo)"/></marker></defs>
+              <g class="v-spinS">
+                <circle cx="150" cy="150" r="128" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="7 9" opacity="0.85"/>
+                <circle cx="150" cy="22" r="6" fill="var(--indigo)"/>
+                <circle cx="278" cy="150" r="6" fill="var(--indigo)"/>
+                <circle cx="150" cy="278" r="6" fill="var(--indigo)"/>
+                <circle cx="22" cy="150" r="6" fill="var(--indigo)"/>
+              </g>
+              <g font-size="11" fill="var(--indigo)" text-anchor="middle"><text x="150" y="14">planner</text><text x="256" y="140">tools</text><text x="150" y="296">memory</text><text x="44" y="140">context</text></g>
+              <circle class="v-pulse" cx="150" cy="150" r="62" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <path d="M143 150 v-8 a7 7 0 0 1 14 0 v8 M138 150 h24 v20 h-24 z" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linejoin="round"/>
+              <text x="150" y="205" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MODEL · frozen</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · CHEAPEST LEVER (pareto) -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.3</span> Why the harness is the cheapest lever</p>
+        <div class="split vr top">
+          <div>
+            <h2>Cheapest capable model, best possible answer</h2>
+            <ul class="clean">
+              <li><b>Cheapest route to the best answer</b> — not just smart, cheap.</li>
+              <li class="j"><b>Small model where it suffices</b>; escalate only when a task truly needs it.</li>
+              <li><b>That gap is your margin</b> — and it compounds in always-on apps.</li>
+            </ul>
+            <div class="grid g2" style="margin-top:0.7rem; gap:0.6rem">
+              <div class="stat"><div class="num"><span class="count" data-to="56" data-pre="~" data-suf="×">0</span></div><div class="k">cheaper than frontier-only</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="7.6" data-dp="1" data-suf="×">0</span></div><div class="k">resolution lift, harness alone</div></div>
+            </div>
+          </div>
+          <div class="di">
+            <span class="cap">Cost vs. capability — the Pareto frontier</span>
+            <svg viewBox="0 0 440 300" role="img" aria-label="RuvStack and frontier-only reach the same capability, but RuvStack costs about 56 times less">
+              <defs><marker id="ar6" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <line x1="56" y1="30" x2="56" y2="250" stroke="var(--border-2)" stroke-width="1.5"/>
+              <line x1="56" y1="250" x2="414" y2="250" stroke="var(--border-2)" stroke-width="1.5"/>
+              <path class="v-draw" d="M100 212 Q132 128 152 113 L410 110" fill="none" stroke="var(--jade)" stroke-width="2" stroke-dasharray="5 6" opacity="0.55"/>
+              <text x="252" y="90" text-anchor="middle" font-size="12.5" class="vlbl">same capability</text>
+              <line x1="166" y1="152" x2="358" y2="152" stroke="var(--jade)" stroke-width="1.5" marker-start="url(#ar6)" marker-end="url(#ar6)"/>
+              <text x="262" y="172" text-anchor="middle" font-size="13.5" fill="var(--jade)" font-weight="600">~56× cheaper</text>
+              <text x="262" y="188" text-anchor="middle" font-size="10.5" class="vlbl-f">more cost buys no more capability</text>
+              <circle class="v-pop" cx="104" cy="210" r="6.5" fill="var(--muted)"/><text x="118" y="214" font-size="12" class="vlbl-f">small model</text>
+              <circle class="v-pop" style="animation-delay:.2s" cx="372" cy="112" r="9" fill="var(--crit)"/>
+              <text x="372" y="96" text-anchor="middle" font-size="12.5" fill="var(--crit)" font-weight="600">frontier-only</text>
+              <circle class="v-halo" cx="152" cy="113" r="10" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:.35s" cx="152" cy="113" r="10" fill="var(--jade)"/><circle cx="152" cy="113" r="10" fill="none" stroke="var(--surface)" stroke-width="2.5"/>
+              <text x="152" y="138" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">RuvStack</text>
+              <text x="62" y="270" font-size="11.5" class="vlbl-f">low cost</text>
+              <text x="414" y="270" font-size="11.5" class="vlbl-f" text-anchor="end">high cost →</text>
+              <text x="38" y="140" font-size="11.5" class="vlbl-f" transform="rotate(-90 38 140)" text-anchor="middle">capability →</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · THREE PROJECTS -->
+    <section class="slide" data-part="The big idea">
+      <div class="inner">
+        <p class="kick"><span class="n">01.4</span> The three projects</p>
+        <h2 style="margin-bottom:0.9rem">What you're being certified on</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag">the factory</div><h3>ruvstack</h3><p>Wraps a repo or a live stack in a branded, publishable agent harness with its own <code>npx</code> CLI.</p></div>
+          <div class="card"><div class="tag j">the engine</div><h3>@ruvstack/darwin</h3><p>Evolves that harness — mutates policy surfaces, keeps only what measurably improves.</p></div>
+          <div class="card"><div class="tag">the proof</div><h3>@ruvstack/flywheel</h3><p>Runs the loop continually and promotes only proven lift — with signed, replayable receipts.</p></div>
+        </div>
+        <div class="di plain" style="margin-top:0.9rem">
+          <svg viewBox="0 0 900 60" role="img" aria-label="Factory builds a harness, Darwin improves it, Flywheel proves it, then ship">
+            <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <g font-size="14" text-anchor="middle">
+              <rect x="20" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--indigo)"/><text x="120" y="36" fill="var(--indigo)">ruvstack — build</text>
+              <line x1="224" y1="31" x2="286" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <rect x="290" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="390" y="36" fill="var(--jade)">darwin — improve</text>
+              <line x1="494" y1="31" x2="556" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <rect x="560" y="14" width="200" height="34" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="660" y="36" fill="var(--jade)">flywheel — prove</text>
+              <line x1="762" y1="31" x2="824" y2="31" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#ar3)"/>
+              <text x="864" y="36" fill="var(--muted)">ship</text>
+            </g>
+            <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M20 31 H864')"/>
+          </svg>
+        </div>
+        <p class="src">All three: open source, MIT · github.com/ruvnet/ruvstack · npm @ruvstack/*</p>
+      </div>
+    </section>
+
+    <!-- 8 · DIVIDER 02 -->
+    <section class="slide divider" data-part="RuvStack">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 02</div>
+          <h2 class="rise" style="animation-delay:.06s">RuvStack — the factory</h2>
+          <p class="sub rise" style="animation-delay:.12s">A factory for agent harnesses. Not another agent framework.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>wraps your stack</span><span>one kernel · nine hosts</span><span>governed by default</span><span>the numbers</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 320" role="img" aria-label="A turning factory gear around the kernel hub">
+            <g class="v-spin" stroke="var(--indigo)" stroke-width="6" stroke-linecap="round">
+              <line x1="290" y1="160" x2="308" y2="160"/><line x1="255" y1="75" x2="268" y2="62"/>
+              <line x1="170" y1="40" x2="170" y2="22"/><line x1="85" y1="75" x2="72" y2="62"/>
+              <line x1="50" y1="160" x2="32" y2="160"/><line x1="85" y1="245" x2="72" y2="258"/>
+              <line x1="170" y1="280" x2="170" y2="298"/><line x1="255" y1="245" x2="268" y2="258"/>
+            </g>
+            <circle class="v-spin" cx="170" cy="160" r="120" fill="none" stroke="var(--indigo)" stroke-width="3"/>
+            <g class="v-spinR"><circle cx="170" cy="160" r="86" fill="none" stroke="var(--border-2)" stroke-width="2" stroke-dasharray="6 11"/></g>
+            <circle class="v-pulse" cx="170" cy="160" r="52" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <text x="170" y="156" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">kernel</text>
+            <text x="170" y="174" text-anchor="middle" font-size="10" fill="var(--faint)">Rust→WASM</text>
+            <circle r="6.5" fill="var(--jade)" class="v-t" style="offset-path:path('M170 160 m -120 0 a 120 120 0 1 0 240 0 a 120 120 0 1 0 -240 0');animation-duration:7s"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · WHAT IT IS -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.1</span> What it is</p>
+        <div class="split v top">
+          <div>
+            <h2>From a repository to a publishable agent — in under a minute</h2>
+            <p class="mut">RuvStack reads a codebase and mints a complete, npm-publishable harness with its own <code>npx</code> CLI, branded as yours. It's a <strong>factory</strong>, not a framework — it produces the product, then gets out of the way.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li><b>Static &amp; deterministic</b> — it scans your repo; it never executes your code.</li>
+              <li class="j"><b>Yours to own</b> — output is a versioned npm package you publish and govern.</li>
+              <li><b>Byte-identical Studio</b> — a client-side playground mirrors the CLI exactly.</li>
+            </ul>
+          </div>
+          <div class="di plain" style="gap:0.9rem; align-content:start">
+            <div class="callout i"><div class="h">The one-liner</div><p>"The meta-harness for AI agents — scaffold your own focused, branded agent harness with its own <code>npx</code> CLI."</p></div>
+            <div class="grid g2">
+              <div class="stat"><div class="num i">&lt;60s</div><div class="k">repo → publishable harness</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="9">0</span></div><div class="k">agent hosts it runs on</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · WRAPS YOUR STACK -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.2</span> It wraps what you already run</p>
+        <div class="split vr top">
+          <div>
+            <h2>Point it at your stack, tell Claude to evolve it</h2>
+            <p class="mut">Reuven's framing: the harness <strong>wraps your other systems</strong>. You already have a funnel, ads, data, and marketing APIs. Point RuvStack at them and tell Claude to build a harness around them — then evolve it.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li><b>Your systems stay put</b> — the harness sits around them, not instead of them.</li>
+              <li class="j"><b>Governance is the outer layer</b> — an MCP policy wraps every tool call.</li>
+              <li><b>Nothing bespoke to maintain</b> — it's an npm dependency, versioned like any other.</li>
+            </ul>
+          </div>
+          <div class="di sq">
+            <span class="cap">A harness is a wrapper, not a rewrite</span>
+            <svg viewBox="0 0 320 262" role="img" aria-label="Your stack wrapped by a harness, wrapped by governance">
+              <rect class="v-pop" x="14" y="14" width="292" height="234" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="6 6"/>
+              <text x="160" y="34" text-anchor="middle" font-size="11" fill="var(--indigo)">GOVERNANCE · MCP default-deny</text>
+              <rect class="v-pop" style="animation-delay:.12s" x="46" y="50" width="228" height="166" rx="13" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
+              <text x="160" y="70" text-anchor="middle" font-size="11" fill="var(--jade)">HARNESS · agents · tools · retries</text>
+              <rect class="v-pop" style="animation-delay:.24s" x="84" y="88" width="152" height="104" rx="10" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              <text x="160" y="130" text-anchor="middle" font-size="13" class="vlbl-t" font-weight="600">YOUR STACK</text>
+              <text x="160" y="150" text-anchor="middle" font-size="11" class="vlbl-f">funnel · ads · data · APIs</text>
+              <circle r="4" fill="var(--indigo)" class="v-t" style="offset-path:path('M30 30 H290 V232 H30 Z');animation-duration:6s"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · ARCHITECTURE -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.3</span> How the pieces stack</p>
+        <h2 style="margin-bottom:0.9rem">One shared kernel, your branding on top</h2>
+        <div class="flow">
+          <div class="node"><span class="badge">you</span><b>Your stack</b><span>funnel · ads · data</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">factory</span><b>Generator</b><span>wraps it up</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">out</span><b>Your harness</b><span>npx · agents · policy</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node kernel j"><span class="badge">core</span><b>kernel</b><span>Rust→WASM</span></div>
+          <div class="harrow">&rarr;</div>
+          <div class="node"><span class="badge">host</span><b>Host adapter</b><span>→ LLM providers</span></div>
+        </div>
+        <div class="split v top" style="margin-top:1rem; gap:1.4rem">
+          <p class="mut small" style="margin:0">The <code>@ruvstack/kernel</code> (Rust compiled to WASM + NAPI-RS) is shared across every generated harness — it handles the plumbing so your content and branding stay proprietary.</p>
+          <ul class="clean sm" style="margin:0">
+            <li><b>Deterministic language detection</b> from lockfiles — Rust, TS, Python, Go.</li>
+            <li class="j"><b>Same output everywhere</b> — the host adapter is the only thing that changes per platform.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · WHAT SHIPS -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.4</span> What ships in the box</p>
+        <div class="grid g2" style="gap:0.7rem 2rem">
+          <ul class="clean">
+            <li><b>Multi-host output</b> — one harness, nine platforms including non-interactive CI.</li>
+            <li class="j"><b>Governance built in</b> — MCP default-deny, Ed25519-signed releases, SBOMs.</li>
+            <li><b>Pre-flight scoring</b> — fitness, tool safety, and cost-per-run before you commit.</li>
+          </ul>
+          <ul class="clean">
+            <li class="j"><b>19 vertical templates</b> — coding, trading, legal, support, research, education…</li>
+            <li><b>21 <code>harness</code> subcommands</b> — the whole lifecycle from one CLI.</li>
+            <li class="j"><b>DRACO benchmark</b> — grades research quality: grounding, coverage, faithfulness.</li>
+          </ul>
+        </div>
+        <div class="grid g4" style="margin-top:0.9rem">
+          <div class="stat"><div class="num i"><span class="count" data-to="568">0</span></div><div class="k">passing tests · 67 files</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="16">0</span></div><div class="k">green CI jobs</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="21">0</span></div><div class="k"><code>harness</code> subcommands</div></div>
+          <div class="stat"><div class="num i"><span class="count" data-to="19">0</span></div><div class="k">vertical templates</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · NINE HOSTS (hub-spoke) -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.5</span> Runs on nine hosts</p>
+        <div class="split vr top">
+          <div>
+            <h2>Write the harness once, run it anywhere</h2>
+            <p class="mut">The kernel is constant; only the host adapter changes. So the same harness runs interactively, in CI, or in a hardware-isolated sandbox — without a rewrite.</p>
+            <ul class="clean" style="margin-top:0.7rem">
+              <li class="j"><b>Interactive</b> — Claude Code, Codex, Copilot, OpenCode.</li>
+              <li><b>Hosted &amp; research</b> — pi.dev, Hermes (Nous), OpenClaw.</li>
+              <li class="j"><b>Locked-down</b> — RVM sandbox, and GitHub Actions for CI/CD.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">One kernel · nine adapters · live signal</span>
+            <svg viewBox="0 0 420 300" role="img" aria-label="Kernel at center firing signals out to nine hosts">
+              <g stroke="var(--border-2)" stroke-width="1.3">
+                <line class="v-draw" x1="210" y1="150" x2="210" y2="40"/><line class="v-draw" x1="210" y1="150" x2="326" y2="66"/>
+                <line class="v-draw" x1="210" y1="150" x2="378" y2="150"/><line class="v-draw" x1="210" y1="150" x2="326" y2="234"/>
+                <line class="v-draw" x1="210" y1="150" x2="210" y2="266"/><line class="v-draw" x1="210" y1="150" x2="94" y2="234"/>
+                <line class="v-draw" x1="210" y1="150" x2="42" y2="150"/><line class="v-draw" x1="210" y1="150" x2="94" y2="66"/>
+                <line class="v-draw" x1="210" y1="150" x2="150" y2="112"/>
+              </g>
+              <g font-size="10.5" fill="var(--muted)" text-anchor="middle">
+                <circle cx="210" cy="34" r="5" fill="var(--indigo)"/><text x="210" y="22">Claude Code</text>
+                <circle cx="326" cy="66" r="5" fill="var(--indigo)"/><text x="344" y="58">Codex</text>
+                <circle cx="378" cy="150" r="5" fill="var(--indigo)"/><text x="378" y="138">pi.dev</text>
+                <circle cx="326" cy="234" r="5" fill="var(--indigo)"/><text x="344" y="252">Hermes</text>
+                <circle cx="210" cy="266" r="5" fill="var(--indigo)"/><text x="210" y="284">OpenClaw</text>
+                <circle cx="94" cy="234" r="5" fill="var(--indigo)"/><text x="74" y="252">RVM</text>
+                <circle cx="42" cy="150" r="5" fill="var(--indigo)"/><text x="46" y="138">Copilot</text>
+                <circle cx="94" cy="66" r="5" fill="var(--indigo)"/><text x="74" y="58">OpenCode</text>
+                <circle cx="150" cy="112" r="5" fill="var(--indigo)"/><text x="120" y="106">Actions</text>
+              </g>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L210 40')"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L378 150');animation-delay:.5s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L326 234');animation-delay:1s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L94 234');animation-delay:1.5s"/>
+              <circle r="3.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M210 150 L94 66');animation-delay:2s"/>
+              <circle class="v-pulse" cx="210" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="210" y="147" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">kernel</text>
+              <text x="210" y="161" text-anchor="middle" font-size="8.5" class="vlbl-f">Rust→WASM</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · GOVERNANCE -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.6</span> Governance &amp; safety</p>
+        <div class="split v top">
+          <div>
+            <h2>Ship an agent your security team will sign off on</h2>
+            <p class="mut">Governance isn't bolted on afterward — it's part of the generated output, so an agent is a dependency you can audit like any other package in your tree.</p>
+          </div>
+          <ul class="clean">
+            <li class="j"><b>MCP default-deny</b> — the tool server refuses anything not explicitly allowed.</li>
+            <li class="j"><b>Ed25519 witness-signed releases</b> — cryptographic provenance you can verify.</li>
+            <li class="j"><b>SPDX-2.3 SBOM</b> — a full bill of materials per release.</li>
+            <li class="j"><b><code>harness mcp-scan</code></b> — a static MCP threat model, ready for PR review.</li>
+            <li><b>SLSA L2 provenance</b> — supply-chain attestation via workload identity.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · DAY TO DAY -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.7</span> Day-to-day commands</p>
+        <div class="split v top">
+          <div>
+            <h2>A small, memorable CLI</h2>
+            <p class="mut">After scaffolding, the whole lifecycle is a handful of <code>harness</code> subcommands — plus two analysis tools you run <em>before</em> you commit.</p>
+            <div class="callout i" style="margin-top:0.5rem"><div class="h">Pre-flight</div><p><code>ruvstack score &lt;repo&gt;</code> → fitness, build likelihood, tool safety, cost-per-run. <code>harness genome &lt;repo&gt;</code> → readiness analysis.</p></div>
+          </div>
+          <pre><span class="c"># health &amp; release gates</span>
+<span class="cmd">harness</span> doctor        <span class="c"># environment check</span>
+<span class="cmd">harness</span> validate      <span class="c"># run all release gates</span>
+<span class="cmd">harness</span> sign / verify <span class="c"># witness manifest</span>
+<span class="cmd">harness</span> mcp-scan      <span class="c"># threat analysis</span>
+<span class="cmd">harness</span> sbom          <span class="c"># SPDX bill of materials</span>
+<span class="cmd">harness</span> threat-model  <span class="c"># MCP risk artifact</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · THE NUMBERS (cost bars) -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.8</span> The case, in numbers</p>
+        <div class="split vr top">
+          <div>
+            <h2>Same benchmark, a fraction of the cost</h2>
+            <div class="grid g2" style="margin-top:0.6rem; gap:0.6rem">
+              <div class="stat"><div class="num"><span class="count" data-to="55.6" data-dp="1" data-suf="%">0</span></div><div class="k">SWE-bench Verified (500) resolved</div></div>
+              <div class="stat"><div class="num i"><span class="count" data-to="51.3" data-dp="1" data-suf="%">0</span></div><div class="k">the Lite-cascade baseline it beats</div></div>
+            </div>
+            <p class="mut small" style="margin-top:0.7rem">The GLM→Opus empty-patch cascade resolves more of the benchmark than the baseline — for cents, not dollars, per instance. Cost is the headline, not a footnote.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Cost per instance</span>
+            <svg viewBox="0 0 420 200" role="img" aria-label="RuvStack about 15 cents versus frontier-only $1 to $20 per instance">
+              <text x="14" y="40" font-size="12" fill="var(--jade)">RuvStack cascade</text>
+              <rect class="v-gx" x="14" y="48" width="60" height="22" rx="6" fill="var(--jade)"/>
+              <text x="82" y="64" font-size="12" class="vlbl-t" font-weight="600">~$0.15</text>
+              <text x="14" y="112" font-size="12" fill="var(--crit)">frontier-only</text>
+              <rect x="14" y="120" width="388" height="22" rx="6" fill="var(--surface-2)" stroke="var(--border)"/>
+              <rect class="v-gx" style="animation-delay:.25s" x="14" y="120" width="388" height="22" rx="6" fill="var(--crit)" opacity="0.82"/>
+              <text x="396" y="136" font-size="12" fill="var(--surface)" text-anchor="end" font-weight="600">$1 – $20</text>
+              <line x1="14" y1="164" x2="402" y2="164" stroke="var(--border)"/>
+              <text x="14" y="184" font-size="11" fill="var(--jade)" font-weight="600">≈ 56× cheaper</text>
+              <text x="402" y="184" font-size="10.5" class="vlbl-f" text-anchor="end">Darwin runs: $0.01–$0.74 / instance</text>
+            </svg>
+          </div>
+        </div>
+        <p class="src">v0.1.x beta · SLSA L2 provenance · CodeQL + cargo/npm audit · a live leaderboard tracks the Pareto frontier.</p>
+      </div>
+    </section>
+
+    <!-- 17 · OPTIMIZATION FAMILY -->
+    <section class="slide" data-part="RuvStack">
+      <div class="inner">
+        <p class="kick"><span class="n">02.9</span> The Pareto-frontier family</p>
+        <h2 style="margin-bottom:0.9rem">Three levers to push cost down without losing quality</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag j">evolve</div><h3>Darwin</h3><p>Self-mutates the harness, tests in sandboxes, keeps only measurable wins. <em>Today's focus.</em></p></div>
+          <div class="card"><div class="tag">distill</div><h3>Weight-EFT</h3><p>Distills frontier models into tuned cheaper ones (GLM/Qwen via LoRA), so you escalate less often.</p></div>
+          <div class="card"><div class="tag">route</div><h3>Router</h3><p>Learns from your eval logs which model handles each task, routing to the cheapest capable option.</p></div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">How to frame it for a client</div><p>They stack. <strong>Route</strong> to the cheapest model that can do the job, <strong>distill</strong> the expensive one so the cheap tier gets smarter, and <strong>evolve</strong> the harness around all of it. A live leaderboard tracks who resolves the most benchmark per dollar.</p></div>
+      </div>
+    </section>
+
+    <!-- 18 · DIVIDER 03 -->
+    <section class="slide divider" data-part="Darwin">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 03</div>
+          <h2 class="rise" style="animation-delay:.06s">Darwin — the engine</h2>
+          <p class="sub rise" style="animation-delay:.12s">"Freeze the model, evolve the harness" — made mechanical.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>seven surfaces</span><span>archive tree</span><span>score &amp; gate</span><span>the lift</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 300 360" role="img" aria-label="An animated DNA double helix">
+            <g class="v-float">
+              <polyline class="v-draw" points="150,30 182,45 202,60 202,75 182,90 150,105 118,120 98,135 98,150 118,165 150,180 182,195 202,210 202,225 182,240 150,255 118,270 98,285 98,300 118,315 150,330" fill="none" stroke="var(--indigo)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <polyline class="v-draw" style="animation-delay:.25s" points="150,30 118,45 98,60 98,75 118,90 150,105 182,120 202,135 202,150 182,165 150,180 118,195 98,210 98,225 118,240 150,255 182,270 202,285 202,300 182,315 150,330" fill="none" stroke="var(--jade)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <g stroke-linecap="round">
+                <line class="v-shim" x1="98" y1="60" x2="202" y2="60" stroke="var(--jade)" stroke-width="3.5"/>
+                <line class="v-shim" style="animation-delay:.2s" x1="118" y1="90" x2="182" y2="90" stroke="var(--jade)" stroke-width="3"/>
+                <line class="v-shim" style="animation-delay:.4s" x1="118" y1="120" x2="182" y2="120" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:.6s" x1="98" y1="150" x2="202" y2="150" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:.8s" x1="98" y1="210" x2="202" y2="210" stroke="var(--jade)" stroke-width="3.5"/>
+                <line class="v-shim" style="animation-delay:1s" x1="118" y1="240" x2="182" y2="240" stroke="var(--jade)" stroke-width="3"/>
+                <line class="v-shim" style="animation-delay:1.2s" x1="118" y1="270" x2="182" y2="270" stroke="var(--border-2)" stroke-width="2"/>
+                <line class="v-shim" style="animation-delay:1.4s" x1="98" y1="300" x2="202" y2="300" stroke="var(--border-2)" stroke-width="2"/>
+              </g>
+              <g fill="var(--indigo)"><circle class="v-pop" cx="202" cy="60" r="5.5"/><circle class="v-pop" style="animation-delay:.3s" cx="98" cy="150" r="5.5"/><circle class="v-pop" style="animation-delay:.6s" cx="202" cy="210" r="5.5"/><circle class="v-pop" style="animation-delay:.9s" cx="98" cy="300" r="5.5"/></g>
+              <g fill="var(--jade)"><circle class="v-pop" cx="98" cy="60" r="5.5"/><circle class="v-pop" style="animation-delay:.3s" cx="202" cy="150" r="5.5"/><circle class="v-pop" style="animation-delay:.6s" cx="98" cy="210" r="5.5"/><circle class="v-pop" style="animation-delay:.9s" cx="202" cy="300" r="5.5"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · DARWIN ONE LINE -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <div class="split v">
+          <div>
+            <p class="kick"><span class="n">03.1</span> @ruvstack/darwin</p>
+            <h2>Evolve the operating system around a frozen model</h2>
+            <ul class="clean">
+              <li><b>One surface mutates</b> per generation — a clean signal.</li>
+              <li class="j"><b>Sandbox → score → gate</b> — promote only measured wins.</li>
+              <li><b>Four hard gates</b> — improvement is measured, never assumed.</li>
+            </ul>
+            <p class="mut small" style="margin-top:0.5rem">Validated on real SWE-bench bug-fixing. <code>v0.8.0</code> · MIT © rUv.</p>
+          </div>
+          <div class="bigquote i" style="align-self:center"><p>"Out of a hundred evolutions, this is the best one. The ones that work, it evolves more. The ones that don't are dead ends."</p><div class="who">Reuven Cohen</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · SEVEN SURFACES -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.2</span> The seven mutation surfaces</p>
+        <div class="split v top">
+          <div>
+            <h2 style="margin-bottom:0.7rem">Exactly one changes per generation</h2>
+            <p class="mut small">Isolating a single change keeps the causal signal clean — you know precisely which surface moved the score, and by how much. Six are writable by a variant; <code>score_policy</code> is read-only, so a variant can't grade its own homework.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Why one at a time</div><p>Change two things and a win is unattributable. Darwin trades speed for a clean gradient.</p></div>
+          </div>
+          <div class="surfaces">
+            <div class="surf"><span class="f">planner.ts</span><span class="d">decomposes a task</span></div>
+            <div class="surf"><span class="f">context_builder.ts</span><span class="d">ranks file relevance</span></div>
+            <div class="surf"><span class="f">reviewer.ts</span><span class="d">risk &amp; test review</span></div>
+            <div class="surf"><span class="f">retry_policy.ts</span><span class="d">classifies &amp; retries</span></div>
+            <div class="surf"><span class="f">tool_policy.ts</span><span class="d">allowlist &amp; order</span></div>
+            <div class="surf"><span class="f">memory_policy.ts</span><span class="d">what to retain</span></div>
+            <div class="surf ro"><span class="f">score_policy.ts</span><span class="d">weights · read-only</span></div>
+            <div class="surf ro"><span class="f">1 per generation</span><span class="d">clean causal signal</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · ARCHIVE TREE -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.3</span> The archive tree</p>
+        <div class="split vr top">
+          <div>
+            <h2>Not a greedy climb — a population</h2>
+            <p class="mut">Variants live in an <strong>archive tree</strong>, not a single best branch. Selection can revisit a weaker ancestor that turns out to seed a stronger lineage — exactly like biology, where a dead end for one trait is the origin of another.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Keeps "losers" around</b> — a low scorer may carry a mutation that pays off later.</li>
+              <li><b>Opt-in strategies</b> — quality-diversity, Pareto selection, crossover, MAP-Elites.</li>
+              <li class="j"><b>Reproducible core</b> — every extra is a toggle over a frozen, seeded baseline.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">A weak ancestor can seed the winner</span>
+            <svg viewBox="0 0 420 250" role="img" aria-label="Evolution tree with a highlighted winning lineage and faded dead ends">
+              <g stroke-width="2" fill="none">
+                <path class="v-draw" d="M40 125 L140 70" stroke="var(--border-2)"/>
+                <path class="v-draw" d="M40 125 L140 185" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 70 L250 44" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 70 L250 104" stroke="var(--border-2)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 185 L250 158" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.3s" d="M140 185 L250 214" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+                <path class="v-draw" style="animation-delay:.6s" d="M250 158 L370 132" stroke="var(--jade)"/>
+                <path class="v-draw" style="animation-delay:.6s" d="M250 104 L370 78" stroke="var(--border-2)" stroke-dasharray="4 4"/>
+              </g>
+              <g>
+                <circle class="v-pop" cx="40" cy="125" r="8" fill="var(--muted)"/>
+                <circle class="v-pop" style="animation-delay:.3s" cx="140" cy="70" r="7" fill="var(--muted)"/>
+                <circle class="v-pop" style="animation-delay:.3s" cx="140" cy="185" r="8" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="44" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="48" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="104" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="108" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="158" r="8" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.5s" cx="250" cy="214" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="250" y="218" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+                <circle class="v-halo" cx="370" cy="132" r="11" fill="var(--jade)"/>
+                <circle class="v-pop" style="animation-delay:.8s" cx="370" cy="132" r="11" fill="var(--jade)"/><circle cx="370" cy="132" r="11" fill="none" stroke="var(--surface)" stroke-width="2"/>
+                <circle class="v-pop" style="animation-delay:.8s" cx="370" cy="78" r="7" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="370" y="82" text-anchor="middle" font-size="9" fill="var(--crit)">✕</text>
+              </g>
+              <text x="40" y="150" text-anchor="middle" font-size="10" class="vlbl-f">root</text>
+              <text x="140" y="209" text-anchor="middle" font-size="9.5" fill="var(--jade)">weak ancestor</text>
+              <text x="370" y="158" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">winner</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · FOUR STEPS (loop) -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.4</span> One generation, four steps</p>
+        <div class="split vr top">
+          <div class="di sq">
+            <span class="cap">The generation loop</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="Cyclic loop: mutate, sandbox, score, promote, with an orbiting token">
+              <defs><marker id="arL" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g fill="none" stroke="var(--border-2)" stroke-width="2">
+                <path d="M186 66 A100 100 0 0 1 234 114" marker-end="url(#arL)"/>
+                <path d="M234 186 A100 100 0 0 1 186 234" marker-end="url(#arL)"/>
+                <path d="M114 234 A100 100 0 0 1 66 186" marker-end="url(#arL)"/>
+                <path d="M66 114 A100 100 0 0 1 114 66" marker-end="url(#arL)"/>
+              </g>
+              <circle r="8" fill="var(--jade)" class="v-t" style="offset-path:path('M150 50 A100 100 0 1 1 149 50');animation-duration:6s"/>
+              <g text-anchor="middle">
+                <circle cx="150" cy="48" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="150" y="52" font-size="12" class="vlbl-t">Mutate</text>
+                <circle cx="252" cy="150" r="26" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/><text x="252" y="154" font-size="11" class="vlbl-t">Sandbox</text>
+                <circle cx="150" cy="252" r="26" fill="var(--surface)" stroke="var(--indigo)" stroke-width="2"/><text x="150" y="256" font-size="12" fill="var(--indigo)">Score</text>
+                <circle cx="48" cy="150" r="26" fill="var(--surface)" stroke="var(--jade)" stroke-width="2"/><text x="48" y="154" font-size="11" fill="var(--jade)">Promote</text>
+                <text x="150" y="146" font-size="10" class="vlbl-f">1 GENERATION</text>
+                <text x="150" y="162" font-size="10" class="vlbl-f">×N children</text>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <ul class="clean" style="margin-bottom:0.8rem">
+              <li><b>Mutate</b> — change exactly one surface → a child variant.</li>
+              <li><b>Sandbox</b> — run it shell-free, secrets scrubbed from the environment.</li>
+              <li class="j"><b>Score</b> — six 0–1 quality terms, minus penalties.</li>
+              <li class="j"><b>Promote</b> — replace the parent only if every gate holds; else keep it as an ancestor.</li>
+            </ul>
+            <h3 style="margin-bottom:0.3rem">Everything lands in <code>.ruvstack/</code></h3>
+            <ul class="clean sm">
+              <li><code>archive.json</code> · <code>lineage.json</code> — the population &amp; its graph</li>
+              <li class="j"><code>runs/</code> · <code>reports/winner.json</code> — traces, scores, the best result</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · SCORING (waterfall) -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.5</span> The scoring model</p>
+        <div class="split vr top">
+          <div>
+            <h2>Reward the outcome, punish the risk</h2>
+            <p class="mut">A base score — the weighted sum of six 0–1 quality terms — minus a penalty layer that makes unsafe or wasteful behaviour uncompetitive by construction. A variant literally can't win by cutting a dangerous corner.</p>
+            <ul class="clean sm" style="margin-top:0.6rem">
+              <li class="j"><b>Six quality terms</b> feed the base score.</li>
+              <li><b>Five penalties</b> subtract for risk &amp; waste.</li>
+              <li class="j"><b>Net score</b> is what the gate compares.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">Base score, minus penalties (labeled)</span>
+            <svg viewBox="0 0 420 220" role="img" aria-label="Waterfall: base score reduced by five penalties to a net score">
+              <line x1="40" y1="20" x2="40" y2="180" stroke="var(--border)"/>
+              <line x1="40" y1="180" x2="410" y2="180" stroke="var(--border)"/>
+              <text x="34" y="30" font-size="9" class="vlbl-f" text-anchor="end">1.0</text>
+              <text x="34" y="184" font-size="9" class="vlbl-f" text-anchor="end">0</text>
+              <rect class="v-gy" x="54" y="30" width="46" height="150" rx="4" fill="var(--jade)"/>
+              <text x="77" y="196" font-size="9" class="vlbl" text-anchor="middle">base</text>
+              <g font-size="8.5" text-anchor="middle">
+                <rect class="v-gy" style="animation-delay:.15s" x="120" y="30" width="34" height="45" rx="3" fill="var(--crit)"/><text x="137" y="196" fill="var(--crit)">−.30</text>
+                <rect class="v-gy" style="animation-delay:.25s" x="168" y="30" width="34" height="38" rx="3" fill="var(--crit)" opacity="0.85"/><text x="185" y="196" fill="var(--crit)">−.25</text>
+                <rect class="v-gy" style="animation-delay:.35s" x="216" y="30" width="34" height="30" rx="3" fill="var(--amber)"/><text x="233" y="196" fill="var(--amber)">−.20</text>
+                <rect class="v-gy" style="animation-delay:.45s" x="264" y="30" width="34" height="23" rx="3" fill="var(--amber)" opacity="0.85"/><text x="281" y="196" fill="var(--amber)">−.15</text>
+                <rect class="v-gy" style="animation-delay:.55s" x="312" y="30" width="34" height="15" rx="3" fill="var(--amber)" opacity="0.7"/><text x="329" y="196" fill="var(--amber)">−.10</text>
+              </g>
+              <rect class="v-gy" style="animation-delay:.7s" x="362" y="112" width="40" height="68" rx="4" fill="var(--indigo)"/>
+              <text x="382" y="196" font-size="9" fill="var(--indigo)" text-anchor="middle">net</text>
+            </svg>
+          </div>
+        </div>
+        <p class="src">Penalties: secret exposure −0.30 · destructive −0.25 · hallucinated files −0.20 · tool loops −0.15 · cost overrun −0.10.</p>
+      </div>
+    </section>
+
+    <!-- 24 · PROMOTION GATE (funnel) -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.6</span> The promotion gate</p>
+        <div class="split vr top">
+          <div>
+            <h2>Four gates. All must hold, or the parent stands.</h2>
+            <p class="mut">This is what turns "it improved" into a fact rather than a vibe — a promotion is a claim with four preconditions, checked every time.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Score improves</b> over the parent by at least the delta.</li>
+              <li class="j"><b>Safety ≥ 0.95</b> on the independent check.</li>
+              <li class="j"><b>No regression</b> — test pass rate never drops.</li>
+              <li class="j"><b>Zero blocked</b> actions during the run.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">Many variants in · few promoted out</span>
+            <svg viewBox="0 0 420 230" role="img" aria-label="Variants flowing through four gates, most filtered, one promoted">
+              <g stroke="var(--border-2)" stroke-width="2"><line x1="110" y1="30" x2="110" y2="200"/><line x1="190" y1="30" x2="190" y2="200"/><line x1="270" y1="30" x2="270" y2="200"/><line x1="350" y1="30" x2="350" y2="200"/></g>
+              <g font-size="8.5" fill="var(--muted)" text-anchor="middle"><text x="110" y="24">score</text><text x="190" y="24">safety</text><text x="270" y="24">no-reg</text><text x="350" y="24">0-block</text></g>
+              <path d="M20 120 H400" fill="none" stroke="var(--jade)" stroke-width="2" opacity="0.5"/>
+              <text x="24" y="214" font-size="9.5" class="vlbl-f" text-anchor="middle">variants</text>
+              <circle class="v-pulse" cx="400" cy="120" r="9" fill="var(--jade)"/><circle cx="400" cy="120" r="9" fill="none" stroke="var(--surface)" stroke-width="2"/>
+              <text x="400" y="214" font-size="9.5" fill="var(--jade)" text-anchor="middle">promoted</text>
+              <!-- flowing pass dot -->
+              <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M20 120 H400');animation-duration:3s"/>
+              <!-- dropped dots diverting at gates -->
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H110 l18 46');animation-duration:3s;animation-delay:.6s"/>
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H190 l18 -50');animation-duration:3s;animation-delay:1.2s"/>
+              <circle r="4.5" fill="var(--crit)" class="v-tf" style="offset-path:path('M20 120 H270 l18 48');animation-duration:3s;animation-delay:1.8s"/>
+              <circle r="4.5" fill="var(--muted)" class="v-tf" style="offset-path:path('M20 120 H350 l16 -44');animation-duration:3s;animation-delay:2.4s"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25 · SAFETY -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.7</span> The safety model</p>
+        <div class="split v top">
+          <div>
+            <h2>Two independent checks, before code ever runs</h2>
+            <p class="mut">Letting a system rewrite its own policies only works if it can't rewrite them into something dangerous. Darwin gates every variant twice, then runs it with no shell and no secrets.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Belt and suspenders</div><p>Static inspection catches the file; code validation catches the payload; the sandbox contains the blast radius; the score penalizes the attempt. Four layers, any one of which stops a bad variant.</p></div>
+          </div>
+          <ul class="clean">
+            <li class="j"><b><code>inspectVariant()</code></b> — disqualifies unapproved files, blocked names (<code>.env</code>, <code>.git</code>, <code>secret</code>), symlinks, and dangerous patterns (<code>eval</code>, <code>fetch</code>, <code>child_process</code>).</li>
+            <li class="j"><b><code>validateGeneratedCode()</code></b> — gates any LLM-written code before it touches disk.</li>
+            <li><b>Shell-free sandbox</b> — no command injection; a scrubbed env exposes only PATH + identifiers, never secrets.</li>
+            <li><b>Score penalties</b> — even a variant that slips through loses on the scoreboard.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26 · LIFT CHART -->
+    <section class="slide" data-part="Darwin" data-chart="1">
+      <div class="inner">
+        <p class="kick"><span class="n">03.8</span> The harness does the lifting</p>
+        <div class="split v top">
+          <div class="panel">
+            <div class="cap">SWE-bench Lite · 300 instances · official harness</div>
+            <div class="ttl">Same frozen model, three harnesses</div>
+            <div class="bars">
+              <div class="bar"><div class="col" data-h="13"><span class="v">7.7%</span></div><div class="lab">Open-loop<b>BASELINE</b></div></div>
+              <div class="bar"><div class="col" data-h="26"><span class="v">15.3%</span></div><div class="lab">Closed-loop<b>+REPAIR</b></div></div>
+              <div class="bar hi"><div class="col" data-h="100"><span class="v">58.3%</span></div><div class="lab">Tiered<b>CHEAP→FRONTIER</b></div></div>
+            </div>
+          </div>
+          <div>
+            <h2 style="font-size:1.6rem">Why the numbers move</h2>
+            <p class="mut">Open-loop, the model resolves <strong>7.7%</strong>. A closed-loop repair harness roughly doubles it to <strong>15.3%</strong>. Tiered escalation — cheap first, frontier only when needed — reaches <strong>58.3%</strong>.</p>
+            <ul class="clean sm" style="margin-top:0.4rem">
+              <li class="j"><b>~$0.01–$0.74</b> / instance vs. <b>$1–20</b> frontier-only.</li>
+              <li><b>7.6× the resolution</b> from the wrapper alone.</li>
+            </ul>
+            <p class="mut" style="margin-top:0.5rem"><strong>The weights never changed. The harness did.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 · GEPA -->
+    <section class="slide" data-part="Darwin">
+      <div class="inner">
+        <p class="kick"><span class="n">03.9</span> GEPA · prompt-policy learning</p>
+        <div class="split vr top">
+          <div>
+            <h2>Evolving the words, not just the wiring</h2>
+            <p class="mut"><code>@ruvstack/darwin/gepa</code> evolves a <strong>genome</strong> of text components — planner preambles, tool descriptions — via reflection on per-instance feedback. Same freeze-and-evolve idea, applied to prompts.</p>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Proof it isn't hand-waving</div><p><code>cand-6</code> was the first <strong>holdout-confirmed</strong> promoted genome — accepted under strict promotion: no regression on the gold set, and cost-per-resolved no worse than before.</p></div>
+          </div>
+          <div class="di">
+            <span class="cap">A genome of text components, mutating</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A strip of prompt components mutating across generations">
+              <g font-size="9.5" text-anchor="middle"><text x="43" y="28" class="vlbl-f">gen 0</text><text x="210" y="28" class="vlbl-f">gen n</text><text x="378" y="28" fill="var(--jade)">cand-6 ✓</text></g>
+              <g>
+                <rect x="20" y="40" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="104" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect x="20" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1.3" fill="none"><path class="v-draw" d="M66 53 H180"/><path class="v-draw" d="M66 85 H180"/><path class="v-draw" d="M66 117 H180"/><path class="v-draw" d="M66 149 H180"/></g>
+              <g>
+                <rect class="v-shim" x="184" y="40" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect x="184" y="72" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+                <rect class="v-shim" style="animation-delay:.6s" x="184" y="104" width="46" height="26" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+                <rect x="184" y="136" width="46" height="26" rx="4" fill="var(--surface-2)" stroke="var(--border-2)"/>
+              </g>
+              <g stroke="var(--jade)" stroke-width="1.6" fill="none"><path class="v-draw" style="animation-delay:.3s" d="M230 53 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 85 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 117 H350"/><path class="v-draw" style="animation-delay:.3s" d="M230 149 H350"/></g>
+              <g>
+                <rect x="354" y="40" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="72" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="104" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="354" y="136" width="46" height="26" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/>
+              </g>
+              <text x="210" y="188" text-anchor="middle" font-size="10" class="vlbl-f">reflect on feedback → mutate components → keep confirmed wins</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 28 · DIVIDER 04 -->
+    <section class="slide divider" data-part="Flywheel">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 04</div>
+          <h2 class="rise" style="animation-delay:.06s">Flywheel — the proof</h2>
+          <p class="sub rise" style="animation-delay:.12s">Turning "self-improving" from a claim into a receipt.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>frozen gate</span><span>anti-Goodhart</span><span>signed receipts</span><span>the digital twin</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 320 320" role="img" aria-label="A large continuously spinning flywheel">
+            <defs><marker id="dv4" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <g class="v-spin">
+              <circle cx="160" cy="160" r="132" fill="none" stroke="var(--jade)" stroke-width="3.5"/>
+              <g stroke="var(--border-2)" stroke-width="2.5"><line x1="160" y1="46" x2="160" y2="274"/><line x1="46" y1="160" x2="274" y2="160"/><line x1="80" y1="80" x2="240" y2="240"/><line x1="240" y1="80" x2="80" y2="240"/></g>
+              <circle cx="160" cy="28" r="7" fill="var(--jade)"/><circle cx="160" cy="292" r="7" fill="var(--jade)"/>
+              <circle cx="28" cy="160" r="7" fill="var(--jade)"/><circle cx="292" cy="160" r="7" fill="var(--jade)"/>
+            </g>
+            <path class="v-draw" d="M160 12 A148 148 0 0 1 300 118" fill="none" stroke="var(--jade)" stroke-width="3" marker-end="url(#dv4)"/>
+            <circle cx="160" cy="160" r="44" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            <text x="160" y="156" text-anchor="middle" font-size="16" fill="var(--jade)" font-weight="600">24/7</text>
+            <text x="160" y="174" text-anchor="middle" font-size="9.5" fill="var(--faint)">momentum</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 29 · FLYWHEEL ONE LINE (wheel) -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <div class="split vr">
+          <div>
+            <p class="kick"><span class="n">04.1</span> @ruvstack/flywheel</p>
+            <h2>Perpetual motion — a receipt for every gain</h2>
+            <ul class="clean">
+              <li><b>Darwin picks the cheapest, best <em>model</em></b> for a task.</li>
+              <li class="j"><b>Flywheel finds the best <em>process</em></b> — running continually.</li>
+              <li class="j"><b>Rewrites its own code</b>; promotes only proven lift.</li>
+              <li><b>Minimal &amp; auditable</b> — ESM, typed; only Node crypto at runtime.</li>
+            </ul>
+          </div>
+          <div class="di sq">
+            <span class="cap">A wheel that compounds every turn</span>
+            <svg viewBox="0 0 300 300" role="img" aria-label="A spinning momentum ring around a compounding-lift core">
+              <defs><marker id="fw29" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <g class="v-spin"><circle cx="150" cy="150" r="120" fill="none" stroke="var(--jade)" stroke-width="3.5" stroke-dasharray="13 13"/></g>
+              <path class="v-draw" d="M150 24 A126 126 0 0 1 252 82" fill="none" stroke="var(--jade)" stroke-width="3" marker-end="url(#fw29)"/>
+              <g text-anchor="middle" font-size="11" fill="var(--muted)">
+                <circle cx="150" cy="30" r="7" fill="var(--indigo)"/><text x="150" y="17">propose</text>
+                <circle cx="270" cy="150" r="7" fill="var(--indigo)"/><text x="270" y="137">evaluate</text>
+                <circle cx="150" cy="270" r="7" fill="var(--jade)"/><text x="150" y="289">gate</text>
+                <circle cx="30" cy="150" r="7" fill="var(--jade)"/><text x="30" y="137">promote</text>
+              </g>
+              <circle class="v-pulse" cx="150" cy="150" r="54" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <text x="150" y="118" text-anchor="middle" font-size="10.5" fill="var(--jade)" font-weight="600">compounds</text>
+              <g>
+                <rect class="v-gy" x="126" y="152" width="11" height="18" rx="2" fill="var(--jade)" opacity="0.55"/>
+                <rect class="v-gy" style="animation-delay:.15s" x="143" y="142" width="11" height="28" rx="2" fill="var(--jade)" opacity="0.8"/>
+                <rect class="v-gy" style="animation-delay:.3s" x="160" y="130" width="11" height="40" rx="2" fill="var(--jade)"/>
+              </g>
+              <text x="150" y="188" text-anchor="middle" font-size="9" fill="var(--faint)">lift / turn</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 30 · FOUR PROPERTIES -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.2</span> Four properties that make it trustworthy</p>
+        <div class="grid g4">
+          <div class="card"><div class="tag">immutable rule</div><h3>Frozen gate</h3><p><code>meetsPromotionRule</code> can't drift mid-run to flatter a candidate.</p></div>
+          <div class="card"><div class="tag">compounding</div><h3>Lineage</h3><p>Each generation builds on the last promoted winner — season over season.</p></div>
+          <div class="card"><div class="tag">anti-Goodhart</div><h3>Holdout + anchor</h3><p>Must win on test sets it was never optimized against.</p></div>
+          <div class="card"><div class="tag j">provenance</div><h3>Ed25519 receipts</h3><p>Signed promotions ship with a replay bundle.</p></div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">Why "minimal" is a feature</div><p>Small enough to trust and audit end-to-end — one runtime dependency, a frozen gate, and a signed trail. The whole point is that a skeptic can read it and reproduce it, not take your word.</p></div>
+      </div>
+    </section>
+
+    <!-- 31 · ANTI-GOODHART -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.3</span> Anti-Goodhart construction</p>
+        <div class="split vr top">
+          <div>
+            <h2>You can't game a metric you can't see</h2>
+            <p class="mut">"When a measure becomes a target, it ceases to be a good measure." Flywheel defuses that: a candidate is optimized on one set but must <strong>prove itself on others it never touched.</strong></p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Holdout set</b> — unseen during optimization; catches overfitting.</li>
+              <li class="j"><b>Anchor set</b> — a fixed reference that guards against silent regressions.</li>
+              <li><b>Clear both, or no promotion</b> — a lucky run on the training slice isn't enough.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">Optimize on one, prove on two</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A candidate optimized on train must clear holdout and anchor to be promoted">
+              <defs><marker id="arG" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <rect x="18" y="72" width="104" height="60" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <text x="70" y="98" text-anchor="middle" font-size="12" fill="var(--indigo)" font-weight="600">TRAIN</text>
+              <text x="70" y="116" text-anchor="middle" font-size="9.5" class="vlbl-f">optimize here</text>
+              <line class="v-draw" x1="124" y1="102" x2="170" y2="70" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line class="v-draw" x1="124" y1="102" x2="170" y2="134" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect class="v-shim" x="176" y="40" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <text x="236" y="62" text-anchor="middle" font-size="11" fill="var(--jade)">HOLDOUT ✓</text>
+              <text x="236" y="80" text-anchor="middle" font-size="9" class="vlbl-f">never seen</text>
+              <rect class="v-shim" style="animation-delay:.5s" x="176" y="112" width="120" height="52" rx="10" fill="var(--surface)" stroke="var(--jade)" stroke-dasharray="5 5"/>
+              <text x="236" y="134" text-anchor="middle" font-size="11" fill="var(--jade)">ANCHOR ✓</text>
+              <text x="236" y="152" text-anchor="middle" font-size="9" class="vlbl-f">fixed reference</text>
+              <line class="v-draw" style="animation-delay:.4s" x1="298" y1="66" x2="336" y2="98" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <line class="v-draw" style="animation-delay:.4s" x1="298" y1="138" x2="336" y2="106" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arG)"/>
+              <rect class="v-pulse" x="338" y="80" width="66" height="48" rx="10" fill="var(--jade)"/>
+              <text x="371" y="102" text-anchor="middle" font-size="10.5" fill="var(--surface)" font-weight="600">PROMOTE</text>
+              <text x="371" y="118" text-anchor="middle" font-size="8.5" fill="var(--surface)">if both ✓</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 32 · SKEPTIC + LIFT CURVE -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.4</span> What you hand a skeptic</p>
+        <div class="split v top">
+          <div>
+            <ul class="clean">
+              <li class="j"><b>A lift curve</b> — improvement you can see, not assert.</li>
+              <li class="j"><b>A promotion lineage</b> — the chain of winners, and why each passed.</li>
+              <li class="j"><b>A replay bundle</b> — reproduce the result on another machine.</li>
+              <li class="j"><b>Signed receipts</b> — Ed25519 proof the run is the run.</li>
+            </ul>
+            <pre style="margin-top:0.8rem"><span class="cmd">const</span> out = <span class="cmd">await</span> runFlywheelGenerations({
+  rootPolicy, proposer, evaluator,
+  promotionRules, signer,
+});
+out.liftCurve; out.lineage; out.replayBundle;</pre>
+          </div>
+          <div class="di">
+            <span class="cap">Lift curve · cumulative, per generation</span>
+            <svg viewBox="0 0 420 210" role="img" aria-label="A rising lift curve; jade dots are promotions, faint marks rejected attempts">
+              <line x1="42" y1="18" x2="42" y2="176" stroke="var(--border)"/>
+              <line x1="42" y1="176" x2="406" y2="176" stroke="var(--border)"/>
+              <g stroke="var(--border)" stroke-width="1" opacity="0.5"><line x1="42" y1="130" x2="406" y2="130"/><line x1="42" y1="84" x2="406" y2="84"/><line x1="42" y1="40" x2="406" y2="40"/></g>
+              <path d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44 L392 176 L42 176 Z" fill="var(--jade)" opacity="0.12"/>
+              <path class="v-draw" d="M42 176 L112 176 L112 140 L182 140 L182 104 L252 104 L252 72 L322 72 L322 44 L392 44" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+              <g fill="var(--jade)"><circle class="v-pop" style="animation-delay:.5s" cx="112" cy="140" r="4.5"/><circle class="v-pop" style="animation-delay:.7s" cx="182" cy="104" r="4.5"/><circle class="v-pop" style="animation-delay:.9s" cx="252" cy="72" r="4.5"/><circle class="v-pop" style="animation-delay:1.1s" cx="322" cy="72" r="4.5"/></g>
+              <circle class="v-halo" cx="392" cy="44" r="6" fill="var(--jade)"/>
+              <circle class="v-pop" style="animation-delay:1.3s" cx="392" cy="44" r="6" fill="var(--jade)"/>
+              <g stroke="var(--faint)" stroke-width="1.2" opacity="0.55"><path d="M144 150 l6 6 M150 150 l-6 6"/><path d="M286 82 l6 6 M292 82 l-6 6"/></g>
+              <text x="224" y="198" font-size="10" class="vlbl-f" text-anchor="middle">generations →   (✕ = rejected attempt)</text>
+              <text x="392" y="36" font-size="10" fill="var(--jade)" text-anchor="middle" font-weight="600">lift</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 33 · DIGITAL TWIN -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <div class="split v">
+          <div class="bigquote"><p>"It's a digital twin. I'm recreating competitors — how they market, how they grow — and it runs 24/7, figuring out where it can make you more profitable."</p><div class="who">Reuven Cohen</div></div>
+          <div>
+            <p class="mut">Left running, the Flywheel is less a script than a <strong>standing capability</strong>: it models the competition, weighs every option, and never stops looking for lift.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Compounds across a season</b> — knowledge carries into the next fiscal year.</li>
+              <li><b>Survives turnover</b> — a departed expert's techniques stay baked into the twin.</li>
+              <li class="j"><b>Per-customer</b> — point a fresh twin at each client's market and data.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 34 · DARWIN VS FLYWHEEL -->
+    <section class="slide" data-part="Flywheel">
+      <div class="inner">
+        <p class="kick"><span class="n">04.5</span> Two engines, two jobs</p>
+        <h2 style="margin-bottom:0.9rem">Where Darwin ends and Flywheel begins</h2>
+        <div class="versus">
+          <div class="vcol d"><h3>DARWIN — discover</h3>
+            <ul class="clean sm">
+              <li>Mutates seven policy surfaces</li>
+              <li>Explores a population of variants</li>
+              <li>Finds the cheapest capable path</li>
+              <li>Answers: <b>which model &amp; wiring?</b></li>
+            </ul>
+          </div>
+          <div class="vmid">then</div>
+          <div class="vcol f"><h3>FLYWHEEL — prove &amp; sustain</h3>
+            <ul class="clean sm">
+              <li class="j">Frozen gate, immutable during a run</li>
+              <li class="j">Compounding, auditable lineage</li>
+              <li class="j">Runs perpetually, signs every gain</li>
+              <li class="j">Answers: <b>did it really improve?</b></li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:0.9rem"><div class="h">One sentence</div><p>Darwin explores the space of harnesses; Flywheel is the frozen gate and signed ledger around promotion. You need both — discovery without proof is a guess; proof without discovery has nothing to promote.</p></div>
+      </div>
+    </section>
+
+    <!-- 35 · DIVIDER 05 -->
+    <section class="slide divider" data-part="Putting it to work">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 05</div>
+          <h2 class="rise" style="animation-delay:.06s">Putting it to work</h2>
+          <p class="sub rise" style="animation-delay:.12s">From an npm install to a client outcome.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>the marketing loop</span><span>getting started</span><span>three deployments</span><span>the Cognitum service</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 300" role="img" aria-label="Two interlocking gears turning">
+            <g class="v-spin">
+              <g stroke="var(--indigo)" stroke-width="7" stroke-linecap="round">
+                <line x1="188" y1="150" x2="206" y2="150"/><line x1="168" y1="102" x2="180" y2="90"/><line x1="120" y1="82" x2="120" y2="64"/><line x1="72" y1="102" x2="60" y2="90"/>
+                <line x1="52" y1="150" x2="34" y2="150"/><line x1="72" y1="198" x2="60" y2="210"/><line x1="120" y1="218" x2="120" y2="236"/><line x1="168" y1="198" x2="180" y2="210"/>
+              </g>
+              <circle cx="120" cy="150" r="68" fill="none" stroke="var(--indigo)" stroke-width="3.5"/>
+              <circle cx="120" cy="150" r="22" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+            </g>
+            <g class="v-spinR">
+              <g stroke="var(--jade)" stroke-width="6" stroke-linecap="round">
+                <line x1="282" y1="196" x2="296" y2="196"/><line x1="255" y1="156" x2="263" y2="144"/><line x1="209" y1="156" x2="201" y2="144"/><line x1="190" y1="196" x2="176" y2="196"/><line x1="209" y1="236" x2="201" y2="248"/><line x1="255" y1="236" x2="263" y2="248"/>
+              </g>
+              <circle cx="236" cy="196" r="46" fill="none" stroke="var(--jade)" stroke-width="3"/>
+              <circle cx="236" cy="196" r="15" fill="var(--indigo)" opacity="0.85"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 36 · MARKETING LOOP -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.1</span> The whiteboard example</p>
+        <div class="split v top">
+          <div>
+            <h2>The marketing feedback loop</h2>
+            <p class="lead">The example Reuven demoed live — four moves from "my stack" to "self-improving."</p>
+            <div class="callout" style="margin-top:0.4rem"><div class="h">The line to remember</div><p style="font-weight:560">"A click funnel that <em>proves its own lift.</em> Creating a funnel is easy. Optimizing one is hard."</p></div>
+          </div>
+          <div class="steps">
+            <div class="step"><span class="idx">1</span><div><b>Point it at what you run</b><p>Funnel, ads, analytics, marketing APIs.</p></div></div>
+            <div class="step"><span class="idx">2</span><div><b>State the problem plainly</b><p>"I need better conversions."</p></div></div>
+            <div class="step a"><span class="idx">3</span><div><b>Darwin runs evolutions</b><p>Keeps winners, abandons dead ends.</p></div></div>
+            <div class="step b"><span class="idx">4</span><div><b>Flywheel keeps it running</b><p>Optimizes 24/7, always evolving.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 37 · GETTING STARTED -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.2</span> Getting a client started</p>
+        <div class="split v top">
+          <div>
+            <h2>"Point Claude at it and say make my marketing better"</h2>
+            <p class="mut">Fork the repo (so it's selectable in Claude), point Claude Code at it, and describe the outcome. It scaffolds the harness; you wire in the data and APIs, and let it run.</p>
+            <ul class="clean sm" style="margin-top:0.6rem">
+              <li><b>Fork first</b> — takes a few minutes to appear as an option in Claude.</li>
+              <li class="j"><b>Integrate what exists</b> — data + API access is all it needs.</li>
+              <li><b>Then leave it</b> — "the rest just works; it's meant to do its thing."</li>
+            </ul>
+          </div>
+          <pre><span class="c"># in Claude Code, on a fork of ruvnet/ruvstack</span>
+<span class="cmd">&gt;</span> Use <span class="flag">@ruvstack/flywheel</span>,
+  <span class="flag">@ruvstack/darwin</span> and <span class="flag">ruvstack</span>
+  to build the world's best-performing
+  click-funnel system.
+
+<span class="c"># → it scaffolds agents, policy, UI.</span>
+<span class="c"># then: integrate data + APIs, let it run.</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 38 · THREE WAYS TO RUN -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.3</span> Three ways to run it</p>
+        <h2 style="margin-bottom:0.8rem">Match the deployment to the client's appetite</h2>
+        <div class="grid g3">
+          <div class="card"><div class="tag">simplest</div><h3>Local</h3><p>On your own machine — great for building, testing, and one-off evolutions.</p></div>
+          <div class="card"><div class="tag">scheduled</div><h3>Claude schedule</h3><p>A cloud version on a cron — hourly, daily. Cheaper, but no perpetual motion; it runs, then stops.</p></div>
+          <div class="card"><div class="tag j">always-on</div><h3>Your cloud + Flywheel</h3><p>Reuven's own setup: infra that ties into everything and runs the Flywheel perpetually.</p></div>
+        </div>
+        <div class="di plain" style="margin-top:0.9rem">
+          <svg viewBox="0 0 900 54" role="img" aria-label="A spectrum from cheaper scheduled runs to continuous perpetual motion">
+            <line x1="30" y1="27" x2="870" y2="27" stroke="var(--border-2)" stroke-width="2"/>
+            <circle class="v-pop" cx="120" cy="27" r="7" fill="var(--muted)"/><text x="120" y="16" font-size="12" fill="var(--muted)" text-anchor="middle">local</text>
+            <circle class="v-pop" style="animation-delay:.15s" cx="450" cy="27" r="7" fill="var(--indigo)"/><text x="450" y="16" font-size="12" fill="var(--indigo)" text-anchor="middle">cron / scheduled</text>
+            <circle class="v-halo" cx="780" cy="27" r="8" fill="var(--jade)"/><circle class="v-pop" style="animation-delay:.3s" cx="780" cy="27" r="8" fill="var(--jade)"/><text x="780" y="16" font-size="12" fill="var(--jade)" text-anchor="middle">always-on flywheel</text>
+            <text x="120" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">cheapest</text>
+            <text x="780" y="48" font-size="10.5" class="vlbl-f" text-anchor="middle">compounds continuously</text>
+            <circle r="5" fill="var(--jade)" class="v-tf" style="offset-path:path('M120 27 H780');animation-duration:4s"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 39 · COGNITUM SIDE (comms) -->
+    <section class="slide" data-part="Putting it to work">
+      <div class="inner">
+        <p class="kick"><span class="n">05.4</span> The Cognitum side</p>
+        <div class="split vr top">
+          <div>
+            <h2>The hosted layer around the open source</h2>
+            <p class="mut">Beyond the repo there's a service that makes the same building blocks easier to adopt. In the <strong>Cognitum dashboard</strong>, <strong>Meta&nbsp;LLM</strong> exposes flywheels, pods, and agents behind an API key — point Claude at it and go.</p>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li class="j"><b>Grab an API key</b>, point it at the API, get to work.</li>
+              <li><b>Comms</b> — agents work alongside people, managed like team members.</li>
+              <li class="j"><b>Privileged agents</b> — e.g. permission to update ads through an API.</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap">Comms · people and agents on one team</span>
+            <svg viewBox="0 0 440 230" role="img" aria-label="A CMO node connected to human reports and agent workers with live tasks">
+              <rect x="172" y="14" width="96" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <text x="220" y="39" text-anchor="middle" font-size="13" fill="var(--indigo)" font-weight="600">CMO</text>
+              <g stroke="var(--border-2)" stroke-width="1.5" fill="none">
+                <path class="v-draw" d="M220 54 L64 112"/><path class="v-draw" d="M220 54 L172 112"/><path class="v-draw" d="M220 54 L280 112"/><path class="v-draw" d="M220 54 L388 112"/>
+              </g>
+              <g text-anchor="middle">
+                <rect x="16" y="112" width="96" height="66" rx="10" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="64" cy="132" r="9" fill="var(--muted)"/><text x="64" y="156" font-size="12" class="vlbl-t">Person</text><text x="64" y="170" font-size="10" class="vlbl-f">reports</text>
+                <rect x="124" y="112" width="96" height="66" rx="10" fill="var(--surface)" stroke="var(--border-2)"/>
+                <circle cx="172" cy="132" r="9" fill="var(--muted)"/><text x="172" y="156" font-size="12" class="vlbl-t">Person</text><text x="172" y="170" font-size="10" class="vlbl-f">reports</text>
+                <rect class="v-shim" x="232" y="112" width="96" height="66" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="272" y="124" width="16" height="16" rx="4" fill="var(--jade)"/><text x="280" y="156" font-size="12" fill="var(--jade)" font-weight="600">Agent</text><text x="280" y="170" font-size="10" class="vlbl-f">ads API</text>
+                <rect class="v-shim" style="animation-delay:.6s" x="340" y="112" width="96" height="66" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/>
+                <rect x="380" y="124" width="16" height="16" rx="4" fill="var(--jade)"/><text x="388" y="156" font-size="12" fill="var(--jade)" font-weight="600">Agent</text><text x="388" y="170" font-size="10" class="vlbl-f">API scope</text>
+              </g>
+              <circle r="4" fill="var(--jade)" class="v-tf" style="offset-path:path('M220 54 L280 112')"/>
+              <circle r="4" fill="var(--indigo)" class="v-tf" style="offset-path:path('M64 112 L220 54');animation-delay:1s"/>
+              <text x="220" y="210" text-anchor="middle" font-size="11" class="vlbl-f">status up · tasks down — human or agent, same channel</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 40 · DIVIDER 06 -->
+    <section class="slide divider" data-part="Selling it">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 06</div>
+          <h2 class="rise" style="animation-delay:.06s">Selling it as a consultant</h2>
+          <p class="sub rise" style="animation-delay:.12s">Where this fits an engagement — and how to answer the hard questions.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>the engagement</span><span>objections</span><span>your head start</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 290" role="img" aria-label="A rising growth chart with bars and an upward trend line">
+            <defs><marker id="dv6" markerWidth="10" markerHeight="10" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <line x1="44" y1="30" x2="44" y2="250" stroke="var(--border)" stroke-width="1.5"/>
+            <line x1="44" y1="250" x2="320" y2="250" stroke="var(--border)" stroke-width="1.5"/>
+            <g>
+              <rect class="v-gy" x="70" y="182" width="38" height="68" rx="5" fill="var(--indigo)" opacity="0.55"/>
+              <rect class="v-gy" style="animation-delay:.15s" x="128" y="146" width="38" height="104" rx="5" fill="var(--indigo)" opacity="0.7"/>
+              <rect class="v-gy" style="animation-delay:.3s" x="186" y="104" width="38" height="146" rx="5" fill="var(--indigo-dim)"/>
+              <rect class="v-gy" style="animation-delay:.45s" x="244" y="60" width="38" height="190" rx="5" fill="var(--jade)"/>
+            </g>
+            <path class="v-draw" d="M60 210 L128 176 L200 128 L296 66" fill="none" stroke="var(--jade)" stroke-width="3.5" stroke-linecap="round" marker-end="url(#dv6)"/>
+            <circle class="v-halo" cx="296" cy="66" r="7" fill="var(--jade)"/>
+            <circle cx="296" cy="66" r="7" fill="var(--jade)"/><circle cx="296" cy="66" r="7" fill="none" stroke="var(--surface)" stroke-width="2"/>
+            <text x="52" y="42" font-size="12" fill="var(--jade)" font-weight="600">lift</text>
+            <text x="316" y="270" font-size="11" fill="var(--faint)" text-anchor="end">engagements →</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 41 · PLAYBOOK -->
+    <section class="slide" data-part="Selling it">
+      <div class="inner">
+        <p class="kick"><span class="n">06.1</span> The engagement, five moves</p>
+        <h2 style="margin-bottom:0.9rem">One workflow you can walk any client down</h2>
+        <div class="pipe">
+          <div class="pstep"><span class="s">Assess</span><b>Score</b><p><code>ruvstack score</code> — fit &amp; cost.</p></div>
+          <div class="pstep"><span class="s">Generate</span><b>Wrap</b><p>Harness around funnel, ads &amp; data.</p></div>
+          <div class="pstep"><span class="s">Improve</span><b>Evolve</b><p>Darwin — keep winners, kill dead ends.</p></div>
+          <div class="pstep"><span class="s">Verify</span><b>Prove</b><p>Flywheel — confirm &amp; sign the lift.</p></div>
+          <div class="pstep"><span class="s">Sustain</span><b>Run 24/7</b><p>Leave it on; it keeps optimizing.</p></div>
+        </div>
+        <div class="split v top" style="margin-top:0.9rem; gap:1.4rem">
+          <div class="callout"><div class="h">The through-line</div><p><strong>The harness, not the model, is the cheapest lever.</strong> Darwin discovers the cheapest capable path; Flywheel proves, records, and never stops improving it.</p></div>
+          <ul class="clean sm" style="margin:0">
+            <li><b>Consulting fit</b> — reuse the same loop across clients and markets.</li>
+            <li class="j"><b>Get to insight faster</b> — but always ship: a live pilot beats endless hypotheticals.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 42 · OBJECTIONS -->
+    <section class="slide" data-part="Selling it">
+      <div class="inner">
+        <p class="kick"><span class="n">06.2</span> Answers to have ready</p>
+        <div class="split v top" style="gap:1.4rem">
+          <div class="qa">
+            <div class="row"><p class="q">"Why not just use a bigger model?"</p><p class="a">The harness is the cheaper lever — 7.7% → 58.3% by changing only the wrapper, at ~1/56th of frontier-only cost.</p></div>
+            <div class="row"><p class="q">"'Self-improving' sounds like hype."</p><p class="a">Flywheel promotions clear holdout + anchor tests, use an immutable gate, and ship signed, replayable receipts.</p></div>
+          </div>
+          <div class="qa">
+            <div class="row"><p class="q">"Is it safe to let it rewrite itself?"</p><p class="a">Two independent checks, a shell-free sandbox with secrets scrubbed, and penalties that make unsafe variants uncompetitive.</p></div>
+            <div class="row"><p class="q">"What will it cost to run?"</p><p class="a">You get an estimate before scaffolding. Darwin runs land ~$0.01–$0.74 per instance vs. $1–20 frontier-only.</p></div>
+          </div>
+        </div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">On the noise</div><p>A vocal minority will always push back — the silent majority is in the download counts. Focus energy on the customers, not the critics.</p></div>
+      </div>
+    </section>
+
+    <!-- 43 · CLOSE -->
+    <section class="slide" data-part="Close">
+      <div class="glow-b"></div>
+      <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
+        <span class="kicker rise"><span class="dot"></span>Cognitum Consultants · Certification cohort</span>
+        <h1 class="rise" style="animation-delay:.08s; margin-inline:auto">Freeze the model.<br><span class="g">Evolve the harness.</span></h1>
+        <p class="title-sub rise" style="animation-delay:.16s; margin-inline:auto">The world hasn't figured out self-learning agents yet — that's the head start you're being certified on. Now go point Claude at it.</p>
+        <p class="src" style="text-align:center; margin-top:1.3rem">ruvstack · @ruvstack/darwin · @ruvstack/flywheel &nbsp;·&nbsp; Orientation 29 Jul 2026</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">Cognitum · Orientation</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate · F present · T theme</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+</body>
+</html>
