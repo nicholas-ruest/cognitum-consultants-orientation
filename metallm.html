@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="MetaLLM — the domain-model layer of the ruv stack: freeze one sovereign base model and specialize it per domain with lightweight MicroLoRA adapters and real-time SONA adaptation, served locally on ruvLLM. Arrow keys / space to navigate.">
+<meta name="description" content="MetaLLM consultant enablement — the governed, budget-safe AI control plane and agent-orchestration substrate: difficulty-aware tier routing, reserve-and-commit budget enforcement before spend, metering, multi-tenancy, and approval-gated Darwin Loop pods, with strict LIVE/BUILT/DESIGN/OPEN honesty. 48-slide deck. Arrow keys / space to navigate.">
 <meta name="color-scheme" content="dark light">
-<title>MetaLLM · Technical Overview</title>
+<title>MetaLLM · Consultant Enablement</title>
 <style>
   /* ============================================================
      COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
@@ -242,7 +242,7 @@
   @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
 
 
-  /* ---- MetaLLM deck helpers ---- */
+  /* ---- MetaLLM enablement deck helpers ---- */
   .card .ct { font-weight: 650; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text); }
   .card.mini { padding: 0.7rem 0.8rem; }
   .card.mini .ct { font-size: 0.9rem; }
@@ -250,7 +250,25 @@
   .card.mini .cd { font-size: 0.8rem; line-height: 1.3; }
   .card.j { border-color: var(--jade-dim); }
   .card.i { border-color: var(--indigo-dim); }
+  .card.a { border-color: var(--amber); }
+  .card.c { border-color: var(--crit); }
   .uh { border-left-color: var(--indigo) !important; background: var(--indigo-wash) !important; }
+  .flow.sm .node { padding: 0.6rem 0.6rem; }
+  .flow.sm .node b { font-size: 0.86rem; } .flow.sm .node span { font-size: 0.68rem; }
+  .flow.sm .harrow { padding: 0 0.28rem; font-size: 0.75rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 600; padding: 0.5rem 0.85rem; border-bottom: 1px solid var(--border-2); }
+  .tbl td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.32; }
+  .tbl td:first-child { color: var(--text); font-weight: 560; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl.sm { font-size: 0.85rem; } .tbl.sm td { padding: 0.44rem 0.7rem; } .tbl.sm th { padding: 0.4rem 0.7rem; }
+  .tbl .j { color: var(--jade); } .tbl .i { color: var(--indigo); }
+  .spill { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.14rem 0.5rem; border-radius: 999px; border: 1px solid var(--border-2); color: var(--muted); white-space: nowrap; }
+  .spill.live { color: var(--jade); border-color: var(--jade); }
+  .spill.built { color: var(--indigo); border-color: var(--indigo); }
+  .spill.design { color: var(--amber); border-color: var(--amber); }
+  .spill.open { color: var(--crit); border-color: var(--crit); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -308,8 +326,8 @@
   <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
   <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
   <div class="stage" id="stage">
-    <!-- 1 · TITLE -->
-    <section class="slide hero" data-part="Overview">
+    <!-- 1 · TITLE (S1) -->
+    <section class="slide hero" data-part="Executive story">
       <div class="glow-a"></div><div class="glow-b"></div>
       <div class="inner">
         <div class="herotext">
@@ -319,594 +337,1135 @@
               <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
               <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
             </svg>
-            MetaLLM <small>by ruvnet</small>
+            MetaLLM <small>by Cognitum</small>
           </div>
-          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Technical overview · the domain-model layer</span>
-          <h1 class="rise" style="animation-delay:.1s">One base model,<br><span class="g">many experts.</span></h1>
-          <p class="title-sub rise" style="animation-delay:.18s">The <strong>domain-model layer</strong> of the ruv stack — freeze one sovereign base and specialize it per domain with tiny adapters, on-prem, without forgetting.</p>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Consultant enablement · evidence 9 Aug 2026</span>
+          <h1 class="rise" style="animation-delay:.1s; max-width:none">Governed intelligence,<br><span class="g">economically routed.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">Put the right model on each task — within an <strong>enforceable budget and control framework</strong>. One API layer across model tiers and agent workflows; cheap-tier first, escalate only when difficulty warrants it.</p>
           <div class="chips rise" style="animation-delay:.26s">
-            <span class="chip"><b>MicroLoRA</b><span>adapters</span></span>
-            <span class="chip"><b>SONA</b><span>real-time</span></span>
-            <span class="chip"><b>ruvLLM</b><span>sovereign runtime</span></span>
+            <span class="chip"><b>route</b><span>tier by difficulty</span></span>
+            <span class="chip"><b>govern</b><span>budget before spend</span></span>
+            <span class="chip"><b>automate</b><span>approval-gated pods</span></span>
           </div>
         </div>
         <div class="heroviz">
-          <svg viewBox="0 0 440 440" role="img" aria-label="A base-model core surrounded by orbiting domain adapters">
+          <svg viewBox="0 0 440 440" role="img" aria-label="AI applications flowing through a MetaLLM control plane to model tiers">
             <defs><radialGradient id="hcore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--jade)" stop-opacity="0.4"/><stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.12"/><stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/></radialGradient></defs>
             <circle cx="220" cy="220" r="200" fill="url(#hcore)"/>
-            <g class="v-spin"><circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/>
-              <circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/><circle cx="90" cy="120" r="5" fill="var(--jade)"/><circle cx="350" cy="120" r="5" fill="var(--jade)"/></g>
-            <g class="v-spinR"><circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.6"/><circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/><circle cx="220" cy="64" r="5" fill="var(--jade)"/><circle cx="220" cy="376" r="5" fill="var(--jade)"/></g>
+            <g class="v-spin"><circle cx="220" cy="220" r="196" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-dasharray="2 15" opacity="0.7"/><circle cx="220" cy="24" r="6" fill="var(--indigo)"/><circle cx="390" cy="318" r="6" fill="var(--indigo)"/><circle cx="50" cy="318" r="6" fill="var(--indigo)"/></g>
+            <g class="v-spinR"><circle cx="220" cy="220" r="156" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="2 17" opacity="0.6"/><circle cx="376" cy="220" r="5" fill="var(--jade)"/><circle cx="64" cy="220" r="5" fill="var(--jade)"/></g>
             <g class="v-spinS"><circle cx="220" cy="220" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.2" stroke-dasharray="1 11" opacity="0.5"/></g>
             <circle r="5.5" fill="var(--jade)" class="v-t" style="offset-path:path('M220 220 m -150 0 a 150 150 0 1 0 300 0 a 150 150 0 1 0 -300 0');animation-duration:5.5s"/>
-            <circle r="4.5" fill="var(--indigo)" style="offset-path:path('M220 220 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0');offset-distance:0%;animation:vtravel 4s linear infinite reverse"/>
             <circle class="v-halo" cx="220" cy="220" r="74" fill="var(--jade)"/>
             <circle class="v-pulse" cx="220" cy="220" r="74" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
             <g class="v-spinS"><circle cx="220" cy="220" r="44" fill="none" stroke="var(--indigo)" stroke-width="3"/><path d="M220 176v18 M220 246v18 M176 220h18 M246 220h18" stroke="var(--indigo)" stroke-width="3" stroke-linecap="round"/></g>
             <circle class="v-pulse" cx="220" cy="220" r="15" fill="var(--jade)"/>
-            <text x="220" y="300" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">base model</text>
+            <text x="220" y="300" text-anchor="middle" font-size="13" fill="var(--jade)" font-weight="600">control plane</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 2 · AGENDA -->
-    <section class="slide" data-part="Overview">
+    <!-- 2 · 30-SECOND BRIEF (S2) -->
+    <section class="slide" data-part="Executive story">
       <div class="inner">
-        <p class="kick"><span class="n">Agenda</span> What we'll cover</p>
-        <h2 style="margin-bottom:1rem">Six parts</h2>
-        <div class="agenda">
-          <div class="arow"><span class="an">01</span><span class="at">Why domain models</span><span class="am">the problem</span></div>
-          <div class="arow"><span class="an">02</span><span class="at">MetaLLM — the domain-model layer</span><span class="am">what it is</span></div>
-          <div class="arow"><span class="an">03</span><span class="at">How it specializes</span><span class="am">under the hood</span></div>
-          <div class="arow"><span class="an">04</span><span class="at">Domain experts</span><span class="am">the library</span></div>
-          <div class="arow"><span class="an">05</span><span class="at">Using MetaLLM</span><span class="am">config &amp; serve</span></div>
-          <div class="arow"><span class="an">06</span><span class="at">Ecosystem &amp; honesty</span><span class="am">where it fits</span></div>
+        <p class="kick"><span class="n">The 30-second brief</span> The consultant's one-breath version</p>
+        <h2 style="margin-bottom:0.85rem">Model choice becomes a governed platform decision, not an app-level guess</h2>
+        <div class="grid g4" style="gap:0.6rem">
+          <div class="card mini"><div class="tag">Problem</div><div class="cd">Organizations overpay, under-govern, and duplicate model-integration logic.</div></div>
+          <div class="card mini j"><div class="tag j">Answer</div><div class="cd">A dual-protocol gateway that routes, meters, caps, audits, and escalates.</div></div>
+          <div class="card mini i"><div class="tag">Extension</div><div class="cd">Autonomous "pods" run bounded workflows, with human approval for outward actions.</div></div>
+          <div class="card mini"><div class="tag">Wedge</div><div class="cd">Governed, budget-safe orchestration — not model novelty.</div></div>
         </div>
-        <div class="callout i" style="margin-top:1.1rem"><div class="h">The one-liner</div><p>"Domain-tuned models that specialize the sovereign inference layer." Freeze the base, adapt per domain with lightweight MicroLoRA adapters and real-time SONA — local, private, composable. By ruvnet · powers Cognitum.</p></div>
+        <div class="callout i" style="margin-top:0.9rem"><div class="h">The shortest accurate positioning</div><p>"The <strong>governed, audited, budget-safe control plane</strong> for cheap-tier-first AI traffic." Not a new foundation model — don't introduce it as one.</p></div>
       </div>
     </section>
 
-    <!-- 3 · DIVIDER 01 -->
-    <section class="slide divider" data-part="Why domain models">
+    <!-- 3 · EXECUTIVE THESIS (S3) -->
+    <section class="slide" data-part="Executive story">
       <div class="inner">
-        <div class="dtext">
-          <div class="pnum rise">PART 01</div>
-          <h2 class="rise" style="animation-delay:.06s">Why domain models</h2>
-          <p class="sub rise" style="animation-delay:.12s">A generalist knows a little about everything. Your domain needs an expert.</p>
-          <div class="rule"></div>
-          <div class="dchips"><span>the generalist gap</span><span>the cost of fine-tuning</span><span>freeze &amp; adapt</span></div>
-        </div>
-        <div class="dviz">
-          <svg viewBox="0 0 340 320" role="img" aria-label="One core specializing into several domain experts">
-            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="170" y1="160" x2="70" y2="70"/><line class="v-draw" style="animation-delay:.1s" x1="170" y1="160" x2="270" y2="70"/><line class="v-draw" style="animation-delay:.2s" x1="170" y1="160" x2="300" y2="200"/><line class="v-draw" style="animation-delay:.3s" x1="170" y1="160" x2="230" y2="280"/><line class="v-draw" style="animation-delay:.4s" x1="170" y1="160" x2="90" y2="280"/><line class="v-draw" style="animation-delay:.5s" x1="170" y1="160" x2="40" y2="200"/></g>
-            <g fill="var(--indigo)"><circle class="v-pop" cx="70" cy="70" r="9"/><circle class="v-pop" style="animation-delay:.1s" cx="270" cy="70" r="9"/><circle class="v-pop" style="animation-delay:.2s" cx="300" cy="200" r="9"/><circle class="v-pop" style="animation-delay:.3s" cx="230" cy="280" r="9"/><circle class="v-pop" style="animation-delay:.4s" cx="90" cy="280" r="9"/><circle class="v-pop" style="animation-delay:.5s" cx="40" cy="200" r="9"/></g>
-            <circle r="4.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M170 160 L70 70')"/>
-            <circle r="4.5" fill="var(--jade)" class="v-tf" style="offset-path:path('M170 160 L230 280');animation-delay:.9s"/>
-            <circle class="v-pulse" cx="170" cy="160" r="36" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
-            <text x="170" y="164" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">base</text>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 · THE PROBLEM -->
-    <section class="slide" data-part="Why domain models">
-      <div class="inner">
-        <p class="kick"><span class="n">01.1</span> The problem with one big model</p>
+        <p class="kick"><span class="n">The executive thesis</span> Cost-at-quality, not a capability claim</p>
         <div class="split vr top">
           <div>
-            <h2>A generalist model is a jack of all trades</h2>
+            <h2>Most work doesn't need the most expensive model; the hard tail still does</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li><b>Generic answers</b> — it doesn't know your domain's language, rules, or edge cases.</li>
-              <li class="j"><b>Full fine-tuning is expensive</b> — GPUs, data pipelines, and a new checkpoint per domain.</li>
-              <li><b>It forgets</b> — naive fine-tuning overwrites old skills to learn new ones.</li>
-              <li class="j"><b>And it leaks</b> — sending domain data to a hosted model is a non-starter in regulated work.</li>
+              <li><b>Cheap near frontier</b> on everyday agentic work, in project benchmarks.</li>
+              <li class="j"><b>A structural ceiling</b> shows up on harder tasks.</li>
+              <li><b>So: start economically</b>, detect difficulty, preserve escalation headroom.</li>
+              <li class="j"><b>Govern every dollar</b> and every irreversible action along the way.</li>
             </ul>
+            <p class="src">Routing does not make any underlying model more intelligent — this is a cost-at-quality thesis.</p>
           </div>
           <div class="di">
-            <span class="cap">One model can't be every expert</span>
-            <svg viewBox="0 0 400 240" role="img" aria-label="A single generalist model spread thin across domains">
-              <circle class="v-pulse" cx="200" cy="90" r="40" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
-              <text x="200" y="94" text-anchor="middle" font-size="11" fill="var(--indigo)">generalist</text>
-              <g stroke="var(--border-2)" stroke-width="1.4" stroke-dasharray="4 4" fill="none"><path class="v-draw" d="M172 118 L96 190"/><path class="v-draw" style="animation-delay:.15s" d="M200 130 L200 190"/><path class="v-draw" style="animation-delay:.3s" d="M228 118 L304 190"/></g>
-              <g font-size="9.5" text-anchor="middle" class="vlbl-f"><text x="96" y="210">health?</text><text x="200" y="210">security?</text><text x="304" y="210">building?</text></g>
+            <span class="cap">Everyday band vs. the hard tail</span>
+            <svg viewBox="0 0 420 220" role="img" aria-label="A large everyday workload band and a small hard tail where cost rises">
+              <path d="M30 180 C120 60 150 60 210 60 C300 60 320 170 390 40" fill="none" stroke="var(--border-2)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <rect class="v-gy" x="40" y="120" width="30" height="60" rx="4" fill="var(--jade)"/>
+              <rect class="v-gy" style="animation-delay:.06s" x="80" y="110" width="30" height="70" rx="4" fill="var(--jade)"/>
+              <rect class="v-gy" style="animation-delay:.12s" x="120" y="104" width="30" height="76" rx="4" fill="var(--jade)"/>
+              <rect class="v-gy" style="animation-delay:.18s" x="160" y="110" width="30" height="70" rx="4" fill="var(--jade)"/>
+              <rect class="v-gy" style="animation-delay:.24s" x="200" y="120" width="30" height="60" rx="4" fill="var(--jade-dim)"/>
+              <rect class="v-gy" style="animation-delay:.3s" x="300" y="150" width="26" height="30" rx="4" fill="var(--indigo)"/>
+              <rect class="v-gy" style="animation-delay:.36s" x="332" y="140" width="26" height="40" rx="4" fill="var(--indigo)"/>
+              <text x="130" y="205" text-anchor="middle" font-size="10" fill="var(--jade)">everyday band</text>
+              <text x="330" y="205" text-anchor="middle" font-size="10" fill="var(--indigo)">hard tail</text>
+              <text x="330" y="128" text-anchor="middle" font-size="9" class="vlbl-f">cost ↑</text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 · THE IDEA -->
-    <section class="slide" data-part="Why domain models">
+    <!-- 4 · WHAT CHANGES (S4) -->
+    <section class="slide" data-part="Executive story">
       <div class="inner">
-        <div class="split v">
-          <div>
-            <div class="bigquote i"><p>Freeze the base. Bolt on a tiny expert for each domain — and swap them like tools.</p><div class="who">the MetaLLM idea</div></div>
-            <p class="mut" style="margin-top:1rem">The base model already knows language and reasoning. MetaLLM keeps it <strong>frozen</strong> and trains small <strong>MicroLoRA adapters</strong> that carry only the domain — cheap to make, tiny to store, and composable at runtime.</p>
-          </div>
-          <div>
-            <ul class="clean">
-              <li><b>Specialize</b> — one adapter per domain, not one model per domain.</li>
-              <li class="j"><b>On-prem</b> — training and inference stay inside the perimeter.</li>
-              <li><b>Composable</b> — load the expert the task needs, drop it when done.</li>
-              <li class="j"><b>No forgetting</b> — the frozen base and prior adapters are never overwritten.</li>
-            </ul>
-            <div class="callout" style="margin-top:0.9rem"><div class="h">The through-line</div><p>Same thesis as the rest of the stack — <strong>freeze the model, adapt around it.</strong> MetaLLM is that thesis applied to the weights themselves.</p></div>
-          </div>
-        </div>
+        <p class="kick"><span class="n">What changes for the enterprise</span> A managed portfolio, not point integrations</p>
+        <table class="tbl sm">
+          <thead><tr><th>From</th><th>To</th></tr></thead>
+          <tbody>
+            <tr><td>Every team chooses and integrates models</td><td class="j">Shared model-access and policy layer</td></tr>
+            <tr><td>Premium model by default</td><td class="j">Tier selected by task difficulty</td></tr>
+            <tr><td>Spend observed after the fact</td><td class="j">Worst-case cost reserved before execution</td></tr>
+            <tr><td>Agent autonomy as all-or-nothing</td><td class="j">Human approval at defined action boundaries</td></tr>
+            <tr><td>Provider-specific telemetry</td><td class="j">Tenant-level usage, cost, tier, and cache records</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:0.85rem"><div class="h">The operating-model change</div><p>As important as the technology: <strong>central policy with decentralized application adoption.</strong></p></div>
       </div>
     </section>
 
-    <!-- 6 · DIVIDER 02 -->
-    <section class="slide divider" data-part="MetaLLM">
+    <!-- D · DIVIDER — THE CATEGORY -->
+    <section class="slide divider" data-part="The category">
       <div class="inner">
         <div class="dtext">
-          <div class="pnum rise">PART 02</div>
-          <h2 class="rise" style="animation-delay:.06s">MetaLLM — the domain-model layer</h2>
-          <p class="sub rise" style="animation-delay:.12s">The layer that turns one sovereign base into a family of domain experts.</p>
+          <div class="pnum rise">SECTION 02</div>
+          <h2 class="rise" style="animation-delay:.06s">The problem &amp; the category</h2>
+          <p class="sub rise" style="animation-delay:.12s">Why scaling AI fragments — and why the gateway is becoming foundational.</p>
           <div class="rule"></div>
-          <div class="dchips"><span>what it is</span><span>where it sits</span><span>at a glance</span></div>
+          <div class="dchips"><span>fragmentation</span><span>cost-at-quality</span><span>the gateway lane</span></div>
         </div>
         <div class="dviz">
-          <svg viewBox="0 0 340 300" role="img" aria-label="Layers of the model stack">
-            <g class="v-pop"><rect x="60" y="40" width="220" height="46" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="170" y="68" text-anchor="middle" font-size="12" class="vlbl-t">domain experts</text></g>
-            <g class="v-pop" style="animation-delay:.15s"><rect x="60" y="104" width="220" height="46" rx="10" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/><text x="170" y="132" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MetaLLM · adapters</text></g>
-            <g class="v-pop" style="animation-delay:.3s"><rect x="60" y="168" width="220" height="46" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="170" y="196" text-anchor="middle" font-size="12" fill="var(--indigo)">ruvLLM · sovereign runtime</text></g>
-            <g class="v-pop" style="animation-delay:.45s"><rect x="60" y="232" width="220" height="40" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="170" y="257" text-anchor="middle" font-size="11" class="vlbl-f">frozen base model</text></g>
+          <svg viewBox="0 0 360 300" role="img" aria-label="Apps converging on one control layer above many providers">
+            <g fill="var(--indigo)"><circle class="v-pop" cx="60" cy="50" r="8"/><circle class="v-pop" style="animation-delay:.1s" cx="180" cy="42" r="8"/><circle class="v-pop" style="animation-delay:.2s" cx="300" cy="50" r="8"/></g>
+            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="60" y1="58" x2="180" y2="126"/><line class="v-draw" style="animation-delay:.1s" x1="180" y1="50" x2="180" y2="126"/><line class="v-draw" style="animation-delay:.2s" x1="300" y1="58" x2="180" y2="126"/></g>
+            <rect class="v-shim" x="70" y="128" width="220" height="40" rx="10" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><text x="180" y="153" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MetaLLM control plane</text>
+            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" style="animation-delay:.3s" x1="180" y1="168" x2="70" y2="240"/><line class="v-draw" style="animation-delay:.4s" x1="180" y1="168" x2="180" y2="240"/><line class="v-draw" style="animation-delay:.5s" x1="180" y1="168" x2="290" y2="240"/></g>
+            <g fill="var(--muted)"><circle class="v-pop" style="animation-delay:.3s" cx="70" cy="250" r="7"/><circle class="v-pop" style="animation-delay:.4s" cx="180" cy="250" r="7"/><circle class="v-pop" style="animation-delay:.5s" cx="290" cy="250" r="7"/></g>
+            <text x="180" y="284" text-anchor="middle" font-size="10" class="vlbl-f">commodity + frontier models</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 7 · WHAT IT IS -->
-    <section class="slide" data-part="MetaLLM">
+    <!-- 5 · SCALING PROBLEM (S5) -->
+    <section class="slide" data-part="The category">
       <div class="inner">
-        <p class="kick"><span class="n">02.1</span> What it is</p>
+        <p class="kick"><span class="n">02.1</span> The enterprise AI scaling problem</p>
+        <div class="split vr top">
+          <div>
+            <h2>Prototype simplicity becomes production fragmentation</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Many providers</b>, APIs, keys, price curves, and failure modes.</li>
+              <li class="j"><b>Inconsistent controls</b> across teams and use cases.</li>
+              <li><b>Little confidence</b> in cost per completed task.</li>
+              <li class="j"><b>Agentic workloads amplify</b> tokens, retries, tools, and operational risk.</li>
+            </ul>
+            <p class="src">The pain is rarely access to a model — it's economical, controlled operation across many consumers.</p>
+          </div>
+          <div class="di">
+            <span class="cap">The tangled "before"</span>
+            <svg viewBox="0 0 380 220" role="img" aria-label="Several apps wired directly to several providers">
+              <g fill="var(--indigo)"><circle cx="40" cy="50" r="8"/><circle cx="40" cy="110" r="8"/><circle cx="40" cy="170" r="8"/></g>
+              <g fill="var(--muted)"><circle cx="330" cy="45" r="8"/><circle cx="330" cy="95" r="8"/><circle cx="330" cy="145" r="8"/><circle cx="330" cy="195" r="8"/></g>
+              <g stroke="var(--crit)" stroke-width="1.1" opacity="0.55" fill="none">
+                <path class="v-draw" d="M48 50 L322 45"/><path class="v-draw" style="animation-delay:.05s" d="M48 50 L322 145"/><path class="v-draw" style="animation-delay:.1s" d="M48 110 L322 95"/><path class="v-draw" style="animation-delay:.15s" d="M48 110 L322 195"/><path class="v-draw" style="animation-delay:.2s" d="M48 170 L322 45"/><path class="v-draw" style="animation-delay:.25s" d="M48 170 L322 145"/><path class="v-draw" style="animation-delay:.3s" d="M48 50 L322 95"/><path class="v-draw" style="animation-delay:.35s" d="M48 170 L322 195"/></g>
+              <text x="40" y="200" text-anchor="middle" font-size="9" class="vlbl-f">apps</text>
+              <text x="330" y="216" text-anchor="middle" font-size="9" class="vlbl-f">providers</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · BEST MODEL NOT A STRATEGY (S6) -->
+    <section class="slide" data-part="The category">
+      <div class="inner">
+        <p class="kick"><span class="n">02.2</span> Why "use the best model" is not a strategy</p>
+        <div class="split vr top">
+          <div>
+            <h2>The most capable model is often economically wrong for routine work</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Quality can saturate</b> before cost does.</li>
+              <li class="j"><b>Premium scaffolds &amp; reasoning tokens</b> can dominate the bill.</li>
+              <li><b>Cheap models can fail expensively</b> through retries if used beyond their band.</li>
+              <li class="j"><b>Manage cost per acceptable outcome</b> — not cost per token.</li>
+            </ul>
+            <p class="src">Not "cheap is always cheaper" — the router and escalation exist precisely because cheap models have a hard-task boundary.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Quality flattens while cost keeps rising</span>
+            <svg viewBox="0 0 400 220" role="img" aria-label="Quality curve flattening as cost curve keeps climbing">
+              <path class="v-draw" d="M30 180 C120 70 220 55 380 48" fill="none" stroke="var(--jade)" stroke-width="2.5"/>
+              <path class="v-draw" style="animation-delay:.3s" d="M30 190 C160 175 260 130 380 30" fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-dasharray="6 5"/>
+              <text x="330" y="42" font-size="10" fill="var(--jade)">quality</text>
+              <text x="330" y="26" font-size="10" fill="var(--indigo)">cost</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · GATEWAY FOUNDATIONAL (S7) -->
+    <section class="slide" data-part="The category">
+      <div class="inner">
+        <p class="kick"><span class="n">02.3</span> Why an AI gateway is becoming foundational</p>
+        <h2 style="margin-bottom:0.85rem">Cross-cutting controls belong in one enforcement point</h2>
+        <div class="grid g2" style="gap:0.6rem">
+          <div class="card i"><div class="tag">Abstraction</div><div class="cd">Unified API and model abstraction over many vendors.</div></div>
+          <div class="card i"><div class="tag">Access</div><div class="cd">Authentication, tenant isolation, scopes, and rate limits.</div></div>
+          <div class="card j"><div class="tag j">Economics</div><div class="cd">Routing, fallback, caching, and cost controls.</div></div>
+          <div class="card j"><div class="tag j">Assurance</div><div class="cd">Guardrails, observability, and audit.</div></div>
+        </div>
+        <div class="callout" style="margin-top:0.85rem"><div class="h">Where MetaLLM must differentiate</div><p>Gateway capabilities are increasingly table stakes. Differentiate on <strong>how it governs economics and autonomous execution</strong> — not merely on an OpenAI-compatible endpoint.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 · CATEGORY POSITION (S8) -->
+    <section class="slide" data-part="The category">
+      <div class="inner">
+        <p class="kick"><span class="n">02.4</span> The category position</p>
+        <div class="split vr top">
+          <div>
+            <h2>MetaLLM sits between an AI gateway and a governed agent runtime</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Gateway</b> — one authenticated surface for OpenAI- and Anthropic-style clients.</li>
+              <li class="j"><b>Router</b> — low/mid/high tier selection plus bounded escalation.</li>
+              <li><b>Control plane</b> — pre-flight budgets, metering, policy, safety, analytics.</li>
+              <li class="j"><b>Agent substrate</b> — scheduled pods, conformance checks, approval gates.</li>
+            </ul>
+            <p class="src">The gateway is mature; some runtime and collaboration experiences are still emerging.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Gateway → router → governance → pods</span>
+            <svg viewBox="0 0 300 240" role="img" aria-label="Four concentric layers">
+              <rect class="v-pop" x="20" y="20" width="260" height="200" rx="16" fill="none" stroke="var(--border-2)" stroke-width="2"/><text x="150" y="38" text-anchor="middle" font-size="10" class="vlbl-f">gateway</text>
+              <rect class="v-pop" style="animation-delay:.12s" x="52" y="52" width="196" height="136" rx="13" fill="none" stroke="var(--indigo)" stroke-width="2"/><text x="150" y="70" text-anchor="middle" font-size="10" fill="var(--indigo)">router</text>
+              <rect class="v-pop" style="animation-delay:.24s" x="84" y="84" width="132" height="72" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/><text x="150" y="102" text-anchor="middle" font-size="10" fill="var(--indigo)">governance</text>
+              <circle class="v-pulse" cx="150" cy="128" r="24" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/><text x="150" y="132" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">pods</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · POSITIONING STATEMENT (S9) -->
+    <section class="slide" data-part="The category">
+      <div class="inner">
+        <p class="kick"><span class="n">02.5</span> Positioning statement</p>
+        <div class="bigquote i" style="margin-bottom:1rem"><p>For organizations scaling AI beyond pilots, MetaLLM is the governed orchestration layer that routes each task to an economical model tier, enforces spend before execution, and keeps autonomous actions auditable.</p></div>
+        <p class="mut" style="margin-bottom:0.7rem">Unlike a raw model marketplace, a generic proxy, or a closed coding agent, MetaLLM combines:</p>
+        <div class="grid g4" style="gap:0.55rem">
+          <div class="card mini j"><div class="cd"><b>Difficulty-aware tiering</b></div></div>
+          <div class="card mini j"><div class="cd"><b>Fail-closed budget control</b></div></div>
+          <div class="card mini i"><div class="cd"><b>Per-tenant operating records</b></div></div>
+          <div class="card mini i"><div class="cd"><b>Human-gated autonomous workflows</b></div></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem">Do not use "best model," "beyond-SOTA," or "self-learning router" — those claims are unsupported.</p>
+      </div>
+    </section>
+
+    <!-- D · DIVIDER — HOW IT WORKS -->
+    <section class="slide divider" data-part="How it works">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">SECTION 03</div>
+          <h2 class="rise" style="animation-delay:.06s">How MetaLLM works</h2>
+          <p class="sub rise" style="animation-delay:.12s">Authenticate, classify, reserve, route, meter, commit — with a fail-closed branch.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>the dials</span><span>reserve-and-commit</span><span>metering</span><span>multi-tenancy</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 360 260" role="img" aria-label="A request flowing through classify, budget check, provider, and ledger">
+            <defs><marker id="arH" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <g font-size="10" text-anchor="middle">
+              <rect x="30" y="40" width="90" height="40" rx="9" fill="var(--surface)" stroke="var(--border-2)"/><text x="75" y="64" class="vlbl-t">classify</text>
+              <rect x="30" y="110" width="90" height="40" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="75" y="130" fill="var(--jade)">reserve</text><text x="75" y="143" font-size="8" class="vlbl-f">worst-case</text>
+              <rect x="180" y="110" width="90" height="40" rx="9" fill="var(--surface)" stroke="var(--indigo)"/><text x="225" y="134" fill="var(--indigo)">provider</text>
+              <rect x="180" y="180" width="90" height="40" rx="9" fill="var(--surface)" stroke="var(--border-2)"/><text x="225" y="204" class="vlbl-t">ledger</text>
+            </g>
+            <g stroke="var(--faint)" stroke-width="1.4" fill="none"><line class="v-draw" x1="75" y1="80" x2="75" y2="108" marker-end="url(#arH)"/><line class="v-draw" style="animation-delay:.15s" x1="120" y1="130" x2="178" y2="130" marker-end="url(#arH)"/><line class="v-draw" style="animation-delay:.3s" x1="225" y1="150" x2="225" y2="178" marker-end="url(#arH)"/></g>
+            <path d="M75 150 v40 h60" fill="none" stroke="var(--crit)" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#arH)"/><text x="120" y="205" font-size="8.5" fill="var(--crit)">fail closed</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · ONE-LINE ARCHITECTURE (S10) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.1</span> The one-line architecture</p>
+        <h2 style="margin-bottom:0.7rem">Authenticate → classify → reserve → call a tier → meter → commit</h2>
+        <div class="steps">
+          <div class="step a"><span class="idx">1</span><div><b>Authenticate</b><p>Credential establishes tenant and scopes.</p></div></div>
+          <div class="step a"><span class="idx">2</span><div><b>Classify difficulty</b><p><code>cognitum-auto</code> scores intrinsic task difficulty.</p></div></div>
+          <div class="step b"><span class="idx">3</span><div><b>Reserve-and-Commit</b><p>Checks worst-case headroom before any paid call — fail-closed branch here.</p></div></div>
+          <div class="step a"><span class="idx">4</span><div><b>Call a tier</b><p>Provider executes through the selected model tier.</p></div></div>
+          <div class="step a"><span class="idx">5</span><div><b>Meter actuals</b><p>Usage ledger records tokens, model, tier, and cost.</p></div></div>
+          <div class="step b"><span class="idx">6</span><div><b>Commit spend</b><p>Actual cost commits; unused reservation is released.</p></div></div>
+        </div>
+        <p class="src" style="margin-top:0.6rem">Budget denial occurs <strong>before</strong> a paid provider call — not after an alert threshold is crossed.</p>
+      </div>
+    </section>
+
+    <!-- 11 · STABLE API (S11) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.2</span> A stable API over a changing model market</p>
+        <div class="split vr top">
+          <div>
+            <h2>Applications call product-level dials, not hard-coded vendor IDs</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b><code>cognitum-auto</code></b> — dynamic selection.</li>
+              <li class="j"><b><code>cognitum-low · -mid · -high</code></b> — explicit control.</li>
+              <li><b>OpenAI-compatible</b> chat/completions and <b>Anthropic-compatible</b> messages.</li>
+              <li class="j"><b>Tier pools can change</b> without forcing every app to re-integrate.</li>
+            </ul>
+            <p class="src">A stable API is not a substitute for outcome testing — model changes still require evaluation.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Many clients → five stable aliases → model pools</span>
+            <svg viewBox="0 0 400 220" role="img" aria-label="Clients entering five aliases that fan out to model pools">
+              <g fill="var(--indigo)"><circle cx="34" cy="55" r="6"/><circle cx="34" cy="110" r="6"/><circle cx="34" cy="165" r="6"/></g>
+              <g stroke="var(--border-2)" stroke-width="1.2"><path class="v-draw" d="M40 55 L150 110"/><path class="v-draw" style="animation-delay:.1s" d="M40 110 L150 110"/><path class="v-draw" style="animation-delay:.2s" d="M40 165 L150 110"/></g>
+              <rect class="v-shim" x="150" y="70" width="110" height="80" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="205" y="104" text-anchor="middle" font-size="9.5" fill="var(--jade)">auto · low</text><text x="205" y="120" text-anchor="middle" font-size="9.5" fill="var(--jade)">mid · high</text>
+              <g stroke="var(--border-2)" stroke-width="1.2"><path class="v-draw" style="animation-delay:.3s" d="M260 100 L360 60"/><path class="v-draw" style="animation-delay:.4s" d="M260 110 L360 110"/><path class="v-draw" style="animation-delay:.5s" d="M260 120 L360 160"/></g>
+              <g fill="var(--muted)"><circle cx="366" cy="60" r="6"/><circle cx="366" cy="110" r="6"/><circle cx="366" cy="160" r="6"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · THREE DIALS (S12) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.3</span> The three operating dials</p>
+        <h2 style="margin-bottom:0.85rem">Tier, host, and approval define the execution posture</h2>
+        <div class="grid g3">
+          <div class="card j"><div class="tag j">Tier</div><div class="ct">How much capability &amp; cost?</div><div class="cd">The quality floor and the cost ceiling the task may use.</div></div>
+          <div class="card i"><div class="tag">Host</div><div class="ct">Which runtime drives the work?</div><div class="cd">Thin SDK/HTTP, or a heavier agentic scaffold — an economic choice.</div></div>
+          <div class="card"><div class="tag">Approval</div><div class="ct">Which actions need a human?</div><div class="cd">The boundary where consequences require a verdict.</div></div>
+        </div>
+        <div class="callout" style="margin-top:1rem"><div class="h">Why it matters to a consultant</div><p>The dials translate business policy into execution design: <strong>quality floor, cost ceiling, runtime autonomy, and action risk.</strong></p></div>
+      </div>
+    </section>
+
+    <!-- 13 · DIFFICULTY ROUTING (S13) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.4</span> Difficulty-aware tier routing</p>
+        <div class="split vr top">
+          <div>
+            <h2>Start with the least expensive tier likely to complete the task</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Heuristic <code>W_d</code></b> reads length, code/diff content, and reasoning markers.</li>
+              <li class="j"><b>Low / mid / high thresholds</b> set the starting tier.</li>
+              <li><b>Client floors &amp; ceilings</b> — a minimum quality floor, a maximum cost tier.</li>
+              <li class="j"><b>Non-streaming can escalate</b> when a post-generation confidence check fails.</li>
+            </ul>
+            <p class="src">The router is heuristic, calibrated from observed traffic — not a trained neural coordinator. Streaming currently routes once up front.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Prompt signals → low / mid / high</span>
+            <svg viewBox="0 0 360 210" role="img" aria-label="A decision tree from prompt signals to three tiers">
+              <rect x="120" y="14" width="120" height="34" rx="9" fill="var(--surface)" stroke="var(--indigo)"/><text x="180" y="36" text-anchor="middle" font-size="10" fill="var(--indigo)">W_d signals</text>
+              <g stroke="var(--border-2)" stroke-width="1.4" fill="none"><path class="v-draw" d="M180 48 L70 110"/><path class="v-draw" style="animation-delay:.12s" d="M180 48 L180 110"/><path class="v-draw" style="animation-delay:.24s" d="M180 48 L290 110"/></g>
+              <g font-size="10" text-anchor="middle">
+                <rect x="26" y="112" width="88" height="34" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="70" y="134" fill="var(--jade)">low</text>
+                <rect x="136" y="112" width="88" height="34" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="180" y="134" class="vlbl-t">mid</text>
+                <rect x="246" y="112" width="88" height="34" rx="8" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="290" y="134" fill="var(--indigo)">high</text>
+              </g>
+              <text x="180" y="182" text-anchor="middle" font-size="9" class="vlbl-f">floor ≤ start ≤ ceiling</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · ESCALATION LADDER (S14) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.5</span> The escalation ladder</p>
+        <div class="split vr top">
+          <div>
+            <h2>Escalation protects quality while preserving cheap-tier economics</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Easy / routine</b> — cheap tier absorbs volume.</li>
+              <li class="j"><b>Moderate</b> — mid tier handles broader reasoning and generation.</li>
+              <li><b>Hard tail</b> — high / frontier tier, used selectively.</li>
+              <li class="j"><b>Measured</b> — a mixed-escalation code-repair pilot reached <b>88% resolution at 22–33% lower cost</b> than all-Fable.</li>
+            </ul>
+            <p class="src">Directional and workload-specific: SWE-bench Lite slices, n=25. Do not generalize 22–33% to every workload.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Volume narrows as cost &amp; capability rise</span>
+            <svg viewBox="0 0 360 210" role="img" aria-label="Three ascending steps with narrowing traffic volume">
+              <rect class="v-gy" x="30" y="140" width="150" height="50" rx="6" fill="var(--jade)"/><text x="105" y="170" text-anchor="middle" font-size="10" fill="var(--ink)">cheap · volume</text>
+              <rect class="v-gy" style="animation-delay:.12s" x="80" y="86" width="120" height="50" rx="6" fill="var(--jade-dim)"/><text x="140" y="116" text-anchor="middle" font-size="10" fill="var(--ink)">mid</text>
+              <rect class="v-gy" style="animation-delay:.24s" x="130" y="32" width="90" height="50" rx="6" fill="var(--indigo)"/><text x="175" y="62" text-anchor="middle" font-size="10" fill="var(--ink)">high</text>
+              <text x="300" y="60" font-size="9" class="vlbl-f">cost ↑</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · RESERVE-AND-COMMIT (S15) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.6</span> Reserve-and-Commit — the economic control point</p>
         <div class="split v top">
           <div>
-            <h2>Domain-tuned models that specialize the sovereign inference layer</h2>
+            <h2>No budget headroom means no provider call</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li><b>Adapters, not checkpoints</b> — MicroLoRA carries the domain; the base stays frozen.</li>
-              <li class="j"><b>Real-time adaptation</b> — SONA tunes behaviour online, in under a tenth of a millisecond.</li>
-              <li><b>One interface, many providers</b> — Claude, GPT, Gemini, Ollama, Cohere, all formatted the same.</li>
-              <li class="j"><b>Runs on ruvLLM</b> — sovereign, local inference; the data never leaves the box.</li>
+              <li><b>Reserve the worst-case</b> request envelope before execution.</li>
+              <li class="j"><b>Per-agent shard limits</b> plus an account hard-cap backstop.</li>
+              <li><b>Commit actual cost</b> after completion; release the difference.</li>
+              <li class="j"><b>Fail closed</b> under concurrency, retry, truncation, idempotent replay.</li>
             </ul>
+            <p class="src">One of the clearest differentiators — it makes the cap an execution invariant, not a dashboard alert.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Authorize maximum → settle actual → release balance</span>
+            <svg viewBox="0 0 380 190" role="img" aria-label="Credit-card authorization analogy">
+              <defs><marker id="arRC" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g font-size="10" text-anchor="middle">
+                <rect x="20" y="76" width="96" height="42" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="68" y="94" fill="var(--jade)">authorize</text><text x="68" y="108" font-size="8" class="vlbl-f">worst-case</text>
+                <rect x="142" y="76" width="96" height="42" rx="9" fill="var(--surface)" stroke="var(--indigo)"/><text x="190" y="94" fill="var(--indigo)">settle</text><text x="190" y="108" font-size="8" class="vlbl-f">actual</text>
+                <rect x="264" y="76" width="96" height="42" rx="9" fill="var(--surface)" stroke="var(--border-2)"/><text x="312" y="94" class="vlbl-t">release</text><text x="312" y="108" font-size="8" class="vlbl-f">balance</text>
+              </g>
+              <g stroke="var(--faint)" stroke-width="1.4"><line class="v-draw" x1="116" y1="97" x2="140" y2="97" marker-end="url(#arRC)"/><line class="v-draw" style="animation-delay:.15s" x1="238" y1="97" x2="262" y2="97" marker-end="url(#arRC)"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · METERING (S16) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.7</span> Metering &amp; cost receipts</p>
+        <div class="split vr top">
+          <div>
+            <h2>Every request leaves an attributable operating record</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Tokens &amp; pricing</b> recorded against the resolved tier.</li>
+              <li class="j"><b>Provider-authoritative usage</b> where available.</li>
+              <li><b>Family-correct local billing floor</b> for streaming / disconnect paths.</li>
+              <li class="j"><b>Tenant-scoped idempotency</b> prevents duplicate billing on replay.</li>
+            </ul>
+            <p class="src">"Tamper-evident signed receipt per completion" is a future extension, not a current claim.</p>
+          </div>
+          <div class="di">
+            <span class="cap">An example cost receipt</span>
+            <svg viewBox="0 0 340 210" role="img" aria-label="A receipt card with request details">
+              <rect x="30" y="20" width="280" height="170" rx="12" fill="var(--surface)" stroke="var(--border-2)"/>
+              <g font-size="10" fill="var(--muted)">
+                <text x="48" y="48">tenant</text><text x="292" y="48" text-anchor="end" fill="var(--text)">acme-01</text>
+                <text x="48" y="72">tier → model</text><text x="292" y="72" text-anchor="end" fill="var(--indigo)">mid → sonnet-class</text>
+                <text x="48" y="96">tokens</text><text x="292" y="96" text-anchor="end" fill="var(--text)">1,240 in · 380 out</text>
+                <text x="48" y="120">cache</text><text x="292" y="120" text-anchor="end" fill="var(--text)">breakpoint hit</text>
+                <text x="48" y="144">escalation</text><text x="292" y="144" text-anchor="end" fill="var(--text)">none</text>
+              </g>
+              <line x1="48" y1="158" x2="292" y2="158" stroke="var(--border)"/>
+              <text x="48" y="180" font-size="11" fill="var(--jade)" font-weight="600">cost</text><text x="292" y="180" text-anchor="end" font-size="11" fill="var(--jade)" font-weight="600">$0.0042</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · MULTI-TENANCY (S17) -->
+    <section class="slide" data-part="How it works">
+      <div class="inner">
+        <p class="kick"><span class="n">03.8</span> Multi-tenancy is structural</p>
+        <div class="split vr top">
+          <div>
+            <h2>Tenant identity is carried through execution, storage, analytics, and controls</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Server-derived identity</b> from scoped <code>cog_</code> keys or verified OAuth.</li>
+              <li class="j"><b>Tenant-owned</b> pods, batches, usage, and vectors.</li>
+              <li><b>Unknown &amp; cross-tenant</b> resources both return <code>404</code>.</li>
+              <li class="j"><b>Prompts &amp; secrets</b> excluded from tracing surfaces.</li>
+            </ul>
+            <p class="src">Caveat: production provisioning of <code>accountId</code> on customer keys is owned by an upstream system — an external dependency in the project ledger.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Shared gateway, isolated data</span>
+            <svg viewBox="0 0 360 210" role="img" aria-label="Three isolated tenant lanes sharing one gateway">
+              <rect class="v-shim" x="120" y="18" width="120" height="30" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="180" y="38" text-anchor="middle" font-size="9.5" fill="var(--jade)">gateway</text>
+              <g>
+                <rect class="v-pop" x="24" y="70" width="96" height="120" rx="10" fill="none" stroke="var(--indigo)" stroke-width="1.6"/><text x="72" y="184" text-anchor="middle" font-size="9" class="vlbl-f">tenant A</text>
+                <rect class="v-pop" style="animation-delay:.12s" x="132" y="70" width="96" height="120" rx="10" fill="none" stroke="var(--indigo)" stroke-width="1.6"/><text x="180" y="184" text-anchor="middle" font-size="9" class="vlbl-f">tenant B</text>
+                <rect class="v-pop" style="animation-delay:.24s" x="240" y="70" width="96" height="120" rx="10" fill="none" stroke="var(--indigo)" stroke-width="1.6"/><text x="288" y="184" text-anchor="middle" font-size="9" class="vlbl-f">tenant C</text>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1.2"><line x1="150" y1="48" x2="72" y2="70"/><line x1="180" y1="48" x2="180" y2="70"/><line x1="210" y1="48" x2="288" y2="70"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D · DIVIDER — CAPABILITIES -->
+    <section class="slide divider" data-part="Capabilities">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">SECTION 04</div>
+          <h2 class="rise" style="animation-delay:.06s">Capability pillars</h2>
+          <p class="sub rise" style="animation-delay:.12s">Compatibility, resilience, the cost stack, safety, observability — and bounded pods.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>protocols</span><span>cost stack</span><span>safety</span><span>Darwin Loop pods</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 300" role="img" aria-label="Interlocking gears representing capability pillars">
+            <g class="v-spin"><g stroke="var(--indigo)" stroke-width="7" stroke-linecap="round"><line x1="188" y1="150" x2="206" y2="150"/><line x1="168" y1="102" x2="180" y2="90"/><line x1="120" y1="82" x2="120" y2="64"/><line x1="72" y1="102" x2="60" y2="90"/><line x1="52" y1="150" x2="34" y2="150"/><line x1="72" y1="198" x2="60" y2="210"/><line x1="120" y1="218" x2="120" y2="236"/><line x1="168" y1="198" x2="180" y2="210"/></g><circle cx="120" cy="150" r="68" fill="none" stroke="var(--indigo)" stroke-width="3.5"/><circle cx="120" cy="150" r="22" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/></g>
+            <g class="v-spinR"><g stroke="var(--jade)" stroke-width="6" stroke-linecap="round"><line x1="282" y1="196" x2="296" y2="196"/><line x1="255" y1="156" x2="263" y2="144"/><line x1="209" y1="156" x2="201" y2="144"/><line x1="190" y1="196" x2="176" y2="196"/><line x1="209" y1="236" x2="201" y2="248"/><line x1="255" y1="236" x2="263" y2="248"/></g><circle cx="236" cy="196" r="46" fill="none" stroke="var(--jade)" stroke-width="3"/><circle cx="236" cy="196" r="15" fill="var(--indigo)" opacity="0.85"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · PROTOCOL COMPATIBILITY (S18) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.1</span> Protocol compatibility</p>
+        <div class="split vr top">
+          <div>
+            <h2>Adopt MetaLLM with a base-URL and credential change</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>OpenAI chat completions</b> — stream or JSON.</li>
+              <li class="j"><b>Anthropic messages</b> — stream or JSON, including tool-use translation.</li>
+              <li><b>Legacy completions</b> supported.</li>
+              <li class="j"><b>Stable model aliases</b> hide vendor churn.</li>
+            </ul>
+            <p class="src">Verify feature-level semantics per host — especially reasoning controls and tool calls.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Every client → one endpoint</span>
+            <svg viewBox="0 0 360 200" role="img" aria-label="OpenAI SDK, Anthropic SDK, CLI and curl pointing to one endpoint">
+              <g font-size="9.5" text-anchor="middle" class="vlbl">
+                <rect x="20" y="30" width="86" height="28" rx="7" fill="var(--surface)" stroke="var(--border-2)"/><text x="63" y="48">OpenAI SDK</text>
+                <rect x="20" y="66" width="86" height="28" rx="7" fill="var(--surface)" stroke="var(--border-2)"/><text x="63" y="84">Anthropic SDK</text>
+                <rect x="20" y="102" width="86" height="28" rx="7" fill="var(--surface)" stroke="var(--border-2)"/><text x="63" y="120">CLI</text>
+                <rect x="20" y="138" width="86" height="28" rx="7" fill="var(--surface)" stroke="var(--border-2)"/><text x="63" y="156">curl</text>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1.2"><path class="v-draw" d="M106 44 L232 98"/><path class="v-draw" style="animation-delay:.08s" d="M106 80 L232 98"/><path class="v-draw" style="animation-delay:.16s" d="M106 116 L232 102"/><path class="v-draw" style="animation-delay:.24s" d="M106 152 L232 102"/></g>
+              <rect class="v-shim" x="232" y="80" width="110" height="40" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="287" y="104" text-anchor="middle" font-size="10" fill="var(--jade)">MetaLLM</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · PROVIDER RESILIENCE (S19) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.2</span> Provider resilience &amp; abstraction</p>
+        <div class="split v top">
+          <div>
+            <h2>Provider selection is separated from application logic</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Tier pools</b> contain primary and fallback models.</li>
+              <li class="j"><b>Circuit breakers</b> isolate upstream failures.</li>
+              <li><b>Provider &amp; model choices</b> can be reconfigured.</li>
+              <li class="j"><b>OpenRouter</b> supplies marketplace breadth; MetaLLM adds enterprise control.</li>
+            </ul>
+          </div>
+          <div class="callout uh" style="align-self:center"><div class="h">Don't compete on catalog breadth</div><p>MetaLLM <strong>consumes breadth upstream</strong> and differentiates on policy, economics, and tenant governance — not on the size of a native provider catalog.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · COST STACK (S20) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.3</span> Cost optimization stack — routing is one lever</p>
+        <div class="grid g3" style="gap:0.55rem">
+          <div class="card mini"><div class="tag">P0 · billing</div><div class="cd">Honest streaming billing &amp; reasoning-token visibility. <span class="spill live">live</span></div></div>
+          <div class="card mini"><div class="tag">P1 · caching</div><div class="cd">Exact response cache + provider prompt-cache breakpoints. <span class="spill live">live</span></div></div>
+          <div class="card mini"><div class="tag">P2 · batch</div><div class="cd">Async batch at ~50% price multiplier. <span class="spill live">live</span></div></div>
+          <div class="card mini"><div class="tag">P3 · midstream</div><div class="cd">Midstream signal detection, shadow mode. <span class="spill design">shadow</span></div></div>
+          <div class="card mini"><div class="tag">P4 · handoff</div><div class="cd">Handoff &amp; verifier layers. <span class="spill open">planned</span></div></div>
+          <div class="card mini"><div class="tag">P5 · offline</div><div class="cd">Compression &amp; offline optimization. <span class="spill open">planned</span></div></div>
+        </div>
+        <div class="callout" style="margin-top:0.8rem"><div class="h">Caching depends on prompt shape</div><p>A large stable prefix showed strong savings — but a measured <strong>seven-day production slice had 0% cache reads</strong> because its traffic didn't meet the breakpoint conditions.</p></div>
+      </div>
+    </section>
+
+    <!-- 21 · ASYNC BATCH (S21) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.4</span> Async batch economics</p>
+        <div class="split vr top">
+          <div>
+            <h2>Same governed pipeline, later execution, lower unit cost</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Submit bulk requests</b> without an immediate provider call.</li>
+              <li class="j"><b>Reserve the batch envelope</b> up front.</li>
+              <li><b>Drain asynchronously</b> — item-level success or failure recorded.</li>
+              <li class="j"><b>~50% discount multiplier</b> on batch-tagged ledger lines (live).</li>
+            </ul>
+            <p class="src">Best fits evaluations, classification, and enrichment. The discount is an economic feature, not a quality feature.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Queue → route → meter → commit (off-peak)</span>
+            <svg viewBox="0 0 380 190" role="img" aria-label="A queue feeding the normal pipeline during off-peak">
+              <g fill="var(--indigo)"><rect class="v-pop" x="24" y="70" width="18" height="18" rx="3"/><rect class="v-pop" style="animation-delay:.08s" x="24" y="94" width="18" height="18" rx="3"/><rect class="v-pop" style="animation-delay:.16s" x="24" y="118" width="18" height="18" rx="3"/></g>
+              <path class="v-draw" d="M50 103 H120" stroke="var(--faint)" stroke-width="1.5"/>
+              <g font-size="9.5" text-anchor="middle"><rect x="120" y="86" width="70" height="34" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="155" y="107" class="vlbl-t">route</text>
+              <rect x="204" y="86" width="70" height="34" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="239" y="107" class="vlbl-t">meter</text>
+              <rect x="288" y="86" width="70" height="34" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="323" y="107" fill="var(--jade)">commit</text></g>
+              <text x="239" y="150" text-anchor="middle" font-size="9" class="vlbl-f">off-peak window · ~50% unit cost</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · SAFETY (S22) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.5</span> Safety &amp; guardrails</p>
+        <div class="split vr top">
+          <div>
+            <h2>Safety policy can intercept before model spend or outward action</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Opt-in detection</b> for prompt injection, PII, and secret patterns.</li>
+              <li class="j"><b><code>block · warn · redact</code></b> policy modes.</li>
+              <li><b>Optional output scanning</b> for non-streaming responses.</li>
+              <li class="j"><b>Findings can trigger</b> an approval gate on pod actions.</li>
+            </ul>
+            <p class="src">Defense-in-depth, not a complete safety solution — a useful deterministic layer, not a capability lift.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Input guard → model → output guard</span>
+            <svg viewBox="0 0 380 190" role="img" aria-label="Input guard, model, output guard with a branch to approval">
+              <defs><marker id="arSf" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g font-size="9.5" text-anchor="middle">
+                <rect x="14" y="70" width="86" height="38" rx="9" fill="var(--surface)" stroke="var(--jade)"/><text x="57" y="93" fill="var(--jade)">input guard</text>
+                <rect x="128" y="70" width="80" height="38" rx="9" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="168" y="93" fill="var(--indigo)">model</text>
+                <rect x="236" y="70" width="90" height="38" rx="9" fill="var(--surface)" stroke="var(--jade)"/><text x="281" y="93" fill="var(--jade)">output guard</text>
+                <rect x="236" y="132" width="90" height="34" rx="9" fill="var(--surface)" stroke="var(--amber)"/><text x="281" y="153" fill="var(--amber)">approval</text>
+              </g>
+              <g stroke="var(--faint)" stroke-width="1.4"><line class="v-draw" x1="100" y1="89" x2="126" y2="89" marker-end="url(#arSf)"/><line class="v-draw" style="animation-delay:.15s" x1="208" y1="89" x2="234" y2="89" marker-end="url(#arSf)"/><line class="v-draw" style="animation-delay:.3s" x1="281" y1="108" x2="281" y2="130" stroke="var(--amber)" marker-end="url(#arSf)"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · OBSERVABILITY (S23) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.6</span> Observability &amp; tenant analytics</p>
+        <div class="split v top">
+          <div>
+            <h2>The same controls that govern spend also make it explainable</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Cost, tokens, requests</b>, tier mix, and escalation rate.</li>
+              <li class="j"><b>Cache hit rate</b>, estimated savings, provider mix.</li>
+              <li><b>Budget headroom</b> versus cap.</li>
+              <li class="j"><b>Secret-redacted OpenTelemetry</b> seam across the pipeline.</li>
+            </ul>
+            <p class="src">Usage endpoint &amp; tracing seam are built; Cloud Trace export and SLO wiring remain operational work — don't pitch a finished observability product.</p>
           </div>
           <div class="grid g2" style="align-content:center">
-            <div class="stat"><div class="num i">1</div><div class="k">frozen base, many experts</div></div>
-            <div class="stat"><div class="num">&lt;0.05<span style="font-size:1.3rem">ms</span></div><div class="k">SONA adaptation latency</div></div>
-            <div class="stat"><div class="num i">5</div><div class="k">providers, one chat format</div></div>
-            <div class="stat"><div class="num">on-prem</div><div class="k">nothing leaves the perimeter</div></div>
+            <div class="stat"><div class="num i">tier mix</div><div class="k">low / mid / high share</div></div>
+            <div class="stat"><div class="num">headroom</div><div class="k">budget vs. cap</div></div>
+            <div class="stat"><div class="num i">cache</div><div class="k">hit rate &amp; savings</div></div>
+            <div class="stat"><div class="num">escalation</div><div class="k">rate by workload</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 8 · WHERE IT SITS -->
-    <section class="slide" data-part="MetaLLM">
+    <!-- 24 · DARWIN LOOP PODS (S24) -->
+    <section class="slide" data-part="Capabilities">
       <div class="inner">
-        <p class="kick"><span class="n">02.2</span> Where it sits in the stack</p>
-        <h2 style="margin-bottom:0.9rem">From a base model to a served domain expert</h2>
-        <div class="flow">
-          <div class="node"><span class="badge">base</span><b>Base model</b><span>frozen weights</span></div>
-          <div class="harrow">→</div>
-          <div class="node j"><span class="badge">specialize</span><b>MicroLoRA</b><span>domain adapter</span></div>
-          <div class="harrow">→</div>
-          <div class="node j"><span class="badge">adapt</span><b>SONA</b><span>real-time</span></div>
-          <div class="harrow">→</div>
-          <div class="node i"><span class="badge">route</span><b>Router</b><span>task · provider</span></div>
-          <div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">run</span><b>ruvLLM</b><span>sovereign</span></div>
-        </div>
-        <div class="split v top" style="margin-top:1rem">
-          <div class="callout"><div class="h">What MetaLLM owns</div><p>The middle of the chain — <strong>specialize and adapt</strong>. It manufactures and manages the domain experts; ruvLLM runs them locally.</p></div>
-          <div class="callout uh" style="border-left-color:var(--indigo); background:var(--indigo-wash)"><div class="h">Why it's one line for the agent</div><p>The agent asks for a domain; MetaLLM loads the right adapter and formats the prompt for whatever provider is behind it. No plumbing.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9 · AT A GLANCE -->
-    <section class="slide" data-part="MetaLLM">
-      <div class="inner">
-        <p class="kick"><span class="n">02.3</span> MetaLLM at a glance</p>
-        <h2 style="margin-bottom:0.85rem">Three moves on one frozen base</h2>
-        <div class="grid g3">
-          <div class="card j"><div class="tag j">Specialize</div><div class="ct">MicroLoRA</div><div class="cd">Tiny per-domain adapters carry the expertise; the base model is never touched.</div></div>
-          <div class="card i"><div class="tag">Adapt</div><div class="ct">SONA</div><div class="cd">Real-time neural adaptation — behaviour tunes online from trajectories, in &lt;0.05 ms.</div></div>
-          <div class="card"><div class="tag">Route</div><div class="ct">One interface</div><div class="cd">HNSW context routing + multi-provider chat formatting behind a single call.</div></div>
-        </div>
-        <div class="callout" style="margin-top:1rem"><div class="h">In one line</div><p>A <strong>fleet of domain experts from one base model</strong> — specialized with adapters, adapted in real time, and served sovereignly through ruvLLM.</p></div>
-      </div>
-    </section>
-
-    <!-- 10 · DIVIDER 03 -->
-    <section class="slide divider" data-part="Under the hood">
-      <div class="inner">
-        <div class="dtext">
-          <div class="pnum rise">PART 03</div>
-          <h2 class="rise" style="animation-delay:.06s">How it specializes</h2>
-          <p class="sub rise" style="animation-delay:.12s">Adapters, real-time adaptation, routing — and never forgetting what it knew.</p>
-          <div class="rule"></div>
-          <div class="dchips"><span>MicroLoRA</span><span>SONA</span><span>no forgetting</span><span>routing</span></div>
-        </div>
-        <div class="dviz">
-          <svg viewBox="0 0 340 300" role="img" aria-label="A frozen base with a small adapter attached">
-            <rect x="60" y="90" width="130" height="120" rx="14" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/>
-            <text x="125" y="145" text-anchor="middle" font-size="12" class="vlbl-f">base</text>
-            <text x="125" y="164" text-anchor="middle" font-size="10" class="vlbl-f">frozen</text>
-            <g class="v-pop" style="animation-delay:.3s"><rect x="205" y="120" width="74" height="60" rx="10" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><text x="242" y="146" text-anchor="middle" font-size="10" fill="var(--jade)">MicroLoRA</text><text x="242" y="162" text-anchor="middle" font-size="9" class="vlbl-f">adapter</text></g>
-            <path class="v-draw" d="M190 150 H205" stroke="var(--jade)" stroke-width="2"/>
-            <text x="170" y="248" text-anchor="middle" font-size="10" fill="var(--indigo)">frozen base + small learned adapter</text>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 · MICROLORA -->
-    <section class="slide" data-part="Under the hood">
-      <div class="inner">
-        <p class="kick"><span class="n">03.1</span> MicroLoRA — the domain adapter</p>
-        <div class="split v top">
-          <div>
-            <h2>Freeze the base, train a tiny expert</h2>
-            <ul class="clean" style="margin-top:0.6rem">
-              <li><b>Lightweight adapters</b> — a few small weight matrices, not a new checkpoint.</li>
-              <li class="j"><b>Cheap to train</b> — task-specific fine-tuning without touching the base.</li>
-              <li><b>Tiny to store &amp; ship</b> — a domain fits in a small, movable file.</li>
-              <li class="j"><b>Hot-swappable</b> — load the health expert, then the security expert, on the same base.</li>
-            </ul>
-          </div>
-          <div class="di">
-            <span class="cap">Base frozen · adapter learned</span>
-            <svg viewBox="0 0 420 200" role="img" aria-label="A frozen base model with a small MicroLoRA adapter that is trained">
-              <rect x="24" y="60" width="150" height="80" rx="12" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/>
-              <text x="99" y="96" text-anchor="middle" font-size="12" class="vlbl-t">base</text>
-              <text x="99" y="114" text-anchor="middle" font-size="10" class="vlbl-f">❄ frozen</text>
-              <path class="v-draw" d="M174 100 H236" stroke="var(--jade)" stroke-width="2" marker-end=""/>
-              <rect class="v-shim" x="238" y="66" width="150" height="68" rx="12" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
-              <text x="313" y="96" text-anchor="middle" font-size="12" fill="var(--jade)" font-weight="600">MicroLoRA</text>
-              <text x="313" y="114" text-anchor="middle" font-size="10" class="vlbl-f">learned · tiny</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 12 · SONA -->
-    <section class="slide" data-part="Under the hood">
-      <div class="inner">
-        <p class="kick"><span class="n">03.2</span> SONA — real-time adaptation</p>
+        <p class="kick"><span class="n">04.7</span> Darwin Loop pods</p>
         <div class="split vr top">
           <div>
-            <h2>It tunes itself while it works</h2>
+            <h2>The substrate runs bounded autonomous workflows, not only single completions</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li class="j"><b>Real-time neural adaptation</b> — adjusts behaviour online, mid-task.</li>
-              <li><b>Under 0.05 ms</b> — fast enough to sit on the hot path.</li>
-              <li class="j"><b>Learns from trajectories</b> — successful patterns feed straight back in.</li>
-              <li><b>Pairs with MicroLoRA</b> — adapters carry the domain, SONA carries the moment.</li>
+              <li><b>A pod combines</b> domain × host × tier.</li>
+              <li class="j"><b>Scheduled or triggered steps</b> execute through the same budgeted gateway.</li>
+              <li><b>Artifacts captured</b> and evaluated for conformance.</li>
+              <li class="j"><b>Runaway budget denial</b> pauses the pod.</li>
             </ul>
+            <p class="src">The native runtime and real executor are live — live pods and budget-pausing behavior are documented, not mocked.</p>
           </div>
           <div class="di">
-            <span class="cap">Trajectory → adaptation → better next call</span>
-            <svg viewBox="0 0 420 200" role="img" aria-label="Trajectories feeding a fast adaptation loop">
-              <circle class="v-pulse" cx="120" cy="100" r="44" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.8"/>
-              <text x="120" y="98" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">SONA</text>
-              <text x="120" y="114" text-anchor="middle" font-size="9" class="vlbl-f">&lt;0.05 ms</text>
-              <g fill="var(--indigo)"><circle class="v-pop" cx="98" cy="88" r="5"/><circle class="v-pop" style="animation-delay:.1s" cx="134" cy="82" r="5"/><circle class="v-pop" style="animation-delay:.2s" cx="122" cy="118" r="5"/></g>
-              <path class="v-draw" style="animation-delay:.4s" d="M166 100 H300" stroke="var(--jade)" stroke-width="2" fill="none"/>
-              <rect class="v-shim" x="304" y="76" width="96" height="48" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="352" y="98" text-anchor="middle" font-size="11" fill="var(--indigo)" font-weight="600">better</text><text x="352" y="114" text-anchor="middle" font-size="9" class="vlbl-f">next call</text>
-              <path class="v-draw" style="animation-delay:.7s" d="M304 130 Q220 172 150 142" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 5"/>
+            <span class="cap">execute → evaluate → decide → wait/continue</span>
+            <svg viewBox="0 0 260 220" role="img" aria-label="A circular pod loop bounded by budget and policy rails">
+              <circle cx="130" cy="110" r="80" fill="none" stroke="var(--border-2)" stroke-width="1.6" stroke-dasharray="5 6"/>
+              <circle class="v-t" r="6" fill="var(--jade)" style="offset-path:path('M130 30 a80 80 0 1 1 -0.1 0');animation-duration:6s"/>
+              <g font-size="9.5" text-anchor="middle" fill="var(--indigo)"><text x="130" y="34">execute</text><text x="214" y="114">evaluate</text><text x="130" y="196">decide</text><text x="46" y="114">wait</text></g>
+              <circle class="v-pulse" cx="130" cy="110" r="26" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><text x="130" y="114" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">pod</text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 13 · NO FORGETTING -->
-    <section class="slide" data-part="Under the hood">
+    <!-- 25 · POD LIFECYCLE (S25) -->
+    <section class="slide" data-part="Capabilities">
       <div class="inner">
-        <p class="kick"><span class="n">03.3</span> Specialize without forgetting</p>
-        <div class="split v top">
+        <p class="kick"><span class="n">04.8</span> Pod lifecycle &amp; control states</p>
+        <h2 style="margin-bottom:0.8rem">Autonomy is a state machine, not an unbounded loop</h2>
+        <div class="flow sm">
+          <div class="node"><span class="badge">start</span><b>SPAWNED</b></div>
+          <div class="harrow">→</div>
+          <div class="node i"><span class="badge">run</span><b>EXECUTING</b></div>
+          <div class="harrow">→</div>
+          <div class="node i"><span class="badge">check</span><b>EVALUATING</b></div>
+          <div class="harrow">→</div>
+          <div class="node j"><span class="badge">rest</span><b>IDLE</b></div>
+        </div>
+        <div class="split v top" style="margin-top:1rem">
+          <div class="card a"><div class="tag" style="color:var(--amber)">AWAITING_APPROVAL</div><div class="cd">For gated action proposals — the pod holds, it does not commit.</div></div>
+          <div class="card c"><div class="tag" style="color:var(--crit)">PAUSED</div><div class="cd">For budget, host, timeout, or policy conditions. Audit events &amp; artifacts at each transition.</div></div>
+        </div>
+        <p class="src" style="margin-top:0.6rem">This bounded lifecycle is the bridge from experimentation to operating control.</p>
+      </div>
+    </section>
+
+    <!-- 26 · HUMAN APPROVAL (S26) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.9</span> Human approval at the action boundary</p>
+        <div class="split vr top">
           <div>
-            <h2>New experts, and the old ones stay intact</h2>
+            <h2>Automate analysis freely; gate consequences deliberately</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li><b>The base is never overwritten</b> — every domain is an additive adapter.</li>
-              <li class="j"><b>Adapters compose</b> — stack or switch experts on one frozen core.</li>
-              <li><b>EWC++ in the stack</b> — Elastic Weight Consolidation guards prior skills as new ones are learned.</li>
-              <li class="j"><b>No catastrophic forgetting</b> — learning security doesn't erase health.</li>
+              <li><b>Policies identify</b> outward or irreversible action types.</li>
+              <li class="j"><b>Pod parks</b> while holding — not committing — the cost reservation.</li>
+              <li><b>Human approves or rejects</b> the proposal.</li>
+              <li class="j"><b>Timeout auto-rejects</b> — it never auto-approves.</li>
             </ul>
+            <p class="src">Well suited to customer communications, transactions, production changes, and other high-consequence edges.</p>
           </div>
           <div class="di">
-            <span class="cap">One base · a shelf of swappable experts</span>
-            <svg viewBox="0 0 420 200" role="img" aria-label="A frozen base with a shelf of domain adapters that can be selected">
-              <rect x="24" y="70" width="120" height="70" rx="12" fill="var(--surface)" stroke="var(--border-2)" stroke-width="2"/>
-              <text x="84" y="102" text-anchor="middle" font-size="11" class="vlbl-t">base</text>
-              <text x="84" y="118" text-anchor="middle" font-size="9" class="vlbl-f">❄ frozen</text>
-              <g>
-                <rect class="v-pop" x="176" y="44" width="100" height="30" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="226" y="63" text-anchor="middle" font-size="10" fill="var(--jade)">health</text>
-                <rect class="v-pop" style="animation-delay:.12s" x="176" y="86" width="100" height="30" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="226" y="105" text-anchor="middle" font-size="10" fill="var(--jade)">security</text>
-                <rect class="v-pop" style="animation-delay:.24s" x="176" y="128" width="100" height="30" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="226" y="147" text-anchor="middle" font-size="10" class="vlbl">building …</text>
+            <span class="cap">think → draft → propose → verdict → act</span>
+            <svg viewBox="0 0 360 200" role="img" aria-label="A flow from think to human verdict to act">
+              <defs><marker id="arHa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g font-size="9" text-anchor="middle">
+                <rect x="14" y="84" width="60" height="32" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="44" y="104" class="vlbl-t">think</text>
+                <rect x="86" y="84" width="60" height="32" rx="8" fill="var(--surface)" stroke="var(--border-2)"/><text x="116" y="104" class="vlbl-t">draft</text>
+                <rect x="158" y="84" width="66" height="32" rx="8" fill="var(--surface)" stroke="var(--indigo)"/><text x="191" y="104" fill="var(--indigo)">propose</text>
+                <rect x="236" y="80" width="66" height="40" rx="8" fill="var(--surface)" stroke="var(--amber)"/><text x="269" y="98" fill="var(--amber)">verdict</text><text x="269" y="111" font-size="7.5" class="vlbl-f">human</text>
+                <rect x="312" y="84" width="42" height="32" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="333" y="104" fill="var(--jade)">act</text>
               </g>
-              <path class="v-draw" d="M144 101 H176" stroke="var(--jade)" stroke-width="2"/>
-              <text x="346" y="105" text-anchor="middle" font-size="10" class="vlbl-f">load on demand</text>
+              <g stroke="var(--faint)" stroke-width="1.3"><line class="v-draw" x1="74" y1="100" x2="84" y2="100" marker-end="url(#arHa)"/><line class="v-draw" style="animation-delay:.1s" x1="146" y1="100" x2="156" y2="100" marker-end="url(#arHa)"/><line class="v-draw" style="animation-delay:.2s" x1="224" y1="100" x2="234" y2="100" marker-end="url(#arHa)"/><line class="v-draw" style="animation-delay:.3s" x1="302" y1="100" x2="310" y2="100" marker-end="url(#arHa)"/></g>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 14 · ROUTING & PROVIDERS -->
-    <section class="slide" data-part="Under the hood">
+    <!-- 27 · HOST CHOICE (S27) -->
+    <section class="slide" data-part="Capabilities">
       <div class="inner">
-        <p class="kick"><span class="n">03.4</span> Routing &amp; providers</p>
-        <div class="split top">
-          <div>
-            <h3 style="margin-bottom:0.5rem">Context routing</h3>
-            <ul class="clean sm">
-              <li><b>HNSW router</b> — pulls the hot patterns relevant to the task.</li>
-              <li class="j"><b>≤11 hot patterns</b> — tuned for fast, small-corpus retrieval.</li>
-              <li><b>Larger corpora</b> — hand off to AgentDB / RuVector embeddings.</li>
-            </ul>
-          </div>
-          <div>
-            <h3 style="margin-bottom:0.5rem">One format, every provider</h3>
-            <ul class="clean sm">
-              <li class="j"><b>Claude · GPT · Gemini · Ollama · Cohere</b> — chat-formatted identically.</li>
-              <li><b>Local or hosted</b> — Ollama on-box, or a frontier API when you choose.</li>
-              <li class="j"><b>Swap providers</b> without rewriting a prompt.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="callout i" style="margin-top:0.9rem"><div class="h">The point</div><p>The domain expert is stable; the <strong>runtime underneath it is interchangeable</strong> — same adapter, whichever model or provider is cheapest and most capable for the task.</p></div>
-      </div>
-    </section>
-
-    <!-- 15 · SOVEREIGN -->
-    <section class="slide" data-part="Under the hood">
-      <div class="inner">
-        <p class="kick"><span class="n">03.5</span> Sovereign by construction</p>
+        <p class="kick"><span class="n">04.10</span> Host choice is an economic design decision</p>
         <div class="split vr top">
           <div>
-            <h2>The whole loop can run inside your walls</h2>
+            <h2>The runtime scaffold can cost more than the task</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li><b>Local inference on ruvLLM</b> — the sovereign runtime the adapters ride on.</li>
-              <li class="j"><b>Train where the data lives</b> — adapters are made on-prem; domain data never leaves.</li>
-              <li><b>Optional hosted</b> — reach for a frontier provider only when you decide to.</li>
-              <li class="j"><b>Fits the edge</b> — small adapters ship onto appliances, not a datacenter.</li>
+              <li><b>Thin SDK/HTTP hosts</b> averaged ~<b>$0.00125</b> per task.</li>
+              <li class="j"><b><code>claude -p</code></b> averaged ~<b>$0.0606</b> per task — ~23.8k overhead tokens.</li>
+              <li><b>Same easy question</b> measured ~<b>33,000× costlier</b> through the heavy scaffold.</li>
+              <li class="j"><b>Choose a host</b> for required autonomy, not prestige.</li>
             </ul>
+            <p class="src">Small four-task benchmark on an older tier pool — treat absolute numbers as a diagnostic snapshot. The durable lesson is the host/router interaction.</p>
           </div>
           <div class="di">
-            <span class="cap">Adapters &amp; inference stay on-prem</span>
-            <svg viewBox="0 0 360 210" role="img" aria-label="A perimeter box containing the base, adapters, and runtime">
-              <rect x="40" y="34" width="230" height="150" rx="14" fill="none" stroke="var(--jade)" stroke-width="2" stroke-dasharray="6 6"/>
-              <text x="155" y="26" text-anchor="middle" font-size="10" fill="var(--jade)">your perimeter</text>
-              <rect x="70" y="66" width="80" height="42" rx="9" fill="var(--surface)" stroke="var(--border-2)"/><text x="110" y="91" text-anchor="middle" font-size="10" class="vlbl-t">base</text>
-              <rect x="164" y="66" width="80" height="42" rx="9" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="204" y="91" text-anchor="middle" font-size="10" fill="var(--jade)">adapters</text>
-              <rect x="106" y="120" width="102" height="42" rx="9" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="157" y="145" text-anchor="middle" font-size="10" fill="var(--indigo)">ruvLLM</text>
-              <path d="M300 110 h34" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="4 4"/><text x="322" y="100" text-anchor="middle" font-size="9" class="vlbl-f">hosted?</text><text x="322" y="128" text-anchor="middle" font-size="9" class="vlbl-f">opt-in</text>
+            <span class="cap">Cost per task · thin vs. heavy host (log)</span>
+            <svg viewBox="0 0 360 190" role="img" aria-label="Thin host bar tiny next to a heavy host bar">
+              <g font-size="10">
+                <text x="20" y="66" fill="var(--jade)">thin</text>
+                <rect class="v-gx" x="90" y="52" width="24" height="20" rx="4" fill="var(--jade)"/>
+                <text x="118" y="70" font-size="9" class="vlbl-f">$0.00125</text>
+                <text x="20" y="126" fill="var(--indigo)">claude -p</text>
+                <rect class="v-gx" style="animation-delay:.2s" x="90" y="112" width="250" height="20" rx="4" fill="var(--indigo)"/>
+                <text x="250" y="126" font-size="9" fill="#fff">$0.0606</text>
+              </g>
+              <text x="180" y="168" text-anchor="middle" font-size="9" class="vlbl-f">~33,000× on an easy question</text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 16 · DIVIDER 04 -->
-    <section class="slide divider" data-part="Domain experts">
+    <!-- 28 · LEARNING LOOP (S28) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.11</span> The learning &amp; optimization loop</p>
+        <div class="split vr top">
+          <div>
+            <h2>Moving from assumed traffic economics toward measured policy</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Usage ledger</b> captures observed tier mix and outcomes today.</li>
+              <li class="j"><b>Calibration</b> updates routing parameters without redeployment.</li>
+              <li><b>First sample</b> shifted an assumed 75/20/5 mix toward measured ~54/15/31.</li>
+              <li class="j"><b>A truly learned router</b> still needs reliable per-request quality labels.</li>
+            </ul>
+            <p class="src">Call this calibration, not autonomous self-learning. The trained routing head is still open work.</p>
+          </div>
+          <div class="di">
+            <span class="cap">ledger → calibrate → hot-reload → new traffic</span>
+            <svg viewBox="0 0 260 200" role="img" aria-label="A calibration loop">
+              <circle cx="130" cy="100" r="74" fill="none" stroke="var(--border-2)" stroke-width="1.6" stroke-dasharray="5 6"/>
+              <circle class="v-t" r="5.5" fill="var(--jade)" style="offset-path:path('M130 26 a74 74 0 1 1 -0.1 0');animation-duration:5s"/>
+              <g font-size="9" text-anchor="middle" fill="var(--indigo)"><text x="130" y="30">ledger</text><text x="204" y="104">calibrate</text><text x="130" y="180">hot-reload</text><text x="56" y="104">traffic</text></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 29 · MIDSTREAM (S29) -->
+    <section class="slide" data-part="Capabilities">
+      <div class="inner">
+        <p class="kick"><span class="n">04.12</span> Midstream optimization — observe before acting</p>
+        <div class="split vr top">
+          <div>
+            <h2>Detect waste and trajectory failure while a response is streaming</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Signals</b> — patch completion, malformed tool-JSON risk, lack of progress.</li>
+              <li class="j"><b>Live shadow mode</b> records what a control would have done.</li>
+              <li><b>Shadow changes no output</b> and spends no control authority.</li>
+              <li class="j"><b>Active interruption</b> remains gated on precision and safety evidence.</li>
+            </ul>
+            <p class="src">The deployment philosophy in one slide: instrument, measure, set an acceptance bar, then arm.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Streaming tokens · observe-only</span>
+            <svg viewBox="0 0 360 180" role="img" aria-label="A streaming token line with signal flags and an observe-only badge">
+              <path class="v-draw" d="M20 100 H340" stroke="var(--border-2)" stroke-width="2"/>
+              <g fill="var(--jade)"><circle class="v-pop" cx="70" cy="100" r="4"/><circle class="v-pop" style="animation-delay:.1s" cx="130" cy="100" r="4"/><circle class="v-pop" style="animation-delay:.2s" cx="190" cy="100" r="4"/><circle class="v-pop" style="animation-delay:.3s" cx="250" cy="100" r="4"/></g>
+              <g stroke="var(--amber)" stroke-width="1.6"><line x1="190" y1="100" x2="190" y2="70"/><line x1="250" y1="100" x2="250" y2="70"/></g>
+              <rect x="120" y="128" width="130" height="26" rx="8" fill="var(--surface)" stroke="var(--amber)"/><text x="185" y="145" text-anchor="middle" font-size="9" fill="var(--amber)">observe only</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D · DIVIDER — WHERE CLIENTS USE IT -->
+    <section class="slide divider" data-part="Use cases">
       <div class="inner">
         <div class="dtext">
-          <div class="pnum rise">PART 04</div>
-          <h2 class="rise" style="animation-delay:.06s">Domain experts</h2>
-          <p class="sub rise" style="animation-delay:.12s">One base, a whole library of specialists — each a small, signed file.</p>
+          <div class="pnum rise">SECTION 05</div>
+          <h2 class="rise" style="animation-delay:.06s">Where clients can use it</h2>
+          <p class="sub rise" style="animation-delay:.12s">Start where volume, model variability, or action risk is economically material.</p>
           <div class="rule"></div>
-          <div class="dchips"><span>the library</span><span>adapter → cog module</span></div>
+          <div class="dchips"><span>portfolio</span><span>support triage</span><span>SWE escalation</span><span>doc ops</span></div>
         </div>
         <div class="dviz">
-          <svg viewBox="0 0 340 300" role="img" aria-label="A grid of domain expert tiles">
+          <svg viewBox="0 0 340 300" role="img" aria-label="A hub of use cases">
+            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="170" y1="150" x2="80" y2="70"/><line class="v-draw" style="animation-delay:.1s" x1="170" y1="150" x2="260" y2="70"/><line class="v-draw" style="animation-delay:.2s" x1="170" y1="150" x2="290" y2="180"/><line class="v-draw" style="animation-delay:.3s" x1="170" y1="150" x2="170" y2="270"/><line class="v-draw" style="animation-delay:.4s" x1="170" y1="150" x2="50" y2="180"/></g>
+            <g fill="var(--indigo)"><circle class="v-pop" cx="80" cy="70" r="8"/><circle class="v-pop" style="animation-delay:.1s" cx="260" cy="70" r="8"/><circle class="v-pop" style="animation-delay:.2s" cx="290" cy="180" r="8"/><circle class="v-pop" style="animation-delay:.3s" cx="170" cy="270" r="8"/><circle class="v-pop" style="animation-delay:.4s" cx="50" cy="180" r="8"/></g>
+            <circle class="v-pulse" cx="170" cy="150" r="32" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/><text x="170" y="154" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">MetaLLM</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 30 · USE-CASE PORTFOLIO (S30) -->
+    <section class="slide" data-part="Use cases">
+      <div class="inner">
+        <p class="kick"><span class="n">05.1</span> Use-case portfolio</p>
+        <table class="tbl sm">
+          <thead><tr><th>Use-case family</th><th>MetaLLM role</th></tr></thead>
+          <tbody>
+            <tr><td>High-volume classification / extraction</td><td class="j">Cheap-tier routing + batch</td></tr>
+            <tr><td>Enterprise copilots</td><td class="j">Protocol abstraction + budgets + safety</td></tr>
+            <tr><td>Support &amp; operations automation</td><td class="j">Pods + approval-gated outward actions</td></tr>
+            <tr><td>Software engineering workflows</td><td class="j">Tier ladder + host selection + conformance</td></tr>
+            <tr><td>Multi-tenant AI products</td><td class="j">Isolation + scoped credentials + usage records</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.7rem">Prioritize repeatable workloads with measurable acceptance criteria. Avoid an undefined "general AI transformation" mandate.</p>
+      </div>
+    </section>
+
+    <!-- 31 · SUPPORT TRIAGE (S31) -->
+    <section class="slide" data-part="Use cases">
+      <div class="inner">
+        <p class="kick"><span class="n">05.2</span> Example · support-triage autopilot</p>
+        <div class="split vr top">
+          <div>
+            <h2>Automate the internal work; require a human before the customer send</h2>
+            <div class="steps" style="margin-top:0.5rem">
+              <div class="step a"><span class="idx">1</span><div><b>Retrieve</b><p>Ticket and customer context.</p></div></div>
+              <div class="step a"><span class="idx">2</span><div><b>Classify severity</b><p>At the low tier.</p></div></div>
+              <div class="step a"><span class="idx">3</span><div><b>Draft</b><p>Concise response; escalate only if needed.</p></div></div>
+              <div class="step a"><span class="idx">4</span><div><b>Test</b><p>Required fields and severity validity.</p></div></div>
+              <div class="step b"><span class="idx">5</span><div><b>Park for approval</b><p>Outward reply held for a human.</p></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Controls</div><p>Maximum <strong>mid</strong> tier · <strong>four</strong> steps · <strong>$0.05</strong> agent cap · <strong>one-hour</strong> auto-reject.</p></div>
+            <p class="src" style="margin-top:0.7rem">A repository demo reference — not a production CRM integration or a canonical packaged template.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 32 · SWE ESCALATION (S32) -->
+    <section class="slide" data-part="Use cases">
+      <div class="inner">
+        <p class="kick"><span class="n">05.3</span> Example · governed software-engineering escalation</p>
+        <div class="split vr top">
+          <div>
+            <h2>Use premium capability only where cheaper loops can't close the repair</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Cheap pass</b> for routine diagnosis and edits.</li>
+              <li class="j"><b>Sonnet-class mid tier</b> as the economic anchor.</li>
+              <li><b>Fable-class actuator</b> for multi-file or hard-tail failures.</li>
+              <li class="j"><b>Test / verifier result</b> decides: stop, retry, or escalate.</li>
+              <li><b>PR creation</b> remains an approval-gated outward action.</li>
+            </ul>
+            <p class="src">Fable was powerful only when paired with a sufficiently capable loop — model × runtime is a multiplicative design choice.</p>
+          </div>
+          <div class="di">
+            <span class="cap">Three-tier repair funnel → tests → approval</span>
+            <svg viewBox="0 0 320 210" role="img" aria-label="A three-tier code-repair funnel ending in tests and approval">
+              <path class="v-draw" d="M40 30 H280 L220 80 H100 Z" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/><text x="160" y="60" text-anchor="middle" font-size="10" fill="var(--jade)">cheap</text>
+              <path class="v-draw" style="animation-delay:.15s" d="M100 84 H220 L188 128 H132 Z" fill="var(--surface)" stroke="var(--border-2)"/><text x="160" y="112" text-anchor="middle" font-size="10" class="vlbl-t">mid</text>
+              <path class="v-draw" style="animation-delay:.3s" d="M132 132 H188 L172 164 H148 Z" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="160" y="154" text-anchor="middle" font-size="9" fill="var(--indigo)">high</text>
+              <rect x="118" y="176" width="84" height="26" rx="8" fill="var(--surface)" stroke="var(--amber)"/><text x="160" y="193" text-anchor="middle" font-size="9" fill="var(--amber)">tests → approval</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 33 · DOC OPS (S33) -->
+    <section class="slide" data-part="Use cases">
+      <div class="inner">
+        <p class="kick"><span class="n">05.4</span> Example · governed document &amp; knowledge operations</p>
+        <div class="split v top">
+          <div>
+            <h2>Separate cheap repetitive processing from higher-value judgment</h2>
+            <ul class="clean" style="margin-top:0.6rem">
+              <li><b>Batch classify, tag, summarize, extract</b> at low cost.</li>
+              <li class="j"><b>Escalate</b> ambiguous or policy-sensitive cases.</li>
+              <li><b>Tenant-scoped embeddings &amp; vectors</b> for managed retrieval.</li>
+              <li class="j"><b>Redact sensitive patterns</b>; retain per-request usage records.</li>
+              <li><b>Require approval</b> before publication or external distribution.</li>
+            </ul>
+          </div>
+          <div class="callout uh" style="align-self:center"><div class="h">Qualify scale early</div><p>Embeddings and tenant-scoped vector operations are live, but the v1 vector store uses a <strong>bounded linear cosine scan, not native HNSW</strong>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D · DIVIDER — THE PLAYBOOK -->
+    <section class="slide divider" data-part="The playbook">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">SECTION 06</div>
+          <h2 class="rise" style="animation-delay:.06s">The consultant playbook</h2>
+          <p class="sub rise" style="animation-delay:.12s">Qualify the fit, read the triggers, run a bounded pilot, score it honestly.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>ICP</span><span>triggers</span><span>discovery</span><span>the pilot</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 360 260" role="img" aria-label="A six-week timeline">
+            <line x1="30" y1="130" x2="330" y2="130" stroke="var(--border-2)" stroke-width="2"/>
+            <g fill="var(--indigo)"><circle class="v-pop" cx="30" cy="130" r="7"/><circle class="v-pop" style="animation-delay:.1s" cx="90" cy="130" r="7"/><circle class="v-pop" style="animation-delay:.2s" cx="150" cy="130" r="7"/><circle class="v-pop" style="animation-delay:.3s" cx="210" cy="130" r="7"/><circle class="v-pop" style="animation-delay:.4s" cx="270" cy="130" r="7"/><circle class="v-halo" cx="330" cy="130" r="7" fill="var(--jade)"/><circle class="v-pop" style="animation-delay:.5s" cx="330" cy="130" r="7" fill="var(--jade)"/></g>
+            <g font-size="10" text-anchor="middle" fill="var(--faint)"><text x="30" y="158">W1</text><text x="90" y="158">W2</text><text x="150" y="158">W3</text><text x="210" y="158">W4</text><text x="270" y="158">W5</text><text x="330" y="158" fill="var(--jade)">W6</text></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 34 · ICP (S34) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.1</span> Ideal client profile</p>
+        <h2 style="margin-bottom:0.8rem">Organizations with real AI traffic and a control problem</h2>
+        <div class="grid g2" style="gap:0.6rem">
+          <div class="card i"><div class="cd"><b>Multiple teams or products</b> consuming more than one model / provider.</div></div>
+          <div class="card i"><div class="cd"><b>Material or rapidly growing</b> inference spend.</div></div>
+          <div class="card j"><div class="cd"><b>Need for hard tenant, team, or agent budgets.</b></div></div>
+          <div class="card j"><div class="cd"><b>Regulated, customer-facing,</b> or operationally consequential use cases.</div></div>
+          <div class="card"><div class="cd"><b>Desire to automate workflows</b> without surrendering human control.</div></div>
+          <div class="card c"><div class="cd" style="color:var(--muted)"><b style="color:var(--crit)">Weak fit:</b> a single low-volume chatbot, one provider, no governance constraint.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 35 · BUYING TRIGGERS (S35) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.2</span> Buying triggers — listen for symptoms, not "a router"</p>
+        <div class="grid g1" style="gap:0.55rem; grid-template-columns:1fr">
+          <div class="callout"><p>"Our <strong>premium-model bill is growing faster than adoption.</strong>"</p></div>
+          <div class="callout i"><p>"Every team has its own <strong>keys, logs, and fallback logic.</strong>"</p></div>
+          <div class="callout"><p>"We can see spend, but <strong>cannot stop an agent from exceeding it.</strong>"</p></div>
+          <div class="callout i"><p>"Risk <strong>will not approve autonomous customer or production actions.</strong>"</p></div>
+          <div class="callout"><p>"We need <strong>model flexibility without rewriting applications.</strong>"</p></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem">These map directly to cost, platform-engineering, risk, and operating-model stakeholders.</p>
+      </div>
+    </section>
+
+    <!-- 36 · DISCOVERY (S36) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.3</span> Discovery questions — diagnose workload shape first</p>
+        <div class="grid g2" style="gap:0.6rem">
+          <div class="card j"><div class="tag j">Economics</div><div class="cd">Monthly spend and cost per accepted outcome? What share is batchable, repetitive, or prefix-heavy?</div></div>
+          <div class="card i"><div class="tag">Quality</div><div class="cd">How is success verified? Where do cheaper models fail?</div></div>
+          <div class="card c"><div class="tag" style="color:var(--crit)">Control</div><div class="cd">Which actions are irreversible, external, or regulated? Which budget must fail closed — user, agent, team, or tenant?</div></div>
+          <div class="card"><div class="tag">Integration</div><div class="cd">Which protocols, tools, hosts, data zones, and observability systems are required?</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 37 · WHEN NOT TO LEAD (S37) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.4</span> Qualification — when <em>not</em> to lead with MetaLLM</p>
+        <div class="split v top">
+          <div>
+            <ul class="clean">
+              <li><b>Frontier capability</b> with no cost or governance objective.</li>
+              <li class="j"><b>A turnkey end-user agent UI</b> is the requirement.</li>
+              <li><b>Heavy dependence</b> on unsupported CLI runtimes today.</li>
+              <li class="j"><b>Mature guardrail breadth</b> or deep observability needed out of the box.</li>
+              <li><b>No measurable workload</b>, baseline, or acceptance test.</li>
+            </ul>
+          </div>
+          <div class="callout uh" style="align-self:center"><div class="h">It coexists</div><p>MetaLLM can sit alongside model providers, OpenRouter, observability tools, and agent products. <strong>It does not need to displace every layer.</strong></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 38 · SIX-WEEK PILOT (S38) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.5</span> A six-week pilot pattern — prove cost-at-quality on one workload</p>
+        <table class="tbl sm">
+          <thead><tr><th>Phase</th><th>Focus</th><th>Exit evidence</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>Baseline &amp; controls</td><td>Current cost, quality, latency, risk map</td></tr>
+            <tr><td>Week 2</td><td>Protocol integration</td><td>Traffic flows through MetaLLM</td></tr>
+            <tr><td>Week 3</td><td>Tier &amp; budget policy</td><td>Low/mid/high rules; caps enforced</td></tr>
+            <tr><td>Week 4</td><td>Evaluation &amp; safety</td><td>Acceptance tests; failure taxonomy</td></tr>
+            <tr><td>Week 5</td><td>Shadow comparison</td><td>Cost-at-quality versus baseline</td></tr>
+            <tr><td>Week 6</td><td>Controlled rollout</td><td>Go/no-go, operating model, scale plan</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">For an agentic pilot, add approval-gate and artifact-conformance tests. Don't activate learned or midstream controls just to look sophisticated.</p>
+      </div>
+    </section>
+
+    <!-- 39 · PILOT SCORECARD (S39) -->
+    <section class="slide" data-part="The playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">06.6</span> Pilot scorecard — a conjunction, not a single number</p>
+        <div class="grid g5" style="gap:0.5rem">
+          <div class="card mini j"><div class="tag j">Quality</div><div class="cd">Accepted / verified task rate vs. baseline.</div></div>
+          <div class="card mini j"><div class="tag j">Economics</div><div class="cd">Cost per accepted task; frontier-call share; retry waste.</div></div>
+          <div class="card mini i"><div class="tag">Performance</div><div class="cd">p50/p95 latency; time to first token.</div></div>
+          <div class="card mini i"><div class="tag">Control</div><div class="cd">Budget denials with zero overspend; approval adherence.</div></div>
+          <div class="card mini"><div class="tag">Operations</div><div class="cd">Error &amp; fallback rate; isolation tests; audit completeness.</div></div>
+        </div>
+        <div class="callout" style="margin-top:0.85rem"><div class="h">The discipline</div><p>Never declare a cost win on price per token alone. <strong>A lower price with more failures and retries is not a successful pilot.</strong></p></div>
+      </div>
+    </section>
+
+    <!-- D · DIVIDER — PROOF & HONESTY -->
+    <section class="slide divider" data-part="Proof &amp; honesty">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">SECTION 07</div>
+          <h2 class="rise" style="animation-delay:.06s">Competition, proof &amp; honesty</h2>
+          <p class="sub rise" style="animation-delay:.12s">Sell the shipped controls today; label tomorrow's intelligence honestly.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>landscape</span><span>proven vs. not</span><span>the close</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 340 300" role="img" aria-label="A three-column evidence ladder">
             <g>
-              <rect class="v-pop" x="60" y="60" width="60" height="46" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/>
-              <rect class="v-pop" style="animation-delay:.08s" x="140" y="60" width="60" height="46" rx="8" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
-              <rect class="v-pop" style="animation-delay:.16s" x="220" y="60" width="60" height="46" rx="8" fill="var(--surface)" stroke="var(--border-2)"/>
-              <rect class="v-pop" style="animation-delay:.24s" x="60" y="122" width="60" height="46" rx="8" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
-              <rect class="v-pop" style="animation-delay:.32s" x="140" y="122" width="60" height="46" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/>
-              <rect class="v-pop" style="animation-delay:.4s" x="220" y="122" width="60" height="46" rx="8" fill="var(--surface)" stroke="var(--border-2)"/>
-              <rect class="v-pop" style="animation-delay:.48s" x="60" y="184" width="60" height="46" rx="8" fill="var(--surface)" stroke="var(--border-2)"/>
-              <rect class="v-pop" style="animation-delay:.56s" x="140" y="184" width="60" height="46" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/>
-              <rect class="v-pop" style="animation-delay:.64s" x="220" y="184" width="60" height="46" rx="8" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+              <rect class="v-gy" x="50" y="120" width="64" height="120" rx="8" fill="var(--jade)"/><text x="82" y="258" text-anchor="middle" font-size="9" fill="var(--jade)">live</text>
+              <rect class="v-gy" style="animation-delay:.15s" x="138" y="160" width="64" height="80" rx="8" fill="var(--indigo)"/><text x="170" y="258" text-anchor="middle" font-size="9" fill="var(--indigo)">built</text>
+              <rect class="v-gy" style="animation-delay:.3s" x="226" y="205" width="64" height="35" rx="8" fill="none" stroke="var(--crit)" stroke-width="2" stroke-dasharray="4 4"/><text x="258" y="258" text-anchor="middle" font-size="9" fill="var(--crit)">not yet</text>
             </g>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 17 · THE LIBRARY -->
-    <section class="slide" data-part="Domain experts">
+    <!-- 40 · COMPETITIVE (S40) -->
+    <section class="slide" data-part="Proof &amp; honesty">
       <div class="inner">
-        <p class="kick"><span class="n">04.1</span> The domain library</p>
-        <h2 style="margin-bottom:0.8rem">One base model, a shelf of specialists</h2>
-        <div class="grid g4" style="gap:0.55rem">
-          <div class="card mini j"><div class="tag j">Health</div><div class="cd">Vitals, sleep, care contexts.</div></div>
-          <div class="card mini"><div class="tag">Security</div><div class="cd">Triage, intrusion, zero-trust.</div></div>
-          <div class="card mini"><div class="tag">Building</div><div class="cd">Occupancy, HVAC, space use.</div></div>
-          <div class="card mini"><div class="tag">Retail</div><div class="cd">Footfall, behaviour, privately.</div></div>
-          <div class="card mini"><div class="tag">Industrial</div><div class="cd">Fleets, safety, ops.</div></div>
-          <div class="card mini i"><div class="tag">Research</div><div class="cd">Analysis &amp; synthesis.</div></div>
-          <div class="card mini i"><div class="tag">AI &amp; swarm</div><div class="cd">Agent coordination.</div></div>
-          <div class="card mini"><div class="tag">Signal · network · dev</div><div class="cd">Edge, comms, tooling.</div></div>
-        </div>
-        <div class="callout" style="margin-top:0.8rem"><div class="h">The pattern</div><p>Each domain is a small MicroLoRA adapter on the same frozen base — <strong>add a vertical by shipping a file, not by training a new model.</strong></p></div>
+        <p class="kick"><span class="n">07.1</span> Competitive landscape</p>
+        <table class="tbl sm">
+          <thead><tr><th>Alternative</th><th>Typical strength</th><th>MetaLLM response</th></tr></thead>
+          <tbody>
+            <tr><td>LiteLLM</td><td>Broad self-hosted compatibility</td><td class="j">Lead with budget invariant + pods, not API breadth</td></tr>
+            <tr><td>Portkey</td><td>Mature gateway, guardrails, observability</td><td class="j">Lead with reserve-before-spend + bounded autonomy</td></tr>
+            <tr><td>Cloudflare AI Gateway</td><td>Edge scale, caching, analytics</td><td class="j">Lead where tenant policy + agent controls matter</td></tr>
+            <tr><td>OpenRouter</td><td>Model / provider marketplace</td><td class="j">Complement it — MetaLLM uses it upstream</td></tr>
+            <tr><td>Closed agent products</td><td>Integrated task capability &amp; UX</td><td class="j">Lead with open, multi-tenant governance across apps</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">Portkey and Cloudflare already publish budgets, guardrails, caching, and analytics — basic gateway governance isn't unique. The distinct claim is the <strong>composition</strong>: pre-flight budgets + tier economics + tenant rigor + approval-gated pods.</p>
       </div>
     </section>
 
-    <!-- 18 · ADAPTER → COG MODULE -->
-    <section class="slide" data-part="Domain experts">
+    <!-- 41 · PROVEN VS NOT (S41) -->
+    <section class="slide" data-part="Proof &amp; honesty">
       <div class="inner">
-        <p class="kick"><span class="n">04.2</span> From adapter to cog module</p>
-        <h2 style="margin-bottom:0.9rem">A domain expert becomes a signed edge binary</h2>
-        <div class="flow">
-          <div class="node j"><span class="badge">train</span><b>MicroLoRA</b><span>on-prem</span></div>
-          <div class="harrow">→</div>
-          <div class="node i"><span class="badge">package</span><b>Domain model</b><span>MetaLLM</span></div>
-          <div class="harrow">→</div>
-          <div class="node"><span class="badge">sign</span><b>Cog module</b><span>~400 KB</span></div>
-          <div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">deploy</span><b>Appliance</b><span>edge</span></div>
+        <p class="kick"><span class="n">07.2</span> What is proven — and what is not</p>
+        <div class="grid g3" style="gap:0.6rem">
+          <div class="card j"><div class="tag j">Live / strongly evidenced <span class="spill live">live</span></div><div class="cd">OpenAI + Anthropic paths, tier router, live pods, batch API. Cloud Run at a documented peak <b>606.7 RPS, 0% error</b> (mock provider). Real-model meter &amp; budget-pause demos. Routing on a bounded benchmark: <b>40% → 100%</b> task-class correctness.</div></div>
+          <div class="card i"><div class="tag">Built / not fully operationalized <span class="spill built">built</span></div><div class="cd">Reserve-and-Commit, approval verdicts, usage analytics, guardrails, tracing seam.</div></div>
+          <div class="card c"><div class="tag" style="color:var(--crit)">Not a current claim <span class="spill open">not yet</span></div><div class="cd">Beyond-frontier quality, trained router, broad CLI-host runtime, turnkey business templates, or full collaboration UI.</div></div>
         </div>
-        <div class="split v top" style="margin-top:1rem">
-          <div class="callout"><div class="h">The distribution story</div><p>MetaLLM produces the specialist; it ships as one of the <strong>signed, verifiable cog modules</strong> that drop onto a Cognitum appliance — small enough to run at the edge.</p></div>
-          <div class="callout uh" style="border-left-color:var(--indigo); background:var(--indigo-wash)"><div class="h">Why signed</div><p>An edge model is only trustworthy if you can <strong>prove which bytes are running</strong> — every module is signed and verifiable.</p></div>
-        </div>
+        <p class="src" style="margin-top:0.7rem">Use the dated status ledger, not older README numbers — it reports <strong>458 unit + 73 emulator E2E tests</strong>. Revalidate model names &amp; prices before external use.</p>
       </div>
     </section>
 
-    <!-- 19 · DIVIDER 05 -->
-    <section class="slide divider" data-part="Using it">
+    <!-- 42 · CLOSE (S42) -->
+    <section class="slide" data-part="Proof &amp; honesty">
       <div class="inner">
-        <div class="dtext">
-          <div class="pnum rise">PART 05</div>
-          <h2 class="rise" style="animation-delay:.06s">Using MetaLLM</h2>
-          <p class="sub rise" style="animation-delay:.12s">Generate a config, attach an adapter, serve it — or drive it from an agent.</p>
-          <div class="rule"></div>
-          <div class="dchips"><span>/ruvllm</span><span>llm-config</span><span>chat-format</span></div>
-        </div>
-        <div class="dviz">
-          <svg viewBox="0 0 360 280" role="img" aria-label="A terminal showing the ruvllm command">
-            <rect x="20" y="24" width="320" height="232" rx="12" fill="var(--surface)" stroke="var(--border-2)"/>
-            <path d="M20 48 h320" stroke="var(--border-2)" stroke-width="1"/>
-            <circle cx="44" cy="36" r="4.5" fill="var(--crit)"/><circle cx="62" cy="36" r="4.5" fill="var(--amber)"/><circle cx="80" cy="36" r="4.5" fill="var(--jade)"/>
-            <g font-size="12" font-family="var(--font-mono)">
-              <text x="40" y="86" fill="var(--jade)">/ruvllm status</text>
-              <text x="40" y="112" fill="var(--muted)">  ✓ base · loaded</text>
-              <text x="40" y="136" fill="var(--muted)">  ✓ adapter · health</text>
-              <text class="v-shim" x="40" y="168" fill="var(--indigo)">  ✓ providers · 5 ready</text>
-              <text x="40" y="200" fill="var(--muted)">  sovereign · local</text>
-              <text x="40" y="228" fill="var(--muted)">$ _</text>
-            </g>
-            <rect class="v-shim" x="62" y="218" width="9" height="15" fill="var(--jade)"/>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- 20 · THE WORKFLOW -->
-    <section class="slide" data-part="Using it">
-      <div class="inner">
-        <p class="kick"><span class="n">05.1</span> The workflow</p>
-        <div class="split v top">
+        <p class="kick"><span class="n">07.3</span> Consultant close — the decision to frame</p>
+        <div class="split vr top">
           <div>
-            <h2>Config, adapter, format — three skills</h2>
+            <h2>Where should the client centralize AI economics and authority before scale makes both harder?</h2>
             <ul class="clean" style="margin-top:0.6rem">
-              <li><b><code>/ruvllm</code></b> — shows model status, loaded adapters, and provider availability.</li>
-              <li class="j"><b><code>llm-config</code></b> — generates an optimal local-inference config.</li>
-              <li><b><code>chat-format</code></b> — formats a prompt for any supported provider.</li>
-              <li class="j"><b>Attach an adapter</b> — pick the domain expert the task needs.</li>
+              <li><b>Choose one workload</b> with measurable outcomes and material spend.</li>
+              <li class="j"><b>Route it</b> through a common, tenant-aware control point.</li>
+              <li><b>Set the cost ceiling &amp; action boundary</b> before execution.</li>
+              <li class="j"><b>Prove equal-or-better outcomes</b> at lower governed cost.</li>
+              <li><b>Scale only the controls</b> and use cases that earn their evidence.</li>
             </ul>
-          </div>
-          <pre><span class="c"># check the model layer</span>
-<span class="cmd">/ruvllm</span> status
-
-<span class="c"># generate a local-inference config</span>
-<span class="cmd">skill</span> llm-config --domain health
-
-<span class="c"># format a prompt for a provider</span>
-<span class="cmd">skill</span> chat-format --provider ollama</pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- 21 · INTEGRATE -->
-    <section class="slide" data-part="Using it">
-      <div class="inner">
-        <p class="kick"><span class="n">05.2</span> Drive it from the stack</p>
-        <div class="split v top">
-          <div>
-            <h2>One call for the agent, the whole layer underneath</h2>
-            <ul class="clean" style="margin-top:0.6rem">
-              <li><b>Part of ruflo</b> — MetaLLM is the model layer the harness calls into.</li>
-              <li class="j"><b>SONA + MicroLoRA</b> pipeline is owned by the intelligence layer; the router by AgentDB.</li>
-              <li><b>Config namespace</b> — adapters and manifests live under <code>ruvllm-config</code>.</li>
-              <li class="j"><b>Agent-ready</b> — the domain expert is available to Claude Code / Codex as a tool.</li>
-            </ul>
+            <p class="src">The next conversation is a workload-and-controls workshop, not a generic product demo.</p>
           </div>
           <div class="di">
-            <span class="cap">Agent → MetaLLM → domain expert</span>
-            <svg viewBox="0 0 420 190" role="img" aria-label="An agent calling MetaLLM which selects a domain adapter">
-              <rect x="24" y="74" width="96" height="42" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="72" y="99" text-anchor="middle" font-size="11" class="vlbl-t">agent</text>
-              <path class="v-draw" d="M120 95 H176" stroke="var(--faint)" stroke-width="1.6"/>
-              <rect x="176" y="70" width="110" height="50" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="231" y="92" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">MetaLLM</text><text x="231" y="108" text-anchor="middle" font-size="9" class="vlbl-f">select adapter</text>
-              <g stroke="var(--jade)" stroke-width="1.6" fill="none"><path class="v-draw" style="animation-delay:.3s" d="M286 84 L344 60"/><path class="v-draw" style="animation-delay:.4s" d="M286 95 L344 95"/><path class="v-draw" style="animation-delay:.5s" d="M286 106 L344 130"/></g>
-              <g font-size="9" text-anchor="start" class="vlbl"><text x="348" y="63">health</text><text x="348" y="98">security</text><text x="348" y="133">building</text></g>
+            <span class="cap">measure → govern → prove → scale</span>
+            <svg viewBox="0 0 240 220" role="img" aria-label="A measure-govern-prove-scale flywheel">
+              <circle cx="120" cy="110" r="78" fill="none" stroke="var(--border-2)" stroke-width="1.6" stroke-dasharray="5 7"/>
+              <circle class="v-t" r="6" fill="var(--jade)" style="offset-path:path('M120 32 a78 78 0 1 1 -0.1 0');animation-duration:5.5s"/>
+              <g font-size="10" text-anchor="middle" fill="var(--indigo)"><text x="120" y="36">measure</text><text x="202" y="114">govern</text><text x="120" y="192">prove</text><text x="40" y="114">scale</text></g>
+              <circle class="v-pulse" cx="120" cy="110" r="24" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><text x="120" y="114" text-anchor="middle" font-size="9" fill="var(--jade)" font-weight="600">MetaLLM</text>
             </svg>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 22 · DIVIDER 06 -->
-    <section class="slide divider" data-part="Ecosystem">
-      <div class="inner">
-        <div class="dtext">
-          <div class="pnum rise">PART 06</div>
-          <h2 class="rise" style="animation-delay:.06s">Ecosystem &amp; honesty</h2>
-          <p class="sub rise" style="animation-delay:.12s">Where MetaLLM fits in the ruv stack — and what it doesn't claim.</p>
-          <div class="rule"></div>
-          <div class="dchips"><span>where it fits</span><span>honest limits</span></div>
-        </div>
-        <div class="dviz">
-          <svg viewBox="0 0 340 300" role="img" aria-label="MetaLLM connected to the other ruv stack pieces">
-            <circle class="v-pulse" cx="170" cy="150" r="40" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
-            <text x="170" y="148" text-anchor="middle" font-size="11" fill="var(--jade)" font-weight="600">MetaLLM</text>
-            <text x="170" y="164" text-anchor="middle" font-size="8.5" class="vlbl-f">domain models</text>
-            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="170" y1="110" x2="170" y2="52"/><line class="v-draw" style="animation-delay:.1s" x1="206" y1="132" x2="286" y2="86"/><line class="v-draw" style="animation-delay:.2s" x1="206" y1="168" x2="286" y2="214"/><line class="v-draw" style="animation-delay:.3s" x1="134" y1="168" x2="54" y2="214"/><line class="v-draw" style="animation-delay:.4s" x1="134" y1="132" x2="54" y2="86"/></g>
-            <g font-size="9.5" text-anchor="middle" fill="var(--indigo)"><text x="170" y="44">ruvLLM</text><text x="300" y="82">RuVector</text><text x="300" y="230">ruflo</text><text x="40" y="230">RVF</text><text x="40" y="82">RuView</text></g>
-            <g fill="var(--indigo)"><circle class="v-pop" cx="170" cy="48" r="5"/><circle class="v-pop" style="animation-delay:.1s" cx="290" cy="82" r="5"/><circle class="v-pop" style="animation-delay:.2s" cx="290" cy="218" r="5"/><circle class="v-pop" style="animation-delay:.3s" cx="50" cy="218" r="5"/><circle class="v-pop" style="animation-delay:.4s" cx="50" cy="82" r="5"/></g>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- 23 · WHERE IT FITS -->
-    <section class="slide" data-part="Ecosystem">
-      <div class="inner">
-        <p class="kick"><span class="n">06.1</span> Where MetaLLM fits</p>
-        <h2 style="margin-bottom:0.8rem">The specialist layer for a sovereign stack</h2>
-        <div class="grid g2" style="gap:0.7rem">
-          <div class="card i"><div class="tag">Regulated verticals</div><div class="cd">Health, security, finance — a domain expert whose training data and inference both stay on-prem.</div></div>
-          <div class="card j"><div class="tag j">Edge appliances</div><div class="cd">Small signed adapters ship as cog modules onto a Cognitum Seed — an expert per box.</div></div>
-          <div class="card"><div class="tag">Agent stacks</div><div class="cd">ruflo agents call the right domain model per task, without prompt rewrites or new checkpoints.</div></div>
-          <div class="card i"><div class="tag">Multi-provider shops</div><div class="cd">Keep the adapter, swap Ollama for a frontier API — one chat format across all of them.</div></div>
-        </div>
-        <div class="callout" style="margin-top:0.8rem"><div class="h">The differentiator</div><p>Not a model zoo and not a hosted API — a <strong>freeze-and-adapt layer</strong> that makes domain experts cheap to build, tiny to ship, and sovereign to run.</p></div>
-      </div>
-    </section>
-
-    <!-- 24 · HONEST LIMITS -->
-    <section class="slide" data-part="Ecosystem">
-      <div class="inner">
-        <p class="kick"><span class="n">06.2</span> Honest limits — stated plainly</p>
-        <div class="split v top">
-          <div>
-            <h2>What MetaLLM is, and isn't, today</h2>
-            <ul class="clean" style="margin-top:0.6rem">
-              <li><b>A layer, not a monolith</b> — capabilities are split across ruflo crates (intelligence owns SONA + MicroLoRA; AgentDB owns the router).</li>
-              <li class="j"><b>The HNSW router is small-corpus</b> — capped at ≤11 hot patterns; larger retrieval belongs to AgentDB / RuVector.</li>
-              <li><b>Formats &amp; quantization</b> aren't publicly pinned — treat specifics as stack-dependent.</li>
-              <li class="j"><b>Part of an active stack</b> — versions move; the honest framing moves with them.</li>
-            </ul>
-          </div>
-          <div class="callout uh" style="align-self:center; border-left-color:var(--indigo); background:var(--indigo-wash)"><div class="h">The family voice</div><p>Same discipline as the rest of the ruv stack: <strong>claim what's measured, label what's early.</strong> MetaLLM is the domain-model layer — the specialist experts on top of a sovereign base.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 25 · CLOSE -->
-    <section class="slide" data-part="Close">
-      <div class="glow-b"></div>
-      <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
-        <span class="kicker"><span class="dot"></span>MetaLLM · by ruvnet · powers Cognitum</span>
-        <h1 style="margin-inline:auto; max-width:none">One base model,<br><span class="g">many experts.</span></h1>
-        <p class="title-sub" style="margin-inline:auto">The domain-model layer of the ruv stack — freeze the base, specialize with MicroLoRA and SONA, serve sovereignly on ruvLLM.</p>
-        <p class="src" style="text-align:center; margin-top:1.3rem">MicroLoRA · SONA · ruvLLM · built on RuVector · powers Cognitum</p>
       </div>
     </section>
 
@@ -915,7 +1474,7 @@
 </div>
 
 <nav class="navbar">
-  <span class="foot-brand">MetaLLM · Domain Models</span>
+  <span class="foot-brand">MetaLLM · Consultant Enablement</span>
   <span class="part" id="partLbl"></span>
   <span class="hint">← → navigate · F present · T theme</span>
   <span class="spacer"></span>
