@@ -1,0 +1,1543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cognitum Enterprise Matter — a consultant briefing on how Cognitum commercial atoms (RuView, RuVector, RuFlow, RuLLM, RVF, COGs, identity, networking, data, verification) bond into solution molecules (SpatialOps, Ambient Care, Industrial Guardian, FlowSafe, Sovereign Knowledge Ops, Autonomous Security Remediation, OEM Edge Brain) and combine into intelligent enterprise matter. Includes target-account clusters, enterprise-matter blueprints, and the consultant playbook. Every named company is a high-fit target-account hypothesis, not a customer. Arrow keys / space to navigate.">
+<meta name="color-scheme" content="dark light">
+<title>Cognitum Enterprise Matter</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+
+  /* ---- HarnessaaS deck helpers ---- */
+  .card .ct { font-weight: 650; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text); }
+  .card.mini { padding: 0.7rem 0.8rem; }
+  .card.mini .ct { font-size: 0.9rem; }
+  .card .cd { color: var(--muted); font-size: 0.85rem; line-height: 1.34; }
+  .card.mini .cd { font-size: 0.8rem; line-height: 1.3; }
+  .card.j { border-color: var(--jade-dim); } .card.i { border-color: var(--indigo-dim); }
+  .card.a { border-color: var(--amber); } .card.c { border-color: var(--crit); }
+  .uh { border-left-color: var(--indigo) !important; background: var(--indigo-wash) !important; }
+  .flow.sm .node { padding: 0.6rem 0.6rem; }
+  .flow.sm .node b { font-size: 0.86rem; } .flow.sm .node span { font-size: 0.68rem; }
+  .flow.sm .harrow { padding: 0 0.26rem; font-size: 0.72rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 600; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-2); }
+  .tbl td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.3; }
+  .tbl td:first-child { color: var(--text); font-weight: 560; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl.sm { font-size: 0.84rem; } .tbl.sm td { padding: 0.4rem 0.7rem; } .tbl.sm th { padding: 0.38rem 0.7rem; }
+  .tbl .j { color: var(--jade); } .tbl .i { color: var(--indigo); } .tbl .c { color: var(--crit); }
+  .mat { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.16rem 0.55rem; border-radius: 6px; border: 1px solid var(--border-2); color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .mat.ship { color: var(--jade); border-color: var(--jade); }
+  .mat.pilot { color: var(--indigo); border-color: var(--indigo); }
+  .mat.gate { color: var(--amber); border-color: var(--amber); }
+  .mat.plan { color: var(--faint); border-color: var(--border-2); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
+  .num-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+  .num-card .ni { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--ink); background: var(--indigo); width: 1.4rem; height: 1.4rem; border-radius: 5px; display: grid; place-items: center; }
+  .num-card.j .ni { background: var(--jade); }
+  .num-card .nt { font-size: 0.86rem; color: var(--muted); line-height: 1.28; }
+  .num-card .nt b { color: var(--text); }
+
+  /* ---- Enterprise Matter additions ---- */
+  .g6 { grid-template-columns: repeat(6,1fr); }
+  .atomchip { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.74rem; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:0.28rem 0.7rem; }
+  .atomchip .dotm { width:8px; height:8px; border-radius:50%; background:var(--jade); }
+  .hyp { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.04em; color:var(--amber); margin-top:0.7rem; }
+  .tbl.tiny { font-size:0.78rem; } .tbl.tiny td { padding:0.34rem 0.6rem; } .tbl.tiny th { padding:0.32rem 0.6rem; }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+    <!-- 1 · HERO / PROGRESSION -->
+    <section class="slide hero" data-part="Foundations">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum <small>Enterprise Matter · consultant briefing</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>From business problem to intelligent enterprise</span>
+          <h1 class="rise" style="animation-delay:.1s; max-width:none">Atoms bond into solutions.<br><span class="g">Solutions become enterprises.</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">Business problems determine what needs to exist. Cognitum assembles the right <strong>atoms</strong>, bonds them through architecture, and creates solution <strong>molecules</strong> that operate together as enterprise <strong>matter</strong>.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>Atoms</b></span><span class="chip"><b>Bonds</b></span><span class="chip"><b>Molecules</b></span><span class="chip"><b>Matter</b></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 380 440" role="img" aria-label="The progression from business conditions to business outcomes">
+            <defs><marker id="arP" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <g font-size="12" text-anchor="middle">
+              <rect x="70" y="14" width="240" height="42" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="190" y="40" class="vlbl-t">Business conditions</text>
+              <rect x="70" y="82" width="240" height="42" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="190" y="108" fill="var(--indigo)">Atoms</text>
+              <rect x="70" y="150" width="240" height="42" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="190" y="176" fill="var(--indigo)">Bonds</text>
+              <rect x="70" y="218" width="240" height="42" rx="10" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="190" y="244" fill="var(--jade)">Molecules</text>
+              <rect x="70" y="286" width="240" height="42" rx="10" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.8"/><text x="190" y="312" fill="var(--jade)" font-weight="600">Enterprise matter</text>
+              <rect x="70" y="354" width="240" height="42" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="190" y="380" class="vlbl-t">Business outcomes</text>
+            </g>
+            <g stroke="var(--jade)" stroke-width="1.6" fill="none"><line class="v-draw" x1="190" y1="56" x2="190" y2="80" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.1s" x1="190" y1="124" x2="190" y2="148" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.2s" x1="190" y1="192" x2="190" y2="216" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.3s" x1="190" y1="260" x2="190" y2="284" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.4s" x1="190" y1="328" x2="190" y2="352" marker-end="url(#arP)"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1b · PRESENTER FRAME + ACCOUNT RULE -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">How to use this deck</span> Positioning for the consultant</p>
+        <div class="split v top">
+          <div>
+            <div class="bigquote i"><p>Lead with the business outcome. Describe Cognitum product capabilities only after the buyer recognizes the problem.</p><div class="who">the presenter rule</div></div>
+            <p class="mut" style="margin-top:0.9rem">Customers describe a <strong>business condition</strong>. We work backward from the required outcome, select the atoms, engineer the bonds, and sell the resulting <strong>molecule</strong>.</p>
+          </div>
+          <div class="callout" style="border-left-color:var(--amber); background:var(--jade-wash); align-self:center"><div class="h" style="color:var(--amber)">Account rule — read before every account slide</div><p>Every named company in this deck is a <strong>high-fit target-account hypothesis</strong> — not a claimed customer, partner, or active opportunity. Re-verify portfolios, product names, Cognitum specs, and account ownership before any external use.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · COMMERCIAL PRODUCT STANDARD -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">The Cognitum commercial product standard</span></p>
+        <h2 style="margin-bottom:0.7rem">Hardened, secured, supported, extended — not community projects</h2>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="card mini j"><div class="cd">Security hardening &amp; threat-tested defaults</div></div>
+          <div class="card mini j"><div class="cd">Stable, versioned APIs &amp; supported hardware profiles</div></div>
+          <div class="card mini j"><div class="cd">Enterprise identity, access, audit &amp; policy enforcement</div></div>
+          <div class="card mini i"><div class="cd">Signed releases, controlled updates, rollback, fleet lifecycle</div></div>
+          <div class="card mini i"><div class="cd">Proprietary features &amp; industry-specific models</div></div>
+          <div class="card mini i"><div class="cd">Integration adapters for enterprise &amp; operational systems</div></div>
+          <div class="card mini"><div class="cd">Documented performance envelopes &amp; reproducible validation</div></div>
+          <div class="card mini"><div class="cd">Commercial licensing, services, SLAs &amp; support</div></div>
+          <div class="card mini"><div class="cd">Accountable ownership from pilot to production</div></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem">Positioning: a <strong>commercial, local-first intelligence portfolio</strong> for enterprise operations and OEM products — value from proprietary extensions, security, validation, integration, lifecycle, and accountable support.</p>
+      </div>
+    </section>
+
+    <!-- 3 · ATOMS -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">Atoms · the commercial building blocks</span> Each is useful alone; strategic value comes from bonding</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Cognitum atom</th><th>Fundamental role</th><th>What commercial rebuilding adds</th></tr></thead>
+          <tbody>
+            <tr><td class="j">RuView</td><td>Perception &amp; spatial intelligence from qualified signals</td><td>Supported hardware, calibration, privacy, monitoring, stable interfaces</td></tr>
+            <tr><td class="j">RuVector</td><td>Vector, graph, temporal &amp; adaptive memory</td><td>Tenant isolation, backup/recovery, access policy, observability, connectors</td></tr>
+            <tr><td class="j">RuFlow</td><td>Agent, tool &amp; workflow orchestration</td><td>Identity, approvals, budgets, circuit breakers, audit, operational support</td></tr>
+            <tr><td class="j">RuLLM</td><td>Local &amp; domain-specific reasoning</td><td>Supported models/hardware, bounded profiles, evaluation, policy, cloud escalation</td></tr>
+            <tr><td class="j">RVF</td><td>Verified packaging of models, memory, config, runtime &amp; evidence</td><td>Signing, lineage, promotion gates, rollback, controlled fleet deployment</td></tr>
+            <tr><td class="j">COGs</td><td>Small, specialized domain capabilities</td><td>Certified catalog, permissions, lifecycle, compatibility, industry extensions</td></tr>
+            <tr><td class="i">Identity &amp; Trust</td><td>Establishes who or what may participate</td><td>Enterprise identity, device trust, least privilege, attestation, audit</td></tr>
+            <tr><td class="i">Networking &amp; Federation</td><td>Connects devices, sites, agents &amp; organizations</td><td>Secure transport, segmentation, resilience, tenancy, policy</td></tr>
+            <tr><td class="i">Data &amp; Integration Fabric</td><td>Connects enterprise &amp; operational systems</td><td>Supported adapters, data permissions, freshness rules, refusal, SLAs</td></tr>
+            <tr><td class="i">Verification &amp; Policy</td><td>Determines what is trusted, permitted &amp; provable</td><td>Evidence, approvals, claims controls, governance, monitoring, incident response</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem">Naming rule: these are the <strong>Cognitum-branded commercial editions</strong> — not raw community distributions. An atom may be useful alone, but its larger value comes from the molecules and matter it makes possible.</p>
+      </div>
+    </section>
+
+    <!-- 3A · BONDS -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">Bonds · architecture is what creates the solution</span> Atoms in the same diagram are not a molecule</p>
+        <table class="tbl sm">
+          <thead><tr><th>Bond type</th><th>Cognitum implementation</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td class="i">Interface</td><td>APIs, MCP, SDKs, protocol adapters</td><td>Request &amp; exchange capabilities</td></tr>
+            <tr><td class="i">Event</td><td>Events, queues, streams, subscriptions</td><td>Turn observations into timely action</td></tr>
+            <tr><td class="i">Data</td><td>Shared schemas, RuVector memory, data fabric</td><td>Preserve context &amp; relationships across time</td></tr>
+            <tr><td class="j">Workflow</td><td>RuFlow orchestration, state machines, approvals</td><td>Sequence, responsibility, retry, escalation</td></tr>
+            <tr><td class="j">Policy</td><td>Identity, permissions, risk rules, human approval</td><td>Keep a useful combination safe &amp; compliant</td></tr>
+            <tr><td class="j">Trust</td><td>RVF verification, signatures, lineage, evidence</td><td>Prove which model/memory/config/policy acted</td></tr>
+            <tr><td>Network</td><td>Secure device/site/enterprise comms &amp; federation</td><td>Span hardware, sites, clouds, organizations safely</td></tr>
+            <tr><td>Operational</td><td>Monitoring, update, rollback, support, SLA</td><td>Turn architecture into a sustainable system</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem">Arrangement matters — like carbon becoming graphite or diamond, the same atoms form different molecules by connection, sequence, policy, and control. <strong>"We bonded RuView, RuVector &amp; RuFlow around this problem"</strong> beats "we have RuView, RuVector &amp; RuFlow."</p>
+      </div>
+    </section>
+
+    <!-- 3B · MOLECULES -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">Molecules · complete solutions to business problems</span> The first level the business experiences as complete</p>
+        <table class="tbl sm">
+          <thead><tr><th>Business condition</th><th>Example atoms</th><th>Resulting molecule</th></tr></thead>
+          <tbody>
+            <tr><td>Machines fail before teams understand why</td><td>Perception + RuVector + RuLLM + RuFlow + diagnostic COG + RVF</td><td class="j">Predictive Maintenance / Industrial Guardian</td></tr>
+            <tr><td>Threats need rapid but controlled response</td><td>Perception + identity + RuVector + RuLLM + RuFlow + security COGs + RVF</td><td class="j">Autonomous Security Remediation</td></tr>
+            <tr><td>Operations lack real-time context</td><td>Perception + RuVector + RuLLM + RuFlow</td><td class="j">Real-Time Operational Intelligence</td></tr>
+            <tr><td>Buildings react to schedules, not use</td><td>RuView + RuVector + RuFlow + occupancy/energy COGs + RVF</td><td class="j">SpatialOps</td></tr>
+            <tr><td>Knowledge is fragmented; actions hard to govern</td><td>RuVector + RuLLM + RuFlow + identity + verification + connectors</td><td class="j">Sovereign Knowledge Ops</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">Critical bonds — telemetry/zone events, asset/room identity, shared memory, system APIs, workflow, and verification — are what turn a list of atoms into a solution.</p>
+      </div>
+    </section>
+
+    <!-- 3C · MATTER -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">Matter · the functioning intelligent enterprise</span> Multiple molecules operating together</p>
+        <table class="tbl sm">
+          <thead><tr><th>Enterprise</th><th>Molecules operating together</th><th>Cognitum matter created</th></tr></thead>
+          <tbody>
+            <tr><td>Logistics company</td><td>Fleet Intelligence + Predictive Maintenance + FlowSafe + Security + Customer Service + Compliance</td><td class="j">The intelligent logistics enterprise</td></tr>
+            <tr><td>Global manufacturer</td><td>Industrial Guardian + Quality + Energy + Worker Safety + Knowledge Ops + Security</td><td class="j">The self-improving, resilient manufacturer</td></tr>
+            <tr><td>Healthcare system</td><td>Ambient Care + Facilities + Equipment Ops + Workforce + Compliance + Knowledge Ops</td><td class="j">The connected, privacy-sensitive care enterprise</td></tr>
+            <tr><td>Commercial property operator</td><td>SpatialOps + Energy + Security + Service Coordination + Tenant Intelligence</td><td class="j">The adaptive building portfolio</td></tr>
+            <tr><td>Hardware OEM</td><td>OEM Edge Brain + Fleet + Service + Security/Update + Customer Support</td><td class="j">The intelligent product-and-service enterprise</td></tr>
+          </tbody>
+        </table>
+        <div class="callout i" style="margin-top:0.7rem"><div class="h">Consultant question</div><p>"If we solved several connected problems — not just one — <strong>what kind of enterprise would this company become?</strong>"</p></div>
+      </div>
+    </section>
+
+    <!-- 3D · OUTCOMES -->
+    <section class="slide" data-part="Foundations">
+      <div class="inner">
+        <p class="kick"><span class="n">Outcomes · why the enterprise builds the matter</span> The chemistry is a construction model, not the value</p>
+        <table class="tbl sm">
+          <thead><tr><th>Matter characteristic</th><th>Business outcome</th></tr></thead>
+          <tbody>
+            <tr><td class="i">More perceptive</td><td>Earlier detection, fewer blind spots, better experiences</td></tr>
+            <tr><td class="i">More contextual</td><td>Faster decisions, fewer false alerts, less search &amp; rework</td></tr>
+            <tr><td class="i">More adaptive</td><td>Continuous improvement, better capacity use, lower energy/operating cost</td></tr>
+            <tr><td class="i">More coordinated</td><td>Shorter cycle times, fewer handoff failures, scalable expert workflows</td></tr>
+            <tr><td class="j">More trustworthy</td><td>Stronger compliance, explainability, audit, identity, controlled automation</td></tr>
+            <tr><td class="j">More resilient</td><td>Local/offline continuity, safe fallback, faster recovery, lower dependency risk</td></tr>
+            <tr><td class="j">More commercial</td><td>Premium products, recurring services, differentiation, higher revenue</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DIVIDER · METHOD & MOLECULES -->
+    <section class="slide divider" data-part="Method &amp; molecules">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 02</div>
+          <h2 class="rise" style="animation-delay:.06s">The method &amp; the molecules</h2>
+          <p class="sub rise" style="animation-delay:.12s">Begin with the conditions, not the atoms — then name a coherent solution.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>design method</span><span>molecule anatomy</span><span>seven cocktails</span><span>market</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 320 300" role="img" aria-label="Atoms bonding into a molecule">
+            <g stroke="var(--border-2)" stroke-width="1.6"><line class="v-draw" x1="160" y1="150" x2="80" y2="80"/><line class="v-draw" style="animation-delay:.1s" x1="160" y1="150" x2="250" y2="90"/><line class="v-draw" style="animation-delay:.2s" x1="160" y1="150" x2="240" y2="220"/><line class="v-draw" style="animation-delay:.3s" x1="160" y1="150" x2="80" y2="220"/></g>
+            <g><circle class="v-pop" cx="80" cy="80" r="14" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.1s" cx="250" cy="90" r="14" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.2s" cx="240" cy="220" r="14" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.3s" cx="80" cy="220" r="14" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/></g>
+            <circle class="v-pulse" cx="160" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/><text x="160" y="154" text-anchor="middle" font-size="10" fill="var(--jade)" font-weight="600">molecule</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · SOLUTION-DESIGN METHOD -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">The solution-design method</span> Begin with the conditions — not the atoms</p>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="num-card"><span class="ni">1</span><div class="nt"><b>Define the condition</b> — what's failing, expensive, slow, risky, or impossible today?</div></div>
+          <div class="num-card"><span class="ni">2</span><div class="nt"><b>Define what must exist</b> — which decision, behavior, or capability resolves it?</div></div>
+          <div class="num-card"><span class="ni">3</span><div class="nt"><b>Select atoms</b> — which Cognitum capabilities provide the functions?</div></div>
+          <div class="num-card"><span class="ni">4</span><div class="nt"><b>Design bonds</b> — APIs, MCP, events, data, identity, policy, verification, RuFlow.</div></div>
+          <div class="num-card j"><span class="ni">5</span><div class="nt"><b>Name the molecule</b> — one coherent solution, not a list of technologies.</div></div>
+          <div class="num-card j"><span class="ni">6</span><div class="nt"><b>Place it into matter</b> — how it works with the enterprise's other solutions.</div></div>
+        </div>
+        <div class="grid g1" style="grid-template-columns:1fr; margin-top:0.55rem">
+          <div class="num-card j"><span class="ni">7</span><div class="nt"><b>Prove the outcome</b> — baseline, acceptance threshold, safety boundary, scale path, economics.</div></div>
+        </div>
+        <p class="src" style="margin-top:0.55rem">Consulting rule: without a named buyer, integration owner, acceptance threshold, and scale path, it's a <strong>demonstration — not a commercial solution.</strong></p>
+      </div>
+    </section>
+
+    <!-- 5 · MOLECULE ANATOMY -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">A molecule's anatomy</span> Illustrative · Real-Time Operational Intelligence</p>
+        <div class="flow sm">
+          <div class="node j"><span class="badge">perceive</span><b>RuView</b><span>perception</span></div>
+          <div class="harrow">event →</div>
+          <div class="node"><span class="badge">remember</span><b>RuVector</b><span>temporal memory</span></div>
+          <div class="harrow">data →</div>
+          <div class="node i"><span class="badge">reason</span><b>RuLLM</b><span>bounded</span></div>
+          <div class="harrow">policy →</div>
+          <div class="node i"><span class="badge">act</span><b>RuFlow</b><span>coordinated</span></div>
+        </div>
+        <div class="split v top" style="margin-top:0.9rem">
+          <div class="callout uh"><div class="h">Across the whole flow</div><p><b>RVF</b> forms a trust bond across model, memory, config, evidence, update &amp; rollback · <b>identity &amp; policy</b> gate who may see data or act · <b>MCP/APIs</b> bond to systems of record · <b>COGs</b> add functions without a new architecture.</p></div>
+          <div class="callout"><div class="h">Deployment split</div><p><b>In the device</b> — signal processing, immediate classification, safe local behavior · <b>site edge</b> — memory, reasoning, coordination, adapters · <b>enterprise control plane</b> — fleet policy, cross-site analytics, governance.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · SEVEN MOLECULES -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">Seven repeatable solution molecules ("cocktails")</span> Examples, not the boundary</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Molecule</th><th>Business problem solved</th><th>Primary client routes</th></tr></thead>
+          <tbody>
+            <tr><td class="j">SpatialOps</td><td>Buildings react to actual use, not schedules</td><td>Building OEMs · property operators · multi-site portfolios</td></tr>
+            <tr><td class="j">Ambient Care</td><td>Timely, contextual, privacy-sensitive care signals</td><td>Medtech OEMs · health systems · senior/post-acute</td></tr>
+            <tr><td class="j">Industrial Guardian</td><td>Anomalies become evidence-grounded maintenance action</td><td>Industrial OEMs · manufacturers · multi-plant operators</td></tr>
+            <tr><td class="j">FlowSafe</td><td>Warehouses coordinate people, robots, space, orders</td><td>Automation vendors · logistics/retail · 3PLs</td></tr>
+            <tr><td class="j">Sovereign Knowledge Ops</td><td>Sensitive knowledge becomes governed decisions</td><td>Regulated enterprises · pro services · larger SMBs</td></tr>
+            <tr><td class="j">Autonomous Security Remediation</td><td>Threats detected, contextualized, contained under policy</td><td>Large enterprises · infrastructure · security OEMs</td></tr>
+            <tr><td class="j">OEM Edge Brain</td><td>Hardware becomes an upgradeable intelligent product</td><td>Hardware GM / product VP</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7 · MARKET PRIORITIZATION -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">Market prioritization</span></p>
+        <div class="grid g3" style="gap:0.6rem">
+          <div class="card j"><div class="tag j">Tier 1 · buildings, factories, warehouses</div><div class="cd">Clear physical signals &amp; integration surfaces · measurable energy/downtime/throughput/alert economics · strong direct-enterprise + OEM demand · lower claims burden.</div></div>
+          <div class="card a"><div class="tag" style="color:var(--amber)">Tier 2 · care environments</div><div class="cd">Strong privacy/latency/workflow/staffing rationale · start with adjunct workflow support, not diagnosis · requires clinical validation, quality systems, careful claims.</div></div>
+          <div class="card i"><div class="tag">Tier 3 · regulated knowledge ops</div><div class="cd">Large but crowded · win where local operation, evidence, existing data estates &amp; specialized workflows beat generic chat.</div></div>
+        </div>
+        <div class="callout" style="margin-top:1rem"><div class="h">Lead with Tier 1</div><p>Measurable economics and a lower claims burden make buildings, factories, and warehouses the cleanest first molecules to sell.</p></div>
+      </div>
+    </section>
+
+    <!-- 7A · THREE COMMERCIAL ROUTES -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">Three commercial routes from molecule to matter</span></p>
+        <table class="tbl sm">
+          <thead><tr><th>Client motion</th><th>How the molecule enters</th><th>Commercial structure</th></tr></thead>
+          <tbody>
+            <tr><td class="i">OEM / hardware</td><td>An intelligent product &amp; installed fleet — differentiated feature, premium SKU, device services</td><td>NRE + license + per-device royalty + fleet support</td></tr>
+            <tr><td class="j">Large enterprise</td><td>A direct operating solution across sites, systems, data, people &amp; governance</td><td>Paid discovery + pilot + site/enterprise subscription + integration &amp; managed support</td></tr>
+            <tr><td>Larger SMB / growth</td><td>A preconfigured outcome package with bounded integrations</td><td>Fixed-scope package + appliance/site subscription + standardized support</td></tr>
+          </tbody>
+        </table>
+        <div class="callout i" style="margin-top:0.85rem"><div class="h">Priority</div><p>Large enterprises and OEMs are <strong>co-equal primary markets.</strong> Larger SMBs are a selective third market where the solution can be standardized with minimal customization.</p></div>
+      </div>
+    </section>
+
+    <!-- 7B · ONE MOLECULE, DIFFERENT ROLES -->
+    <section class="slide" data-part="Method &amp; molecules">
+      <div class="inner">
+        <p class="kick"><span class="n">One molecule can occupy different roles</span> The molecule is reusable; its role changes</p>
+        <div class="grid g2" style="gap:0.6rem">
+          <div class="card"><div class="ct">SpatialOps</div><div class="cd"><b>OEM</b> — a controller/network vendor embeds the runtime &amp; distributes via installed base.<br><b>Enterprise</b> — a property/hospitality/finance operator deploys across facilities, integrating BMS, booking, cleaning, energy, security.<br><b>SMB</b> — a regional group buys a preconfigured 5–50-site package.</div></div>
+          <div class="card"><div class="ct">Industrial Guardian</div><div class="cd"><b>OEM</b> — an equipment maker embeds the technician layer into a gateway, HMI, drive, or service platform.<br><b>Enterprise</b> — a multi-plant operator connects it to historians, CMMS, manuals, parts, safety.<br><b>SMB</b> — a regional manufacturer deploys a supported appliance on its most critical line.</div></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem">An OEM bonds it into a product &amp; fleet · a large enterprise bonds it into operations and other molecules · an SMB adopts a pre-bonded package. <span class="hyp">Named companies are target-account hypotheses, not customers.</span></p>
+      </div>
+    </section>
+
+    <!-- DIVIDER · MOLECULES IN DEPTH -->
+    <section class="slide divider" data-part="Molecules in depth">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 03</div>
+          <h2 class="rise" style="animation-delay:.06s">The molecules, in depth</h2>
+          <p class="sub rise" style="animation-delay:.12s">Each solution, its bonds, and its high-fit target-account clusters.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>SpatialOps</span><span>Ambient Care</span><span>Industrial Guardian</span><span>FlowSafe</span><span>Knowledge Ops</span><span>Security</span><span>OEM Edge Brain</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 320 300" role="img" aria-label="Several molecules forming enterprise matter">
+            <g><circle class="v-pop" cx="90" cy="90" r="26" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.1s" cx="230" cy="90" r="26" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.2s" cx="90" cy="215" r="26" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.3s" cx="230" cy="215" r="26" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/></g>
+            <g stroke="var(--border-2)" stroke-width="1.4"><line class="v-draw" x1="116" y1="90" x2="204" y2="90"/><line class="v-draw" style="animation-delay:.1s" x1="90" y1="116" x2="90" y2="189"/><line class="v-draw" style="animation-delay:.2s" x1="230" y1="116" x2="230" y2="189"/><line class="v-draw" style="animation-delay:.3s" x1="112" y1="108" x2="208" y2="197"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · SPATIALOPS SOLUTION -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">SpatialOps · commercial solution</span> Occupancy-to-building-action</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.5rem"><b>Problem:</b> scheduled/sparsely-sensed HVAC, lighting, cleaning &amp; space planning waste energy, lose utilization data, and fragment automation.</p>
+            <ul class="clean sm">
+              <li class="j"><b>RuView</b> → qualified presence, occupancy &amp; flow events.</li>
+              <li><b>RuVector</b> → learns room &amp; site patterns.</li>
+              <li class="j"><b>Connectors</b> → BMS, booking, weather, tariff, work-order context.</li>
+              <li><b>RuLLM</b> → bounded operational interpretation.</li>
+              <li class="j"><b>RuFlow</b> → HVAC, lighting, work-order &amp; approval workflows.</li>
+              <li><b>RVF + identity/networking</b> → verified, versioned, supported.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Contribution to matter</div><p>Operates beside Security, Energy, Cleaning/Service &amp; Tenant Intelligence to create the <strong>adaptive building portfolio.</strong></p></div>
+            <div class="callout uh" style="margin-top:0.6rem"><div class="h">Integration &amp; KPIs</div><p>MQTT/REST → gateway → BACnet/KNX/Modbus/OEM. KPIs: energy per occupied hour · utilization accuracy · false-presence rate · comfort exceptions · cleaning labor per used zone · event-to-action latency.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · SPATIALOPS CLUSTER A -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">SpatialOps · cluster A — building-automation OEMs</span> Embedded into controllers, gateways, room systems</p>
+        <table class="tbl sm">
+          <thead><tr><th>Target companies</th><th>Shared need</th><th>Common entry offer</th></tr></thead>
+          <tbody>
+            <tr><td>Schneider Electric, Siemens, Johnson Controls, Honeywell, Carrier, Trane</td><td>Differentiate platforms with better occupancy context &amp; retrofit coverage</td><td>Companion appliance pilot → supported controller/gateway app</td></tr>
+            <tr><td>ABB, Delta Controls, Distech Controls, Automated Logic</td><td>Expand BMS intelligence without replacing the control system</td><td>Occupancy-event &amp; adaptive-memory module, BACnet-facing</td></tr>
+            <tr><td>Signify, Lutron, Legrand, Acuity Brands</td><td>Make lighting/room control responsive to actual use</td><td>Embedded room/zone intelligence tied to lighting &amp; space</td></tr>
+            <tr><td>Belimo, Daikin, Mitsubishi Electric, Bosch Building Tech</td><td>Add demand-responsive intelligence to HVAC equipment</td><td>Local inference package + BMS integration + fleet analytics</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">Same buyer family, similar protocols, repeatable room/zone KPI model, product-embedded expansion path. Market anchors: Schneider room control · Siemens Building X · Carrier Abound. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 10 · SPATIALOPS CLUSTER B -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">SpatialOps · cluster B — networks &amp; smart spaces</span> + OEM Edge Brain inside network/gateway/IoT products</p>
+        <table class="tbl sm">
+          <thead><tr><th>Target companies</th><th>Shared opportunity</th><th>Common entry offer</th></tr></thead>
+          <tbody>
+            <tr><td>Cisco, HPE Aruba, Juniper/Mist, CommScope/RUCKUS</td><td>Convert installed network into a spatial-event platform</td><td>AP/gateway integration, local processing, enterprise API, fleet policy</td></tr>
+            <tr><td>Ubiquiti, Extreme Networks, Fortinet</td><td>Add smart-space capabilities to networking portfolios</td><td>Premium firmware feature + managed update + evidence package</td></tr>
+            <tr><td>Espressif, NXP, Qualcomm, MediaTek, Broadcom</td><td>Enable wireless sensing &amp; edge intelligence on silicon</td><td>Reference design, optimized runtime, benchmarks, SDK, certification</td></tr>
+            <tr><td>Advantech, AAEON, Kontron, OnLogic</td><td>Add a ready edge appliance/runtime to IPCs &amp; gateways</td><td>Validated hardware profile &amp; co-sellable edge SKU</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">Anchors: Cisco Spaces (occupancy + maps + APIs); Espressif CSI/Wi-Fi sensing validates the hardware direction. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 10A · SPATIALOPS CLUSTER C -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">SpatialOps · cluster C — direct enterprise operators</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Cohort</th><th>Target companies</th><th>Direct operational outcome</th></tr></thead>
+          <tbody>
+            <tr><td>CRE &amp; facilities mgmt</td><td>CBRE, JLL, Cushman &amp; Wakefield, Colliers, Brookfield, Prologis</td><td>Occupancy, energy, space planning, cleaning, tenant experience, dispatch</td></tr>
+            <tr><td>Hospitality</td><td>Marriott, Hilton, Hyatt, IHG, Accor, Wyndham</td><td>Room/public-space energy, housekeeping, staffing, privacy-sensitive occupancy</td></tr>
+            <tr><td>Corporate campuses</td><td>JPMorgan Chase, Bank of America, Microsoft, Google, Salesforce, IBM</td><td>Hybrid-work utilization, meeting availability, energy, cleaning</td></tr>
+            <tr><td>Retail &amp; restaurants</td><td>Walmart, Target, Costco, Starbucks, McDonald's, Yum! Brands</td><td>Queue/flow, zone utilization, cleaning, energy, back-of-house</td></tr>
+            <tr><td>Education</td><td>Arizona State, University of California, NYU, Purdue, private systems</td><td>Classroom utilization, HVAC demand, facilities scheduling, safety</td></tr>
+            <tr><td>Airports &amp; venues</td><td>Heathrow, Aena, Fraport, Live Nation, ASM Global, Disney Experiences</td><td>Crowd/queue context, facilities response, energy, cleaning</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Land-and-expand: one site + one KPI → regional portfolio → cross-site optimization, standardized policy, fleet management. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 11 · AMBIENT CARE SOLUTION -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Ambient Care · commercial solution</span> Non-visual event-to-care-workflow</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.5rem"><b>Problem:</b> detect unsafe bed exits, falls, wandering &amp; workflow changes while managing alarm fatigue, privacy &amp; staffing.</p>
+            <ul class="clean sm">
+              <li class="j"><b>RuView</b> → site-validated room/bed-zone/presence/movement events.</li>
+              <li><b>RuVector</b> → permitted local baselines.</li>
+              <li class="j"><b>RuLLM</b> → summarizes events against approved protocols.</li>
+              <li><b>RuFlow</b> → dedupes, prioritizes, routes &amp; escalates.</li>
+              <li class="j"><b>RVF + identity/policy</b> → approved model, evidence, rollback.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Contribution to matter</div><p>Combines with Facilities, Equipment Ops, Workforce, Compliance &amp; Knowledge Ops to create the <strong>connected, privacy-sensitive care enterprise.</strong></p></div>
+            <div class="callout" style="margin-top:0.6rem; border-left-color:var(--crit); background:var(--crit-wash)"><div class="h" style="color:var(--crit)">Explicit exclusion</div><p><strong>No diagnostic vital-sign, fall-prevention, or clinical-outcome claim</strong> until the full system is validated and cleared for that intended use. Start with adjunct workflow support.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · AMBIENT CARE CLUSTERS -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Ambient Care · account clusters</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Cluster</th><th>Target companies</th><th>Shared cocktail &amp; entry motion</th></tr></thead>
+          <tbody>
+            <tr><td>Connected beds &amp; mobility</td><td>Stryker, Baxter/Hillrom, Arjo, Getinge, LINET</td><td>Adjunct room context around bed-exit, mobility, nurse-call, equipment</td></tr>
+            <tr><td>Patient monitoring</td><td>Philips, GE HealthCare, Masimo, Dräger, Mindray, Nihon Kohden, Spacelabs</td><td>Governed room context to alarm prioritization — non-diagnostic initially</td></tr>
+            <tr><td>Comms &amp; nurse call</td><td>Ascom, Rauland, Securitas Healthcare, Vocera/Stryker, TigerConnect</td><td>Route Cognitum events through existing escalation infrastructure</td></tr>
+            <tr><td>Hospital operators</td><td>HCA, CommonSpirit, Ascension, Tenet, Mayo Clinic, Cleveland Clinic</td><td>Controlled unit-level workflow pilot with current systems &amp; ground truth</td></tr>
+            <tr><td>Senior living / post-acute</td><td>Brookdale, Atria, Sunrise, Encompass Health, Select Medical</td><td>Privacy-sensitive occupancy, wandering, response &amp; staffing pilots</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Anchors: Stryker ProCuity connected beds; GE HealthCare alarm/workflow monitoring. <span class="hyp">Target-account hypotheses only · non-diagnostic launch scope.</span></p>
+      </div>
+    </section>
+
+    <!-- 13 · INDUSTRIAL GUARDIAN SOLUTION -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Industrial Guardian · commercial solution</span> Anomaly-to-maintenance-action</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.5rem"><b>Problem:</b> monitoring finds deviations, but technicians lose time finding the right manual, history, expert, parts &amp; safe procedure. Cloud-only may violate OT policy or fail when isolated.</p>
+            <ul class="clean sm">
+              <li class="j"><b>RuVector</b> → equipment, fault, time, relationship &amp; repair context.</li>
+              <li><b>Connectors</b> → historians, manuals, CMMS, parts (not replaced).</li>
+              <li class="j"><b>RuLLM + diagnostic COGs</b> → bounded explanation, local procedures.</li>
+              <li><b>RuFlow</b> → approvals, parts, people &amp; work orders.</li>
+              <li class="j"><b>RVF</b> → verified released package, lab→plant promotion.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Contribution to matter</div><p>Operates with Quality, Energy, Worker Safety, Security &amp; Knowledge Ops to create the <strong>self-improving, resilient manufacturer.</strong></p></div>
+            <div class="callout uh" style="margin-top:0.6rem"><div class="h">Integration &amp; KPIs</div><p><strong>Read-only first</strong> via OPC UA/MQTT/historian/CMMS; control writes stay behind existing safety systems &amp; approvals. KPIs: MTTD · first-time fix · repeat-fault resolution · search time · downtime · refusal rate.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · IG CLUSTER A -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Industrial Guardian · cluster A — automation platforms</span></p>
+        <table class="tbl sm">
+          <thead><tr><th>Target companies</th><th>Shared need</th><th>Common entry offer</th></tr></thead>
+          <tbody>
+            <tr><td>Rockwell, Siemens, Schneider Electric, ABB</td><td>Extend from anomaly visibility to governed resolution</td><td>Containerized technician assistant &amp; memory service for edge platforms</td></tr>
+            <tr><td>Honeywell, Emerson, Yokogawa</td><td>Local, evidence-grounded assistance under strict OT governance</td><td>Read-only historian/manual/CMMS pilot with human-approved recs</td></tr>
+            <tr><td>Mitsubishi Electric, Omron, Bosch Rexroth, Beckhoff, B&amp;R</td><td>Differentiate machine/control ecosystems with embedded intelligence</td><td>OEM-branded molecule for HMI, IPC, controller-adjacent compute</td></tr>
+            <tr><td>Phoenix Contact, Advantech, Siemens Industrial Edge, Kontron</td><td>Expand industrial edge value &amp; app catalogs</td><td>Validated runtime image, connectors, benchmarks, support bundle</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.6rem">Anchors: Rockwell FactoryTalk GuardianAI (edge asset health); Emerson DeltaV (control/historian/edge). Cognitum's opening is the <strong>governed workflow</strong> from signal → diagnosis → evidence → work order. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 15 · IG CLUSTER B -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Industrial Guardian · cluster B — equipment &amp; service OEMs</span> + OEM Edge Brain</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Equipment cohort</th><th>Target companies</th><th>Repeatable product hypothesis</th></tr></thead>
+          <tbody>
+            <tr><td>Drives, motors, motion</td><td>ABB, Siemens, Rockwell, Schneider, Yaskawa, Danfoss</td><td>Condition memory + technician guidance packaged with drive telemetry</td></tr>
+            <tr><td>Pumps, compressors, rotating</td><td>Flowserve, Grundfos, Sulzer, KSB, Atlas Copco, Ingersoll Rand</td><td>Local anomaly context, service history, parts guidance, fleet learning</td></tr>
+            <tr><td>Instrumentation</td><td>Emerson, Endress+Hauser, Yokogawa, Honeywell, Pepperl+Fuchs, ifm</td><td>Evidence-grounded calibration &amp; maintenance assistant near sensors</td></tr>
+            <tr><td>Robotics &amp; machine tools</td><td>FANUC, KUKA, ABB Robotics, Yaskawa, Universal Robots, Teradyne</td><td>Local cell knowledge, alarm interpretation, operator assistance</td></tr>
+            <tr><td>Heavy equipment</td><td>Caterpillar, Deere, Komatsu, CNH, Volvo CE</td><td>Edge service copilot: telemetry + manuals + site + dealer workflow</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">One OEM integration can reach a large installed base and become a premium service, warranty, uptime, or subscription feature. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 15A · IG CLUSTER C -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Industrial Guardian · cluster C — direct large enterprises</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Cohort</th><th>Target companies</th><th>Direct operational problem</th></tr></thead>
+          <tbody>
+            <tr><td>Automotive &amp; mobility</td><td>Toyota, GM, Ford, Stellantis, BMW, Mercedes-Benz, VW, Tesla</td><td>Multi-vendor asset knowledge, alarm triage, line downtime, technician productivity</td></tr>
+            <tr><td>Consumer &amp; food/bev</td><td>P&amp;G, Unilever, PepsiCo, Coca-Cola, Nestlé, Mondelez, AB InBev</td><td>Plant reliability, changeover knowledge, quality/maintenance, energy</td></tr>
+            <tr><td>Pharma &amp; life sciences</td><td>Pfizer, J&amp;J, Roche, Novartis, Merck, Eli Lilly, GSK</td><td>SOP retrieval, equipment investigations, deviation workflow, site governance</td></tr>
+            <tr><td>Aerospace</td><td>Boeing, Airbus, RTX, Lockheed Martin, Northrop Grumman, GE Aerospace, Rolls-Royce</td><td>Secure engineering/maintenance knowledge, asset history, evidence assembly</td></tr>
+            <tr><td>Chemicals &amp; energy</td><td>Dow, BASF, Shell, ExxonMobil, Chevron, BP, Saudi Aramco</td><td>Plant-local anomaly context, safe work, incident learning, reliability</td></tr>
+            <tr><td>Mining &amp; metals</td><td>Rio Tinto, BHP, Vale, Freeport-McMoRan, Nucor, ArcelorMittal, Holcim</td><td>Remote/isolated ops, heavy-asset uptime, cross-site learning</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Buying center: COO + reliability/maintenance + OT/security + CIO/data + plant manager — the solution must satisfy all five. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 16 · FLOWSAFE SOLUTION -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">FlowSafe · commercial solution</span> Physical-flow-to-operational-action</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.5rem"><b>Problem:</b> warehouses mix people, forklifts, conveyors, robots, inventory &amp; volatile demand; transaction systems &amp; cameras lack a unified, low-latency context-and-action loop.</p>
+            <ul class="clean sm">
+              <li class="j"><b>RuView</b> → qualified zone occupancy, motion, queue &amp; flow events.</li>
+              <li><b>RuVector</b> → spatial &amp; temporal patterns.</li>
+              <li class="j"><b>RuLLM + flow/safety COGs</b> → classify bounded exceptions.</li>
+              <li><b>RuFlow</b> → safety, congestion, replenishment &amp; maintenance workflows.</li>
+              <li class="j"><b>RVF + identity/networking</b> → secure, low-latency, multi-site.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Contribution to matter</div><p>Combines with Fleet Intelligence, Predictive Maintenance, Customer Service, Security &amp; Compliance to create the <strong>intelligent logistics enterprise.</strong></p></div>
+            <div class="callout" style="margin-top:0.6rem; border-left-color:var(--amber); background:var(--jade-wash)"><div class="h" style="color:var(--amber)">Guardrail &amp; KPIs</div><p>Cognitum <strong>augments approved safety controls</strong> until validated to standard. KPIs: congestion minutes · dock dwell · blocked-aisle time · near-miss proxies · pick travel · throughput/labor hour · false alerts.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · FLOWSAFE CLUSTER A -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">FlowSafe · cluster A — automation OEMs &amp; software</span></p>
+        <table class="tbl sm">
+          <thead><tr><th>Target companies</th><th>Shared product adjacency</th><th>Common entry offer</th></tr></thead>
+          <tbody>
+            <tr><td>Honeywell Intelligrated, Dematic, Vanderlande, Daifuku, KNAPP</td><td>End-to-end material handling &amp; warehouse software</td><td>Edge spatial/context module in WES &amp; site-control products</td></tr>
+            <tr><td>SSI Schäfer, Swisslog, TGW, Körber, BEUMER</td><td>Repeatable automation platforms, global deployments</td><td>Supported FlowSafe app + site-calibration &amp; fleet services</td></tr>
+            <tr><td>Zebra, Honeywell Productivity, Panasonic Connect</td><td>Frontline devices, scanning, edge compute</td><td>Role-aware local assistant &amp; spatial context on handheld/gateway</td></tr>
+            <tr><td>Manhattan Associates, Blue Yonder, SAP, Oracle, Infor</td><td>WMS/WES hold critical operational context</td><td>Supported data bonds + governed RuFlow event-to-workflow</td></tr>
+            <tr><td>Locus Robotics, Geek+, Exotec, AutoStore, Ocado</td><td>Human/robot coordination in dense automation</td><td>Local zone context, congestion prediction, exception workflow</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem">Anchors: Dematic, Vanderlande, Honeywell warehouse solutions. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 18 · FLOWSAFE CLUSTER B -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">FlowSafe · cluster B — operators</span></p>
+        <table class="tbl sm">
+          <thead><tr><th>Operator cohort</th><th>Target companies</th><th>Repeatable pilot hypothesis</th></tr></thead>
+          <tbody>
+            <tr><td>Contract logistics</td><td>DHL Supply Chain, GXO, Kuehne+Nagel, DB Schenker, CEVA, UPS SCS</td><td>One-site congestion/dock/restricted-zone pilot → replicate across sites</td></tr>
+            <tr><td>Parcel &amp; postal</td><td>UPS, FedEx, DHL Express, Amazon Logistics, Royal Mail, PostNL</td><td>Sort-hub flow, queue, equipment-state &amp; safe-zone context</td></tr>
+            <tr><td>Retail distribution</td><td>Walmart, Target, Costco, Kroger, Tesco, Carrefour, Ahold Delhaize</td><td>Back-of-house/DC flow, energy, queue, labor coordination</td></tr>
+            <tr><td>E-commerce</td><td>Amazon, Mercado Libre, JD.com, Alibaba/Cainiao, Coupang</td><td>High-volume fulfillment exceptions, human/robot context</td></tr>
+            <tr><td>Cold chain &amp; food</td><td>Lineage, Americold, Sysco, US Foods, McLane</td><td>Cold-room occupancy, door/dwell, energy, safety, maintenance</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem">Anchor: DHL publicly combines WMS/TMS data with robots &amp; sensors for algorithmic decisions. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 19 · SOVEREIGN KNOWLEDGE OPS -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Governed knowledge-to-action — not a generic chatbot</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.4rem"><b>Problem:</b> generic copilots struggle with residency, stale answers, fragmented repositories, model lock-in &amp; unverifiable actions.</p>
+            <ul class="clean sm">
+              <li class="j"><b>Connectors + policy</b> govern retrieval from existing data estates.</li>
+              <li><b>RuVector</b> → hybrid, relationship &amp; temporal context.</li>
+              <li class="j"><b>Model policy</b> routes by risk, residency, quality, cost, latency.</li>
+              <li><b>RuFlow + COGs</b> execute approved multi-step workflows.</li>
+            </ul>
+          </div>
+          <div>
+            <table class="tbl tiny">
+              <thead><tr><th>Cluster</th><th>Target companies</th></tr></thead>
+              <tbody>
+                <tr><td>Engineering service</td><td>Siemens Energy, GE Vernova, Schneider Services, ABB Motion, Honeywell Services</td></tr>
+                <tr><td>Aerospace &amp; defense</td><td>RTX, Northrop Grumman, Lockheed Martin, Boeing, Airbus, General Dynamics</td></tr>
+                <tr><td>Energy &amp; utilities</td><td>Shell, BP, ExxonMobil, Chevron, Duke Energy, National Grid, Enel</td></tr>
+                <tr><td>Pharma &amp; life sci</td><td>Pfizer, Roche, Novartis, GSK, Sanofi, Thermo Fisher</td></tr>
+                <tr><td>Financial services</td><td>JPMorgan Chase, Bank of America, Citi, HSBC, UBS, Allianz</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="src" style="margin-top:0.5rem">Qualification: pursue only workflows where local control, proof &amp; integration decisively beat a generic assistant. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 19A · AUTONOMOUS SECURITY REMEDIATION -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Autonomous Security Remediation</span> Threat-to-controlled-response — a horizontal molecule</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.4rem"><b>Condition:</b> more alerts than can be investigated; fragmented response; unsafe automation adds risk.</p>
+            <ol class="clean sm" style="counter-reset:none">
+              <li>Perception / security platform raises an event.</li>
+              <li class="j">Identity + RuVector establish device, user, process, site, history.</li>
+              <li>RuLLM + security COGs classify within approved scope.</li>
+              <li class="j">Policy chooses observe · recommend · approve · contain · refuse.</li>
+              <li>RuFlow coordinates approved security tools &amp; responders.</li>
+              <li class="j">RVF preserves policy, action evidence &amp; rollback state.</li>
+            </ol>
+          </div>
+          <div>
+            <div class="callout"><div class="h">Contribution to matter</div><p>A horizontal molecule protecting SpatialOps, Industrial Guardian, FlowSafe, Ambient Care, Knowledge Ops, OEM products — and the bonds between them.</p></div>
+            <div class="callout" style="margin-top:0.6rem; border-left-color:var(--amber); background:var(--jade-wash)"><div class="h" style="color:var(--amber)">Guardrail</div><p>"Autonomous" means <strong>policy-bounded automation</strong> with identity, evidence, refusal, safe fallback &amp; human escalation — not unrestricted agent authority.</p></div>
+          </div>
+        </div>
+        <p class="src" style="margin-top:0.5rem">Clusters: infrastructure operators · manufacturers · logistics · healthcare · finance · airports · data centers · utilities · security OEMs · MSSPs. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 20 · OEM EDGE BRAIN -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">OEM Edge Brain</span> Embedded-intelligence &amp; installed-fleet solution</p>
+        <div class="split vr top">
+          <div>
+            <p class="mut" style="margin-bottom:0.4rem"><b>Problem:</b> hardware margins compress as competitors source similar silicon &amp; cloud. OEMs need differentiated intelligence <strong>without giving a model vendor control of product identity or customer data.</strong></p>
+            <ul class="clean sm">
+              <li class="j">Signed, versioned model/memory/config packages (RVF).</li>
+              <li>Embedded adaptive memory + bounded local reasoning.</li>
+              <li class="j">OEM-branded solution agent &amp; approved tool surface.</li>
+              <li>Fleet policy, observability, updates, rollback, support.</li>
+            </ul>
+            <p class="src" style="margin-top:0.5rem">Four embedding levels: companion appliance → container/app → firmware/SDK → silicon/reference design.</p>
+          </div>
+          <div>
+            <table class="tbl tiny">
+              <thead><tr><th>OEM cohort</th><th>Companies</th></tr></thead>
+              <tbody>
+                <tr><td>Semiconductor</td><td>NXP, Espressif, Qualcomm, MediaTek, Intel, AMD</td></tr>
+                <tr><td>Networking</td><td>Cisco, HPE Aruba, Juniper, Extreme, Fortinet, Ubiquiti</td></tr>
+                <tr><td>Industrial edge</td><td>Advantech, Siemens, Kontron, Beckhoff, Phoenix Contact, OnLogic</td></tr>
+                <tr><td>Rugged/frontline</td><td>Zebra, Honeywell, Panasonic Connect, Getac, Dell, Lenovo</td></tr>
+                <tr><td>Smart home</td><td>Samsung, LG, Bosch/BSH, Haier, Electrolux, Resideo</td></tr>
+              </tbody>
+            </table>
+            <p class="src" style="margin-top:0.4rem">Models: royalty · license+support · premium SKU · fleet subscription · paid vertical dev. <span class="hyp">Hypotheses only.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20A · LARGE-ENTERPRISE PORTFOLIO -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Large-enterprise portfolio · direct deployments</span> No hardware-manufacturer partnership required</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Function</th><th>Best cocktail</th><th>Example companies</th><th>First measurable workflow</th></tr></thead>
+          <tbody>
+            <tr><td>Real estate &amp; facilities</td><td class="j">SpatialOps</td><td>JPMorgan, Microsoft, Walmart, Marriott, CBRE, JLL</td><td>Occupancy-informed HVAC/cleaning &amp; utilization</td></tr>
+            <tr><td>Manufacturing reliability</td><td class="j">Industrial Guardian</td><td>Toyota, P&amp;G, Pfizer, Dow, Boeing, Rio Tinto</td><td>Critical-asset triage, procedure retrieval, work orders</td></tr>
+            <tr><td>Warehousing</td><td class="j">FlowSafe</td><td>Amazon, Walmart, DHL, GXO, UPS, FedEx</td><td>Congestion, dock dwell, restricted-zone, exceptions</td></tr>
+            <tr><td>Healthcare delivery</td><td class="j">Ambient Care</td><td>HCA, CommonSpirit, Ascension, Mayo Clinic, Brookdale</td><td>Adjunct bed/room event routing, response time</td></tr>
+            <tr><td>Field service</td><td class="j">Guardian + Knowledge Ops</td><td>GE Vernova, Siemens Energy, Schneider Services, Otis, KONE</td><td>Evidence-grounded technician prep, first-time fix</td></tr>
+            <tr><td>Regulated operations</td><td class="j">Sovereign Knowledge Ops</td><td>JPMorgan, Pfizer, Shell, RTX, National Grid</td><td>Policy/SOP research, investigations, controlled action</td></tr>
+            <tr><td>Cyber-physical security</td><td class="j">Security Remediation</td><td>Equinix, Digital Realty, National Grid, Siemens, DHL, HCA, JPMorgan</td><td>Contextual triage, bounded containment, evidence, recovery</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Value: connect physical environment + enterprise knowledge + existing systems into a governed decision loop the enterprise owns. <span class="hyp">Target-account hypotheses only.</span></p>
+      </div>
+    </section>
+
+    <!-- 20B · LARGER-SMB PORTFOLIO -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">Larger-SMB portfolio · standardized growth packages</span> A repeatable package, not a bespoke transformation</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Ideal customer</th><th>Packaged cocktail</th><th>Typical scope</th><th>Value proposition</th></tr></thead>
+          <tbody>
+            <tr><td>Regional property / hotel group</td><td class="j">SpatialOps Essentials</td><td>5–50 buildings; standard BMS/MQTT</td><td>Cut energy &amp; cleaning waste without a data/AI team</td></tr>
+            <tr><td>Multi-site senior living</td><td class="j">Ambient Care Workflow</td><td>5–30 facilities; bounded room-event</td><td>Improve response &amp; visibility, privacy-sensitive local</td></tr>
+            <tr><td>Mid-market manufacturer</td><td class="j">Industrial Guardian Starter</td><td>1–5 plants; one CMMS/historian</td><td>Cut diagnostic/search time, preserve knowledge</td></tr>
+            <tr><td>Regional 3PL / cold store</td><td class="j">FlowSafe Site</td><td>1–20 warehouses; standard WMS</td><td>Improve dock/aisle flow, exceptions, energy/safety</td></tr>
+            <tr><td>Engineering / compliance firm</td><td class="j">Knowledge Ops Team</td><td>100–2,000 users; doc/CRM connectors</td><td>Govern knowledge, automate a high-value workflow</td></tr>
+            <tr><td>Device maker / specialist OEM</td><td class="j">OEM Edge Brain Launch</td><td>One product line + reference hardware</td><td>Add premium AI without building a platform</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Gates: executive sponsor · repeatable workflow · accessible data · standard connector · measurable in one quarter · limited customization · contract large enough for enterprise-grade delivery. <strong>Do not pursue</strong> very small businesses needing heavy customization or a low-price generic chatbot.</p>
+      </div>
+    </section>
+
+    <!-- 20C · CLIENT FIT MATRIX -->
+    <section class="slide" data-part="Molecules in depth">
+      <div class="inner">
+        <p class="kick"><span class="n">From molecule to matter · client-fit matrix</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Molecule</th><th>OEM enterprise</th><th>Large enterprise</th><th>Larger SMB</th></tr></thead>
+          <tbody>
+            <tr><td class="j">SpatialOps</td><td>Premium controller/AP/building feature</td><td>Portfolio facilities, energy, space, experience</td><td>Preconfigured multi-site package</td></tr>
+            <tr><td class="j">Ambient Care</td><td>Adjunct intelligence in beds/monitoring/nurse call</td><td>Integrated care workflow across units &amp; systems</td><td>Bounded workflow package for multi-site operators</td></tr>
+            <tr><td class="j">Industrial Guardian</td><td>Differentiated equipment/edge/service product</td><td>Multi-plant reliability operating system</td><td>Critical-line reliability starter</td></tr>
+            <tr><td class="j">FlowSafe</td><td>WES/robotics/handheld enhancement</td><td>Distribution-network flow &amp; exceptions</td><td>Standardized warehouse/site package</td></tr>
+            <tr><td class="j">Knowledge Ops</td><td>Embedded product/service assistant</td><td>Governed cross-system workflow</td><td>Preconfigured pro/engineering/compliance workflow</td></tr>
+            <tr><td class="j">Security Remediation</td><td>Embedded device/fleet protection</td><td>Horizontal protection across sites &amp; molecules</td><td>Managed policy-bounded workflow (qualified mid-market)</td></tr>
+            <tr><td class="j">OEM Edge Brain</td><td>Core differentiation &amp; recurring fleet revenue</td><td>Relevant when enterprise builds proprietary devices</td><td>Specialist device makers with sufficient scale</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:0.6rem"><div class="h">Consultant takeaway</div><p>Don't force every molecule into every segment. <strong>Land with the clearest economic buyer, then bond to adjacent molecules</strong> until it becomes part of the customer's functioning enterprise matter.</p></div>
+      </div>
+    </section>
+
+    <!-- DIVIDER · ENTERPRISE MATTER -->
+    <section class="slide divider" data-part="Enterprise matter">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 04</div>
+          <h2 class="rise" style="animation-delay:.06s">Enterprise matter blueprints</h2>
+          <p class="sub rise" style="animation-delay:.12s">What the company becomes when molecules share identity, data, policy, memory, events &amp; workflows.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>logistics</span><span>manufacturing</span><span>care</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 320 300" role="img" aria-label="Many molecules bonded into enterprise matter">
+            <g><circle class="v-pop" cx="90" cy="80" r="20" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.08s" cx="230" cy="80" r="20" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.16s" cx="160" cy="150" r="24" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.24s" cx="70" cy="215" r="20" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle class="v-pop" style="animation-delay:.32s" cx="250" cy="215" r="20" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/></g>
+            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="90" y1="80" x2="160" y2="150"/><line class="v-draw" style="animation-delay:.1s" x1="230" y1="80" x2="160" y2="150"/><line class="v-draw" style="animation-delay:.2s" x1="70" y1="215" x2="160" y2="150"/><line class="v-draw" style="animation-delay:.3s" x1="250" y1="215" x2="160" y2="150"/><line class="v-draw" style="animation-delay:.4s" x1="90" y1="80" x2="230" y2="80"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20D · LOGISTICS MATTER -->
+    <section class="slide" data-part="Enterprise matter">
+      <div class="inner">
+        <p class="kick"><span class="n">Blueprint · intelligent logistics enterprise</span></p>
+        <p class="src" style="margin:0 0 0.5rem"><b>Conditions:</b> volatile demand, worker/robot congestion, fleet downtime, fragmented security, slow exceptions, growing compliance.</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Molecule</th><th>Function inside the matter</th></tr></thead>
+          <tbody>
+            <tr><td class="j">Fleet Intelligence</td><td>Vehicle, trailer, equipment, route &amp; condition context</td></tr>
+            <tr><td class="j">Industrial Guardian</td><td>Predicts &amp; resolves equipment/fleet maintenance</td></tr>
+            <tr><td class="j">FlowSafe</td><td>Coordinates people, robots, docks, aisles, orders, exceptions</td></tr>
+            <tr><td class="j">Security Remediation</td><td>Protects devices, sites, identities &amp; connections</td></tr>
+            <tr><td class="j">Customer Service Intelligence</td><td>Operational state → proactive customer communication</td></tr>
+            <tr><td class="j">Compliance Verification</td><td>Evidence for handling, safety, cold-chain, contracts</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem"><b>Shared bonds:</b> enterprise identity, RuVector context, policies, events, evidence, RuFlow workflows. <b>Outcomes:</b> higher throughput · lower dwell &amp; downtime · faster exceptions · fewer incidents · better visibility · lower compliance effort.</p>
+      </div>
+    </section>
+
+    <!-- 20E · MANUFACTURING MATTER -->
+    <section class="slide" data-part="Enterprise matter">
+      <div class="inner">
+        <p class="kick"><span class="n">Blueprint · self-improving manufacturer</span></p>
+        <p class="src" style="margin:0 0 0.5rem"><b>Conditions:</b> unplanned downtime, quality losses, high energy use, retiring expertise, cyber-physical risk, inconsistent learning between plants.</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Molecule</th><th>Function inside the matter</th></tr></thead>
+          <tbody>
+            <tr><td class="j">Industrial Guardian</td><td>Equipment anomalies → verified maintenance action</td></tr>
+            <tr><td class="j">Quality Intelligence</td><td>Detects deviations, coordinates investigation</td></tr>
+            <tr><td class="j">Energy Optimization</td><td>Relates production, occupancy, equipment &amp; tariffs to energy</td></tr>
+            <tr><td class="j">Worker Safety Intelligence</td><td>Situational context to approved safety systems</td></tr>
+            <tr><td class="j">Sovereign Knowledge Ops</td><td>Engineering/SOP/incident/service knowledge, actionable</td></tr>
+            <tr><td class="j">Security Remediation</td><td>Protects OT/IT devices, identities &amp; molecular bonds</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem"><b>Shared bonds:</b> asset/identity graph, trusted data, policy, memory, event fabric, evidence, workflows. <b>Outcomes:</b> less downtime &amp; scrap · faster root cause &amp; changeover · lower energy · preserved expertise · safer work · stronger resilience.</p>
+      </div>
+    </section>
+
+    <!-- 20F · CARE MATTER -->
+    <section class="slide" data-part="Enterprise matter">
+      <div class="inner">
+        <p class="kick"><span class="n">Blueprint · connected care enterprise</span></p>
+        <p class="src" style="margin:0 0 0.5rem"><b>Conditions:</b> staffing pressure, fragmented alerts, privacy requirements, equipment complexity, facility cost, evidence burden.</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Molecule</th><th>Function inside the matter</th></tr></thead>
+          <tbody>
+            <tr><td class="j">Ambient Care</td><td>Contextual, non-visual room &amp; care-workflow signals</td></tr>
+            <tr><td class="j">Equipment Operations</td><td>Readiness, location, maintenance &amp; service workflow</td></tr>
+            <tr><td class="j">SpatialOps</td><td>Facilities, cleaning, energy &amp; utilization</td></tr>
+            <tr><td class="j">Sovereign Knowledge Ops</td><td>Governed SOP, policy, research &amp; evidence workflows</td></tr>
+            <tr><td class="j">Compliance Verification</td><td>Decision, config, event &amp; workflow evidence</td></tr>
+            <tr><td class="j">Security Remediation</td><td>Protects connected devices &amp; operational systems</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem"><b>Shared bonds:</b> identity, privacy, evidence, device &amp; workflow policies. <b>Outcomes:</b> faster response · fewer nuisance interruptions · better equipment readiness · lower facility cost · stronger evidence · safer connected operations.</p>
+      </div>
+    </section>
+
+    <!-- DIVIDER · PLAYBOOK -->
+    <section class="slide divider" data-part="Playbook">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 05</div>
+          <h2 class="rise" style="animation-delay:.06s">The consultant playbook</h2>
+          <p class="sub rise" style="animation-delay:.12s">Score the fit, run the pilot, hold the non-negotiables, and package the deal.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>scorecard</span><span>90-day pilot</span><span>non-negotiables</span><span>packaging</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 320 300" role="img" aria-label="A measure-govern-prove-scale loop">
+            <circle cx="160" cy="150" r="96" fill="none" stroke="var(--border-2)" stroke-width="1.6" stroke-dasharray="5 8"/>
+            <circle class="v-t" r="7" fill="var(--jade)" style="offset-path:path('M160 54 a96 96 0 1 1 -0.1 0');animation-duration:6s"/>
+            <g font-size="12" text-anchor="middle" fill="var(--indigo)"><text x="160" y="58">qualify</text><text x="256" y="154">pilot</text><text x="160" y="252">prove</text><text x="64" y="154">scale</text></g>
+            <circle class="v-pulse" cx="160" cy="150" r="30" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · SCORECARD -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">PMF &amp; account-cluster scorecard</span> Score every cluster/account 1–5</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Dimension</th><th>A score of 5 means</th></tr></thead>
+          <tbody>
+            <tr><td>Pain severity</td><td>Executive-owned cost/risk with current budget</td></tr>
+            <tr><td>Edge necessity</td><td>Privacy, latency, offline, or data volume makes local decisive</td></tr>
+            <tr><td>Signal availability</td><td>Data exists and can legally &amp; technically be accessed</td></tr>
+            <tr><td>Integration feasibility</td><td>Supported gateway/API/protocol &amp; an engaged system owner</td></tr>
+            <tr><td>Bond quality</td><td>Identity, data, event, policy, trust, workflow, operational bonds explicit &amp; testable</td></tr>
+            <tr><td>Repeatability</td><td>One cocktail applies across many products/sites/accounts</td></tr>
+            <tr><td>Measurability</td><td>Baseline &amp; improvement visible within 90 days</td></tr>
+            <tr><td>Claim risk</td><td>Bounded launch scope &amp; safe human-in-the-loop design</td></tr>
+            <tr><td>Distribution leverage</td><td>One integration reaches a large installed base or repeatable sites</td></tr>
+            <tr><td>Matter contribution</td><td>The molecule can share context/workflows with adjacent solutions, not silo</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Priority threshold: <strong>≥40/50</strong>, with no score below 3 for signal, integration, bond quality, measurement, safety, or matter contribution.</p>
+      </div>
+    </section>
+
+    <!-- 22 · 90-DAY PILOT -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">The 90-day commercial pilot</span></p>
+        <div class="grid g4" style="gap:0.55rem">
+          <div class="card mini"><div class="tag">Days 0–15 · Qualify &amp; baseline</div><div class="cd">One workflow, buyer, device/site, system of record &amp; economic KPI. Data rights, retention, safety boundary, target hardware, acceptance threshold. Validate atoms on the exact environment.</div></div>
+          <div class="card mini i"><div class="tag">Days 16–45 · Shadow</div><div class="cd">Implement event/data/identity/policy/trust/workflow/operational bonds. Run on real signals, no autonomous control. Compare vs ground truth: FP/FN, latency, compute, power, trust.</div></div>
+          <div class="card mini a"><div class="tag" style="color:var(--amber)">Days 46–75 · Supervised action</div><div class="cd">Validate the named molecule behind human confirmation. Test signing, update, rollback, drift, isolation, monitoring, support runbooks.</div></div>
+          <div class="card mini j"><div class="tag j">Days 76–90 · Economic proof</div><div class="cd">Compare to baseline/acceptance. Define adjacent molecules to bond into matter. Produce scale cost, security evidence, gaps &amp; commercial proposal.</div></div>
+        </div>
+        <p class="src" style="margin-top:0.6rem">Deliverables: supported integration · validated deployment artifact · threat/safety model · benchmark report · runbook · KPI dashboard · production &amp; support plan.</p>
+      </div>
+    </section>
+
+    <!-- 23 · NON-NEGOTIABLES -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">Enterprise promise &amp; non-negotiables</span></p>
+        <div class="grid g2" style="gap:0.5rem">
+          <div class="card mini"><div class="cd">Data classification, purpose, retention &amp; deletion (raw + derived)</div></div>
+          <div class="card mini"><div class="cd">Tenant isolation &amp; least-privilege connectors</div></div>
+          <div class="card mini"><div class="cd">Device identity, secure update, signed artifacts, rollback, incident response</div></div>
+          <div class="card mini a"><div class="cd">Default-deny tool execution &amp; human approval for high-impact actions</div></div>
+          <div class="card mini"><div class="cd">Version/model lineage, site/cohort eval, drift detection, observability</div></div>
+          <div class="card mini"><div class="cd">SBOM, dependency/license review, CVE process, security docs, SLA ownership</div></div>
+          <div class="card mini j"><div class="cd">Clear status labels: prototype · validated pilot · production-supported · certified</div></div>
+          <div class="card mini j"><div class="cd">Explicit intended use, exclusions &amp; claims approval</div></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem">Consultant language: sell only the <strong>Cognitum commercial build</strong>, approved specifications, validated deployment, proprietary enhancements, and support contract.</p>
+      </div>
+    </section>
+
+    <!-- 24 · WHY COGNITUM WINS -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">Why Cognitum wins</span></p>
+        <table class="tbl sm">
+          <thead><tr><th>Alternative</th><th>Strength</th><th>Cognitum commercial differentiation</th></tr></thead>
+          <tbody>
+            <tr><td>Cloud AI assistant</td><td>General reasoning</td><td class="j">Local/offline path, device proximity, governed action, data control</td></tr>
+            <tr><td>Vector database</td><td>Retrieval</td><td class="j">Adaptive memory + portable deployment, evidence, physical signals</td></tr>
+            <tr><td>IoT sensor</td><td>Reliable measurement</td><td class="j">Context, memory, reasoning, cross-system workflow, product integration</td></tr>
+            <tr><td>Agent framework</td><td>Tool orchestration</td><td class="j">Supported hardware-aware product, policy, lifecycle, vertical solution</td></tr>
+            <tr><td>BMS/WMS/CMMS/EHR</td><td>System of record/control</td><td class="j">Augmenting decision layer across installed systems — not rip-and-replace</td></tr>
+            <tr><td>Custom integration</td><td>Exact fit</td><td class="j">Repeatable platform, adapters, validation, SLA &amp; roadmap</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.55rem"><b>Moat:</b> competitors may imitate an atom; Cognitum's advantage is the <strong>commercial system</strong> — proprietary atoms, effective bonds, proven molecular architectures, validation data, industry adapters, supported hardware, enterprise matter, fleet lifecycle &amp; distribution.</p>
+      </div>
+    </section>
+
+    <!-- 25 · COMMERCIAL PACKAGING -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">Commercial packaging</span></p>
+        <div class="grid g4" style="gap:0.55rem">
+          <div class="card mini"><div class="tag">A · Opportunity architecture</div><div class="cd">2–4 wks. Conditions, outcomes, atoms, bonds, molecule architecture, matter roadmap, risk plan, KPI baseline, pilot SOW.</div></div>
+          <div class="card mini i"><div class="tag">B · Outcome pilot</div><div class="cd">8–12 wks. One molecule, one product/site, tested bonds, shadow→supervised, measured evidence.</div></div>
+          <div class="card mini a"><div class="tag" style="color:var(--amber)">C · OEM productization</div><div class="cd">Hardware optimization, branded solution, supported SDK/API, update/rollback, verification suite, reference design.</div></div>
+          <div class="card mini j"><div class="tag j">D · Enterprise fleet</div><div class="cd">Multiple molecules sharing identity, memory, policy, events, evidence &amp; workflows across sites — the managed matter layer.</div></div>
+        </div>
+        <div class="callout" style="margin-top:0.85rem"><div class="h">Revenue stack</div><p>Strategy &amp; integration fee + annual license/support + per-device/site royalty + managed fleet/operations + industry-module upgrades.</p></div>
+      </div>
+    </section>
+
+    <!-- 26 · DISCOVERY QUESTIONS -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">Consultant discovery questions</span></p>
+        <div class="grid g2" style="gap:0.5rem">
+          <div class="card mini j"><div class="tag j">Business &amp; conditions</div><div class="cd">Which KPI has an executive owner? Cost of a missed/late/false signal? What's failing today — and what must exist to change it?</div></div>
+          <div class="card mini"><div class="tag">Atoms &amp; bonds</div><div class="cd">Which capabilities provide perception, memory, reasoning, orchestration, verification, identity, networking, COGs? Which APIs, events, schemas, policies, approvals connect them?</div></div>
+          <div class="card mini"><div class="tag">Molecule &amp; matter</div><div class="cd">Can it be bought as one complete solution? Which other solutions must share context, identity, events, policy &amp; evidence — and what enterprise does that create?</div></div>
+          <div class="card mini i"><div class="tag">Product &amp; technical</div><div class="cd">Site solution, premium feature, or OEM platform? How many devices/sites per integration? Signals, receiving system, offline needs, power/compute/latency/protocol/update constraints?</div></div>
+          <div class="card mini a"><div class="tag" style="color:var(--amber)">Trust</div><div class="cd">Can raw data be stored? Which actions need human confirmation or a certified controller? What ground truth &amp; acceptance thresholds define success?</div></div>
+          <div class="card mini"><div class="tag">Operations &amp; commercial</div><div class="cd">Who owns monitoring, drift, updates, incident response, support &amp; liability? What replaces a pilot with recurring revenue and owns the relationship?</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 · ACTION PLAN -->
+    <section class="slide" data-part="Playbook">
+      <div class="inner">
+        <p class="kick"><span class="n">Recommended action plan</span></p>
+        <div class="grid g2" style="gap:0.45rem">
+          <div class="num-card"><span class="ni">1</span><div class="nt"><b>Publish the commercial atom table</b> — names, specs, owners, proprietary extensions, support tiers.</div></div>
+          <div class="num-card"><span class="ni">2</span><div class="nt"><b>Publish the bond standards</b> — APIs, MCP, events, schemas, identity, policy, verification, monitoring.</div></div>
+          <div class="num-card j"><span class="ni">3</span><div class="nt"><b>Select two lighthouse molecules</b> — SpatialOps and Industrial Guardian/FlowSafe.</div></div>
+          <div class="num-card j"><span class="ni">4</span><div class="nt"><b>Pick one enterprise + one OEM cluster</b> per molecule; pursue three similar companies each.</div></div>
+          <div class="num-card"><span class="ni">5</span><div class="nt"><b>Choose one OEM design partner &amp; two enterprise operators</b> — distribution + outcome evidence together.</div></div>
+          <div class="num-card"><span class="ni">6</span><div class="nt"><b>Create industry-matter roadmaps</b> — how the first molecule bonds into the intelligent enterprise.</div></div>
+        </div>
+        <div class="callout i" style="margin-top:0.7rem"><div class="h">Closing line</div><p>Business conditions tell us what must exist. Cognitum <strong>selects the atoms, engineers the bonds, delivers the molecules, and helps them operate together as intelligent enterprise matter</strong> — producing measurable business outcomes.</p></div>
+      </div>
+    </section>
+
+    <!-- APPENDIX A -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix A · account-cluster pursuit model</span> One reusable campaign brief per cluster</p>
+        <div class="grid g2" style="gap:0.45rem">
+          <div class="card mini"><div class="cd">Required atoms &amp; the resulting molecule</div></div>
+          <div class="card mini"><div class="cd">First role + adjacent molecules needed for the target matter</div></div>
+          <div class="card mini"><div class="cd">Common executive problem &amp; buyer roles</div></div>
+          <div class="card mini"><div class="cd">Standard cocktail &amp; architecture</div></div>
+          <div class="card mini"><div class="cd">Product surfaces &amp; protocols shared by the cluster</div></div>
+          <div class="card mini"><div class="cd">Three entry use cases ranked by time to evidence</div></div>
+          <div class="card mini"><div class="cd">Pilot KPI &amp; economic calculator</div></div>
+          <div class="card mini"><div class="cd">Security, safety &amp; claims boundary</div></div>
+          <div class="card mini"><div class="cd">Reference hardware &amp; supported deployment pattern</div></div>
+          <div class="card mini"><div class="cd">Account trigger &amp; installed-base hypothesis</div></div>
+          <div class="card mini"><div class="cd">Likely partners &amp; competitive alternatives</div></div>
+          <div class="card mini"><div class="cd">Land-and-expand path across product lines &amp; customers</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPENDIX B + B2 -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix B · commercial atom &amp; bond fact sheets</span></p>
+        <div class="split top">
+          <div>
+            <h3 style="margin-bottom:0.5rem">Per atom, document</h3>
+            <ul class="clean sm">
+              <li>Name, one-line value, product owner · version, maturity, support tier, roadmap</li>
+              <li class="j">Inputs/outputs, APIs, protocols, supported integrations</li>
+              <li>Supported HW/OS + measured CPU, memory, power, throughput, latency</li>
+              <li class="j">Security architecture, threat model, audit, update, rollback</li>
+              <li>Tenant/data controls, observability, backup/recovery, fleet ops</li>
+              <li class="j">License, packaging, pricing unit, SLA, escalation · benchmarks · intended uses, limits, exclusions, approved claims</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="margin-bottom:0.5rem">Per bond pattern, document</h3>
+            <ul class="clean sm">
+              <li>Bond type: interface, event, data, workflow, policy, trust, network, operational</li>
+              <li class="j">Atoms &amp; external systems it may connect</li>
+              <li>API/MCP/protocol/schema/event/state contract</li>
+              <li class="j">Identity, permission, tenancy, encryption, data-handling rules</li>
+              <li>Ordering, latency, retry, idempotency, failure, refusal, fallback</li>
+              <li class="j">Observability, evidence, version compatibility, test harness, SLA · safety boundary &amp; human-approval actions · update/migration/rollback/IR</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPENDIX C -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix C · external market anchors</span> Strategic-fit evidence, not endorsements</p>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="card mini"><div class="cd">Schneider Electric occupancy-based room control</div></div>
+          <div class="card mini"><div class="cd">Siemens Building X occupancy</div></div>
+          <div class="card mini"><div class="cd">Carrier Abound smart-building</div></div>
+          <div class="card mini"><div class="cd">Cisco Spaces</div></div>
+          <div class="card mini"><div class="cd">Espressif Wi-Fi sensing</div></div>
+          <div class="card mini"><div class="cd">Rockwell FactoryTalk GuardianAI</div></div>
+          <div class="card mini"><div class="cd">Emerson DeltaV</div></div>
+          <div class="card mini"><div class="cd">Stryker connected beds</div></div>
+          <div class="card mini"><div class="cd">GE HealthCare patient monitoring</div></div>
+          <div class="card mini"><div class="cd">Honeywell warehouse solutions</div></div>
+          <div class="card mini"><div class="cd">Dematic · Vanderlande</div></div>
+          <div class="card mini"><div class="cd">DHL data-driven supply chain</div></div>
+        </div>
+        <p class="src" style="margin-top:0.7rem"><strong>Research note:</strong> re-verify company portfolios, product names, Cognitum specifications &amp; account ownership immediately before presenting. Company inclusion indicates <strong>strategic fit only</strong> — every named company is a target-account hypothesis, not a customer, partner, or active opportunity.</p>
+      </div>
+    </section>
+
+    <!-- CLOSE -->
+    <section class="slide" data-part="Appendix">
+      <div class="glow-b"></div>
+      <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
+        <span class="kicker"><span class="dot"></span>Cognitum Enterprise Matter · consultant briefing</span>
+        <h1 style="margin-inline:auto; max-width:none">Atoms. Bonds. Molecules.<br><span class="g">Intelligent enterprise matter.</span></h1>
+        <p class="title-sub" style="margin-inline:auto">Business conditions tell us what must exist. Cognitum selects the atoms, engineers the bonds, delivers the molecules — and helps them operate together as measurable business outcomes.</p>
+        <p class="src" style="text-align:center; margin-top:1.2rem">Every named company is a high-fit target-account hypothesis — not a customer, partner, or active opportunity.</p>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">Cognitum Enterprise Matter</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate · F present · T theme</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+</body>
+</html>
