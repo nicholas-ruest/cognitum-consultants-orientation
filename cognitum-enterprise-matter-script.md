@@ -1,5 +1,7 @@
 # Cognitum Enterprise Matter — Presentation Script (≈40 minutes)
 
+**Part A** is the verbatim stage script for presenting the 32-slide deck to the consultant cohort. **Part B** (at the end) is a set of client-facing talk tracks — how consultants phrase each concept when they're in front of an end-user enterprise.
+
 Read the text under each slide heading aloud, word for word. The headings are for your navigation only. Slides marked *(divider)* are section breaks — say the short line and move on.
 
 ---
@@ -26,7 +28,7 @@ Let's start with the chemistry — nine atoms, the bonds that join them, and the
 
 ## Slide 6 — The atoms
 
-These are our nine atoms. RuView is perception — it turns camera-free signal into presence, motion, and events. RuVector is memory — the context a solution recalls and learns from. RuLake is the data lake underneath it — durable storage for raw signals, events, documents, and evidence. RuvLLM is local, domain-specific reasoning that runs on-site, with no cloud dependency. MetaLLM governs which model runs each task, under policy and budget. RuFlo turns a decision into a coordinated, approved action. RVF signs everything — every model, config, and action gets verifiable evidence. COGs are the industry adapters that connect us to the customer's existing systems. And MetaHarness embeds the whole stack inside a product and keeps improving it. Nine atoms — that's the entire toolbox.
+These are our ten atoms. RuView is perception — it turns camera-free signal into presence, motion, and events. RuVector is memory — the context a solution recalls and learns from. RuLake is the data lake underneath it — durable storage for raw signals, events, documents, and evidence. RuvLLM is local, domain-specific reasoning that runs on-site, with no cloud dependency. MetaLLM governs which model runs each task, under policy and budget. RuFlo turns a decision into a coordinated, approved action. RVF signs everything — every model, config, and action gets verifiable evidence. RVM is the secure runtime the whole stack actually executes in — bare-metal, capability-isolated, and witnessed on every action, from a tiny sixty-four-kilobyte device all the way to the cloud. COGs are the industry adapters that connect us to the customer's existing systems. And MetaHarness embeds the whole stack inside a product and keeps improving it. Ten atoms — that's the entire toolbox.
 
 ## Slide 7 — Bonds
 
@@ -34,7 +36,7 @@ This is the idea that matters most: the atoms are not the solution — the bonds
 
 ## Slide 8 — A molecule's anatomy
 
-Every molecule we build runs the same five moves. Sense, with RuView. Remember, with RuVector. Reason, with RuvLLM or MetaLLM. Act, with RuFlo. And prove it, with RVF. Underneath all of it, RuLake holds the data and RVF anchors the evidence. And then there's the loop that makes it better over time: MetaHarness runs Darwin and Flywheel — it proposes changes, and it only keeps the ones that measurably win on held-out proof. So the molecule doesn't just work. It improves — and every improvement is backed by evidence.
+Every molecule we build runs the same five moves. Sense, with RuView. Remember, with RuVector. Reason, with RuvLLM or MetaLLM. Act, with RuFlo. And prove it, with RVF. The whole thing executes inside RVM — our secure, bare-metal runtime that isolates every agent and witnesses every action, from a tiny edge device up to the cloud. Underneath, RuLake holds the data and RVF anchors the evidence. And then there's the loop that makes it better over time: MetaHarness runs Darwin and Flywheel — it proposes changes, and it only keeps the ones that measurably win on held-out proof. So the molecule doesn't just work. It improves — and every improvement is backed by evidence.
 
 ## Slide 9 — Part 2: The seven molecules *(divider)*
 
@@ -42,7 +44,7 @@ That's the toolkit. Now the seven molecules — one shared spine, seven business
 
 ## Slide 10 — Seven molecules
 
-Seven molecules, and they all share one spine: sense, remember, reason, act, verify — RuView, RuVector, RuvLLM or MetaLLM, RuFlo, and RVF, all running over the RuLake data lake and packaged by MetaHarness. What changes from molecule to molecule is the distinguishing atom and the problem it solves. SpatialOps makes buildings react to real use. Ambient Care delivers privacy-safe care signals. Industrial Guardian turns anomalies into grounded action. FlowSafe coordinates people, robots, and orders. Sovereign Knowledge Ops turns sensitive knowledge into governed decisions. Autonomous Security Remediation contains threats under policy. And OEM Edge Brain turns hardware into an upgradeable product. Same spine, seven outcomes.
+Seven molecules, and they all share one spine: sense, remember, reason, act, verify — RuView, RuVector, RuvLLM or MetaLLM, RuFlo, and RVF, all running over the RuLake data lake, inside the RVM secure runtime, and packaged by MetaHarness. What changes from molecule to molecule is the distinguishing atom and the problem it solves. SpatialOps makes buildings react to real use. Ambient Care delivers privacy-safe care signals. Industrial Guardian turns anomalies into grounded action. FlowSafe coordinates people, robots, and orders. Sovereign Knowledge Ops turns sensitive knowledge into governed decisions. Autonomous Security Remediation contains threats under policy. And OEM Edge Brain turns hardware into an upgradeable product. Same spine, seven outcomes.
 
 ## Slide 11 — SpatialOps
 
@@ -118,7 +120,7 @@ When you name these companies, you're not guessing. Each one already ships a pro
 
 ## Slide 29 — Why Cognitum wins
 
-So why do we win these accounts? Because a competitor imitates a single atom, and we ship the whole system. Against a frontier cloud AI platform, we offer a local, offline path with full data control. Against a vector database, adaptive memory plus real deployment. Against an IoT sensor, context and reasoning and workflow. Against an agent framework, a supported, hardware-aware product. And against the customer's existing systems, we augment them instead of ripping them out. The moat is the whole commercial system — the atoms, the proven bonds and molecules, the validation data, the adapters, the hardware, and the matter that binds it all together.
+So why do we win these accounts? Because a competitor imitates a single atom, and we ship the whole system. Against a frontier cloud AI platform, we offer a local, offline path on our own RVM bare-metal runtime, with full data control. Against a vector database, adaptive memory plus real deployment. Against an IoT sensor, context and reasoning and workflow. Against an agent framework, a supported, hardware-aware product. And against the customer's existing systems, we augment them instead of ripping them out. The moat is the whole commercial system — the atoms, the proven bonds and molecules, the validation data, the adapters, the hardware, and the matter that binds it all together.
 
 ## Slide 30 — The objections you'll hear
 
@@ -131,3 +133,61 @@ Six moves to carry into every conversation. One — lead with the outcome, never
 ## Slide 32 — Close
 
 So here's what I want you to walk out with. Pick the molecule. Name the account. Bond the atoms into one molecule, land it with the company where the economics are clearest — one KPI — and then bond adjacent molecules until the deployment becomes the customer's real-world matter. And remember the ground rule: every company we named today is a high-fit target-account hypothesis, not a customer. Thank you.
+
+---
+
+# Part B — Talk tracks for client conversations
+
+These are for the room *after* this one — how you talk to an end-user enterprise. Read them verbatim or adapt them; pick the ones that fit the buyer in front of you. Everything here is client-facing, plain-language, and outcome-first.
+
+## Framing the whole model (any executive)
+
+"Think of it like chemistry. We have a set of building-block products — we call them atoms. On their own they don't do much. The value is in how we bond them together into a molecule — a complete solution to one specific problem you have. And when several of those molecules run together across your operation, they become what we call matter: your business, running on intelligence it owns. So I'm not here to sell you a tool. I'm here to sell you the molecule that solves the problem you're about to describe — and a path to grow it from there."
+
+## Opening — lead with the outcome (discovery)
+
+"Before I show you anything, tell me where it hurts. What's the thing your team does today that's slow, manual, or risky? … Okay — that's a solved problem for us. Let me show you exactly which pieces we'd bond together to fix it, and where we'd prove it first."
+
+## SpatialOps (facilities / real-estate leader)
+
+"Right now your buildings run on a schedule — you heat, cool, light, and clean space whether anyone's in it or not. We make the building react to how it's actually used. Your facilities team stops managing timers and starts managing outcomes; the manual rounds and scheduling get automated; and you see it in energy and space utilization within a quarter, on a single building."
+
+## Ambient Care (health-system leader)
+
+"This gives your care teams an earlier, quieter signal — without a camera in the room. It does not diagnose anything, and it does not replace your clinicians' judgment. It simply helps the right nurse reach the right room sooner and cuts the alarm noise. We'd prove it on one unit first."
+
+## Industrial Guardian (plant / reliability leader)
+
+"Your equipment fails, and your team spends hours working out why. We turn each anomaly into an explanation your technician can act on — the likely cause and the exact procedure, with the evidence attached. It augments your technicians; it doesn't touch your controls. Everything stays read-only, behind your existing safety systems, until you decide otherwise."
+
+## FlowSafe (logistics / operations leader)
+
+"At peak, your floor is chaos — congestion, near-misses, missed docks. We coordinate people, robots, and orders in real time and flag the exceptions before they stall the floor. It gives your supervisors a live picture and automates the manual traffic control. One site, one number — throughput or dwell — then we replicate it."
+
+## Sovereign Knowledge Ops (regulated / IT leader)
+
+"Your experts' knowledge is trapped in documents and people's heads, and a generic chatbot is a non-starter for you on control and compliance. We give your people governed, cited answers over your own sensitive knowledge — every claim traceable to a permitted source, nothing leaving your control. It augments your experts and automates hours of manual research."
+
+## Autonomous Security Remediation (CISO / security leader)
+
+"A security event today takes hours to contain by hand. We contain it in seconds — but under your policy, with approved tools only, human escalation on anything uncertain, and a clean, evidenced rollback. It automates the tier-one work that's burning out your SOC and augments your analysts on everything above that. It is never unrestricted automation."
+
+## OEM Edge Brain (product / hardware leader)
+
+"Your hardware ships once and never gets smarter. We embed our whole stack right in your silicon, so your product ships intelligent and improves over the air — new capability, and recurring fleet revenue, on hardware you already make. And it runs on our own bare-metal runtime, so it fits on the smallest devices you build."
+
+## The trust & runtime story — RVM and RVF (CISO / CIO)
+
+"Two things usually decide it for security and IT. First, everything runs on RVM, our own secure runtime — no shared hypervisor, capability-based isolation between agents, and a witnessed record of every privileged action, small enough to run on a sixty-four-kilobyte device. Second, RVF signs and verifies every model, config, and action, so you get tamper-evident evidence and full lineage for audit. Local by default, governed, and provable — that's the part a cloud assistant can't give you."
+
+## The "are you replacing my people?" question
+
+"Honest answer: some of both, and we're specific about which. We automate the repetitive, manual work — the tier-one triage, the traffic control, the hours of document search — so your people stop doing it. And we augment the skilled work — the technician, the nurse, the analyst — by putting the right context and the next action in front of them. Wherever judgment or safety matters, a human stays in the loop by design."
+
+## The moat (skeptical / technical buyer)
+
+"Anyone can copy one piece — a model wrapper, a vector store, a sensor. What they can't copy is the system: proprietary atoms, the architecture that bonds them, the validation data behind them, the industry adapters, the runtime and the hardware, and the way molecules combine into your enterprise matter. That's years of work, not a weekend project."
+
+## Closing / the next step
+
+"Here's what I'd propose. Pick one molecule and one number you care about. We land it on a single site, and we prove that number with verified evidence — not a demo — in about a quarter. If it works, we bond the next molecule onto the same foundation, and it gets cheaper every time. So — of the problems we talked about, which one should we prove first?"
