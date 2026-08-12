@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Enterprise Matter — how Cognitum commercial atoms bond into solution molecules and which real target accounts buy each. Every named company is a high-fit target-account hypothesis, not a customer.">
+<meta name="description" content="Cognitum Enterprise Matter — the atom→bond→molecule→matter ladder: named Cognitum projects bond into solution molecules, and matter is the real-world implementation at named target accounts. Every named company is a high-fit target-account hypothesis, not a customer.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Enterprise Matter</title>
 <style>
@@ -295,6 +295,16 @@
   .slide.active .v-cut { animation: emcut 3s ease-in-out infinite; }
   @keyframes emflash { 0%,70%,100%{opacity:0} 82%{opacity:1} }
   .slide.active .v-flash { animation: emflash 3s ease-in-out infinite; }
+  /* atom-composition line under each molecule kicker */
+  .molatoms { font-family: var(--font-mono); font-size: 0.73rem; color: var(--muted); margin: 0.2rem 0 0.05rem; letter-spacing: 0.01em; }
+  .molatoms .lbl { color: var(--faint); text-transform: uppercase; font-size: 0.58rem; letter-spacing: 0.11em; margin-right: 0.5rem; }
+  .molatoms b { color: var(--jade); font-weight: 600; } .molatoms b.i { color: var(--indigo); } .molatoms .mo { color: var(--faint); }
+  /* the model · ladder rungs */
+  .card .rsvg { width: 100%; height: 44px; margin-bottom: 0.35rem; display: block; }
+  .rung-n { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--faint); }
+  .mono2 { font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0; }
+  .tbl td .mono2, .tbl td.mono2 { color: var(--muted); }
+  .hl { color: var(--indigo); font-weight: 600; }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -365,11 +375,11 @@
             </svg>
             Cognitum <small>Enterprise Matter · target accounts</small>
           </div>
-          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Atoms → bonds → molecules → real accounts</span>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Atoms → bonds → molecules → matter</span>
           <h1 class="rise" style="animation-delay:.1s; max-width:none">The molecules,<br><span class="g">and who buys them.</span></h1>
-          <p class="title-sub rise" style="animation-delay:.18s">Cognitum bonds commercial atoms into solution <strong>molecules</strong> that solve a specific business problem — then lands them with the <strong>real companies</strong> for whom the economics are clearest.</p>
+          <p class="title-sub rise" style="animation-delay:.18s">Cognitum bonds named commercial <strong>atoms</strong> into solution <strong>molecules</strong> that solve one business problem — and deployed together at a real company, molecules become <strong>matter</strong>: the customer's running enterprise.</p>
           <div class="chips rise" style="animation-delay:.26s">
-            <span class="chip"><b>8 atoms</b></span><span class="chip"><b>7 molecules</b></span><span class="chip"><b>named target accounts</b></span>
+            <span class="chip"><b>8 atoms</b></span><span class="chip"><b>7 molecules</b></span><span class="chip"><b>matter at real accounts</b></span>
           </div>
         </div>
         <div class="heroviz">
@@ -414,7 +424,78 @@
       </div>
     </section>
 
-    <!-- 2 · HOW TO READ + ACCOUNT RULE -->
+    <!-- 2 · THE MODEL · LADDER -->
+    <section class="slide" data-part="Overview">
+      <div class="inner">
+        <p class="kick"><span class="n">The model</span> One consistent ladder — atoms bond into molecules, molecules become matter</p>
+        <div class="grid g4" style="gap:0.55rem; margin-top:0.2rem">
+          <div class="card j">
+            <svg class="rsvg" viewBox="0 0 120 44" aria-hidden="true">
+              <circle cx="60" cy="22" r="11" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/>
+              <circle cx="60" cy="22" r="3.5" fill="var(--jade)"/>
+              <ellipse cx="60" cy="22" rx="26" ry="11" fill="none" stroke="var(--jade)" stroke-width="1" opacity="0.5"/>
+              <circle r="3" fill="var(--jade)" style="offset-path:path('M60 22 m -26 0 a 26 11 0 1 0 52 0 a 26 11 0 1 0 -52 0');animation:vtravel 3s linear infinite"/>
+            </svg>
+            <div class="rung-n">rung 1</div><div class="ct">Atom</div>
+            <div class="cd">A named Cognitum / ruvnet product — the raw element: <b>RuView, RuVector, RuFlo, RuLLM, MetaLLM, RVF, COGs, MetaHarness.</b></div>
+          </div>
+          <div class="card i">
+            <svg class="rsvg" viewBox="0 0 120 44" aria-hidden="true">
+              <line class="v-draw" x1="44" y1="22" x2="76" y2="22" stroke="var(--indigo)" stroke-width="2"/>
+              <circle cx="44" cy="22" r="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+              <circle cx="76" cy="22" r="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            </svg>
+            <div class="rung-n">rung 2</div><div class="ct">Bond</div>
+            <div class="cd">The architecture that joins atoms — <b class="i">interface, event, data, workflow, policy, trust, network, ops.</b> Arrangement is the solution.</div>
+          </div>
+          <div class="card j">
+            <svg class="rsvg" viewBox="0 0 120 44" aria-hidden="true">
+              <g stroke="var(--jade)" stroke-width="1.8"><line class="v-draw" x1="60" y1="14" x2="44" y2="32"/><line class="v-draw" x1="60" y1="14" x2="76" y2="32"/><line class="v-draw" x1="44" y1="32" x2="76" y2="32"/></g>
+              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" cx="60" cy="14" r="8"/><circle class="v-pop" cx="44" cy="32" r="8"/><circle class="v-pop" cx="76" cy="32" r="8"/></g>
+            </svg>
+            <div class="rung-n">rung 3</div><div class="ct">Molecule</div>
+            <div class="cd">Atoms bonded into a <b>complete solution to one business problem</b> — SpatialOps, Ambient Care, FlowSafe, and four more.</div>
+          </div>
+          <div class="card i">
+            <svg class="rsvg" viewBox="0 0 120 44" aria-hidden="true">
+              <g stroke="var(--jade)" stroke-width="1.2" opacity="0.85">
+                <g transform="translate(-2,-2)"><line x1="24" y1="16" x2="16" y2="28"/><line x1="24" y1="16" x2="32" y2="28"/><line x1="16" y1="28" x2="32" y2="28"/></g>
+                <g transform="translate(30,4)"><line x1="24" y1="16" x2="16" y2="28"/><line x1="24" y1="16" x2="32" y2="28"/><line x1="16" y1="28" x2="32" y2="28"/></g>
+                <g transform="translate(62,-4)"><line x1="24" y1="16" x2="16" y2="28"/><line x1="24" y1="16" x2="32" y2="28"/><line x1="16" y1="28" x2="32" y2="28"/></g>
+              </g>
+              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"><circle class="v-pop" cx="22" cy="14" r="5"/><circle class="v-pop" cx="14" cy="26" r="5"/><circle class="v-pop" cx="30" cy="26" r="5"/><circle class="v-pop" cx="54" cy="20" r="5"/><circle class="v-pop" cx="46" cy="32" r="5"/><circle class="v-pop" cx="62" cy="32" r="5"/><circle class="v-pop" cx="86" cy="12" r="5"/><circle class="v-pop" cx="78" cy="24" r="5"/><circle class="v-pop" cx="94" cy="24" r="5"/></g>
+              <circle class="v-pulse" cx="108" cy="22" r="4" fill="var(--indigo)"/>
+            </svg>
+            <div class="rung-n">rung 4</div><div class="ct">Matter</div>
+            <div class="cd">Molecules <b class="i">deployed and operating together in the real world</b> — the customer's running enterprise. This is the real-world implementation.</div>
+          </div>
+        </div>
+        <div class="di plain" style="margin-top:0.5rem">
+          <svg viewBox="0 0 1000 64" role="img" aria-label="A progression from a single atom, to a bond, to a molecule, to real-world matter">
+            <defs><marker id="arM2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <!-- atom -->
+            <circle cx="60" cy="26" r="11" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><circle cx="60" cy="26" r="3.5" fill="var(--jade)"/>
+            <text x="60" y="56" text-anchor="middle" class="slbl slbl-f">atom · a product</text>
+            <line x1="110" y1="26" x2="215" y2="26" stroke="var(--faint)" stroke-width="1.3" marker-end="url(#arM2)"/>
+            <!-- bond -->
+            <line x1="250" y1="26" x2="290" y2="26" stroke="var(--indigo)" stroke-width="2"/><circle cx="250" cy="26" r="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><circle cx="290" cy="26" r="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="270" y="56" text-anchor="middle" class="slbl slbl-f">bond · architecture</text>
+            <line x1="320" y1="26" x2="470" y2="26" stroke="var(--faint)" stroke-width="1.3" marker-end="url(#arM2)"/>
+            <!-- molecule -->
+            <g stroke="var(--jade)" stroke-width="1.8"><line x1="530" y1="12" x2="512" y2="34"/><line x1="530" y1="12" x2="548" y2="34"/><line x1="512" y1="34" x2="548" y2="34"/></g>
+            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle cx="530" cy="12" r="8"/><circle cx="512" cy="34" r="8"/><circle cx="548" cy="34" r="8"/></g>
+            <text x="530" y="56" text-anchor="middle" class="slbl sok">molecule · a solution</text>
+            <line x1="580" y1="26" x2="700" y2="26" stroke="var(--faint)" stroke-width="1.3" marker-end="url(#arM2)"/>
+            <!-- matter -->
+            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.4"><circle cx="770" cy="14" r="5"/><circle cx="758" cy="26" r="5"/><circle cx="782" cy="26" r="5"/><circle cx="812" cy="20" r="5"/><circle cx="800" cy="32" r="5"/><circle cx="824" cy="32" r="5"/><circle cx="852" cy="14" r="5"/><circle cx="844" cy="26" r="5"/><circle cx="860" cy="26" r="5"/></g>
+            <circle r="3.5" fill="var(--indigo)" class="v-t" style="offset-path:path('M745 40 L875 40');animation-duration:3s"/>
+            <text x="810" y="56" text-anchor="middle" class="slbl sind">matter · real-world implementation</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · HOW TO READ + ACCOUNT RULE -->
     <section class="slide" data-part="Overview">
       <div class="inner">
         <p class="kick"><span class="n">How to read this deck</span> Positioning for the consultant</p>
@@ -572,20 +653,20 @@
     <!-- 6 · SEVEN MOLECULES → WHO BUYS -->
     <section class="slide" data-part="Overview">
       <div class="inner">
-        <p class="kick"><span class="n">Seven molecules → who buys them</span></p>
+        <p class="kick"><span class="n">Seven molecules · composition → who buys</span> Every molecule shares one spine; the distinguishing atom is emphasized</p>
         <table class="tbl tiny">
-          <thead><tr><th>Molecule</th><th>Business problem solved</th><th>Primary client routes</th></tr></thead>
+          <thead><tr><th>Molecule</th><th>Cognitum atoms (the bonded projects)</th><th>Solves</th><th>Primary buyers</th></tr></thead>
           <tbody>
-            <tr><td class="j">SpatialOps</td><td>Buildings react to actual use, not schedules</td><td>Building OEMs · property operators · portfolios</td></tr>
-            <tr><td class="j">Ambient Care</td><td>Timely, privacy-sensitive care signals</td><td>Medtech OEMs · health systems · senior living</td></tr>
-            <tr><td class="j">Industrial Guardian</td><td>Anomalies → evidence-grounded maintenance</td><td>Industrial OEMs · manufacturers · multi-plant</td></tr>
-            <tr><td class="j">FlowSafe</td><td>Warehouses coordinate people, robots, orders</td><td>Automation vendors · logistics/retail · 3PLs</td></tr>
-            <tr><td class="j">Sovereign Knowledge Ops</td><td>Sensitive knowledge → governed decisions</td><td>Regulated enterprises · pro services</td></tr>
-            <tr><td class="j">Autonomous Security Remediation</td><td>Threats contained under policy</td><td>Infrastructure · manufacturers · security OEMs</td></tr>
-            <tr><td class="j">OEM Edge Brain</td><td>Hardware → upgradeable intelligent product</td><td>Semiconductor · networking · device makers</td></tr>
+            <tr><td class="j">SpatialOps</td><td class="mono2">RuView · RuVector · RuLLM · RuFlo · RVF · COGs</td><td>Buildings react to real use</td><td>Building OEMs · operators</td></tr>
+            <tr><td class="j">Ambient Care</td><td class="mono2">RuView · RuVector · RuLLM · RuFlo · RVF · COGs</td><td>Privacy-sensitive care signals</td><td>Medtech · health · senior living</td></tr>
+            <tr><td class="j">Industrial Guardian</td><td class="mono2">RuView · RuVector · RuLLM · COGs · RuFlo · RVF</td><td>Anomalies → grounded action</td><td>Industrial OEMs · manufacturers</td></tr>
+            <tr><td class="j">FlowSafe</td><td class="mono2">RuView · RuVector · RuLLM · COGs · RuFlo · RVF</td><td>People + robots + orders</td><td>Automation vendors · 3PLs</td></tr>
+            <tr><td class="j">Sovereign Knowledge Ops</td><td class="mono2">RuVector · <span class="hl">MetaLLM</span> · RuLLM · RuFlo · RVF</td><td>Knowledge → governed decisions</td><td>Regulated enterprises · pro svcs</td></tr>
+            <tr><td class="j">Autonomous Security Remediation</td><td class="mono2">RuView · RuVector · RuLLM · COGs · RuFlo · RVF</td><td>Threats contained under policy</td><td>Infrastructure · security OEMs</td></tr>
+            <tr><td class="j">OEM Edge Brain</td><td class="mono2"><span class="hl">MetaHarness</span> · RuView · RuVector · RuLLM · RuFlo · RVF</td><td>Hardware → upgradeable product</td><td>Semiconductor · networking · devices</td></tr>
           </tbody>
         </table>
-        <p class="hyp" style="text-align:center; margin-top:0.55rem">Every named company on the following slides is a high-fit target-account hypothesis — not a customer, partner, or active opportunity.</p>
+        <p class="hyp" style="text-align:center; margin-top:0.5rem">Shared spine: sense <b class="mono2" style="color:var(--jade)">RuView</b> → remember <b class="mono2" style="color:var(--jade)">RuVector</b> → reason <b class="mono2" style="color:var(--jade)">RuLLM/MetaLLM</b> → act <b class="mono2" style="color:var(--jade)">RuFlo</b> → verify <b class="mono2" style="color:var(--jade)">RVF</b>. Every named company is a target-account hypothesis, not a customer.</p>
       </div>
     </section>
 
@@ -593,6 +674,7 @@
     <section class="slide" data-part="SpatialOps">
       <div class="inner">
         <p class="kick"><span class="n">SpatialOps</span> Buildings react to actual use, not schedules</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuView</b> · <b>RuVector</b> · <b>RuLLM</b> · <b>RuFlo</b> · <b>RVF</b> · <b>COGs</b> <span class="mo">(BMS/gateway adapters)</span></p>
         <div class="di scene">
           <span class="cap">Occupied zones drive the systems · empty zones set back</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A building floor-plan where occupied rooms glow and drive HVAC, lighting and cleaning while empty rooms set back">
@@ -638,6 +720,7 @@
     <section class="slide" data-part="Ambient Care">
       <div class="inner">
         <p class="kick"><span class="n">Ambient Care</span> Non-visual, privacy-sensitive care-workflow signals</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuView</b> <span class="mo">(RF/non-visual)</span> · <b>RuVector</b> · <b>RuLLM</b> · <b>RuFlo</b> · <b>RVF</b> · <b>COGs</b> <span class="mo">(care/EHR adapters)</span></p>
         <div class="di scene">
           <span class="cap">Camera-free RF sensing · baseline → deviation → governed escalation</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A camera-free radio sensor over a bed detects a deviation from baseline and escalates to a nurse station">
@@ -684,6 +767,7 @@
     <section class="slide" data-part="Industrial Guardian">
       <div class="inner">
         <p class="kick"><span class="n">Industrial Guardian</span> Equipment anomalies → evidence-grounded maintenance action</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuView</b> <span class="mo">(telemetry)</span> · <b>RuVector</b> · <b>RuLLM</b> · <b>COGs</b> <span class="mo">(manuals/CMMS)</span> · <b>RuFlo</b> · <b>RVF</b></p>
         <div class="di scene">
           <span class="cap">Vibration trace · anomaly spike → evidence-grounded work order</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A rotating motor feeds a vibration oscilloscope where an anomaly spike triggers an evidence-grounded work order">
@@ -730,6 +814,7 @@
     <section class="slide" data-part="FlowSafe">
       <div class="inner">
         <p class="kick"><span class="n">FlowSafe</span> Warehouses coordinate people, robots, space, orders &amp; exceptions</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuView</b> · <b>RuVector</b> <span class="mo">(WMS/WES)</span> · <b>RuLLM</b> · <b>COGs</b> · <b>RuFlo</b> · <b>RVF</b></p>
         <div class="di scene">
           <span class="cap">Top-down flow · congestion hotspot → reroute &amp; dock scheduling</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A top-down warehouse where an AGV and a worker move along aisles, a congestion hotspot flags, and flow reroutes to the docks">
@@ -776,6 +861,7 @@
     <section class="slide" data-part="Knowledge Ops">
       <div class="inner">
         <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Sensitive knowledge → governed decisions (not a chatbot)</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuVector</b> · <b class="i">MetaLLM</b> <span class="mo">(governed routing)</span> · <b>RuLLM</b> · <b>RuFlo</b> · <b>RVF</b> · <b>COGs</b></p>
         <div class="di scene">
           <span class="cap">Permissioned sources → policy gate → cited, verified decision</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="Permissioned documents pass a policy gate that denies unauthorized ones, producing a cited and verified decision">
@@ -824,6 +910,7 @@
     <section class="slide" data-part="Security">
       <div class="inner">
         <p class="kick"><span class="n">Autonomous Security Remediation</span> Threats detected, contextualized &amp; contained under policy</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b>RuView</b> <span class="mo">(+ identity)</span> · <b>RuVector</b> · <b>RuLLM</b> · <b>COGs</b> · <b>RuFlo</b> <span class="mo">(policy-bounded)</span> · <b>RVF</b></p>
         <div class="di scene">
           <span class="cap">Threat on the graph → quarantine → policy-approved action → verified rollback</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A threatened node on a network graph is quarantined, the containment passes a policy gate, and a verified rollback restores service">
@@ -871,6 +958,7 @@
     <section class="slide" data-part="OEM Edge Brain">
       <div class="inner">
         <p class="kick"><span class="n">OEM Edge Brain</span> Hardware → an upgradeable intelligent product &amp; fleet</p>
+        <p class="molatoms"><span class="lbl">Atoms bonded</span> <b class="i">MetaHarness</b> <span class="mo">(embeds the stack)</span> · <b>RuView</b> · <b>RuVector</b> · <b>RuLLM</b> · <b>RuFlo</b> · <b>RVF</b></p>
         <div class="di scene">
           <span class="cap">The stack embedded in silicon → signed updates fan out to the whole fleet</span>
           <svg viewBox="0 0 1000 104" role="img" aria-label="A chip die with the embedded stack fans signed updates out to a fleet of devices">
@@ -957,9 +1045,10 @@
     </section>
 
     <!-- 16 · MATTER · LOGISTICS -->
-    <section class="slide" data-part="Enterprise matter">
+    <section class="slide" data-part="Matter · real-world">
       <div class="inner">
-        <p class="kick"><span class="n">Enterprise matter · intelligent logistics</span> Molecules bond along one supply artery</p>
+        <p class="kick"><span class="n">Matter · real-world implementation</span> Intelligent logistics — molecules deployed &amp; operating together at one live enterprise</p>
+        <p class="molatoms"><span class="lbl">Matter =</span> the molecules from the earlier slides, running together in production on shared identity · data · policy · events · workflow</p>
         <div class="split vr top">
           <div class="di">
             <span class="cap">A routed network on a shared identity · data · policy spine</span>
@@ -1002,9 +1091,10 @@
     </section>
 
     <!-- 17 · MATTER · MANUFACTURER -->
-    <section class="slide" data-part="Enterprise matter">
+    <section class="slide" data-part="Matter · real-world">
       <div class="inner">
-        <p class="kick"><span class="n">Enterprise matter · self-improving manufacturer</span> A production line that learns from its own evidence</p>
+        <p class="kick"><span class="n">Matter · real-world implementation</span> Self-improving manufacturer — molecules running together, learning from their own evidence</p>
+        <p class="molatoms"><span class="lbl">Matter =</span> the same molecules, deployed in production on one plant floor — sharing an asset graph and improving the line</p>
         <div class="split vr top">
           <div class="di">
             <span class="cap">Stations feed a shared asset graph · evidence loops back to improve the line</span>
@@ -1089,9 +1179,9 @@
     <section class="slide" data-part="Close">
       <div class="glow-b"></div>
       <div class="inner" style="text-align:center; align-items:center; display:flex; flex-direction:column">
-        <span class="kicker"><span class="dot"></span>Cognitum Enterprise Matter · target accounts</span>
+        <span class="kicker"><span class="dot"></span>Atoms → bonds → molecules → matter</span>
         <h1 style="margin-inline:auto; max-width:none">Pick the molecule.<br><span class="g">Name the account.</span></h1>
-        <p class="title-sub" style="margin-inline:auto">Land with the company where the economics are clearest — one molecule, one KPI — then bond it to adjacent molecules until it becomes the customer's intelligent enterprise matter.</p>
+        <p class="title-sub" style="margin-inline:auto">Bond the <strong>atoms</strong> into one <strong>molecule</strong>, land it with the company where the economics are clearest — one KPI — then bond adjacent molecules until the deployment becomes the customer's real-world <strong>matter</strong>.</p>
         <p class="src" style="text-align:center; margin-top:1.2rem">Every named company is a high-fit target-account hypothesis — not a customer, partner, or active opportunity.</p>
       </div>
     </section>
