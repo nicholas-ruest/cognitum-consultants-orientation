@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Enterprise Matter — a 32-slide consultant deck on the atoms->bond->molecule->matter framework: ten ruvstack atoms (incl. RVM, the secure bare-metal agent runtime), the seven solution molecules and who buys them, how to hear and land the molecule, commercial models, objection handling, and a playbook. Every named company is a high-fit target-account hypothesis, not a customer.">
+<meta name="description" content="Cognitum Enterprise Matter — a 32-slide consultant deck on the atoms->bond->molecule->matter framework: ten ruvstack atoms (incl. RVM), the seven solution molecules and who buys them, each tagged with the five reasons companies buy (save time, make more income, reduce risk, cut expenses, increase status), plus discovery, landing, commercial models, objections, and a playbook. Every named company is a high-fit target-account hypothesis, not a customer.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Enterprise Matter</title>
 <style>
@@ -322,6 +322,10 @@
   .labor .lt.aug { color: var(--jade); border: 1px solid var(--jade-dim); }
   .labor .lt.auto { color: var(--amber); border: 1px solid var(--amber); }
   .labor b { color: var(--text); font-weight: 600; }
+  /* the five reasons companies buy — tagged on each use-case slide */
+  .buys { margin: 0.12rem 0 0.05rem; line-height: 1.6; }
+  .buys .bl { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); margin-right: 0.45rem; }
+  .buys .bp { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; color: var(--indigo); border: 1px solid var(--indigo-dim); border-radius: 999px; padding: 0.06rem 0.55rem; margin-right: 0.32rem; }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -787,6 +791,7 @@
         <p class="kick"><span class="n">SpatialOps</span> Buildings react to actual use, not schedules</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>right-sized HVAC, lighting &amp; cleaning</b> — lower energy and less wasted space, run on real occupancy.</p>
         <p class="labor"><span class="lt auto">Automates</span> manual scheduling &amp; rounds — <b>frees facilities staff</b> for higher-value work.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">cut expenses</span><span class="bp">save time</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>SpatialOps molecule</b> → the building acts on real use; across a portfolio it becomes the operator&#39;s <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A building floor-plan where occupied rooms glow and drive HVAC, lighting and cleaning while empty rooms set back">
@@ -858,6 +863,7 @@
         <p class="kick"><span class="n">Ambient Care</span> Non-visual, privacy-sensitive care-workflow signals</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>earlier, de-duplicated care signals &amp; faster response</b> — privacy-safe room context, no cameras.</p>
         <p class="labor"><span class="lt aug">Augments</span> <b>care staff</b> — non-diagnostic; it never replaces clinical judgment.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">reduce risk</span><span class="bp">save time</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Ambient Care molecule</b> → privacy-safe signals; across a health system it becomes care-delivery <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A camera-free radio sensor over a bed detects a deviation from baseline and escalates to a nurse station">
@@ -930,6 +936,7 @@
         <p class="kick"><span class="n">Industrial Guardian</span> Equipment anomalies → evidence-grounded maintenance action</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>fewer surprise breakdowns, faster repairs</b> — likely cause &amp; exact procedure, evidence-backed.</p>
         <p class="labor"><span class="lt aug">Augments</span> <b>technicians</b> · automates routine inspection &amp; triage.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">cut expenses</span><span class="bp">reduce risk</span><span class="bp">save time</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Industrial Guardian molecule</b> → grounded action; across plants it becomes reliability <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A rotating motor feeds a vibration oscilloscope where an anomaly spike triggers an evidence-grounded work order">
@@ -1006,6 +1013,7 @@
         <p class="kick"><span class="n">FlowSafe</span> Warehouses coordinate people, robots, space, orders &amp; exceptions</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>higher throughput, less congestion &amp; dock dwell</b> — people, robots &amp; orders coordinated safely.</p>
         <p class="labor"><span class="lt aug">Augments</span> supervisors · <span class="lt auto">Automates</span> manual traffic-control &amp; slotting.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">make more income</span><span class="bp">cut expenses</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>FlowSafe molecule</b> → coordinated flow; across a network it becomes logistics <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A top-down warehouse where an AGV and a worker move along aisles, a congestion hotspot flags, and flow reroutes to the docks">
@@ -1082,6 +1090,7 @@
         <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Sensitive knowledge → governed decisions (not a chatbot)</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>cited, trustworthy answers over sensitive knowledge</b> — governed decisions &amp; actions, not chat.</p>
         <p class="labor"><span class="lt aug">Augments</span> <b>experts &amp; analysts</b> · automates hours of manual research &amp; retrieval.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">save time</span><span class="bp">reduce risk</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Sovereign Knowledge Ops molecule</b> → governed decisions; across an enterprise, knowledge <b>matter</b></span>
           <svg viewBox="0 0 1000 170" role="img" aria-label="Permissioned documents pass a policy gate that denies unauthorized ones, producing a cited and verified decision">
@@ -1156,6 +1165,7 @@
         <p class="kick"><span class="n">Autonomous Security Remediation</span> Threats detected, contextualized &amp; contained under policy</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>threats contained in seconds, under policy</b> — human escalation on doubt, clean evidenced rollback.</p>
         <p class="labor"><span class="lt auto">Automates</span> tier-1 containment — work that took hours by hand · <span class="lt aug">Augments</span> the SOC, human escalation kept.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">reduce risk</span><span class="bp">save time</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Autonomous Security Remediation molecule</b> → contained threats; across sites, cyber-physical <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A threatened node on a network graph is quarantined, the containment passes a policy gate, and a verified rollback restores service">
@@ -1228,6 +1238,7 @@
       <div class="inner">
         <p class="kick"><span class="n">OEM Edge Brain</span> Hardware → an upgradeable intelligent product &amp; fleet</p>
         <p class="benefit"><span class="lbl">The OEM gets</span> <b>a differentiated, upgradeable product &amp; recurring fleet revenue</b> — intelligence shipped in the hardware.</p>
+        <p class="buys"><span class="bl">Buys on</span><span class="bp">make more income</span><span class="bp">increase status</span></p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>OEM Edge Brain molecule</b> → an intelligent product; across a fleet it becomes the product&#39;s <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A chip die with the embedded stack fans signed updates out to a fleet of devices">
@@ -1448,7 +1459,7 @@
           </svg>
         </div>
         <div class="grid g4" style="gap:0.5rem">
-          <div class="num-card"><div class="ni">1</div><div class="nt"><b>Pick the molecule.</b> From the condition, choose one molecule and one clear KPI.</div></div>
+          <div class="num-card"><div class="ni">1</div><div class="nt"><b>Pick the molecule &amp; the reason.</b> Choose one molecule and one KPI that moves the buyer&#39;s top reason to buy.</div></div>
           <div class="num-card"><div class="ni">2</div><div class="nt"><b>Land one site.</b> Prove that KPI on a single building, line or unit in a quarter.</div></div>
           <div class="num-card j"><div class="ni">3</div><div class="nt"><b>Show the evidence.</b> RVF-verified proof — a measured result, not a demo.</div></div>
           <div class="num-card j"><div class="ni">4</div><div class="nt"><b>Bond outward.</b> Add adjacent molecules on the same spine until it&#39;s matter.</div></div>
