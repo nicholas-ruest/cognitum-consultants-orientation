@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Enterprise Matter — nine named ruvstack atoms (RuView, RuVector, RuLake, RuvLLM, MetaLLM, RuFlo, RVF, COGs, MetaHarness) bond into solution molecules, each slide stating what the end-user company gets, on the atom→bond→molecule→matter ladder. Every named company is a high-fit target-account hypothesis, not a customer.">
+<meta name="description" content="Cognitum Enterprise Matter — the atoms→bond→molecule→matter framing baked into every slide, with the nine named ruvstack atoms (RuView, RuVector, RuLake, RuvLLM, MetaLLM, RuFlo, RVF, COGs, MetaHarness) tied to each solution. Every named company is a high-fit target-account hypothesis, not a customer.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Enterprise Matter</title>
 <style>
@@ -309,6 +309,13 @@
   .tbl td .mono2, .tbl td.mono2 { color: var(--muted); }
   .hl { color: var(--indigo); font-weight: 600; }
   .hl2 { color: var(--jade); font-weight: 600; }
+  /* atoms → bonds → molecules → matter stepper, on every content slide */
+  .chain { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); margin:0.1rem 0 0.35rem; }
+  .chain span { opacity:0.4; }
+  .chain span.on { opacity:1; color:var(--jade); font-weight:600; }
+  .chain span.oni { opacity:1; color:var(--indigo); font-weight:600; }
+  .chain i { font-style:normal; color:var(--border-2); }
+  .di .cap b { color: var(--jade); font-weight: 700; }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -506,7 +513,7 @@
         <div class="split v top">
           <div>
             <div class="bigquote i"><p>Lead with the business outcome. Name Cognitum capabilities only after the buyer recognizes the problem.</p></div>
-            <p class="mut" style="margin-top:0.8rem">Customers describe a <strong>business condition</strong>. We work backward: select the atoms, engineer the bonds, and sell the resulting <strong>molecule</strong> — to the company where the economics are clearest.</p>
+            <p class="mut" style="margin-top:0.8rem">Customers describe a <strong>business condition</strong>. We work backward: select the <strong>atoms</strong>, engineer the <strong>bonds</strong>, and sell the resulting <strong>molecule</strong> — and, deployed together at the account, molecules become the customer&#39;s real-world <strong>matter</strong>.</p>
             <div class="di plain" style="margin-top:0.9rem">
               <svg viewBox="0 0 520 96" role="img" aria-label="Start from the business outcome and work backward to the molecule, bonds and atoms">
                 <defs><marker id="arB3" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
@@ -711,7 +718,7 @@
         <p class="kick"><span class="n">SpatialOps</span> Buildings react to actual use, not schedules</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>right-sized HVAC, lighting &amp; cleaning</b> and real occupancy analytics — lower energy and less wasted space, because the building runs on how it's actually used.</p>
         <div class="di scene">
-          <span class="cap">Occupied zones drive the systems · empty zones set back</span>
+          <span class="cap">Atoms bonded into the <b>SpatialOps molecule</b> → the building acts on real use; across a portfolio it becomes the operator&#39;s <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A building floor-plan where occupied rooms glow and drive HVAC, lighting and cleaning while empty rooms set back">
             <defs><marker id="ar7" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <!-- building shell, 5 rooms -->
@@ -781,7 +788,7 @@
         <p class="kick"><span class="n">Ambient Care</span> Non-visual, privacy-sensitive care-workflow signals</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>earlier, de-duplicated care signals and faster staff response</b> — privacy-preserving room context with no cameras, so nurses reach the right room sooner.</p>
         <div class="di scene">
-          <span class="cap">Camera-free RF sensing · baseline → deviation → governed escalation</span>
+          <span class="cap">Atoms bonded into the <b>Ambient Care molecule</b> → privacy-safe signals; across a health system it becomes care-delivery <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A camera-free radio sensor over a bed detects a deviation from baseline and escalates to a nurse station">
             <defs><marker id="ar8" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--indigo)"/></marker></defs>
             <!-- bed -->
@@ -852,7 +859,7 @@
         <p class="kick"><span class="n">Industrial Guardian</span> Equipment anomalies → evidence-grounded maintenance action</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>fewer surprise breakdowns and faster repairs</b> — technicians get the likely cause and the exact procedure, every action backed by cited evidence.</p>
         <div class="di scene">
-          <span class="cap">Vibration trace · anomaly spike → evidence-grounded work order</span>
+          <span class="cap">Atoms bonded into the <b>Industrial Guardian molecule</b> → grounded action; across plants it becomes reliability <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A rotating motor feeds a vibration oscilloscope where an anomaly spike triggers an evidence-grounded work order">
             <defs><marker id="ar9" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <!-- motor -->
@@ -927,7 +934,7 @@
         <p class="kick"><span class="n">FlowSafe</span> Warehouses coordinate people, robots, space, orders &amp; exceptions</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>higher throughput with less congestion and dock dwell</b> — people, robots and orders coordinated safely, exceptions caught before they stall the floor.</p>
         <div class="di scene">
-          <span class="cap">Top-down flow · congestion hotspot → reroute &amp; dock scheduling</span>
+          <span class="cap">Atoms bonded into the <b>FlowSafe molecule</b> → coordinated flow; across a network it becomes logistics <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A top-down warehouse where an AGV and a worker move along aisles, a congestion hotspot flags, and flow reroutes to the docks">
             <defs><marker id="ar10" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <rect x="20" y="12" width="640" height="80" rx="5" fill="var(--surface)" stroke="var(--border-2)"/>
@@ -1002,7 +1009,7 @@
         <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Sensitive knowledge → governed decisions (not a chatbot)</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>trustworthy, cited answers over its own sensitive knowledge</b> — governed decisions and actions with every claim traceable to a permitted source.</p>
         <div class="di scene">
-          <span class="cap">Permissioned sources → policy gate → cited, verified decision</span>
+          <span class="cap">Atoms bonded into the <b>Sovereign Knowledge Ops molecule</b> → governed decisions; across an enterprise, knowledge <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="Permissioned documents pass a policy gate that denies unauthorized ones, producing a cited and verified decision">
             <defs><marker id="ar11" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <!-- sources -->
@@ -1075,7 +1082,7 @@
         <p class="kick"><span class="n">Autonomous Security Remediation</span> Threats detected, contextualized &amp; contained under policy</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>threats contained in seconds, under policy</b> — bounded automation with human escalation on doubt and clean, evidenced rollback, not unrestricted access.</p>
         <div class="di scene">
-          <span class="cap">Threat on the graph → quarantine → policy-approved action → verified rollback</span>
+          <span class="cap">Atoms bonded into the <b>Autonomous Security Remediation molecule</b> → contained threats; across sites, cyber-physical <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A threatened node on a network graph is quarantined, the containment passes a policy gate, and a verified rollback restores service">
             <defs><marker id="ar12" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <!-- graph edges -->
@@ -1147,7 +1154,7 @@
         <p class="kick"><span class="n">OEM Edge Brain</span> Hardware → an upgradeable intelligent product &amp; fleet</p>
         <p class="benefit"><span class="lbl">The OEM gets</span> <b>a differentiated, upgradeable product and recurring fleet revenue</b> — intelligence shipped in the hardware and improved over the air.</p>
         <div class="di scene">
-          <span class="cap">The stack embedded in silicon → signed updates fan out to the whole fleet</span>
+          <span class="cap">Atoms bonded into the <b>OEM Edge Brain molecule</b> → an intelligent product; across a fleet it becomes the product&#39;s <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A chip die with the embedded stack fans signed updates out to a fleet of devices">
             <defs><marker id="ar13" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
             <!-- chip die -->
@@ -1224,7 +1231,7 @@
     <!-- 14 · LARGE-ENTERPRISE PORTFOLIO -->
     <section class="slide" data-part="Portfolio">
       <div class="inner">
-        <p class="kick"><span class="n">Direct large-enterprise deployments</span> No hardware partnership required — the enterprise owns the outcome</p>
+        <p class="kick"><span class="n">Direct large-enterprise deployments</span> Molecules deploy direct — no hardware partner — and become the enterprise's real-world matter</p>
         <div class="di plain" style="margin:0.15rem 0 0.35rem">
           <svg viewBox="0 0 1000 66" role="img" aria-label="Solution molecules deploy directly into a large enterprise that owns the outcome">
             <defs><marker id="arP15" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
@@ -1235,7 +1242,7 @@
             <circle r="3.4" fill="var(--jade)" class="v-t" style="offset-path:path('M150 26 L296 26');animation-duration:3s"/>
             <path d="M330 44 L330 18 L390 6 L450 18 L450 44 Z" fill="var(--surface)" stroke="var(--indigo)" stroke-width="1.8"/>
             <g fill="var(--indigo-wash)" stroke="var(--indigo-dim)"><rect x="344" y="24" width="12" height="12"/><rect x="384" y="24" width="12" height="12"/><rect x="424" y="24" width="12" height="12"/></g>
-            <text x="390" y="62" text-anchor="middle" class="slbl sind">the enterprise owns the outcome</text>
+            <text x="390" y="62" text-anchor="middle" class="slbl sind">the enterprise's real-world matter</text>
             <line x1="466" y1="30" x2="560" y2="30" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#arP15)"/>
             <rect x="570" y="14" width="424" height="32" rx="8" fill="var(--surface)" stroke="var(--border-2)"/>
             <text x="588" y="30" class="slbl slbl-t" style="font-size:10px;font-weight:600">Land one measurable workflow</text><text x="588" y="41" class="slbl slbl-f">occupancy · reliability · congestion · response · policy — then expand</text>
@@ -1259,9 +1266,9 @@
     <!-- 15 · CLIENT-FIT MATRIX -->
     <section class="slide" data-part="Portfolio">
       <div class="inner">
-        <p class="kick"><span class="n">One molecule, three roles</span> Land with the clearest economic buyer, then bond to adjacent molecules</p>
+        <p class="kick"><span class="n">One molecule, three roles</span> Land the clearest economic buyer, then bond adjacent molecules into matter</p>
         <div class="di plain" style="margin:0.15rem 0 0.3rem">
-          <svg viewBox="0 0 1000 66" role="img" aria-label="One molecule sold three ways — to an OEM, a large enterprise, or a larger SMB">
+          <svg viewBox="0 0 1000 72" role="img" aria-label="One molecule sold three ways — to an OEM, a large enterprise, or a larger SMB">
             <defs><marker id="arC16" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
             <g stroke="var(--jade)" stroke-width="1.6" fill="none"><line class="v-draw" x1="30" y1="24" x2="14" y2="42"/><line class="v-draw" x1="30" y1="24" x2="46" y2="42"/><line class="v-draw" x1="14" y1="42" x2="46" y2="42"/></g>
             <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle cx="30" cy="24" r="8"/><circle cx="14" cy="42" r="8"/><circle cx="46" cy="42" r="8"/></g>
@@ -1272,9 +1279,10 @@
               <rect x="200" y="24" width="300" height="18" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="210" y="36" class="slbl-t" style="font-weight:600">Large enterprise</text><text x="492" y="36" text-anchor="end" class="slbl-f">portfolio system</text>
               <rect x="200" y="46" width="300" height="18" rx="5" fill="var(--surface)" stroke="var(--border-2)"/><text x="210" y="58" class="slbl-t" style="font-weight:600">Larger SMB</text><text x="492" y="58" text-anchor="end" class="slbl-f">preconfigured package</text>
             </g>
-            <text x="540" y="24" class="slbl slbl-m" style="font-size:11px">Same molecule, three economic buyers.</text>
-            <text x="540" y="42" class="slbl slbl-f">Land the clearest buyer first — one KPI —</text>
-            <text x="540" y="56" class="slbl slbl-f">then bond adjacent molecules into matter.</text>
+            <text x="540" y="22" class="slbl slbl-m" style="font-size:11px">Same molecule, three economic buyers.</text>
+            <text x="540" y="38" class="slbl slbl-f">The one <tspan class="sok">RuView · RuVector · RuvLLM · RuFlo · RVF</tspan> molecule,</text>
+            <text x="540" y="52" class="slbl slbl-f">landed at the clearest buyer first — one KPI —</text>
+            <text x="540" y="64" class="slbl slbl-f">then bonded into adjacent molecules &amp; matter.</text>
           </svg>
         </div>
         <table class="tbl tiny">
@@ -1296,7 +1304,7 @@
     <section class="slide" data-part="Matter · real-world">
       <div class="inner">
         <p class="kick"><span class="n">Matter · real-world implementation</span> Intelligent logistics — molecules deployed &amp; operating together at one live enterprise</p>
-        <p class="molatoms"><span class="lbl">Matter =</span> the molecules from the earlier slides, running together in production on shared identity · data · policy · events · workflow</p>
+        <p class="molatoms"><span class="lbl">Matter =</span> the earlier molecules running together — sharing <b>RuVector</b> memory, <b>RuLake</b> data, <b>RVF</b> trust &amp; <b>RuFlo</b> workflow across the enterprise</p>
         <div class="split vr top">
           <div class="di">
             <span class="cap">A routed network on a shared identity · data · policy spine</span>
@@ -1342,7 +1350,7 @@
     <section class="slide" data-part="Matter · real-world">
       <div class="inner">
         <p class="kick"><span class="n">Matter · real-world implementation</span> Self-improving manufacturer — molecules running together, learning from their own evidence</p>
-        <p class="molatoms"><span class="lbl">Matter =</span> the same molecules, deployed in production on one plant floor — sharing an asset graph and improving the line</p>
+        <p class="molatoms"><span class="lbl">Matter =</span> the same molecules on one plant floor — sharing a <b>RuVector</b> + <b>RuLake</b> asset graph, <b>RVF</b>-anchored, improved by <b class="i">MetaHarness</b></p>
         <div class="split vr top">
           <div class="di">
             <span class="cap">Stations feed a shared asset graph · evidence loops back to improve the line</span>
@@ -1361,10 +1369,11 @@
               <!-- shared asset graph -->
               <g stroke="var(--border)" stroke-width="1.1" stroke-dasharray="2 4"><line x1="220" y1="33" x2="300" y2="113"/><line x1="220" y1="73" x2="300" y2="113"/><line x1="220" y1="113" x2="300" y2="113"/><line x1="220" y1="153" x2="300" y2="113"/><line x1="220" y1="193" x2="300" y2="113"/></g>
               <circle class="v-pulse" cx="312" cy="113" r="22" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><text x="312" y="110" text-anchor="middle" class="slbl sind" style="font-size:8px">asset</text><text x="312" y="120" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">graph</text>
+              <text x="312" y="150" text-anchor="middle" class="slbl slbl-f" style="font-size:7px">RuVector · RuLake · RVF</text>
               <!-- self-improving feedback loop -->
-              <path d="M40 200 C10 200 10 26 40 26" fill="none" stroke="var(--jade)" stroke-width="1.8" stroke-dasharray="5 6" marker-end="url(#ar17j)"/>
-              <circle r="4" fill="var(--jade)" class="v-t" style="offset-path:path('M40 200 C10 200 10 26 40 26');animation-duration:4.5s"/>
-              <text x="20" y="116" text-anchor="middle" class="slbl sok" style="font-size:8px" transform="rotate(-90 20 116)">evidence improves the line</text>
+              <path d="M38 200 C10 200 10 26 38 26" fill="none" stroke="var(--jade)" stroke-width="1.8" stroke-dasharray="5 6" marker-end="url(#ar17j)"/>
+              <circle r="4" fill="var(--jade)" class="v-t" style="offset-path:path('M38 200 C10 200 10 26 38 26');animation-duration:4.5s"/>
+              <text x="55" y="116" text-anchor="middle" class="slbl sok" style="font-size:8px" transform="rotate(-90 55 116)">evidence improves the line</text>
               <text x="180" y="232" text-anchor="middle" class="slbl slbl-f">downtime &amp; scrap ↓ · root cause &amp; changeover faster</text>
             </svg>
           </div>
@@ -1396,7 +1405,7 @@
             <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle cx="330" cy="23" r="8"/><circle cx="360" cy="23" r="8"/></g>
             <text x="345" y="44" text-anchor="middle" class="slbl sok">bond</text>
             <rect x="386" y="8" width="300" height="30" rx="7" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"/>
-            <text x="400" y="22" class="slbl slbl-t" style="font-size:10px;font-weight:600">Cognitum molecule bonds in</text><text x="400" y="33" class="slbl slbl-f">the adjacent decision + action layer</text>
+            <text x="400" y="22" class="slbl slbl-t" style="font-size:10px;font-weight:600">a Cognitum molecule bonds in</text><text x="400" y="33" class="slbl slbl-f">RuView·RuVector·RuvLLM·RuFlo·RVF, bonded</text>
             <line x1="694" y1="23" x2="756" y2="23" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#arA19)"/>
             <rect x="766" y="8" width="228" height="30" rx="7" fill="var(--surface)" stroke="var(--border-2)"/>
             <text x="880" y="22" text-anchor="middle" class="slbl slbl-t" style="font-size:10px;font-weight:600">Credible fit</text><text x="880" y="33" text-anchor="middle" class="slbl swarn">hypothesis, not a customer</text>
@@ -1454,7 +1463,7 @@
             <tr><td>BMS/WMS/CMMS/EHR</td><td class="j">Augmenting decision layer across installed systems — not rip-and-replace</td></tr>
           </tbody>
         </table>
-        <div class="callout" style="margin-top:0.85rem"><div class="h">The moat</div><p>Competitors imitate an atom. Cognitum's advantage is the <strong>commercial system</strong> — proprietary atoms, proven molecular architectures, validation data, industry adapters, supported hardware, and the enterprise matter that binds molecules together.</p></div>
+        <div class="callout" style="margin-top:0.85rem"><div class="h">The moat</div><p>Competitors imitate a single <strong>atom</strong>. Cognitum's advantage is the whole system — proprietary <strong>atoms</strong> (RuView, RuVector, RuvLLM, RuFlo, RVF, RuLake…), the proven <strong>bonds</strong> and <strong>molecular</strong> architectures, validation data, industry adapters, supported hardware, and the enterprise <strong>matter</strong> that binds molecules together.</p></div>
       </div>
     </section>
 
