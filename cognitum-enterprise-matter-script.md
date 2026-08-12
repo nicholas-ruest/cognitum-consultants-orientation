@@ -10,7 +10,7 @@ Good morning. Over the next forty minutes I want to give you one clean way to ta
 
 ## Slide 2 — Agenda
 
-Here's where the next forty minutes go. First, the chemistry — the atoms, the bonds, the molecules, and matter; that's the vocabulary for everything else. Then the heart of it: the seven molecules, what each one solves, and who buys it. After that, how you actually find the right molecule and land it. Then how molecules come together as matter. And we'll finish with how you win the account, plus a short playbook you can carry into every conversation. One shape to hold onto the whole way through: atoms bond into molecules, and molecules deployed together become the customer's matter.
+Here's what we'll cover. First, the chemistry — the atoms, the bonds, the molecules, and matter; that's the vocabulary for everything else. Then the heart of it: the seven molecules, what each one solves, and who buys it. After that, how you actually find the right molecule and land it. Then how molecules come together as matter. And we'll finish with how you win the account, plus a short playbook you can carry into every conversation. One shape to hold onto the whole way through: atoms bond into molecules, and molecules deployed together become the customer's matter.
 
 ## Slide 3 — The model
 

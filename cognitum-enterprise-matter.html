@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Cognitum Enterprise Matter — a 32-slide (~40 min) consultant deck on the atoms→bond→molecule→matter framework: the nine ruvstack atoms, the seven solution molecules and who buys them, how to hear and land the molecule, commercial models, objection handling, and a playbook. Every named company is a high-fit target-account hypothesis, not a customer.">
+<meta name="description" content="Cognitum Enterprise Matter — a 32-slide consultant deck on the atoms->bond->molecule->matter framework: the nine ruvstack atoms, the seven solution molecules and who buys them (positioned as human-labor augmentation and automation), how to hear and land the molecule, commercial models, objection handling, and a playbook. Every named company is a high-fit target-account hypothesis, not a customer.">
 <meta name="color-scheme" content="dark light">
 <title>Cognitum Enterprise Matter</title>
 <style>
@@ -316,6 +316,12 @@
   .chain span.oni { opacity:1; color:var(--indigo); font-weight:600; }
   .chain i { font-style:normal; color:var(--border-2); }
   .di .cap b { color: var(--jade); font-weight: 700; }
+  /* human-labor positioning tag on use-case slides */
+  .labor { font-size: 0.8rem; color: var(--muted); margin: 0.15rem 0 0.05rem; line-height: 1.3; }
+  .labor .lt { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.1rem 0.42rem; border-radius: 5px; font-weight: 600; white-space: nowrap; margin-right: 0.35rem; }
+  .labor .lt.aug { color: var(--jade); border: 1px solid var(--jade-dim); }
+  .labor .lt.auto { color: var(--amber); border: 1px solid var(--amber); }
+  .labor b { color: var(--text); font-weight: 600; }
 
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
@@ -438,13 +444,13 @@
     <!-- AGENDA -->
     <section class="slide" data-part="Overview">
       <div class="inner">
-        <p class="kick"><span class="n">Agenda</span> Where the next forty minutes go</p>
+        <p class="kick"><span class="n">Agenda</span> What we&#39;ll cover</p>
         <div class="agenda">
-          <div class="arow"><span class="an">01</span><span class="at">The chemistry — atoms, bonds, molecules, matter</span><span class="am">~7 min</span></div>
-          <div class="arow"><span class="an">02</span><span class="at">The seven molecules — what each solves &amp; who buys it</span><span class="am">~13 min</span></div>
-          <div class="arow"><span class="an">03</span><span class="at">Finding &amp; landing the molecule</span><span class="am">~8 min</span></div>
-          <div class="arow"><span class="an">04</span><span class="at">Molecules become matter</span><span class="am">~5 min</span></div>
-          <div class="arow"><span class="an">05</span><span class="at">Winning the account &amp; the playbook</span><span class="am">~7 min</span></div>
+          <div class="arow"><span class="an">01</span><span class="at">The chemistry — atoms, bonds, molecules, matter</span></div>
+          <div class="arow"><span class="an">02</span><span class="at">The seven molecules — what each solves &amp; who buys it</span></div>
+          <div class="arow"><span class="an">03</span><span class="at">Finding &amp; landing the molecule</span></div>
+          <div class="arow"><span class="an">04</span><span class="at">Molecules become matter</span></div>
+          <div class="arow"><span class="an">05</span><span class="at">Winning the account &amp; the playbook</span></div>
         </div>
         <div class="callout i" style="margin-top:1rem"><div class="h">One shape to hold onto</div><p>Everything ladders up the same way — <strong>atoms</strong> bond into <strong>molecules</strong>, and molecules deployed together become the customer&#39;s <strong>matter</strong>. Keep that shape in mind and every slide slots into it.</p></div>
       </div>
@@ -557,7 +563,7 @@
         <div class="dtext">
           <div class="pnum rise">PART 01</div>
           <h2 class="rise" style="animation-delay:.06s">The chemistry</h2>
-          <p class="sub rise" style="animation-delay:.12s">Nine atoms, the bonds that join them, and the anatomy every molecule shares.</p>
+          <p class="sub rise" style="animation-delay:.12s">The same nine atoms, recombined by different bonds into every molecule — and the one anatomy they all share.</p>
           <div class="rule"></div>
           <div class="dchips"><span>the atoms</span><span>the bonds</span><span>the molecule</span></div>
         </div>
@@ -779,6 +785,7 @@
       <div class="inner">
         <p class="kick"><span class="n">SpatialOps</span> Buildings react to actual use, not schedules</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>right-sized HVAC, lighting &amp; cleaning</b> — lower energy and less wasted space, run on real occupancy.</p>
+        <p class="labor"><span class="lt auto">Automates</span> manual scheduling &amp; rounds — <b>frees facilities staff</b> for higher-value work.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>SpatialOps molecule</b> → the building acts on real use; across a portfolio it becomes the operator&#39;s <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A building floor-plan where occupied rooms glow and drive HVAC, lighting and cleaning while empty rooms set back">
@@ -849,6 +856,7 @@
       <div class="inner">
         <p class="kick"><span class="n">Ambient Care</span> Non-visual, privacy-sensitive care-workflow signals</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>earlier, de-duplicated care signals &amp; faster response</b> — privacy-safe room context, no cameras.</p>
+        <p class="labor"><span class="lt aug">Augments</span> <b>care staff</b> — non-diagnostic; it never replaces clinical judgment.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Ambient Care molecule</b> → privacy-safe signals; across a health system it becomes care-delivery <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A camera-free radio sensor over a bed detects a deviation from baseline and escalates to a nurse station">
@@ -920,6 +928,7 @@
       <div class="inner">
         <p class="kick"><span class="n">Industrial Guardian</span> Equipment anomalies → evidence-grounded maintenance action</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>fewer surprise breakdowns, faster repairs</b> — likely cause &amp; exact procedure, evidence-backed.</p>
+        <p class="labor"><span class="lt aug">Augments</span> <b>technicians</b> · automates routine inspection &amp; triage.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Industrial Guardian molecule</b> → grounded action; across plants it becomes reliability <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A rotating motor feeds a vibration oscilloscope where an anomaly spike triggers an evidence-grounded work order">
@@ -995,6 +1004,7 @@
       <div class="inner">
         <p class="kick"><span class="n">FlowSafe</span> Warehouses coordinate people, robots, space, orders &amp; exceptions</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>higher throughput, less congestion &amp; dock dwell</b> — people, robots &amp; orders coordinated safely.</p>
+        <p class="labor"><span class="lt aug">Augments</span> supervisors · <span class="lt auto">Automates</span> manual traffic-control &amp; slotting.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>FlowSafe molecule</b> → coordinated flow; across a network it becomes logistics <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A top-down warehouse where an AGV and a worker move along aisles, a congestion hotspot flags, and flow reroutes to the docks">
@@ -1070,6 +1080,7 @@
       <div class="inner">
         <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Sensitive knowledge → governed decisions (not a chatbot)</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>cited, trustworthy answers over sensitive knowledge</b> — governed decisions &amp; actions, not chat.</p>
+        <p class="labor"><span class="lt aug">Augments</span> <b>experts &amp; analysts</b> · automates hours of manual research &amp; retrieval.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Sovereign Knowledge Ops molecule</b> → governed decisions; across an enterprise, knowledge <b>matter</b></span>
           <svg viewBox="0 0 1000 170" role="img" aria-label="Permissioned documents pass a policy gate that denies unauthorized ones, producing a cited and verified decision">
@@ -1143,6 +1154,7 @@
       <div class="inner">
         <p class="kick"><span class="n">Autonomous Security Remediation</span> Threats detected, contextualized &amp; contained under policy</p>
         <p class="benefit"><span class="lbl">The company gets</span> <b>threats contained in seconds, under policy</b> — human escalation on doubt, clean evidenced rollback.</p>
+        <p class="labor"><span class="lt auto">Automates</span> tier-1 containment — work that took hours by hand · <span class="lt aug">Augments</span> the SOC, human escalation kept.</p>
         <div class="di scene">
           <span class="cap">Atoms bonded into the <b>Autonomous Security Remediation molecule</b> → contained threats; across sites, cyber-physical <b>matter</b></span>
           <svg viewBox="0 0 1000 156" role="img" aria-label="A threatened node on a network graph is quarantined, the containment passes a policy gate, and a verified rollback restores service">
