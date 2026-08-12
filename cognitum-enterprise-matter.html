@@ -280,6 +280,22 @@
   .hyp { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.04em; color:var(--amber); margin-top:0.7rem; }
   .tbl.tiny { font-size:0.78rem; } .tbl.tiny td { padding:0.34rem 0.6rem; } .tbl.tiny th { padding:0.32rem 0.6rem; }
 
+  /* ---- Enterprise Matter · dynamic subject-specific scenes ---- */
+  .di.scene { padding: 0.45rem 0.65rem; gap: 0.25rem; }
+  .di.scene svg { width: 100%; height: auto; display: block; }
+  .di.scene .cap { margin-bottom: 0.05rem; }
+  .slbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.02em; }
+  .slbl-t { fill: var(--text); } .slbl-f { fill: var(--faint); } .slbl-m { fill: var(--muted); }
+  .sok { fill: var(--jade); } .swarn { fill: var(--amber); } .sbad { fill: var(--crit); } .sind { fill: var(--indigo); }
+  @keyframes emsweep { to { transform: rotate(360deg); } }
+  .slide.active .v-sweep { animation: emsweep 3.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes emblink { 0%,45%,100%{opacity:.25} 55%,90%{opacity:1} }
+  .slide.active .v-blink { animation: emblink 2.2s ease-in-out infinite; }
+  @keyframes emcut { 0%,60%{opacity:1} 72%,100%{opacity:.12} }
+  .slide.active .v-cut { animation: emcut 3s ease-in-out infinite; }
+  @keyframes emflash { 0%,70%,100%{opacity:0} 82%{opacity:1} }
+  .slide.active .v-flash { animation: emflash 3s ease-in-out infinite; }
+
   /* ============ ANIMATION LAYER ============ */
   @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
   @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
@@ -357,15 +373,42 @@
           </div>
         </div>
         <div class="heroviz">
-          <svg viewBox="0 0 380 380" role="img" aria-label="Atoms bonding into molecules that reach companies">
-            <defs><marker id="arP" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
-            <g font-size="12" text-anchor="middle">
-              <rect x="90" y="24" width="200" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="190" y="49" fill="var(--indigo)">Atoms</text>
-              <rect x="90" y="104" width="200" height="40" rx="10" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="190" y="129" fill="var(--indigo)">Bonds</text>
-              <rect x="90" y="184" width="200" height="40" rx="10" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.8"/><text x="190" y="209" fill="var(--jade)" font-weight="600">Molecules</text>
-              <rect x="90" y="264" width="200" height="40" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="190" y="289" class="vlbl-t">Target accounts</text>
+          <svg viewBox="0 0 380 380" role="img" aria-label="Atoms orbiting and bonding into a central molecule, ringed by target-account nodes">
+            <defs>
+              <radialGradient id="emcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--jade)" stop-opacity="0.38"/>
+                <stop offset="55%" stop-color="var(--indigo)" stop-opacity="0.10"/>
+                <stop offset="100%" stop-color="var(--jade)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="190" cy="190" r="182" fill="url(#emcore)"/>
+            <!-- outer orbit: target accounts -->
+            <g class="v-spin">
+              <circle cx="190" cy="190" r="162" fill="none" stroke="var(--border-2)" stroke-width="1.4" stroke-dasharray="2 14"/>
+              <rect x="182" y="20" width="16" height="16" rx="4" fill="var(--surface)" stroke="var(--indigo)"/>
+              <rect x="330" y="270" width="16" height="16" rx="4" fill="var(--surface)" stroke="var(--indigo)"/>
+              <rect x="34" y="270" width="16" height="16" rx="4" fill="var(--surface)" stroke="var(--indigo)"/>
             </g>
-            <g stroke="var(--jade)" stroke-width="1.6" fill="none"><line class="v-draw" x1="190" y1="64" x2="190" y2="102" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.12s" x1="190" y1="144" x2="190" y2="182" marker-end="url(#arP)"/><line class="v-draw" style="animation-delay:.24s" x1="190" y1="224" x2="190" y2="262" marker-end="url(#arP)"/></g>
+            <!-- mid orbit: electrons -->
+            <g class="v-spinR"><circle cx="190" cy="190" r="118" fill="none" stroke="var(--jade)" stroke-width="1.3" stroke-dasharray="2 16" opacity="0.6"/></g>
+            <circle r="5.5" fill="var(--jade)" class="v-t" style="offset-path:path('M190 190 m -150 0 a 150 150 0 1 0 300 0 a 150 150 0 1 0 -300 0');animation-duration:6s"/>
+            <circle r="4.5" fill="var(--indigo)" style="offset-path:path('M190 190 m -108 0 a 108 108 0 1 0 216 0 a 108 108 0 1 0 -216 0');offset-distance:0%;animation:vtravel 4.4s linear infinite reverse"/>
+            <!-- central molecule: hexagonal bonded lattice -->
+            <circle class="v-halo" cx="190" cy="190" r="60" fill="var(--jade)"/>
+            <g stroke="var(--jade)" stroke-width="2" fill="none">
+              <path class="v-draw" d="M232 190 L211 153.6 L169 153.6 L148 190 L169 226.4 L211 226.4 Z"/>
+              <line class="v-draw" style="animation-delay:.2s" x1="190" y1="190" x2="232" y2="190"/>
+              <line class="v-draw" style="animation-delay:.28s" x1="190" y1="190" x2="169" y2="153.6"/>
+              <line class="v-draw" style="animation-delay:.36s" x1="190" y1="190" x2="211" y2="226.4"/>
+            </g>
+            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2">
+              <circle class="v-pop" cx="232" cy="190" r="11"/><circle class="v-pop" style="animation-delay:.06s" cx="211" cy="153.6" r="11"/>
+              <circle class="v-pop" style="animation-delay:.12s" cx="169" cy="153.6" r="11"/><circle class="v-pop" style="animation-delay:.18s" cx="148" cy="190" r="11"/>
+              <circle class="v-pop" style="animation-delay:.24s" cx="169" cy="226.4" r="11"/><circle class="v-pop" style="animation-delay:.3s" cx="211" cy="226.4" r="11"/>
+            </g>
+            <circle class="v-pulse" cx="190" cy="190" r="15" fill="var(--jade)"/>
+            <circle class="v-float" cx="70" cy="96" r="4.5" fill="var(--jade)"/>
+            <circle class="v-float" style="animation-delay:1.2s" cx="312" cy="300" r="5.5" fill="var(--indigo)"/>
           </svg>
         </div>
       </div>
@@ -399,42 +442,87 @@
           <div class="card mini i"><div class="ct">COGs</div><div class="cd">Specialized domain capabilities</div></div>
           <div class="card mini i"><div class="ct">MetaHarness</div><div class="cd">Developer wedge — embeds the stack</div></div>
         </div>
-        <div class="di plain" style="margin-top:0.7rem">
-          <svg viewBox="0 0 960 96" role="img" aria-label="Scattered atoms bonding into a molecule around a business problem">
-            <defs><marker id="arA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
-            <g fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"><circle class="v-pop" cx="60" cy="28" r="13"/><circle class="v-pop" style="animation-delay:.1s" cx="120" cy="66" r="13"/><circle class="v-pop" style="animation-delay:.2s" cx="180" cy="24" r="13"/><circle class="v-pop" style="animation-delay:.3s" cx="150" cy="70" r="10"/><circle class="v-pop" style="animation-delay:.4s" cx="70" cy="72" r="10"/></g>
-            <text x="120" y="94" text-anchor="middle" font-size="11" class="vlbl-f">atoms</text>
-            <line class="v-draw" x1="220" y1="48" x2="360" y2="48" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arA)"/>
-            <text x="290" y="38" text-anchor="middle" font-size="10" fill="var(--jade)">bond around one problem</text>
-            <g stroke="var(--jade)" stroke-width="1.6"><line class="v-draw" style="animation-delay:.3s" x1="470" y1="48" x2="540" y2="20"/><line class="v-draw" style="animation-delay:.35s" x1="470" y1="48" x2="545" y2="76"/><line class="v-draw" style="animation-delay:.4s" x1="540" y1="20" x2="545" y2="76"/></g>
-            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" style="animation-delay:.3s" cx="470" cy="48" r="15"/><circle class="v-pop" style="animation-delay:.35s" cx="540" cy="20" r="15"/><circle class="v-pop" style="animation-delay:.4s" cx="545" cy="76" r="15"/></g>
-            <text x="516" y="94" text-anchor="middle" font-size="11" fill="var(--jade)">a molecule = a complete solution</text>
-            <line class="v-draw" x1="620" y1="48" x2="760" y2="48" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arA)"/>
-            <text x="690" y="38" text-anchor="middle" font-size="10" fill="var(--indigo)">lands with</text>
-            <rect class="v-pop" style="animation-delay:.5s" x="790" y="26" width="150" height="44" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="865" y="53" text-anchor="middle" font-size="11" class="vlbl-t">a target account</text>
+        <div class="di plain" style="margin-top:0.55rem">
+          <svg viewBox="0 0 1000 96" role="img" aria-label="Free atoms with orbiting electrons bond into a molecule that then lands with a target account">
+            <defs><marker id="arA3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <!-- free atoms with orbiting electrons -->
+            <g>
+              <circle cx="70" cy="30" r="12" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle r="2.6" fill="var(--indigo)" style="offset-path:path('M70 30 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0');animation:vtravel 3s linear infinite"/>
+              <circle cx="150" cy="66" r="12" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle r="2.6" fill="var(--indigo)" style="offset-path:path('M150 66 m -19 0 a 19 19 0 1 0 38 0 a 19 19 0 1 0 -38 0');animation:vtravel 2.6s linear infinite reverse"/>
+              <circle cx="188" cy="24" r="10" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="96" cy="74" r="9" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.6"/>
+            </g>
+            <text x="120" y="94" text-anchor="middle" class="slbl slbl-f">eight free atoms</text>
+            <line x1="230" y1="48" x2="360" y2="48" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#arA3)"/>
+            <text x="295" y="38" text-anchor="middle" class="slbl sok">bond around one problem</text>
+            <!-- molecule -->
+            <g stroke="var(--jade)" stroke-width="1.8"><line class="v-draw" x1="470" y1="48" x2="540" y2="22"/><line class="v-draw" style="animation-delay:.3s" x1="470" y1="48" x2="548" y2="74"/><line class="v-draw" style="animation-delay:.4s" x1="540" y1="22" x2="548" y2="74"/></g>
+            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" cx="470" cy="48" r="15"/><circle class="v-pop" style="animation-delay:.3s" cx="540" cy="22" r="15"/><circle class="v-pop" style="animation-delay:.4s" cx="548" cy="74" r="15"/></g>
+            <text x="512" y="94" text-anchor="middle" class="slbl sok">a molecule = a complete solution</text>
+            <line x1="620" y1="48" x2="756" y2="48" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#arA3)"/>
+            <circle r="4" fill="var(--jade)" class="v-tf" style="offset-path:path('M620 48 L752 48')"/>
+            <text x="688" y="38" text-anchor="middle" class="slbl sind">lands with</text>
+            <rect class="v-pop" style="animation-delay:.5s" x="792" y="26" width="168" height="44" rx="10" fill="var(--surface)" stroke="var(--border-2)"/>
+            <text x="876" y="46" text-anchor="middle" class="slbl slbl-t">a target account</text><text x="876" y="60" text-anchor="middle" class="slbl slbl-f">clearest economics</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 4 · BONDS -->
+    <!-- 4 · BONDS · graphite vs diamond -->
     <section class="slide" data-part="Overview">
       <div class="inner">
-        <p class="kick"><span class="n">Bonds · architecture is the solution</span> Same atoms, different molecule — like graphite vs diamond</p>
+        <p class="kick"><span class="n">Bonds · architecture is the solution</span> Same atoms, different bonds — like graphite vs diamond</p>
         <div class="split v top">
           <div class="di">
-            <span class="cap">Rearrange the bonds → a different solution</span>
-            <svg viewBox="0 0 420 220" role="img" aria-label="The same three atoms bonded two different ways form two different molecules">
-              <g stroke="var(--indigo)" stroke-width="1.6" fill="none"><line class="v-draw" x1="60" y1="60" x2="140" y2="60"/><line class="v-draw" style="animation-delay:.1s" x1="140" y1="60" x2="100" y2="120"/></g>
-              <g fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"><circle class="v-pop" cx="60" cy="60" r="15"/><circle class="v-pop" style="animation-delay:.1s" cx="140" cy="60" r="15"/><circle class="v-pop" style="animation-delay:.2s" cx="100" cy="120" r="15"/></g>
-              <text x="100" y="160" text-anchor="middle" font-size="11" fill="var(--indigo)">monitoring assistant</text>
-              <g stroke="var(--jade)" stroke-width="1.6" fill="none"><line class="v-draw" style="animation-delay:.2s" x1="300" y1="60" x2="360" y2="110"/><line class="v-draw" style="animation-delay:.3s" x1="360" y1="110" x2="300" y2="120"/><line class="v-draw" style="animation-delay:.4s" x1="300" y1="120" x2="300" y2="60"/></g>
-              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" style="animation-delay:.2s" cx="300" cy="60" r="15"/><circle class="v-pop" style="animation-delay:.3s" cx="360" cy="110" r="15"/><circle class="v-pop" style="animation-delay:.4s" cx="300" cy="120" r="15"/></g>
-              <text x="330" y="160" text-anchor="middle" font-size="11" fill="var(--jade)">autonomous remediation</text>
+            <span class="cap">Identical atoms · rearranged bonds · a different material</span>
+            <svg viewBox="0 0 440 220" role="img" aria-label="The same carbon atoms bonded as a flat graphite sheet versus a rigid diamond lattice">
+              <!-- GRAPHITE: flat hexagon sheet, soft -->
+              <g transform="translate(6,8)">
+                <g stroke="var(--indigo)" stroke-width="1.7" fill="none">
+                  <path class="v-draw" d="M60 60 L100 40 L140 60 L140 104 L100 124 L60 104 Z"/>
+                  <line class="v-draw" style="animation-delay:.15s" x1="140" y1="60" x2="180" y2="40"/>
+                  <line class="v-draw" style="animation-delay:.2s" x1="140" y1="104" x2="180" y2="124"/>
+                  <line class="v-draw" style="animation-delay:.25s" x1="60" y1="60" x2="20" y2="40"/>
+                  <line class="v-draw" style="animation-delay:.3s" x1="60" y1="104" x2="20" y2="124"/>
+                </g>
+                <g fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2">
+                  <circle class="v-pop" cx="60" cy="60" r="11"/><circle class="v-pop" style="animation-delay:.05s" cx="100" cy="40" r="11"/><circle class="v-pop" style="animation-delay:.1s" cx="140" cy="60" r="11"/>
+                  <circle class="v-pop" style="animation-delay:.15s" cx="140" cy="104" r="11"/><circle class="v-pop" style="animation-delay:.2s" cx="100" cy="124" r="11"/><circle class="v-pop" style="animation-delay:.25s" cx="60" cy="104" r="11"/>
+                  <circle class="v-pop" cx="180" cy="40" r="8"/><circle class="v-pop" cx="180" cy="124" r="8"/><circle class="v-pop" cx="20" cy="40" r="8"/><circle class="v-pop" cx="20" cy="124" r="8"/>
+                </g>
+                <text x="100" y="168" text-anchor="middle" class="slbl sind" style="font-size:11px">GRAPHITE · flat, layered</text>
+                <text x="100" y="184" text-anchor="middle" class="slbl slbl-f">a monitoring assistant</text>
+              </g>
+              <text x="220" y="90" text-anchor="middle" class="slbl slbl-f" style="font-size:11px">same</text>
+              <text x="220" y="104" text-anchor="middle" class="slbl slbl-f" style="font-size:11px">atoms</text>
+              <path d="M204 116 C214 128 226 128 236 116" stroke="var(--border-2)" stroke-width="1.4" fill="none"/>
+              <!-- DIAMOND: tetrahedral rigid lattice, hard -->
+              <g transform="translate(246,8)">
+                <g stroke="var(--jade)" stroke-width="1.7" fill="none" class="v-float">
+                  <line class="v-draw" style="animation-delay:.2s" x1="90" y1="82" x2="40" y2="44"/>
+                  <line class="v-draw" style="animation-delay:.25s" x1="90" y1="82" x2="150" y2="44"/>
+                  <line class="v-draw" style="animation-delay:.3s" x1="90" y1="82" x2="52" y2="128"/>
+                  <line class="v-draw" style="animation-delay:.35s" x1="90" y1="82" x2="132" y2="128"/>
+                  <line class="v-draw" style="animation-delay:.4s" x1="40" y1="44" x2="52" y2="128"/>
+                  <line class="v-draw" style="animation-delay:.45s" x1="150" y1="44" x2="132" y2="128"/>
+                  <line class="v-draw" style="animation-delay:.5s" x1="40" y1="44" x2="150" y2="44"/>
+                  <line class="v-draw" style="animation-delay:.55s" x1="52" y1="128" x2="132" y2="128"/>
+                </g>
+                <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2">
+                  <circle class="v-pop" style="animation-delay:.2s" cx="90" cy="82" r="13"/>
+                  <circle class="v-pop" style="animation-delay:.25s" cx="40" cy="44" r="11"/><circle class="v-pop" style="animation-delay:.3s" cx="150" cy="44" r="11"/>
+                  <circle class="v-pop" style="animation-delay:.35s" cx="52" cy="128" r="11"/><circle class="v-pop" style="animation-delay:.4s" cx="132" cy="128" r="11"/>
+                </g>
+                <text x="92" y="168" text-anchor="middle" class="slbl sok" style="font-size:11px">DIAMOND · rigid, bonded</text>
+                <text x="92" y="184" text-anchor="middle" class="slbl slbl-f">autonomous remediation</text>
+              </g>
             </svg>
           </div>
           <div>
-            <p class="mut" style="margin-bottom:0.5rem">Atoms in the same diagram are <strong>not</strong> a molecule. Deliberate bonds make the solution:</p>
+            <p class="mut" style="margin-bottom:0.5rem">Atoms in the same box are <strong>not</strong> a molecule. Eight deliberate bonds make the solution:</p>
             <div class="grid g2" style="gap:0.35rem">
               <div class="atomchip"><span class="dotm" style="background:var(--indigo)"></span>Interface · APIs, MCP</div>
               <div class="atomchip"><span class="dotm" style="background:var(--indigo)"></span>Event · streams</div>
@@ -453,7 +541,7 @@
     <!-- 5 · MOLECULE ANATOMY -->
     <section class="slide" data-part="Overview">
       <div class="inner">
-        <p class="kick"><span class="n">A molecule's anatomy</span> The canonical bonded pipeline — same five moves in every molecule</p>
+        <p class="kick"><span class="n">A molecule's anatomy</span> The canonical bonded pipeline — the same five moves, and the loop that improves it</p>
         <div class="flow">
           <div class="node j"><span class="badge">sense</span><b>RuView</b><span>perception</span></div>
           <div class="harrow">event →</div>
@@ -465,7 +553,14 @@
           <div class="harrow">prove →</div>
           <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>evidence</span></div>
         </div>
-        <p class="src" style="text-align:center; margin:0.6rem 0 0.8rem"><b>RVF</b> is a trust bond across model, memory, config &amp; evidence · <b>identity &amp; policy</b> gate who may act · <b>COGs</b> add functions · <b>MetaHarness</b> embeds the whole stack into a product.</p>
+        <div class="di plain" style="margin:0.35rem 0 0.5rem">
+          <svg viewBox="0 0 1000 46" role="img" aria-label="A learning loop returns verified evidence from the end of the pipeline back to the start">
+            <defs><marker id="arL5" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <path id="loop5" d="M920 8 C960 8 960 40 900 40 L100 40 C40 40 40 8 80 8" fill="none" stroke="var(--jade)" stroke-width="1.6" stroke-dasharray="5 6" marker-end="url(#arL5)"/>
+            <circle r="4.5" fill="var(--jade)" class="v-t" style="offset-path:path('M920 8 C960 8 960 40 900 40 L100 40 C40 40 40 8 80 8');animation-duration:4s"/>
+            <text x="500" y="35" text-anchor="middle" class="slbl sok">verified evidence improves the molecule — only on held-out proof</text>
+          </svg>
+        </div>
         <div class="grid g3" style="gap:0.5rem">
           <div class="card mini"><div class="tag">In the device</div><div class="cd">Signal processing, immediate classification, safe local behavior.</div></div>
           <div class="card mini i"><div class="tag">At the site edge</div><div class="cd">Memory, reasoning, multi-device coordination, protocol adapters.</div></div>
@@ -498,14 +593,36 @@
     <section class="slide" data-part="SpatialOps">
       <div class="inner">
         <p class="kick"><span class="n">SpatialOps</span> Buildings react to actual use, not schedules</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">sense</span><b>RuView</b><span>zone events</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">learn</span><b>RuVector</b><span>site patterns</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">reason</span><b>RuLLM</b><span>bounded</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">act</span><b>RuFlo</b><span>HVAC · work-order</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>config</span></div>
+        <div class="di scene">
+          <span class="cap">Occupied zones drive the systems · empty zones set back</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A building floor-plan where occupied rooms glow and drive HVAC, lighting and cleaning while empty rooms set back">
+            <defs><marker id="ar7" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <!-- building shell, 5 rooms -->
+            <rect x="20" y="14" width="600" height="66" rx="5" fill="var(--surface)" stroke="var(--border-2)"/>
+            <line x1="140" y1="14" x2="140" y2="80" stroke="var(--border-2)"/><line x1="260" y1="14" x2="260" y2="80" stroke="var(--border-2)"/>
+            <line x1="380" y1="14" x2="380" y2="80" stroke="var(--border-2)"/><line x1="500" y1="14" x2="500" y2="80" stroke="var(--border-2)"/>
+            <!-- occupied rooms glow + people -->
+            <rect class="v-shim" x="22" y="16" width="116" height="62" fill="var(--jade-wash)"/>
+            <rect class="v-shim" style="animation-delay:.6s" x="262" y="16" width="116" height="62" fill="var(--jade-wash)"/>
+            <rect class="v-shim" style="animation-delay:1.1s" x="502" y="16" width="116" height="62" fill="var(--jade-wash)"/>
+            <g fill="var(--jade)"><circle class="v-float" cx="80" cy="46" r="5"/><circle class="v-float" style="animation-delay:.5s" cx="320" cy="42" r="5"/><circle class="v-float" style="animation-delay:.3s" cx="300" cy="56" r="5"/><circle class="v-float" style="animation-delay:.8s" cx="560" cy="48" r="5"/></g>
+            <text x="80" y="94" text-anchor="middle" class="slbl sok">occupied</text>
+            <text x="200" y="94" text-anchor="middle" class="slbl slbl-f">setback</text>
+            <text x="320" y="94" text-anchor="middle" class="slbl sok">occupied</text>
+            <text x="440" y="94" text-anchor="middle" class="slbl slbl-f">setback</text>
+            <text x="560" y="94" text-anchor="middle" class="slbl sok">occupied</text>
+            <!-- moving occupancy signal along corridor -->
+            <circle r="3.5" fill="var(--jade)" class="v-t" style="offset-path:path('M30 78 L610 78');animation-duration:5s"/>
+            <!-- reactive systems -->
+            <line x1="630" y1="47" x2="700" y2="47" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <g>
+              <rect x="710" y="14" width="270" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" cx="724" cy="24.5" r="4" fill="var(--jade)"/><text x="736" y="28" class="slbl slbl-t">HVAC follows the people</text>
+              <rect x="710" y="41" width="270" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" style="animation-delay:.5s" cx="724" cy="51.5" r="4" fill="var(--jade)"/><text x="736" y="55" class="slbl slbl-t">Lighting + energy setback</text>
+              <rect x="710" y="68" width="270" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" style="animation-delay:1s" cx="724" cy="78.5" r="4" fill="var(--jade)"/><text x="736" y="82" class="slbl slbl-t">Cleaning &amp; work-orders routed</text>
+            </g>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.55rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>Entry / outcome</th></tr></thead>
           <tbody>
             <tr><td class="i">Building-automation OEMs</td><td>Schneider Electric, Siemens, Johnson Controls, Honeywell, Carrier, Trane, ABB, Signify</td><td>Companion appliance → controller/gateway app</td></tr>
@@ -513,7 +630,7 @@
             <tr><td class="j">Enterprise operators</td><td>CBRE, JLL, Brookfield, Marriott, Hilton, JPMorgan, Microsoft, Walmart, ASU</td><td>Portfolio occupancy, energy, space &amp; experience</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.4rem">Anchors: Schneider room control · Siemens Building X · Carrier Abound · Cisco Spaces. <span class="hyp">Target-account hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.35rem">Anchors: Schneider room control · Siemens Building X · Carrier Abound · Cisco Spaces. <span class="hyp">Target-account hypotheses only.</span></p>
       </div>
     </section>
 
@@ -521,14 +638,37 @@
     <section class="slide" data-part="Ambient Care">
       <div class="inner">
         <p class="kick"><span class="n">Ambient Care</span> Non-visual, privacy-sensitive care-workflow signals</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">sense</span><b>RuView</b><span>bed-zone</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">baseline</span><b>RuVector</b><span>local</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">assess</span><b>RuLLM</b><span>vs protocol</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">escalate</span><b>RuFlo</b><span>dedupe · route</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>evidence</span></div>
+        <div class="di scene">
+          <span class="cap">Camera-free RF sensing · baseline → deviation → governed escalation</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A camera-free radio sensor over a bed detects a deviation from baseline and escalates to a nurse station">
+            <defs><marker id="ar8" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--indigo)"/></marker></defs>
+            <!-- bed -->
+            <rect x="30" y="58" width="150" height="26" rx="5" fill="var(--surface-2)" stroke="var(--border-2)"/>
+            <rect x="34" y="50" width="34" height="18" rx="4" fill="var(--surface)" stroke="var(--border-2)"/>
+            <!-- RF sensor + emanating arcs (no camera) -->
+            <circle cx="105" cy="30" r="6" fill="var(--jade)"/>
+            <g fill="none" stroke="var(--jade)" stroke-width="1.6">
+              <path class="v-shim" d="M83 34 A26 26 0 0 1 127 34"/>
+              <path class="v-shim" style="animation-delay:.4s" d="M72 40 A38 38 0 0 1 138 40"/>
+              <path class="v-shim" style="animation-delay:.8s" d="M61 46 A50 50 0 0 1 149 46"/>
+            </g>
+            <g stroke="var(--crit)" stroke-width="1.6"><rect x="150" y="20" width="16" height="12" rx="2" fill="none" stroke="var(--faint)"/><line x1="150" y1="20" x2="166" y2="32" stroke="var(--crit)"/></g>
+            <text x="105" y="98" text-anchor="middle" class="slbl slbl-f">RF presence · no camera</text>
+            <!-- baseline waveform + deviation -->
+            <path d="M240 60 L280 60 L292 60 L300 46 L308 74 L316 60 L360 60 L372 60 L380 52 L388 68 L396 60 L470 60" fill="none" stroke="var(--indigo)" stroke-width="1.8"/>
+            <path class="v-flash" d="M470 60 L486 60 L494 24 L504 92 L514 60 L560 60" fill="none" stroke="var(--crit)" stroke-width="2"/>
+            <circle r="3.5" fill="var(--indigo)" class="v-t" style="offset-path:path('M240 60 L560 60');animation-duration:3.4s"/>
+            <text x="330" y="96" text-anchor="middle" class="slbl sind">baseline</text>
+            <text x="500" y="96" text-anchor="middle" class="slbl sbad">deviation</text>
+            <!-- escalation -->
+            <line x1="566" y1="58" x2="626" y2="58" stroke="var(--indigo)" stroke-width="1.5" marker-end="url(#ar8)"/>
+            <rect x="636" y="34" width="180" height="48" rx="6" fill="var(--surface)" stroke="var(--indigo-dim)"/>
+            <text x="726" y="54" text-anchor="middle" class="slbl slbl-t">Nurse station</text><text x="726" y="70" text-anchor="middle" class="slbl slbl-f">escalate · dedupe · route</text>
+            <line x1="822" y1="58" x2="866" y2="58" stroke="var(--indigo)" stroke-width="1.5" marker-end="url(#ar8)"/>
+            <rect x="876" y="40" width="104" height="36" rx="6" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="928" y="62" text-anchor="middle" class="slbl sok">faster response</text>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.55rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>Entry / outcome</th></tr></thead>
           <tbody>
             <tr><td class="i">Connected beds &amp; mobility</td><td>Stryker, Baxter/Hillrom, Arjo, Getinge, LINET</td><td>Adjunct room context: bed-exit, mobility</td></tr>
@@ -536,7 +676,7 @@
             <tr><td class="j">Hospital &amp; senior-living operators</td><td>HCA, CommonSpirit, Mayo Clinic, Cleveland Clinic, Brookdale, Sunrise</td><td>Unit-level workflow pilot; response &amp; staffing</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.4rem; color:var(--crit)">Launch scope is <strong>non-diagnostic</strong> — no clinical claim until validated. <span class="hyp" style="color:var(--amber)">Target-account hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.35rem; color:var(--crit)">Launch scope is <strong>non-diagnostic</strong> — no clinical claim until validated. <span class="hyp" style="color:var(--amber)">Target-account hypotheses only.</span></p>
       </div>
     </section>
 
@@ -544,14 +684,37 @@
     <section class="slide" data-part="Industrial Guardian">
       <div class="inner">
         <p class="kick"><span class="n">Industrial Guardian</span> Equipment anomalies → evidence-grounded maintenance action</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">sense</span><b>Telemetry</b><span>+ asset ID</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">recall</span><b>RuVector</b><span>fault · repairs</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">explain</span><b>RuLLM + COGs</b><span>manuals · CMMS</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">act</span><b>RuFlo</b><span>work order</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>released pkg</span></div>
+        <div class="di scene">
+          <span class="cap">Vibration trace · anomaly spike → evidence-grounded work order</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A rotating motor feeds a vibration oscilloscope where an anomaly spike triggers an evidence-grounded work order">
+            <defs><marker id="ar9" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <!-- motor -->
+            <circle cx="66" cy="52" r="32" fill="var(--surface-2)" stroke="var(--indigo)" stroke-width="1.6"/>
+            <g class="v-spin" stroke="var(--indigo)" stroke-width="2.4" stroke-linecap="round"><line x1="66" y1="34" x2="66" y2="70"/><line x1="48" y1="52" x2="84" y2="52"/></g>
+            <circle cx="66" cy="52" r="5" fill="var(--indigo)"/>
+            <text x="66" y="98" text-anchor="middle" class="slbl slbl-f">asset + telemetry</text>
+            <!-- scope -->
+            <rect x="120" y="12" width="380" height="80" rx="6" fill="var(--ink)" stroke="var(--border-2)"/>
+            <g stroke="var(--border)" stroke-width="0.8" opacity="0.6"><line x1="120" y1="52" x2="500" y2="52"/><line x1="215" y1="12" x2="215" y2="92"/><line x1="310" y1="12" x2="310" y2="92"/><line x1="405" y1="12" x2="405" y2="92"/></g>
+            <path d="M130 52 Q150 30 170 52 T210 52 T250 52 T290 52" fill="none" stroke="var(--jade)" stroke-width="1.8"/>
+            <path class="v-flash" d="M290 52 L300 52 L312 14 L326 90 L338 52 L360 52" fill="none" stroke="var(--crit)" stroke-width="2.2"/>
+            <path d="M360 52 Q380 30 400 52 T440 52 T480 52" fill="none" stroke="var(--jade)" stroke-width="1.8"/>
+            <circle r="3.5" fill="var(--jade)" class="v-t" style="offset-path:path('M130 52 L490 52');animation-duration:3s"/>
+            <text x="325" y="106" text-anchor="middle" class="slbl sbad">anomaly detected</text>
+            <!-- gauge -->
+            <path d="M528 68 A40 40 0 0 1 608 68" fill="none" stroke="var(--jade)" stroke-width="4"/>
+            <path d="M582 30 A40 40 0 0 1 608 68" fill="none" stroke="var(--crit)" stroke-width="4"/>
+            <line x1="568" y1="68" x2="596" y2="40" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/><circle cx="568" cy="68" r="3.5" fill="var(--text)"/>
+            <text x="568" y="90" text-anchor="middle" class="slbl swarn">condition</text>
+            <!-- work order -->
+            <line x1="620" y1="52" x2="666" y2="52" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar9)"/>
+            <rect x="676" y="22" width="304" height="60" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/>
+            <text x="694" y="44" class="slbl slbl-t" style="font-size:11px">Work order + evidence</text>
+            <text x="694" y="60" class="slbl slbl-f">RuVector recall · manual / CMMS citation</text>
+            <text x="694" y="74" class="slbl sok">read-only first · writes behind safety systems</text>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.5rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>Entry / outcome</th></tr></thead>
           <tbody>
             <tr><td class="i">Automation platforms</td><td>Rockwell, Siemens, Schneider Electric, ABB, Honeywell, Emerson, Yokogawa</td><td>Technician assistant; read-only historian/CMMS pilot</td></tr>
@@ -559,7 +722,7 @@
             <tr><td class="j">Large manufacturers</td><td>Toyota, P&amp;G, Pfizer, Boeing, Dow, Shell, Rio Tinto</td><td>Critical-asset triage, procedure retrieval</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.4rem">Read-only first; control writes stay behind existing safety systems. Anchors: Rockwell GuardianAI · Emerson DeltaV. <span class="hyp">Hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.3rem">Anchors: Rockwell GuardianAI · Emerson DeltaV. <span class="hyp">Hypotheses only.</span></p>
       </div>
     </section>
 
@@ -567,21 +730,45 @@
     <section class="slide" data-part="FlowSafe">
       <div class="inner">
         <p class="kick"><span class="n">FlowSafe</span> Warehouses coordinate people, robots, space, orders &amp; exceptions</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">sense</span><b>RuView</b><span>zone · flow</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">context</span><b>RuVector</b><span>+ WMS/WES</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">classify</span><b>RuLLM + COGs</b><span>exceptions</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">coordinate</span><b>RuFlo</b><span>safety · congestion</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>site model</span></div>
+        <div class="di scene">
+          <span class="cap">Top-down flow · congestion hotspot → reroute &amp; dock scheduling</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A top-down warehouse where an AGV and a worker move along aisles, a congestion hotspot flags, and flow reroutes to the docks">
+            <defs><marker id="ar10" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <rect x="20" y="12" width="640" height="80" rx="5" fill="var(--surface)" stroke="var(--border-2)"/>
+            <!-- racks -->
+            <g fill="var(--surface-2)" stroke="var(--border-2)">
+              <rect x="46" y="24" width="150" height="12" rx="2"/><rect x="46" y="68" width="150" height="12" rx="2"/>
+              <rect x="250" y="24" width="150" height="12" rx="2"/><rect x="250" y="68" width="150" height="12" rx="2"/>
+              <rect x="454" y="24" width="120" height="12" rx="2"/><rect x="454" y="68" width="120" height="12" rx="2"/>
+            </g>
+            <!-- dock doors -->
+            <g fill="var(--jade-wash)" stroke="var(--jade-dim)"><rect x="632" y="22" width="20" height="18" rx="2"/><rect x="632" y="46" width="20" height="18" rx="2"/><rect x="632" y="70" width="20" height="18" rx="2"/></g>
+            <text x="642" y="100" text-anchor="middle" class="slbl slbl-f">docks</text>
+            <!-- AGV robot travelling an aisle -->
+            <rect x="-7" y="-7" width="14" height="14" rx="3" fill="var(--indigo)" class="v-t" style="offset-path:path('M60 52 L300 52');animation-duration:4s"/>
+            <!-- worker dot -->
+            <circle r="5" fill="var(--jade)" class="v-t" style="offset-path:path('M420 52 L470 52 L470 88 L560 88');animation-duration:5s"/>
+            <!-- congestion hotspot -->
+            <circle class="v-halo" cx="330" cy="52" r="14" fill="var(--amber)"/>
+            <circle class="v-pulse" cx="330" cy="52" r="12" fill="none" stroke="var(--amber)" stroke-width="2"/>
+            <text x="330" y="100" text-anchor="middle" class="slbl swarn">congestion</text>
+            <!-- reroute out -->
+            <line x1="668" y1="52" x2="712" y2="52" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar10)"/>
+            <g>
+              <rect x="722" y="16" width="258" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" cx="736" cy="26.5" r="4" fill="var(--jade)"/><text x="748" y="30" class="slbl slbl-t">Reroute around congestion</text>
+              <rect x="722" y="42" width="258" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" style="animation-delay:.5s" cx="736" cy="52.5" r="4" fill="var(--jade)"/><text x="748" y="56" class="slbl slbl-t">Schedule dock &amp; slot dwell</text>
+              <rect x="722" y="68" width="258" height="21" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><circle class="v-blink" style="animation-delay:1s" cx="736" cy="78.5" r="4" fill="var(--jade)"/><text x="748" y="82" class="slbl slbl-t">Flag restricted-zone exception</text>
+            </g>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.55rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>Entry / outcome</th></tr></thead>
           <tbody>
             <tr><td class="i">Automation OEMs &amp; software</td><td>Dematic, Vanderlande, Honeywell Intelligrated, Daifuku, KNAPP, Manhattan Associates, Blue Yonder, Locus Robotics, Zebra</td><td>Edge spatial module in WES; event-to-workflow</td></tr>
             <tr><td class="j">Operators</td><td>DHL, GXO, Kuehne+Nagel, UPS, FedEx, Amazon, Walmart, Target, Lineage, Americold</td><td>One-site congestion/dock pilot → replicate</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.4rem">Augments approved safety controls until validated. Anchor: DHL data-driven supply chain. <span class="hyp">Hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.35rem">Augments approved safety controls until validated. Anchor: DHL data-driven supply chain. <span class="hyp">Hypotheses only.</span></p>
       </div>
     </section>
 
@@ -589,14 +776,38 @@
     <section class="slide" data-part="Knowledge Ops">
       <div class="inner">
         <p class="kick"><span class="n">Sovereign Knowledge Ops</span> Sensitive knowledge → governed decisions (not a chatbot)</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">retrieve</span><b>Connectors</b><span>permissioned</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">context</span><b>RuVector</b><span>hybrid</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">route</span><b>MetaLLM + RuLLM</b><span>by policy</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">act</span><b>RuFlo</b><span>tools · approvals</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>sources · action</span></div>
+        <div class="di scene">
+          <span class="cap">Permissioned sources → policy gate → cited, verified decision</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="Permissioned documents pass a policy gate that denies unauthorized ones, producing a cited and verified decision">
+            <defs><marker id="ar11" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <!-- sources -->
+            <g>
+              <rect x="24" y="16" width="34" height="42" rx="3" fill="var(--surface)" stroke="var(--indigo-dim)"/><path d="M50 16 l8 8 h-8 z" fill="var(--indigo-wash)"/><rect x="30" y="52" width="12" height="9" rx="2" fill="none" stroke="var(--jade)"/><path d="M33 52 v-3 a3 3 0 0 1 6 0 v3" fill="none" stroke="var(--jade)" stroke-width="1.2"/>
+              <rect x="24" y="66" width="34" height="30" rx="3" fill="var(--surface)" stroke="var(--indigo-dim)"/>
+              <rect x="70" y="40" width="34" height="42" rx="3" fill="var(--surface)" stroke="var(--indigo-dim)"/><rect x="76" y="76" width="12" height="9" rx="2" fill="none" stroke="var(--jade)"/>
+            </g>
+            <text x="64" y="103" text-anchor="middle" class="slbl slbl-f">permissioned sources</text>
+            <!-- denied source -->
+            <rect x="120" y="18" width="30" height="38" rx="3" fill="none" stroke="var(--crit)" stroke-dasharray="3 3"/><line x1="120" y1="18" x2="150" y2="56" stroke="var(--crit)" stroke-width="1.6"/><text x="135" y="70" text-anchor="middle" class="slbl sbad">denied</text>
+            <!-- retrieval memory -->
+            <line x1="160" y1="50" x2="196" y2="50" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#ar11)"/>
+            <rect x="206" y="34" width="70" height="34" rx="6" fill="var(--surface)" stroke="var(--indigo)"/><text x="241" y="50" text-anchor="middle" class="slbl slbl-t">RuVector</text><text x="241" y="62" text-anchor="middle" class="slbl slbl-f">hybrid</text>
+            <!-- policy gate (shield) -->
+            <path d="M360 20 L410 34 L410 62 C410 82 388 90 360 96 C332 90 310 82 310 62 L310 34 Z" fill="var(--surface)" stroke="var(--amber)" stroke-width="2"/>
+            <path class="v-blink" d="M344 58 l12 12 l22 -26" fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="360" y="103" text-anchor="middle" class="slbl swarn">policy · permissions</text>
+            <line x1="276" y1="50" x2="308" y2="50" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#ar11)"/>
+            <!-- flowing particle source→gate→answer -->
+            <circle r="3.5" fill="var(--jade)" class="v-t" style="offset-path:path('M104 55 L206 50 M276 50 L360 55 L360 55');animation-duration:3.2s"/>
+            <!-- decision -->
+            <line x1="414" y1="52" x2="470" y2="52" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar11)"/>
+            <rect x="480" y="20" width="500" height="66" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/>
+            <text x="500" y="42" class="slbl slbl-t" style="font-size:11px">Governed decision</text>
+            <g><rect x="500" y="52" width="26" height="14" rx="3" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="513" y="62" text-anchor="middle" class="slbl sind">[1]</text><rect x="532" y="52" width="26" height="14" rx="3" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="545" y="62" text-anchor="middle" class="slbl sind">[2]</text><rect x="564" y="52" width="26" height="14" rx="3" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="577" y="62" text-anchor="middle" class="slbl sind">[3]</text><text x="606" y="62" class="slbl slbl-f">every claim cites a permitted source</text></g>
+            <rect x="500" y="70" width="120" height="12" rx="3" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="560" y="79" text-anchor="middle" class="slbl sok">RVF verified</text>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.5rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>High-value workflow</th></tr></thead>
           <tbody>
             <tr><td class="i">Engineering &amp; industrial service</td><td>Siemens Energy, GE Vernova, Schneider Services, ABB Motion, Honeywell Services</td><td>Field-service research, procedure retrieval, evidence</td></tr>
@@ -605,7 +816,7 @@
             <tr><td class="j">Financial services</td><td>JPMorgan Chase, Bank of America, Citi, HSBC, UBS, Allianz</td><td>Policy research, investigations, compliance evidence</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.35rem">Pursue only where local control &amp; proof beat a generic assistant. <span class="hyp">Hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.3rem">Pursue only where local control &amp; proof beat a generic assistant. <span class="hyp">Hypotheses only.</span></p>
       </div>
     </section>
 
@@ -613,14 +824,38 @@
     <section class="slide" data-part="Security">
       <div class="inner">
         <p class="kick"><span class="n">Autonomous Security Remediation</span> Threats detected, contextualized &amp; contained under policy</p>
-        <div class="flow sm">
-          <div class="node j"><span class="badge">event</span><b>Perception</b><span>+ identity</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">context</span><b>RuVector</b><span>topology · history</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">classify</span><b>RuLLM + COGs</b><span>scoped</span></div><div class="harrow">→</div>
-          <div class="node a" style="border-color:var(--amber)"><span class="badge" style="background:var(--amber)">policy</span><b>RuFlo</b><span>approved tools</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">verify</span><b>RVF</b><span>evidence · rollback</span></div>
+        <div class="di scene">
+          <span class="cap">Threat on the graph → quarantine → policy-approved action → verified rollback</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A threatened node on a network graph is quarantined, the containment passes a policy gate, and a verified rollback restores service">
+            <defs><marker id="ar12" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <!-- graph edges -->
+            <g stroke="var(--border-2)" stroke-width="1.3">
+              <line x1="70" y1="30" x2="180" y2="52"/><line x1="70" y1="80" x2="180" y2="52"/>
+              <line class="v-cut" x1="180" y1="52" x2="300" y2="26"/><line class="v-cut" x1="180" y1="52" x2="300" y2="82"/>
+              <line x1="300" y1="26" x2="300" y2="82"/>
+            </g>
+            <!-- healthy nodes -->
+            <g fill="var(--surface)" stroke="var(--indigo)" stroke-width="1.8"><circle cx="70" cy="30" r="12"/><circle cx="70" cy="80" r="12"/><circle cx="300" cy="26" r="12"/><circle cx="300" cy="82" r="12"/></g>
+            <!-- threat node + quarantine ring -->
+            <circle class="v-halo" cx="180" cy="52" r="14" fill="var(--crit)"/>
+            <circle cx="180" cy="52" r="13" fill="var(--crit)" opacity="0.85"/>
+            <circle class="v-sweep" cx="180" cy="52" r="24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="6 6"/>
+            <text x="180" y="92" text-anchor="middle" class="slbl sbad">threat · isolated</text>
+            <text x="70" y="103" text-anchor="middle" class="slbl slbl-f">perception + identity</text>
+            <!-- policy gate -->
+            <line x1="326" y1="54" x2="372" y2="54" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#ar12)"/>
+            <path d="M430 22 L474 34 L474 60 C474 78 454 86 430 92 C406 86 386 78 386 60 L386 34 Z" fill="var(--surface)" stroke="var(--amber)" stroke-width="2"/>
+            <text x="430" y="52" text-anchor="middle" class="slbl swarn">policy</text><text x="430" y="65" text-anchor="middle" class="slbl slbl-f">approved</text><text x="430" y="77" text-anchor="middle" class="slbl slbl-f">tools</text>
+            <text x="430" y="103" text-anchor="middle" class="slbl swarn">human escalation on doubt</text>
+            <!-- bounded action + rollback -->
+            <line x1="478" y1="54" x2="524" y2="54" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar12)"/>
+            <rect x="534" y="30" width="200" height="48" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="634" y="50" text-anchor="middle" class="slbl slbl-t">Bounded containment</text><text x="634" y="66" text-anchor="middle" class="slbl slbl-f">block · quarantine · rotate</text>
+            <line x1="736" y1="54" x2="782" y2="54" stroke="var(--jade)" stroke-width="1.5" marker-end="url(#ar12)"/>
+            <rect x="792" y="30" width="188" height="48" rx="6" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="886" y="50" text-anchor="middle" class="slbl sok">RVF evidence</text><text x="886" y="66" text-anchor="middle" class="slbl slbl-f">safe fallback · rollback</text>
+            <path d="M886 78 C886 98 534 98 534 80" fill="none" stroke="var(--jade)" stroke-width="1.3" stroke-dasharray="4 5" marker-end="url(#ar12)"/>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.7rem">
+        <table class="tbl tiny" style="margin-top:0.45rem">
           <thead><tr><th>Route</th><th>High-fit target companies</th><th>Entry / outcome</th></tr></thead>
           <tbody>
             <tr><td class="i">Infrastructure &amp; data centers</td><td>Equinix, Digital Realty, National Grid, utilities, airports</td><td>Contextual triage, policy-bounded containment</td></tr>
@@ -628,7 +863,7 @@
             <tr><td class="j">Regulated enterprises &amp; MSSPs</td><td>HCA, JPMorgan Chase, financial institutions, managed security providers</td><td>Bounded remediation, evidence &amp; recovery</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.35rem; color:var(--amber)">"Autonomous" = policy-bounded automation with refusal, safe fallback &amp; human escalation. <span class="hyp">Hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.3rem; color:var(--amber)">"Autonomous" = policy-bounded automation with refusal, safe fallback &amp; human escalation. <span class="hyp">Hypotheses only.</span></p>
       </div>
     </section>
 
@@ -636,14 +871,40 @@
     <section class="slide" data-part="OEM Edge Brain">
       <div class="inner">
         <p class="kick"><span class="n">OEM Edge Brain</span> Hardware → an upgradeable intelligent product &amp; fleet</p>
-        <div class="flow sm">
-          <div class="node i"><span class="badge">wedge</span><b>MetaHarness</b><span>embeds stack</span></div><div class="harrow">→</div>
-          <div class="node"><span class="badge">memory</span><b>RuVector</b><span>device context</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">reason</span><b>RuLLM</b><span>bounded local</span></div><div class="harrow">→</div>
-          <div class="node i"><span class="badge">act</span><b>RuFlo</b><span>device workflows</span></div><div class="harrow">→</div>
-          <div class="node kernel"><span class="badge">sign</span><b>RVF</b><span>fleet package</span></div>
+        <div class="di scene">
+          <span class="cap">The stack embedded in silicon → signed updates fan out to the whole fleet</span>
+          <svg viewBox="0 0 1000 104" role="img" aria-label="A chip die with the embedded stack fans signed updates out to a fleet of devices">
+            <defs><marker id="ar13" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <!-- chip die -->
+            <rect x="60" y="18" width="180" height="70" rx="6" fill="var(--surface-2)" stroke="var(--indigo)" stroke-width="1.8"/>
+            <g stroke="var(--indigo)" stroke-width="1.6">
+              <line x1="60" y1="34" x2="46" y2="34"/><line x1="60" y1="53" x2="46" y2="53"/><line x1="60" y1="72" x2="46" y2="72"/>
+              <line x1="240" y1="34" x2="254" y2="34"/><line x1="240" y1="53" x2="254" y2="53"/><line x1="240" y1="72" x2="254" y2="72"/>
+              <line x1="96" y1="18" x2="96" y2="6"/><line x1="150" y1="18" x2="150" y2="6"/><line x1="204" y1="18" x2="204" y2="6"/>
+            </g>
+            <rect class="v-shim" x="66" y="24" width="168" height="58" rx="4" fill="var(--indigo-wash)"/>
+            <g class="slbl slbl-t" style="font-size:8px" text-anchor="middle">
+              <rect x="74" y="28" width="152" height="10" rx="2" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="150" y="36">RuView · perceive</text>
+              <rect x="74" y="41" width="152" height="10" rx="2" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="150" y="49">RuVector · remember</text>
+              <rect x="74" y="54" width="152" height="10" rx="2" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="150" y="62">RuLLM · reason · RuFlo · act</text>
+              <rect x="74" y="67" width="152" height="10" rx="2" fill="var(--surface)" stroke="var(--jade)"/><text x="150" y="75">RVF · signed package</text>
+            </g>
+            <text x="150" y="100" text-anchor="middle" class="slbl sind">MetaHarness embeds the stack</text>
+            <!-- fan-out to fleet -->
+            <g stroke="var(--jade)" stroke-width="1.3" fill="none">
+              <path d="M254 40 C420 20 560 16 700 18"/><path d="M254 46 C430 40 580 40 700 42"/><path d="M254 52 C440 60 590 62 700 66"/>
+              <path d="M254 58 C430 78 560 86 700 90"/><path d="M254 64 C420 96 540 100 660 100"/>
+            </g>
+            <g fill="var(--jade)"><circle r="4" class="v-tf" style="offset-path:path('M254 40 C420 20 560 16 700 18')"/><circle r="4" class="v-tf" style="offset-path:path('M254 46 C430 40 580 40 700 42');animation-delay:.5s"/><circle r="4" class="v-tf" style="offset-path:path('M254 52 C440 60 590 62 700 66');animation-delay:1s"/><circle r="4" class="v-tf" style="offset-path:path('M254 58 C430 78 560 86 700 90');animation-delay:1.5s"/></g>
+            <!-- fleet devices -->
+            <g fill="var(--surface)" stroke="var(--jade)" stroke-width="1.6">
+              <rect x="702" y="10" width="26" height="18" rx="3"/><rect x="702" y="34" width="26" height="18" rx="3"/><rect x="702" y="58" width="26" height="18" rx="3"/><rect x="648" y="92" width="26" height="12" rx="3"/>
+              <rect x="760" y="20" width="20" height="30" rx="4"/><rect x="800" y="50" width="30" height="20" rx="3"/><rect x="850" y="24" width="22" height="22" rx="4"/><rect x="890" y="56" width="26" height="18" rx="3"/><rect x="930" y="28" width="22" height="26" rx="4"/>
+            </g>
+            <text x="850" y="96" text-anchor="middle" class="slbl slbl-f">fleet · signed updates, upgradeable</text>
+          </svg>
         </div>
-        <table class="tbl tiny" style="margin-top:0.6rem">
+        <table class="tbl tiny" style="margin-top:0.4rem">
           <thead><tr><th>OEM cohort</th><th>High-fit target companies</th><th>First product wedge</th></tr></thead>
           <tbody>
             <tr><td class="i">Semiconductor</td><td>NXP, Espressif, Qualcomm, MediaTek, Intel, AMD</td><td>Reference stack, benchmarks, dev kit</td></tr>
@@ -653,7 +914,7 @@
             <tr><td class="j">Smart home / appliances</td><td>Samsung, LG, Bosch/BSH, Haier, Electrolux, Resideo</td><td>Privacy-aware presence/context, local automation</td></tr>
           </tbody>
         </table>
-        <p class="src" style="margin-top:0.3rem">Models: royalty · license+support · premium SKU · fleet subscription. <span class="hyp">Hypotheses only.</span></p>
+        <p class="src" style="margin-top:0.25rem">Models: royalty · license+support · premium SKU · fleet subscription. <span class="hyp">Hypotheses only.</span></p>
       </div>
     </section>
 
@@ -698,14 +959,31 @@
     <!-- 16 · MATTER · LOGISTICS -->
     <section class="slide" data-part="Enterprise matter">
       <div class="inner">
-        <p class="kick"><span class="n">Enterprise matter · intelligent logistics</span> Molecules bond into one operating enterprise</p>
+        <p class="kick"><span class="n">Enterprise matter · intelligent logistics</span> Molecules bond along one supply artery</p>
         <div class="split vr top">
           <div class="di">
-            <span class="cap">Molecules sharing identity, data, policy, events &amp; workflows</span>
-            <svg viewBox="0 0 340 250" role="img" aria-label="Six logistics molecules bonded to a shared hub">
-              <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="170" y1="125" x2="70" y2="55"/><line class="v-draw" style="animation-delay:.08s" x1="170" y1="125" x2="270" y2="55"/><line class="v-draw" style="animation-delay:.16s" x1="170" y1="125" x2="300" y2="150"/><line class="v-draw" style="animation-delay:.24s" x1="170" y1="125" x2="220" y2="215"/><line class="v-draw" style="animation-delay:.32s" x1="170" y1="125" x2="90" y2="215"/><line class="v-draw" style="animation-delay:.4s" x1="170" y1="125" x2="40" y2="150"/></g>
-              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" cx="70" cy="55" r="16"/><circle class="v-pop" style="animation-delay:.08s" cx="270" cy="55" r="16"/><circle class="v-pop" style="animation-delay:.16s" cx="300" cy="150" r="16"/><circle class="v-pop" style="animation-delay:.24s" cx="220" cy="215" r="16"/><circle class="v-pop" style="animation-delay:.32s" cx="90" cy="215" r="16"/><circle class="v-pop" style="animation-delay:.4s" cx="40" cy="150" r="16"/></g>
-              <circle class="v-pulse" cx="170" cy="125" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2.5"/><text x="170" y="122" text-anchor="middle" font-size="9" fill="var(--indigo)">shared</text><text x="170" y="134" text-anchor="middle" font-size="8" class="vlbl-f">identity · data · policy</text>
+            <span class="cap">A routed network on a shared identity · data · policy spine</span>
+            <svg viewBox="0 0 360 250" role="img" aria-label="Logistics molecules arranged along a supply route, all connected to a shared data spine, with a packet travelling the route">
+              <defs><marker id="ar16" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <!-- route path -->
+              <path id="route16" d="M34 40 L120 40 L120 96 L240 96 L240 40 L326 40" fill="none" stroke="var(--border-2)" stroke-width="2" stroke-dasharray="4 5"/>
+              <path d="M34 168 L326 168" stroke="var(--jade)" stroke-width="2"/>
+              <text x="180" y="161" text-anchor="middle" class="slbl sok">shared identity · data · policy spine</text>
+              <!-- waypoint molecules -->
+              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2">
+                <circle class="v-pop" cx="34" cy="40" r="15"/><circle class="v-pop" style="animation-delay:.08s" cx="120" cy="40" r="15"/><circle class="v-pop" style="animation-delay:.16s" cx="120" cy="96" r="15"/>
+                <circle class="v-pop" style="animation-delay:.24s" cx="240" cy="96" r="15"/><circle class="v-pop" style="animation-delay:.32s" cx="240" cy="40" r="15"/><circle class="v-pop" style="animation-delay:.4s" cx="326" cy="40" r="15"/>
+              </g>
+              <!-- links to spine -->
+              <g stroke="var(--border)" stroke-width="1.1" stroke-dasharray="2 4"><line x1="34" y1="55" x2="34" y2="168"/><line x1="120" y1="136" x2="120" y2="168"/><line x1="240" y1="136" x2="240" y2="168"/><line x1="326" y1="55" x2="326" y2="168"/></g>
+              <!-- travelling packet -->
+              <rect x="-6" y="-6" width="12" height="12" rx="2" fill="var(--indigo)" class="v-t" style="offset-path:path('M34 40 L120 40 L120 96 L240 96 L240 40 L326 40');animation-duration:5s"/>
+              <g class="slbl slbl-f" text-anchor="middle" style="font-size:8px">
+                <text x="34" y="22">Fleet</text><text x="120" y="22">Guardian</text><text x="120" y="128">FlowSafe</text><text x="240" y="128">Security</text><text x="240" y="22">Service</text><text x="326" y="22">Comply</text>
+              </g>
+              <text x="180" y="180" text-anchor="middle" class="slbl slbl-m" style="font-size:9px">one packet, one policy, end to end</text>
+              <line x1="60" y1="205" x2="300" y2="205" stroke="var(--border)" stroke-width="1"/>
+              <text x="180" y="230" text-anchor="middle" class="slbl slbl-f">throughput ↑ · dwell &amp; downtime ↓ · incidents ↓</text>
             </svg>
           </div>
           <div>
@@ -726,14 +1004,30 @@
     <!-- 17 · MATTER · MANUFACTURER -->
     <section class="slide" data-part="Enterprise matter">
       <div class="inner">
-        <p class="kick"><span class="n">Enterprise matter · self-improving manufacturer</span></p>
+        <p class="kick"><span class="n">Enterprise matter · self-improving manufacturer</span> A production line that learns from its own evidence</p>
         <div class="split vr top">
           <div class="di">
-            <span class="cap">An asset/identity graph shared across molecules</span>
-            <svg viewBox="0 0 340 250" role="img" aria-label="Six manufacturing molecules bonded to a shared asset graph">
-              <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="170" y1="125" x2="70" y2="55"/><line class="v-draw" style="animation-delay:.08s" x1="170" y1="125" x2="270" y2="55"/><line class="v-draw" style="animation-delay:.16s" x1="170" y1="125" x2="300" y2="150"/><line class="v-draw" style="animation-delay:.24s" x1="170" y1="125" x2="220" y2="215"/><line class="v-draw" style="animation-delay:.32s" x1="170" y1="125" x2="90" y2="215"/><line class="v-draw" style="animation-delay:.4s" x1="170" y1="125" x2="40" y2="150"/></g>
-              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"><circle class="v-pop" cx="70" cy="55" r="16"/><circle class="v-pop" style="animation-delay:.08s" cx="270" cy="55" r="16"/><circle class="v-pop" style="animation-delay:.16s" cx="300" cy="150" r="16"/><circle class="v-pop" style="animation-delay:.24s" cx="220" cy="215" r="16"/><circle class="v-pop" style="animation-delay:.32s" cx="90" cy="215" r="16"/><circle class="v-pop" style="animation-delay:.4s" cx="40" cy="150" r="16"/></g>
-              <circle class="v-pulse" cx="170" cy="125" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2.5"/><text x="170" y="122" text-anchor="middle" font-size="9" fill="var(--indigo)">asset</text><text x="170" y="134" text-anchor="middle" font-size="8" class="vlbl-f">identity graph</text>
+            <span class="cap">Stations feed a shared asset graph · evidence loops back to improve the line</span>
+            <svg viewBox="0 0 360 250" role="img" aria-label="A vertical production line of molecule stations feeding a shared asset graph, with a feedback loop that improves the line">
+              <defs><marker id="ar17" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--indigo)"/></marker><marker id="ar17j" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+              <!-- production column: 5 stations -->
+              <g>
+                <rect class="v-pop" x="70" y="20" width="150" height="26" rx="6" fill="var(--surface)" stroke="var(--jade)" stroke-width="1.8"/><text x="145" y="37" text-anchor="middle" class="slbl slbl-t">Industrial Guardian</text>
+                <rect class="v-pop" style="animation-delay:.08s" x="70" y="60" width="150" height="26" rx="6" fill="var(--surface)" stroke="var(--indigo)" stroke-width="1.8"/><text x="145" y="77" text-anchor="middle" class="slbl slbl-t">Quality Intelligence</text>
+                <rect class="v-pop" style="animation-delay:.16s" x="70" y="100" width="150" height="26" rx="6" fill="var(--surface)" stroke="var(--jade)" stroke-width="1.8"/><text x="145" y="117" text-anchor="middle" class="slbl slbl-t">Energy Optimization</text>
+                <rect class="v-pop" style="animation-delay:.24s" x="70" y="140" width="150" height="26" rx="6" fill="var(--surface)" stroke="var(--indigo)" stroke-width="1.8"/><text x="145" y="157" text-anchor="middle" class="slbl slbl-t">Worker Safety</text>
+                <rect class="v-pop" style="animation-delay:.32s" x="70" y="180" width="150" height="26" rx="6" fill="var(--surface)" stroke="var(--jade)" stroke-width="1.8"/><text x="145" y="197" text-anchor="middle" class="slbl slbl-t">Knowledge Ops · Security</text>
+              </g>
+              <!-- material flow down -->
+              <g stroke="var(--border-2)" stroke-width="1.4"><line x1="145" y1="46" x2="145" y2="58" marker-end="url(#ar17)"/><line x1="145" y1="86" x2="145" y2="98" marker-end="url(#ar17)"/><line x1="145" y1="126" x2="145" y2="138" marker-end="url(#ar17)"/><line x1="145" y1="166" x2="145" y2="178" marker-end="url(#ar17)"/></g>
+              <!-- shared asset graph -->
+              <g stroke="var(--border)" stroke-width="1.1" stroke-dasharray="2 4"><line x1="220" y1="33" x2="300" y2="113"/><line x1="220" y1="73" x2="300" y2="113"/><line x1="220" y1="113" x2="300" y2="113"/><line x1="220" y1="153" x2="300" y2="113"/><line x1="220" y1="193" x2="300" y2="113"/></g>
+              <circle class="v-pulse" cx="312" cy="113" r="22" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/><text x="312" y="110" text-anchor="middle" class="slbl sind" style="font-size:8px">asset</text><text x="312" y="120" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">graph</text>
+              <!-- self-improving feedback loop -->
+              <path d="M40 200 C10 200 10 26 40 26" fill="none" stroke="var(--jade)" stroke-width="1.8" stroke-dasharray="5 6" marker-end="url(#ar17j)"/>
+              <circle r="4" fill="var(--jade)" class="v-t" style="offset-path:path('M40 200 C10 200 10 26 40 26');animation-duration:4.5s"/>
+              <text x="20" y="116" text-anchor="middle" class="slbl sok" style="font-size:8px" transform="rotate(-90 20 116)">evidence improves the line</text>
+              <text x="180" y="232" text-anchor="middle" class="slbl slbl-f">downtime &amp; scrap ↓ · root cause &amp; changeover faster</text>
             </svg>
           </div>
           <div>
