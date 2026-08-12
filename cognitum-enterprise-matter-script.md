@@ -24,7 +24,7 @@ Here's the one rule for how you sell this: always lead with the business outcome
 
 ## Slide 5 — Part 1: The chemistry *(divider)*
 
-Let's start with the chemistry — nine atoms, the bonds that join them, and the anatomy every molecule shares.
+Let's start with the chemistry — ten atoms, the bonds that join them, and the anatomy every molecule shares.
 
 ## Slide 6 — The atoms
 
