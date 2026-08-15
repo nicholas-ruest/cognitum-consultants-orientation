@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cognitum Methods — the same eight-step COGNITUM method (Clarify, Observe, Govern, Navigate, Illuminate, Test, Unify, Mobilize) spoken in each leader's language across 29 enterprise roles.">
+<meta name="color-scheme" content="dark light">
+<title>Cognitum Methods</title>
+<title>Cognitum Methods</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+
+  /* ---- HarnessaaS deck helpers ---- */
+  .card .ct { font-weight: 650; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text); }
+  .card.mini { padding: 0.7rem 0.8rem; }
+  .card.mini .ct { font-size: 0.9rem; }
+  .card .cd { color: var(--muted); font-size: 0.85rem; line-height: 1.34; }
+  .card.mini .cd { font-size: 0.8rem; line-height: 1.3; }
+  .card.j { border-color: var(--jade-dim); } .card.i { border-color: var(--indigo-dim); }
+  .card.a { border-color: var(--amber); } .card.c { border-color: var(--crit); }
+  .uh { border-left-color: var(--indigo) !important; background: var(--indigo-wash) !important; }
+  .flow.sm .node { padding: 0.6rem 0.6rem; }
+  .flow.sm .node b { font-size: 0.86rem; } .flow.sm .node span { font-size: 0.68rem; }
+  .flow.sm .harrow { padding: 0 0.26rem; font-size: 0.72rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 600; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-2); }
+  .tbl td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.3; }
+  .tbl td:first-child { color: var(--text); font-weight: 560; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl.sm { font-size: 0.84rem; } .tbl.sm td { padding: 0.4rem 0.7rem; } .tbl.sm th { padding: 0.38rem 0.7rem; }
+  .tbl .j { color: var(--jade); } .tbl .i { color: var(--indigo); } .tbl .c { color: var(--crit); }
+  .mat { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.16rem 0.55rem; border-radius: 6px; border: 1px solid var(--border-2); color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .mat.ship { color: var(--jade); border-color: var(--jade); }
+  .mat.pilot { color: var(--indigo); border-color: var(--indigo); }
+  .mat.gate { color: var(--amber); border-color: var(--amber); }
+  .mat.plan { color: var(--faint); border-color: var(--border-2); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
+  .num-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+  .num-card .ni { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--ink); background: var(--indigo); width: 1.4rem; height: 1.4rem; border-radius: 5px; display: grid; place-items: center; }
+  .num-card.j .ni { background: var(--jade); }
+  .num-card .nt { font-size: 0.86rem; color: var(--muted); line-height: 1.28; }
+  .num-card .nt b { color: var(--text); }
+
+  /* ---- Enterprise Matter additions ---- */
+  .g6 { grid-template-columns: repeat(6,1fr); }
+  .atomchip { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.74rem; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:0.28rem 0.7rem; }
+  .atomchip .dotm { width:8px; height:8px; border-radius:50%; background:var(--jade); }
+  .hyp { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.04em; color:var(--amber); margin-top:0.7rem; }
+  .tbl.tiny { font-size:0.78rem; } .tbl.tiny td { padding:0.34rem 0.6rem; } .tbl.tiny th { padding:0.32rem 0.6rem; }
+
+  /* ---- Enterprise Matter · dynamic subject-specific scenes ---- */
+  .di.scene { padding: 0.45rem 0.65rem; gap: 0.25rem; }
+  .di.scene svg { width: 100%; height: auto; display: block; }
+  .di.scene .cap { margin-bottom: 0.05rem; }
+  .slbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.02em; }
+  .slbl-t { fill: var(--text); } .slbl-f { fill: var(--faint); } .slbl-m { fill: var(--muted); }
+  .sok { fill: var(--jade); } .swarn { fill: var(--amber); } .sbad { fill: var(--crit); } .sind { fill: var(--indigo); }
+  @keyframes emsweep { to { transform: rotate(360deg); } }
+  .slide.active .v-sweep { animation: emsweep 3.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes emblink { 0%,45%,100%{opacity:.25} 55%,90%{opacity:1} }
+  .slide.active .v-blink { animation: emblink 2.2s ease-in-out infinite; }
+  @keyframes emcut { 0%,60%{opacity:1} 72%,100%{opacity:.12} }
+  .slide.active .v-cut { animation: emcut 3s ease-in-out infinite; }
+  @keyframes emflash { 0%,70%,100%{opacity:0} 82%{opacity:1} }
+  .slide.active .v-flash { animation: emflash 3s ease-in-out infinite; }
+  /* atom-composition line under each molecule kicker */
+  .molatoms { font-family: var(--font-mono); font-size: 0.73rem; color: var(--muted); margin: 0.2rem 0 0.05rem; letter-spacing: 0.01em; }
+  .molatoms .lbl { color: var(--faint); text-transform: uppercase; font-size: 0.58rem; letter-spacing: 0.11em; margin-right: 0.5rem; }
+  .molatoms b { color: var(--jade); font-weight: 600; } .molatoms b.i { color: var(--indigo); } .molatoms .mo { color: var(--faint); }
+  /* the model · ladder rungs */
+  .card .rsvg { width: 100%; height: 44px; margin-bottom: 0.35rem; display: block; }
+  .rung-n { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--faint); }
+  .benefit { font-size: 0.86rem; color: var(--muted); margin: 0.25rem 0 0.1rem; line-height: 1.3; }
+  .benefit .lbl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--jade); border: 1px solid var(--jade-dim); border-radius: 5px; padding: 0.08rem 0.4rem; margin-right: 0.55rem; white-space: nowrap; }
+  .benefit b { color: var(--text); font-weight: 600; }
+  .mono2 { font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0; }
+  .tbl td .mono2, .tbl td.mono2 { color: var(--muted); }
+  .hl { color: var(--indigo); font-weight: 600; }
+  .hl2 { color: var(--jade); font-weight: 600; }
+  /* atoms → bonds → molecules → matter stepper, on every content slide */
+  .chain { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); margin:0.1rem 0 0.35rem; }
+  .chain span { opacity:0.4; }
+  .chain span.on { opacity:1; color:var(--jade); font-weight:600; }
+  .chain span.oni { opacity:1; color:var(--indigo); font-weight:600; }
+  .chain i { font-style:normal; color:var(--border-2); }
+  .di .cap b { color: var(--jade); font-weight: 700; }
+  /* human-labor positioning tag on use-case slides */
+  .labor { font-size: 0.8rem; color: var(--muted); margin: 0.15rem 0 0.05rem; line-height: 1.3; }
+  .labor .lt { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.1rem 0.42rem; border-radius: 5px; font-weight: 600; white-space: nowrap; margin-right: 0.35rem; }
+  .labor .lt.aug { color: var(--jade); border: 1px solid var(--jade-dim); }
+  .labor .lt.auto { color: var(--amber); border: 1px solid var(--amber); }
+  .labor b { color: var(--text); font-weight: 600; }
+  /* the five reasons companies buy — tagged on each use-case slide */
+  .buys { margin: 0.12rem 0 0.05rem; line-height: 1.6; }
+  .buys .bl { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); margin-right: 0.45rem; }
+  .buys .bp { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; color: var(--indigo); border: 1px solid var(--indigo-dim); border-radius: 999px; padding: 0.06rem 0.55rem; margin-right: 0.32rem; }
+
+  /* ---- Cognitum Methods deck ---- */
+  .cog-tag { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.01em; color: var(--muted); }
+  .cog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.42rem 0.9rem; margin-top: 0.55rem; }
+  .cog-card { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.46rem 0.62rem; }
+  .cog-card .cl { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--ink); background: var(--indigo); width: 1.42rem; height: 1.42rem; border-radius: 5px; display: grid; place-items: center; }
+  .cog-card.j .cl { background: var(--jade); }
+  .cog-card .cx { font-size: 0.79rem; color: var(--muted); line-height: 1.28; }
+  .cog-card .cx b { color: var(--text); font-weight: 620; display: block; margin-bottom: 0.03rem; letter-spacing: -0.005em; }
+  .cog-take { margin-top: 0.5rem; padding: 0.55rem 0.8rem; }
+  .cog-take .h { margin-bottom: 0.1rem; }
+  .cog-take p { font-size: 0.9rem; }
+  /* master positioning hears grid */
+  .hears { display: grid; grid-template-columns: auto 1fr; gap: 0.34rem 0.9rem; align-items: baseline; }
+  .hears .hr { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--indigo); text-transform: uppercase; font-weight: 600; }
+  .hears .hh { font-size: 0.92rem; color: var(--muted); }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+    <!-- 1 · HERO -->
+    <section class="slide hero" data-part="Cognitum Methods">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum <small>Role-Specific Methods</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>One company · a method for every seat at the table</span>
+          <h1 class="rise" style="animation-delay:.1s; max-width:none">Cognitum<br><span class="g">Methods</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">The same eight-step method &#8212; <strong>C&#183;O&#183;G&#183;N&#183;I&#183;T&#183;U&#183;M</strong> &#8212; spoken in each leader&#8217;s language. Cognitum is a role-specific method for turning <strong>intelligence into trusted action</strong>.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>29 roles</b></span><span class="chip"><b>8 steps</b></span><span class="chip"><b>1 narrative</b></span>
+          </div>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 380 380" role="img" aria-label="One Cognitum method radiating into many role-specific methods">
+            <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" style="animation-delay:0.00s" x1="190" y1="190" x2="190.0" y2="70.0"/><line class="v-draw" style="animation-delay:0.04s" x1="190" y1="190" x2="250.0" y2="86.1"/><line class="v-draw" style="animation-delay:0.08s" x1="190" y1="190" x2="293.9" y2="130.0"/><line class="v-draw" style="animation-delay:0.12s" x1="190" y1="190" x2="310.0" y2="190.0"/><line class="v-draw" style="animation-delay:0.16s" x1="190" y1="190" x2="293.9" y2="250.0"/><line class="v-draw" style="animation-delay:0.20s" x1="190" y1="190" x2="250.0" y2="293.9"/><line class="v-draw" style="animation-delay:0.24s" x1="190" y1="190" x2="190.0" y2="310.0"/><line class="v-draw" style="animation-delay:0.28s" x1="190" y1="190" x2="130.0" y2="293.9"/><line class="v-draw" style="animation-delay:0.32s" x1="190" y1="190" x2="86.1" y2="250.0"/><line class="v-draw" style="animation-delay:0.36s" x1="190" y1="190" x2="70.0" y2="190.0"/><line class="v-draw" style="animation-delay:0.40s" x1="190" y1="190" x2="86.1" y2="130.0"/><line class="v-draw" style="animation-delay:0.44s" x1="190" y1="190" x2="130.0" y2="86.1"/></g>
+            <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.8"><circle class="v-pop" style="animation-delay:0.00s" cx="190.0" cy="70.0" r="7"/><circle class="v-pop" style="animation-delay:0.04s" cx="250.0" cy="86.1" r="7"/><circle class="v-pop" style="animation-delay:0.08s" cx="293.9" cy="130.0" r="7"/><circle class="v-pop" style="animation-delay:0.12s" cx="310.0" cy="190.0" r="7"/><circle class="v-pop" style="animation-delay:0.16s" cx="293.9" cy="250.0" r="7"/><circle class="v-pop" style="animation-delay:0.20s" cx="250.0" cy="293.9" r="7"/><circle class="v-pop" style="animation-delay:0.24s" cx="190.0" cy="310.0" r="7"/><circle class="v-pop" style="animation-delay:0.28s" cx="130.0" cy="293.9" r="7"/><circle class="v-pop" style="animation-delay:0.32s" cx="86.1" cy="250.0" r="7"/><circle class="v-pop" style="animation-delay:0.36s" cx="70.0" cy="190.0" r="7"/><circle class="v-pop" style="animation-delay:0.40s" cx="86.1" cy="130.0" r="7"/><circle class="v-pop" style="animation-delay:0.44s" cx="130.0" cy="86.1" r="7"/></g>
+            <text x="190.0" y="51.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CEO</text><text x="261.0" y="70.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CIO</text><text x="313.0" y="122.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CTO</text><text x="332.0" y="193.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CFO</text><text x="313.0" y="264.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CISO</text><text x="261.0" y="316.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">Legal</text><text x="190.0" y="335.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">Sales</text><text x="119.0" y="316.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">PM</text><text x="67.0" y="264.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">Data</text><text x="48.0" y="193.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">Risk</text><text x="67.0" y="122.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">CMO</text><text x="119.0" y="70.0" text-anchor="middle" class="slbl slbl-m" style="font-size:9.5px">GM</text>
+            <circle class="v-pulse" cx="190" cy="190" r="40" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2.5"/>
+            <text x="190" y="186" text-anchor="middle" class="slbl sind" style="font-size:12px;font-weight:700">COGNITUM</text>
+            <text x="190" y="200" text-anchor="middle" class="slbl slbl-f" style="font-size:8.5px">one method</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · ANATOMY -->
+    <section class="slide" data-part="Cognitum Methods">
+      <div class="inner">
+        <p class="kick"><span class="n">The anatomy of a method</span> Eight steps, one arc &#8212; from context to outcome</p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify the context</b>Frame the mandate, problem, or pressure — before anything else.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe the reality</b>Look at the current state, signals, and evidence as they actually are.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern the boundaries</b>Set the rules, permissions, and controls the work must respect.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate the complexity</b>Map the dependencies, stakeholders, and systems that must move.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Illuminate the intelligence</b>Surface the insight, options, and decision support that create value.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test before committing</b>Validate, pilot, and prove the behavior against a real bar.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify the stakeholders</b>Align teams and functions around one shared account of the work.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize the outcome</b>Move from discussion to adoption, measurement, and results.</div></div></div>
+        <p class="src" style="margin-top:0.55rem">Every role below runs these same eight steps. Only the <b>vocabulary</b> changes &#8212; a CEO clarifies a strategic mandate; an engineer clones a reference architecture; a CISO classifies risk surfaces. Same method, different language.</p>
+      </div>
+    </section>
+
+    <section class="slide divider" data-part="The C-suite">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 01</div>
+          <h2 class="rise" style="animation-delay:.06s">The C-suite</h2>
+          <p class="sub rise" style="animation-delay:.12s">Eight executive methods — strategy, systems, architecture, AI, finance, operations, security, and law — each hearing Cognitum in its own terms.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>CEO</span><span>CIO</span><span>CTO</span><span>CAIO</span><span>CFO</span><span>COO</span><span>CISO</span><span>Legal</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="COGNITUM method emblem">
+            <circle class="v-halo" cx="150" cy="150" r="52" fill="var(--jade)"/>
+            <g class="v-spinS"><circle cx="150" cy="150" r="112" fill="none" stroke="var(--indigo)" stroke-width="1.3" stroke-dasharray="2 13"/></g>
+            <g font-family="var(--font-mono)" font-size="15" font-weight="700" fill="var(--indigo)" text-anchor="middle"><text x="150.0" y="73.0">C</text><text x="208.0" y="97.0">O</text><text x="232.0" y="155.0">G</text><text x="208.0" y="213.0">N</text><text x="150.0" y="237.0">I</text><text x="92.0" y="213.0">T</text><text x="68.0" y="155.0">U</text><text x="92.0" y="97.0">M</text></g>
+            <circle class="v-pulse" cx="150" cy="150" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="150" y="155" text-anchor="middle" class="slbl sind" style="font-size:11px;font-weight:700">8 STEPS</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CEO Method</span> <span class="cog-tag">For enterprise strategy, market advantage &amp; organizational transformation</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify the strategic mandate</b>Define the business outcome: growth, resilience, speed, efficiency, defensibility, or category leadership.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Orient around market opportunity</b>Connect AI capability to customer value, competitive pressure, and strategic timing.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern the transformation</b>Ensure leadership alignment, executive accountability, risk controls, and operating-model clarity.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate enterprise complexity</b>Identify which divisions, workflows, partners, and systems must change.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Illuminate decision paths</b>Show scenarios, tradeoffs, risks, ROI paths, and likely outcomes before major investment.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Translate into executive action</b>Convert technical possibility into board-level decisions, budgets, priorities, and roadmaps.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify leadership around the model</b>Create shared language between business, technology, risk, finance, and operations.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize the organization</b>Move from AI discussion to adoption, execution, measurement, and competitive advantage.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum helps leadership make better AI decisions before committing capital, people, or reputation.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CIO Method</span> <span class="cog-tag">For enterprise systems, integration, governance &amp; operational reliability</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Catalogue the enterprise landscape</b>Map systems, data flows, vendors, identity layers, cloud environments, and dependencies.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe system readiness</b>Assess telemetry, data quality, integration maturity, security posture, and bottlenecks.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern access and architecture</b>Apply IAM, policy enforcement, compliance, lineage, and enterprise-architecture standards.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Normalize data and workflows</b>Reduce fragmentation across systems, departments, data stores, and business processes.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Integrate intelligence safely</b>Embed AI into existing enterprise systems without creating unmanaged shadow AI.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test resilience and reliability</b>Validate latency, uptime, failure modes, auditability, and operational impact.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify the intelligence layer</b>Create a shared enterprise intelligence fabric across apps, agents, workflows, and memory.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Manage at scale</b>Operate AI with monitoring, controls, cost visibility, support models, and lifecycle governance.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum gives the CIO a controlled path to enterprise AI without chaos, sprawl, or ungoverned automation.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CTO Method</span> <span class="cog-tag">For platform architecture, engineering execution &amp; technical defensibility</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Codify the architecture</b>Define technical primitives, service boundaries, contracts, runtime assumptions, and deployment model.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe runtime behavior</b>Instrument services, agents, models, APIs, infrastructure, and system interactions.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Guard the execution layer</b>Constrain agents, enforce policies, scope permissions, and prevent unsafe autonomous behavior.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate capability routing</b>Route tasks to the right services, agents, tools, models, and infrastructure components.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Implement intelligence primitives</b>Build reusable cognition, memory, retrieval, simulation, validation, and orchestration.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test deterministically</b>Benchmark outputs, validate contracts, run adversarial tests, and prove repeatable behavior.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify engineering surfaces</b>Standardize SDKs, APIs, repos, observability, schemas, and developer workflows.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move to production</b>Deploy through secure, stateless, auditable, cloud-native services.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum turns AI from scattered prototypes into a real technical platform.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CAIO Method</span> <span class="cog-tag">For AI strategy, model governance, adoption &amp; responsible scale</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Charter the AI mandate</b>Define where AI should create value, where it should not operate, and what human-approval boundaries exist.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe AI usage and demand</b>Identify existing AI activity, shadow AI, high-value use cases, adoption friction, and risk exposure.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern models, agents &amp; outputs</b>Establish model policies, human-in-the-loop controls, audit trails, explainability, and escalation paths.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate use-case prioritization</b>Rank AI opportunities by value, risk, feasibility, data readiness, and organizational adoption.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Inspect intelligence quality</b>Evaluate hallucination risk, reasoning quality, relevance, accuracy, bias, and decision usefulness.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Train the organization</b>Educate teams, executives, operators, and practitioners on safe, effective AI use.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify AI operations</b>Align business units, technology, compliance, security, data, and transformation teams.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Measure AI impact</b>Track ROI, productivity, risk reduction, adoption, quality improvement, and strategic outcomes.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum gives the CAIO a repeatable operating model for scaling AI responsibly across the enterprise.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CFO Method</span> <span class="cog-tag">For investment discipline, ROI, cost control &amp; risk-adjusted value</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Calculate the business case</b>Define investment size, expected value, cost drivers, savings, revenue impact, and opportunity cost.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe cost leakage &amp; inefficiency</b>Identify manual work, vendor sprawl, duplicate systems, operational waste, and underused assets.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern spend and exposure</b>Set approval thresholds, cost controls, procurement rules, risk limits, and financial accountability.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Normalize value measurement</b>Create consistent metrics for ROI, productivity, avoided cost, revenue lift, and risk-adjusted return.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Inspect investment scenarios</b>Compare build, buy, partner, defer, or pilot pathways before committing budget.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Track performance against plan</b>Monitor budget variance, realized savings, utilization, adoption, and payback timing.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify finance &amp; technology planning</b>Make AI investment legible across finance, IT, legal, security, and business units.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Monetize the transformation</b>Convert AI capability into margin improvement, new revenue, reduced risk, or enterprise value.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum makes AI financially governable, measurable, and defensible.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">COO Method</span> <span class="cog-tag">For operations, execution, process improvement &amp; organizational throughput</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Capture operational reality</b>Map workflows, bottlenecks, handoffs, delays, exceptions, and failure points.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe process performance</b>Track cycle time, throughput, quality, rework, SLA breaches, and operational friction.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern process change</b>Ensure AI-assisted workflows follow rules, approvals, safety controls, and escalation paths.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate operational dependencies</b>Understand which teams, tools, vendors, and systems must coordinate.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve decision flow</b>Surface better recommendations, faster triage, clearer prioritization, and fewer manual delays.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test workflow impact</b>Pilot changes, measure before/after performance, and validate operational resilience.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify teams &amp; execution layers</b>Connect frontline teams, managers, systems, and executive reporting.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize at scale</b>Roll out proven improvements across business units, regions, and operating teams.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum helps operations leaders turn AI into measurable execution improvement.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">CISO Method</span> <span class="cog-tag">For security, trust, compliance &amp; adversarial resilience</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Classify risk surfaces</b>Identify sensitive systems, data exposure, model access, user permissions, and threat vectors.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe anomalous behavior</b>Monitor prompts, outputs, agent actions, access patterns, drift, abuse signals, and infra events.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern permissions and policy</b>Enforce IAM, least privilege, data boundaries, model-usage policy, and approval gates.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Neutralize unsafe pathways</b>Prevent prompt injection, data leakage, unauthorized tool use, and uncontrolled agent behavior.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Inspect trustworthiness</b>Evaluate provenance, output quality, lineage, explainability, and security posture.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test adversarially</b>Run red-team tests, abuse simulations, policy-bypass attempts, and failure-mode analysis.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify security intelligence</b>Connect AI security with SOC, GRC, cloud security, identity, and compliance programs.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Maintain continuous assurance</b>Keep AI systems monitored, auditable, patchable, and aligned with changing threats.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum makes AI security measurable, enforceable, and operationally defensible.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The C-suite">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief Legal / Compliance</span> <span class="cog-tag">For regulatory exposure, auditability &amp; defensible AI use</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify obligations</b>Identify legal, regulatory, contractual, privacy, industry, and jurisdictional requirements.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe AI decision points</b>Find where AI touches customers, employees, regulated workflows, sensitive data, or material decisions.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern accountability</b>Define ownership, approvals, recordkeeping, policy controls, and escalation procedures.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Narrow permissible use</b>Separate acceptable AI use cases from restricted, high-risk, or prohibited ones.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Interpret exposure</b>Assess legal risk, reputational risk, explainability gaps, and compliance impact.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Trace decisions and evidence</b>Maintain logs, lineage, documentation, model records, and audit-ready evidence.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify legal, risk &amp; tech controls</b>Align policy with actual system behavior, not slideware.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Manage defensibility over time</b>Keep the organization ready for audits, disputes, regulators, and evolving AI laws.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum turns AI governance into evidence, not promises.</p></div>
+      </div>
+    </section>
+
+    <section class="slide divider" data-part="The practitioners">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 02</div>
+          <h2 class="rise" style="animation-delay:.06s">The practitioners</h2>
+          <p class="sub rise" style="animation-delay:.12s">The people who build, ship, and sell it — the same eight steps, expressed as concrete daily discipline.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>Engineer</span><span>Product</span><span>Data / AI</span><span>Sales</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="COGNITUM method emblem">
+            <circle class="v-halo" cx="150" cy="150" r="52" fill="var(--jade)"/>
+            <g class="v-spinS"><circle cx="150" cy="150" r="112" fill="none" stroke="var(--indigo)" stroke-width="1.3" stroke-dasharray="2 13"/></g>
+            <g font-family="var(--font-mono)" font-size="15" font-weight="700" fill="var(--indigo)" text-anchor="middle"><text x="150.0" y="73.0">C</text><text x="208.0" y="97.0">O</text><text x="232.0" y="155.0">G</text><text x="208.0" y="213.0">N</text><text x="150.0" y="237.0">I</text><text x="92.0" y="213.0">T</text><text x="68.0" y="155.0">U</text><text x="92.0" y="97.0">M</text></g>
+            <circle class="v-pulse" cx="150" cy="150" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="150" y="155" text-anchor="middle" class="slbl sind" style="font-size:11px;font-weight:700">8 STEPS</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The practitioners">
+      <div class="inner">
+        <p class="kick"><span class="n">Engineer Method</span> <span class="cog-tag">For builders implementing Cognitum systems</span></p>
+        <div class="cog-grid"><div class="cog-card j"><div class="cl">C</div><div class="cx"><b>Clone the reference architecture</b>Start from approved patterns, templates, contracts, and deployment assumptions.</div></div><div class="cog-card j"><div class="cl">O</div><div class="cx"><b>Observe the service boundaries</b>Understand inputs, outputs, events, APIs, dependencies, and runtime expectations.</div></div><div class="cog-card j"><div class="cl">G</div><div class="cx"><b>Guard with policy</b>Build with explicit auth, permissions, validation, rate limits, and logging.</div></div><div class="cog-card j"><div class="cl">N</div><div class="cx"><b>Normalize interfaces</b>Use shared schemas, typed contracts, consistent payloads, and clean service wrappers.</div></div><div class="cog-card j"><div class="cl">I</div><div class="cx"><b>Implement the smallest working unit</b>Build narrow, testable components instead of broad autonomous systems.</div></div><div class="cog-card j"><div class="cl">T</div><div class="cx"><b>Test every boundary</b>Unit test, integration test, contract test, regression test, and failure test.</div></div><div class="cog-card j"><div class="cl">U</div><div class="cx"><b>Use shared infrastructure</b>Avoid isolated databases, duplicated logic, and unmanaged side channels.</div></div><div class="cog-card j"><div class="cl">M</div><div class="cx"><b>Merge with evidence</b>Ship only with passing tests, documentation, observability, and a rollback path.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum gives builders a disciplined way to ship AI infrastructure without creating technical debt.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The practitioners">
+      <div class="inner">
+        <p class="kick"><span class="n">Product Manager Method</span> <span class="cog-tag">For translating AI capability into usable products</span></p>
+        <div class="cog-grid"><div class="cog-card j"><div class="cl">C</div><div class="cx"><b>Clarify the user problem</b>Define the decision, workflow, pain point, and job-to-be-done.</div></div><div class="cog-card j"><div class="cl">O</div><div class="cx"><b>Observe user behavior</b>Study how users currently work, decide, escalate, approve, and recover from errors.</div></div><div class="cog-card j"><div class="cl">G</div><div class="cx"><b>Govern product boundaries</b>Define what the product can recommend, automate, block, or require approval for.</div></div><div class="cog-card j"><div class="cl">N</div><div class="cx"><b>Narrow the first use case</b>Choose the highest-value, lowest-risk workflow to prove adoption.</div></div><div class="cog-card j"><div class="cl">I</div><div class="cx"><b>Identify the intelligence moment</b>Pinpoint where AI creates the most useful insight, recommendation, or decision support.</div></div><div class="cog-card j"><div class="cl">T</div><div class="cx"><b>Test with real users</b>Validate usefulness, trust, clarity, accuracy, and workflow fit.</div></div><div class="cog-card j"><div class="cl">U</div><div class="cx"><b>Unify product, policy &amp; engineering</b>Make sure UX, controls, data, and system behavior all match.</div></div><div class="cog-card j"><div class="cl">M</div><div class="cx"><b>Measure adoption and value</b>Track usage, retention, time saved, decision quality, and expansion potential.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum keeps AI products focused on trust, adoption, and measurable user value.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The practitioners">
+      <div class="inner">
+        <p class="kick"><span class="n">Data / AI Team Method</span> <span class="cog-tag">For model quality, retrieval, memory &amp; intelligence evaluation</span></p>
+        <div class="cog-grid"><div class="cog-card j"><div class="cl">C</div><div class="cx"><b>Curate the knowledge base</b>Identify trusted sources, data boundaries, memory rules, and retrieval priorities.</div></div><div class="cog-card j"><div class="cl">O</div><div class="cx"><b>Observe data behavior</b>Track freshness, coverage, drift, bias, gaps, duplication, and retrieval failures.</div></div><div class="cog-card j"><div class="cl">G</div><div class="cx"><b>Govern data use</b>Control access, privacy, retention, lineage, and allowed model interactions.</div></div><div class="cog-card j"><div class="cl">N</div><div class="cx"><b>Normalize knowledge structures</b>Create embeddings, schemas, labels, entities, metadata, and reusable memory objects.</div></div><div class="cog-card j"><div class="cl">I</div><div class="cx"><b>Improve intelligence quality</b>Optimize retrieval, ranking, reasoning chains, relevance, and answer usefulness.</div></div><div class="cog-card j"><div class="cl">T</div><div class="cx"><b>Test against benchmarks</b>Evaluate accuracy, hallucination, grounding, latency, and regression.</div></div><div class="cog-card j"><div class="cl">U</div><div class="cx"><b>Unify memory and context</b>Connect knowledge, documents, workflows, simulations, agents, and outputs.</div></div><div class="cog-card j"><div class="cl">M</div><div class="cx"><b>Monitor continuously</b>Measure performance, drift, feedback, failures, and improvement loops.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum gives AI teams a structured way to make intelligence accurate, governed, and reusable.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The practitioners">
+      <div class="inner">
+        <p class="kick"><span class="n">Sales / Revenue Leader Method</span> <span class="cog-tag">For commercial storytelling, buyer alignment &amp; enterprise expansion</span></p>
+        <div class="cog-grid"><div class="cog-card j"><div class="cl">C</div><div class="cx"><b>Clarify the buyer's pressure</b>Identify what the buyer is trying to protect, improve, reduce, or accelerate.</div></div><div class="cog-card j"><div class="cl">O</div><div class="cx"><b>Observe decision signals</b>Listen for budget triggers, risk concerns, stalled initiatives, internal politics, and urgency.</div></div><div class="cog-card j"><div class="cl">G</div><div class="cx"><b>Ground the conversation in governance</b>Show that Cognitum is not reckless automation — it is controlled intelligence.</div></div><div class="cog-card j"><div class="cl">N</div><div class="cx"><b>Navigate stakeholders</b>Map CEO, CIO, CTO, CFO, CAIO, legal, security, and practitioner concerns.</div></div><div class="cog-card j"><div class="cl">I</div><div class="cx"><b>Illuminate the business case</b>Connect Cognitum to ROI, speed, risk reduction, transformation, and defensibility.</div></div><div class="cog-card j"><div class="cl">T</div><div class="cx"><b>Translate technical value</b>Turn architecture into outcomes each buyer understands.</div></div><div class="cog-card j"><div class="cl">U</div><div class="cx"><b>Unify the buying committee</b>Create one shared narrative across strategy, finance, technology, risk, and operations.</div></div><div class="cog-card j"><div class="cl">M</div><div class="cx"><b>Move to commitment</b>Advance from interest to pilot, proof, executive review, commercial terms, and expansion.</div></div></div>
+        <div class="callout cog-take" style="border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Takeaway</div><p>Cognitum becomes a sales methodology for aligning complex enterprise buyers.</p></div>
+      </div>
+    </section>
+
+    <!-- MASTER POSITIONING -->
+    <section class="slide" data-part="The master positioning">
+      <div class="inner">
+        <p class="kick"><span class="n">The master positioning</span> One company &#8212; a different meaning to each leader, without losing the master narrative</p>
+        <div class="split vr top">
+          <div class="hears" style="align-self:center"><div class="hr">CEO</div><div class="hh">Strategy, transformation, market advantage.</div><div class="hr">CIO</div><div class="hh">Systems, governance, integration, scale.</div><div class="hr">CTO</div><div class="hh">Architecture, reliability, platform execution.</div><div class="hr">CAIO</div><div class="hh">Responsible AI adoption and operating model.</div><div class="hr">CFO</div><div class="hh">ROI, budget control, risk-adjusted return.</div><div class="hr">CISO</div><div class="hh">Security, trust, policy, adversarial resilience.</div><div class="hr">Legal</div><div class="hh">Auditability, defensibility, compliance.</div><div class="hr">Practitioners</div><div class="hh">Clear steps to build, test, deploy &amp; improve.</div></div>
+          <div style="align-self:center">
+            <div class="bigquote" style="padding:1.2rem 1.4rem"><p style="font-size:1.55rem">Cognitum is a <span class="g">role-specific method</span> for turning intelligence into trusted action.</p></div>
+            <p class="src" style="margin-top:0.7rem">The power of the model: Cognitum can mean something different to every executive &#8212; strategy, systems, architecture, ROI, security, compliance &#8212; while every one of them is running the <b>same eight-step method</b>. One narrative, spoken in eight languages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide divider" data-part="Every other seat">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">PART 03</div>
+          <h2 class="rise" style="animation-delay:.06s">Every other seat</h2>
+          <p class="sub rise" style="animation-delay:.12s">The same method scales to the whole enterprise — the board, the revenue engine, the back office, the plant floor, and the delivery teams.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>Board</span><span>CRO / CMO</span><span>People &amp; Customer</span><span>Ops &amp; Supply</span><span>Delivery &amp; PMO</span></div>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="COGNITUM method emblem">
+            <circle class="v-halo" cx="150" cy="150" r="52" fill="var(--jade)"/>
+            <g class="v-spinS"><circle cx="150" cy="150" r="112" fill="none" stroke="var(--indigo)" stroke-width="1.3" stroke-dasharray="2 13"/></g>
+            <g font-family="var(--font-mono)" font-size="15" font-weight="700" fill="var(--indigo)" text-anchor="middle"><text x="150.0" y="73.0">C</text><text x="208.0" y="97.0">O</text><text x="232.0" y="155.0">G</text><text x="208.0" y="213.0">N</text><text x="150.0" y="237.0">I</text><text x="92.0" y="213.0">T</text><text x="68.0" y="155.0">U</text><text x="92.0" y="97.0">M</text></g>
+            <circle class="v-pulse" cx="150" cy="150" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="150" y="155" text-anchor="middle" class="slbl sind" style="font-size:11px;font-weight:700">8 STEPS</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Board Member / Investor / Strategic Advisor</span> <span class="cog-tag">Risk, enterprise value, defensibility &amp; capital allocation</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Confirm the strategic thesis</b>Clarify why Cognitum matters to the company's long-term value.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe the value drivers</b>Identify where AI can improve margins, revenue, resilience, speed, or defensibility.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern downside exposure</b>Ensure adoption does not create unmanaged legal, financial, operational, or reputational risk.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate capital priorities</b>Compare Cognitum against competing investments, transformation programs, and initiatives.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Inspect enterprise impact</b>Evaluate whether the system improves the company's competitive position.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test the investment logic</b>Validate assumptions, payback path, adoption risk, and execution feasibility.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify board &amp; management</b>Align leadership around value, risk, timelines, and measurable outcomes.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Monitor strategic performance</b>Track whether Cognitum is creating real enterprise value over time.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief Revenue Officer / VP Revenue</span> <span class="cog-tag">Revenue growth, pipeline quality &amp; commercial execution</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify revenue pressure</b>Identify whether the priority is pipeline, conversion, expansion, retention, speed, or forecast accuracy.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe buyer behavior</b>Track customer signals, stalled deals, objections, urgency, and buying-committee movement.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern commercial discipline</b>Ensure sales activity, messaging, pricing, and approvals remain consistent.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate the buying committee</b>Map stakeholders, concerns, influence, blockers, and decision paths.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Illuminate deal strategy</b>Surface the next best action, risk areas, business-case gaps, and expansion paths.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test messaging and offers</b>Validate which narratives, proofs, use cases, and proposals move deals forward.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify sales, marketing &amp; delivery</b>Keep the revenue engine aligned around what is actually sold and delivered.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move revenue forward</b>Turn intelligence into pipeline progression, closed deals, and account expansion.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief Marketing Officer / VP Marketing</span> <span class="cog-tag">Positioning, demand generation, category creation &amp; brand trust</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify the market message</b>Define what Cognitum means to the buyer and why it matters now.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe market signals</b>Track buyer language, objections, competitor claims, search behavior, and campaign performance.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern the brand narrative</b>Keep messaging accurate, defensible, compliant, and aligned with what the product can prove.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate audience segments</b>Adapt the story for enterprise leaders, technical buyers, practitioners, partners, and analysts.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Identify resonance</b>Find which messages create understanding, urgency, trust, and conversion.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test campaigns and content</b>Validate positioning, hooks, landing pages, webinars, case studies, and collateral.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify market education</b>Ensure website, decks, social, events, and partner messaging tell one coherent story.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize demand</b>Turn positioning into awareness, qualified pipeline, and category authority.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief HR Officer / Chief People Officer</span> <span class="cog-tag">Workforce adoption, change management &amp; capability building</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify workforce impact</b>Define how Cognitum changes roles, workflows, skills, productivity, and employee experience.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe adoption readiness</b>Assess team confidence, training gaps, resistance, fears, and workflow friction.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern responsible workforce use</b>Set boundaries around employee data, decision support, approvals, fairness, and accountability.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate change management</b>Sequence adoption across teams, managers, functions, and operating rhythms.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve employee capability</b>Support training, knowledge access, better decisions, and faster execution.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Train for confident adoption</b>Give employees practical guidance, safe-use patterns, and role-specific enablement.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify people, process &amp; tech</b>Align HR, leadership, IT, legal, security, and department managers.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Measure workforce outcomes</b>Track productivity, adoption, satisfaction, retention, skills growth, and performance.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief Customer Officer / VP Customer Success</span> <span class="cog-tag">Retention, expansion, customer outcomes &amp; service quality</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify customer outcomes</b>Define what success means for each account, segment, or customer journey.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe customer health</b>Track usage, sentiment, tickets, delays, complaints, expansion signals, and churn risk.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern customer commitments</b>Ensure promises, SLAs, escalations, and support actions are visible and accountable.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate account risk</b>Identify blockers, executive concerns, adoption gaps, and renewal threats.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Illuminate next best action</b>Recommend interventions, expansion paths, enablement, and support priorities.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test success motions</b>Validate onboarding, training, escalation, renewal, and expansion playbooks.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify customer intelligence</b>Connect sales, support, product, implementation, and account management.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Maximize lifetime value</b>Turn intelligence into retention, renewals, expansion, and stronger relationships.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Chief Procurement Officer / Head of Procurement</span> <span class="cog-tag">Vendor selection, contract control &amp; sourcing discipline</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify sourcing requirements</b>Define business need, technical fit, budget, risk profile, and procurement constraints.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe vendor landscape</b>Compare providers, claims, pricing models, contractual terms, and delivery credibility.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern vendor risk</b>Apply security, privacy, compliance, financial, and contractual review standards.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate approval pathways</b>Coordinate IT, finance, legal, security, operations, and executive signoff.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Inspect value and fit</b>Evaluate total cost, implementation burden, vendor maturity, and strategic alignment.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test proof requirements</b>Require demos, pilots, references, security reviews, and measurable success criteria.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify stakeholders on selection</b>Create a clean decision record across technical, commercial, legal, and risk teams.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Manage supplier performance</b>Track delivery, adoption, value realization, contract obligations, and renewal readiness.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Transformation</span> <span class="cog-tag">Enterprise change, modernization, adoption &amp; execution</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify transformation scope</b>Define which processes, systems, teams, and outcomes must change.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe organizational friction</b>Identify blockers, duplicated efforts, legacy processes, resistance, and execution gaps.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern the transformation roadmap</b>Set ownership, milestones, controls, risk gates, and decision rights.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate dependencies</b>Coordinate business units, technology teams, vendors, policies, and operating rhythms.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Identify high-leverage workflows</b>Find where Cognitum can create the fastest measurable improvement.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test transformation increments</b>Pilot, measure, refine, and expand only after proof.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify change efforts</b>Connect strategy, operations, technology, finance, and communications.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize enterprise adoption</b>Scale what works across departments, regions, and business units.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Innovation / Emerging Tech</span> <span class="cog-tag">Pilots, experimentation, future capability &amp; competitive edge</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify the innovation thesis</b>Define what new capability, market advantage, or operating model Cognitum could unlock.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe emerging signals</b>Track new technologies, customer expectations, competitor moves, and internal opportunity areas.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern experimentation</b>Keep pilots safe, bounded, measurable, and aligned with enterprise priorities.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate from idea to proof</b>Move concepts through discovery, prototype, pilot, evaluation, and scale decision.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Investigate use-case potential</b>Explore where intelligence can create new products, workflows, services, or revenue models.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test assumptions quickly</b>Validate feasibility, desirability, viability, risk, and adoption.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify innovators &amp; operators</b>Bridge future-looking ideas with the teams that must actually run them.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move proven concepts into the business</b>Turn experiments into funded programs, production systems, or offerings.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Risk / Enterprise Risk Leader</span> <span class="cog-tag">Operational risk, model risk, governance &amp; resilience</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Classify risk domains</b>Identify operational, financial, regulatory, model, third-party, cyber, and reputational risks.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe risk signals</b>Monitor anomalies, weak controls, process failures, exposure changes, and emerging threats.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern risk controls</b>Define thresholds, approvals, escalation paths, policy requirements, and evidence standards.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate control gaps</b>Locate where existing systems, people, or processes fail to manage exposure.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Interpret risk impact</b>Assess likelihood, severity, velocity, dependencies, and business consequences.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test resilience</b>Run scenarios, stress tests, failure simulations, and control validations.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify risk intelligence</b>Connect risk, compliance, security, finance, operations, and executive reporting.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Maintain assurance</b>Keep controls observable, auditable, and continuously updated.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Operations Technology / OT</span> <span class="cog-tag">Industrial systems, edge environments, reliability &amp; safety</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Catalogue operational assets</b>Map machines, sensors, facilities, networks, edge devices, and control systems.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe physical-digital signals</b>Track equipment behavior, environmental conditions, downtime, anomalies, and safety signals.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern operational boundaries</b>Separate advisory intelligence from control authority unless explicitly approved.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate site constraints</b>Account for latency, connectivity, safety requirements, legacy equipment, and environment.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Interpret operating conditions</b>Identify patterns, risks, maintenance needs, process issues, and abnormal behavior.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test safely before deployment</b>Validate in simulation, shadow mode, controlled pilots, and site-specific conditions.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify edge &amp; enterprise intelligence</b>Connect plant-floor signals with business systems, reporting, and decision support.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Maintain reliable operations</b>Improve uptime, safety, efficiency, and response speed.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Supply Chain / Logistics</span> <span class="cog-tag">Visibility, resilience, cost &amp; fulfillment performance</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify supply-chain priorities</b>Define the focus: cost, resilience, inventory, speed, supplier risk, or service levels.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe supply-chain signals</b>Track demand shifts, supplier delays, inventory movement, logistics events, and disruption risk.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern supplier &amp; process controls</b>Set approval rules, quality standards, compliance requirements, and escalation paths.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate dependencies</b>Map supplier tiers, routes, warehouses, production constraints, and customer commitments.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve planning intelligence</b>Surface demand risks, bottlenecks, replenishment needs, and scenario options.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test disruption scenarios</b>Model delays, shortages, demand spikes, route failures, and supplier changes.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify planning &amp; execution</b>Connect procurement, inventory, logistics, operations, finance, and commitments.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move goods more reliably</b>Improve fulfillment, cost control, resilience, and service performance.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Support / Service Operations</span> <span class="cog-tag">Ticket resolution, customer experience &amp; service efficiency</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Capture service demand</b>Understand ticket volume, issue types, customer segments, urgency, and escalation patterns.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe service performance</b>Track resolution time, backlog, repeat issues, sentiment, SLA breaches, and handoff friction.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern response quality</b>Ensure recommendations are accurate, approved, consistent, and escalation-aware.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate knowledge sources</b>Route agents and staff to the right documentation, account history, policies, and experts.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve resolution intelligence</b>Suggest fixes, summarize context, classify issues, and identify root causes.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test support playbooks</b>Validate responses, workflows, routing rules, and escalation logic.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify service knowledge</b>Connect tickets, docs, CRM, product feedback, account data, and reporting.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Measure service improvement</b>Track faster resolution, lower backlog, improved CSAT, and reduced repeat issues.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Partnerships / Channel Leader</span> <span class="cog-tag">Ecosystem growth, partner enablement &amp; co-selling</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify partner strategy</b>Define which partners matter: technology, channel, implementation, marketplace, alliance, or reseller.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe partner signals</b>Track partner activity, deal flow, enablement gaps, co-sell behavior, and market overlap.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern partner commitments</b>Set rules for data sharing, customer ownership, pricing, messaging, and delivery responsibility.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate ecosystem fit</b>Map where Cognitum complements partner platforms, services, and customer relationships.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Illuminate co-sell value</b>Show how the partnership creates new revenue, stickier accounts, or faster adoption.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test partner motions</b>Pilot joint offers, referral flows, marketplace listings, and enablement materials.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify partner operations</b>Align sales, product, marketing, legal, delivery, and support.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Mobilize ecosystem growth</b>Turn partnerships into pipeline, implementations, marketplace traction, and expansion.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Implementation / Delivery</span> <span class="cog-tag">Deployment success, customer rollout &amp; project risk</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify delivery scope</b>Define what must be delivered, by whom, by when, with what success criteria.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe implementation readiness</b>Assess customer data, systems, integrations, stakeholder availability, and constraints.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern project execution</b>Set approvals, milestones, change controls, escalation paths, and delivery accountability.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate dependencies</b>Coordinate customer teams, internal teams, vendors, security reviews, and technical blockers.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Identify delivery risks early</b>Surface missing inputs, unclear ownership, adoption gaps, and scope creep.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test deployment conditions</b>Validate integrations, permissions, performance, workflows, and user acceptance.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify delivery communication</b>Keep sales, product, engineering, customer success, and stakeholders aligned.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move to successful adoption</b>Complete rollout, confirm value, document learnings, and prepare expansion.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Head of Training / Enablement</span> <span class="cog-tag">Education, adoption, internal capability &amp; consistent execution</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify learning outcomes</b>Define what each audience must understand, do, decide, or avoid.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe knowledge gaps</b>Identify confusion, inconsistent usage, weak process adoption, and training needs.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern enablement standards</b>Ensure training matches policy, product truth, approved messaging, and compliance rules.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate learner groups</b>Adapt education for executives, managers, technical teams, operators, sellers, and partners.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve comprehension</b>Use role-specific examples, simulations, workflows, and decision guides.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test capability</b>Assess whether learners can apply the method, not just repeat the content.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify enablement materials</b>Align training, documentation, sales collateral, onboarding, and support resources.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Measure adoption readiness</b>Track completion, confidence, usage, performance, and behavior change.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Program Manager / PMO Leader</span> <span class="cog-tag">Governance, milestones, dependencies &amp; execution rhythm</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify program objectives</b>Define scope, outcomes, milestones, owners, budget, and success criteria.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe execution status</b>Track blockers, risks, dependencies, delays, resource constraints, and decision bottlenecks.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern cadence &amp; accountability</b>Set operating rhythms, decision rights, reporting, risk logs, and change controls.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate cross-functional deps</b>Coordinate business, technology, legal, finance, security, vendors, and delivery teams.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Identify execution gaps</b>Surface unclear ownership, missed handoffs, scope drift, and unresolved decisions.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Track against plan</b>Measure progress, variance, risk movement, and readiness for next milestones.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify reporting</b>Create one source of truth for leadership, teams, and stakeholders.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Move the program forward</b>Convert visibility into decisions, actions, and delivery progress.</div></div></div>
+        
+      </div>
+    </section>
+
+    <section class="slide" data-part="Every other seat">
+      <div class="inner">
+        <p class="kick"><span class="n">Business Unit Leader / GM</span> <span class="cog-tag">Department performance, practical outcomes &amp; operational adoption</span></p>
+        <div class="cog-grid"><div class="cog-card"><div class="cl">C</div><div class="cx"><b>Clarify business-unit goals</b>Define the performance improvement needed: revenue, cost, speed, quality, service, or risk reduction.</div></div><div class="cog-card"><div class="cl">O</div><div class="cx"><b>Observe local workflows</b>Understand how the team actually operates, decides, escalates, and measures success.</div></div><div class="cog-card"><div class="cl">G</div><div class="cx"><b>Govern practical use</b>Set boundaries for what Cognitum can recommend, automate, or require approval for.</div></div><div class="cog-card"><div class="cl">N</div><div class="cx"><b>Navigate team impact</b>Identify which roles, workflows, customers, and systems will be affected.</div></div><div class="cog-card"><div class="cl">I</div><div class="cx"><b>Improve daily decisions</b>Prioritize work, reduce friction, and improve management visibility.</div></div><div class="cog-card"><div class="cl">T</div><div class="cx"><b>Test in the real environment</b>Pilot with real users, real data, and measurable before/after comparisons.</div></div><div class="cog-card"><div class="cl">U</div><div class="cx"><b>Unify the team around adoption</b>Align managers, operators, support teams, and leadership reporting.</div></div><div class="cog-card"><div class="cl">M</div><div class="cx"><b>Measure business improvement</b>Track outcomes that matter to the department, not abstract AI metrics.</div></div></div>
+        
+      </div>
+    </section>
+
+    <!-- CLOSE -->
+    <section class="slide" data-part="The unifying line">
+      <div class="inner" style="justify-content:center">
+        <div style="text-align:center; max-width:60ch; margin:0 auto">
+          <p class="kick" style="justify-content:center"><span class="n">The unifying line</span></p>
+          <div class="bigquote" style="margin-top:0.8rem; text-align:left"><p>Cognitum is a <span class="g">role-specific method</span> for turning intelligence into trusted action.</p></div>
+          <div class="chips" style="justify-content:center; margin-top:1.1rem">
+            <span class="chip"><b>C</b>larify</span><span class="chip"><b>O</b>bserve</span><span class="chip"><b>G</b>overn</span><span class="chip"><b>N</b>avigate</span><span class="chip"><b>I</b>lluminate</span><span class="chip"><b>T</b>est</span><span class="chip"><b>U</b>nify</span><span class="chip"><b>M</b>obilize</span>
+          </div>
+          <p class="src" style="margin-top:1.1rem; text-align:center">29 roles &#183; one eight-step method &#183; one master narrative.</p>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">Cognitum · Role-Specific Methods</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+
+</body>
+</html>
