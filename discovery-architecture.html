@@ -482,12 +482,40 @@
     <section class="slide" data-part="Why diagnose">
       <div class="inner">
         <p class="kick"><span class="n">A product question is not permission for a product tour</span></p>
-        <div class="bigquote i"><p>Buyer: &#8220;So what does Cognitum actually do?&#8221;</p></div>
-        <div class="versus" style="margin-top:0.8rem">
-          <div class="vcol"><div class="vlbl" style="color:var(--crit)">Weak response</div><p class="mut">Explain everything. Hand the design work back to the buyer with a catalog tour.</p></div>
-          <div class="vcol"><div class="vlbl" style="color:var(--jade)">Diagnostic response</div><p class="mut">&#8220;I&#39;ll make room for that. First, can I understand the problem behind the question, so I only show what is relevant?&#8221;</p></div>
+        <div class="bigquote i" style="padding:1.1rem 1.4rem"><p style="font-size:1.7rem">Buyer: &#8220;So what does Cognitum actually do?&#8221;</p></div>
+        <div class="grid g2" style="margin-top:0.8rem; gap:1rem">
+          <div class="card c">
+            <div class="ct" style="color:var(--crit)">Weak response — the catalog tour</div>
+            <div class="cd">&#8220;Let me show you everything.&#8221; Every capability fires at once; the buyer is handed the design work back.</div>
+            <svg viewBox="0 0 320 118" role="img" aria-label="One question fans out to every product at once" style="width:100%;height:auto;margin-top:0.55rem;display:block">
+              <defs><marker id="s4a" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0 0 L6 3.5 L0 7 z" fill="var(--crit)" opacity="0.7"/></marker></defs>
+              <rect x="6" y="46" width="66" height="26" rx="7" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="39" y="62" text-anchor="middle" class="slbl sind">question</text>
+              <line x1="74" y1="59" x2="196" y2="18" stroke="var(--crit)" stroke-width="1.2" opacity="0.55" marker-end="url(#s4a)"/>
+              <line x1="74" y1="59" x2="196" y2="45" stroke="var(--crit)" stroke-width="1.2" opacity="0.55" marker-end="url(#s4a)"/>
+              <line x1="74" y1="59" x2="196" y2="72" stroke="var(--crit)" stroke-width="1.2" opacity="0.55" marker-end="url(#s4a)"/>
+              <line x1="74" y1="59" x2="196" y2="99" stroke="var(--crit)" stroke-width="1.2" opacity="0.55" marker-end="url(#s4a)"/>
+              <rect x="200" y="6"  width="110" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="255" y="21" text-anchor="middle" class="slbl slbl-m">RuFlo · orchestrate</text>
+              <rect x="200" y="33" width="110" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="255" y="48" text-anchor="middle" class="slbl slbl-m">RuVector · remember</text>
+              <rect x="200" y="60" width="110" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="255" y="75" text-anchor="middle" class="slbl slbl-m">MetaHarness · govern</text>
+              <rect x="200" y="87" width="110" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="255" y="102" text-anchor="middle" class="slbl slbl-m">RuView · sense</text>
+            </svg>
+          </div>
+          <div class="card j">
+            <div class="ct" style="color:var(--jade)">Diagnostic response — one lane</div>
+            <div class="cd">&#8220;I&#39;ll make room for that — first, can I understand the problem behind the question, so I only show what&#39;s relevant?&#8221;</div>
+            <svg viewBox="0 0 320 118" role="img" aria-label="The question passes through a diagnosis filter that selects one bounded lane" style="width:100%;height:auto;margin-top:0.55rem;display:block">
+              <defs><marker id="s4b" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0 0 L6 3.5 L0 7 z" fill="var(--jade)"/></marker></defs>
+              <rect x="6" y="46" width="66" height="26" rx="7" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="39" y="62" text-anchor="middle" class="slbl sind">question</text>
+              <line x1="74" y1="59" x2="104" y2="59" stroke="var(--faint)" stroke-width="1.3" marker-end="url(#s4b)"/>
+              <path d="M110 30 L166 44 L166 74 L110 88 Z" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.2" class="v-halo"/><text x="138" y="62" text-anchor="middle" class="slbl sok">diagnose</text>
+              <line x1="168" y1="59" x2="198" y2="59" stroke="var(--jade)" stroke-width="1.4" marker-end="url(#s4b)"/>
+              <rect x="202" y="33" width="112" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)" opacity="0.4"/><text x="258" y="48" text-anchor="middle" class="slbl slbl-f" opacity="0.5">not this</text>
+              <rect x="200" y="46" width="116" height="26" rx="7" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.5"/><text x="258" y="62" text-anchor="middle" class="slbl sok">one bounded lane</text>
+              <rect x="202" y="61" width="112" height="24" rx="6" fill="var(--surface)" stroke="var(--border-2)" opacity="0.4"/><text x="258" y="76" text-anchor="middle" class="slbl slbl-f" opacity="0.5">not this</text>
+            </svg>
+          </div>
         </div>
-        <div class="callout" style="margin-top:0.85rem; border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Rule</div><p>Answer relevance, not curiosity. The RuvNet ecosystem is broad — RuFlo orchestrates, RuVector remembers, MetaHarness governs, RuView senses. Breadth tempts a tour; discovery earns the right to select <strong>one lane, one bounded evaluation</strong>.</p></div>
+        <div class="callout" style="margin-top:0.7rem; border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Rule</div><p>Answer relevance, not curiosity. The RuvNet ecosystem is broad — RuFlo orchestrates, RuVector remembers, MetaHarness governs, RuView senses. Breadth tempts a tour; discovery earns the right to select <strong>one lane, one bounded evaluation</strong>.</p></div>
       </div>
     </section>
 
