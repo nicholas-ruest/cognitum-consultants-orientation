@@ -1,0 +1,1360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Diagnose: The Discovery Architecture — a Cognitum University sales-doctrine course that turns an ambiguous AI concern into a bounded, measurable, decision-ready evaluation.">
+<meta name="color-scheme" content="dark light">
+<title>Diagnose · The Discovery Architecture</title>
+<title>Diagnose · The Discovery Architecture</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+
+  /* ---- HarnessaaS deck helpers ---- */
+  .card .ct { font-weight: 650; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text); }
+  .card.mini { padding: 0.7rem 0.8rem; }
+  .card.mini .ct { font-size: 0.9rem; }
+  .card .cd { color: var(--muted); font-size: 0.85rem; line-height: 1.34; }
+  .card.mini .cd { font-size: 0.8rem; line-height: 1.3; }
+  .card.j { border-color: var(--jade-dim); } .card.i { border-color: var(--indigo-dim); }
+  .card.a { border-color: var(--amber); } .card.c { border-color: var(--crit); }
+  .uh { border-left-color: var(--indigo) !important; background: var(--indigo-wash) !important; }
+  .flow.sm .node { padding: 0.6rem 0.6rem; }
+  .flow.sm .node b { font-size: 0.86rem; } .flow.sm .node span { font-size: 0.68rem; }
+  .flow.sm .harrow { padding: 0 0.26rem; font-size: 0.72rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 600; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-2); }
+  .tbl td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.3; }
+  .tbl td:first-child { color: var(--text); font-weight: 560; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl.sm { font-size: 0.84rem; } .tbl.sm td { padding: 0.4rem 0.7rem; } .tbl.sm th { padding: 0.38rem 0.7rem; }
+  .tbl .j { color: var(--jade); } .tbl .i { color: var(--indigo); } .tbl .c { color: var(--crit); }
+  .mat { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.16rem 0.55rem; border-radius: 6px; border: 1px solid var(--border-2); color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .mat.ship { color: var(--jade); border-color: var(--jade); }
+  .mat.pilot { color: var(--indigo); border-color: var(--indigo); }
+  .mat.gate { color: var(--amber); border-color: var(--amber); }
+  .mat.plan { color: var(--faint); border-color: var(--border-2); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
+  .num-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+  .num-card .ni { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--ink); background: var(--indigo); width: 1.4rem; height: 1.4rem; border-radius: 5px; display: grid; place-items: center; }
+  .num-card.j .ni { background: var(--jade); }
+  .num-card .nt { font-size: 0.86rem; color: var(--muted); line-height: 1.28; }
+  .num-card .nt b { color: var(--text); }
+
+  /* ---- Enterprise Matter additions ---- */
+  .g6 { grid-template-columns: repeat(6,1fr); }
+  .atomchip { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.74rem; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:0.28rem 0.7rem; }
+  .atomchip .dotm { width:8px; height:8px; border-radius:50%; background:var(--jade); }
+  .hyp { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.04em; color:var(--amber); margin-top:0.7rem; }
+  .tbl.tiny { font-size:0.78rem; } .tbl.tiny td { padding:0.34rem 0.6rem; } .tbl.tiny th { padding:0.32rem 0.6rem; }
+
+  /* ---- Enterprise Matter · dynamic subject-specific scenes ---- */
+  .di.scene { padding: 0.45rem 0.65rem; gap: 0.25rem; }
+  .di.scene svg { width: 100%; height: auto; display: block; }
+  .di.scene .cap { margin-bottom: 0.05rem; }
+  .slbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.02em; }
+  .slbl-t { fill: var(--text); } .slbl-f { fill: var(--faint); } .slbl-m { fill: var(--muted); }
+  .sok { fill: var(--jade); } .swarn { fill: var(--amber); } .sbad { fill: var(--crit); } .sind { fill: var(--indigo); }
+  @keyframes emsweep { to { transform: rotate(360deg); } }
+  .slide.active .v-sweep { animation: emsweep 3.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes emblink { 0%,45%,100%{opacity:.25} 55%,90%{opacity:1} }
+  .slide.active .v-blink { animation: emblink 2.2s ease-in-out infinite; }
+  @keyframes emcut { 0%,60%{opacity:1} 72%,100%{opacity:.12} }
+  .slide.active .v-cut { animation: emcut 3s ease-in-out infinite; }
+  @keyframes emflash { 0%,70%,100%{opacity:0} 82%{opacity:1} }
+  .slide.active .v-flash { animation: emflash 3s ease-in-out infinite; }
+  /* atom-composition line under each molecule kicker */
+  .molatoms { font-family: var(--font-mono); font-size: 0.73rem; color: var(--muted); margin: 0.2rem 0 0.05rem; letter-spacing: 0.01em; }
+  .molatoms .lbl { color: var(--faint); text-transform: uppercase; font-size: 0.58rem; letter-spacing: 0.11em; margin-right: 0.5rem; }
+  .molatoms b { color: var(--jade); font-weight: 600; } .molatoms b.i { color: var(--indigo); } .molatoms .mo { color: var(--faint); }
+  /* the model · ladder rungs */
+  .card .rsvg { width: 100%; height: 44px; margin-bottom: 0.35rem; display: block; }
+  .rung-n { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--faint); }
+  .benefit { font-size: 0.86rem; color: var(--muted); margin: 0.25rem 0 0.1rem; line-height: 1.3; }
+  .benefit .lbl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--jade); border: 1px solid var(--jade-dim); border-radius: 5px; padding: 0.08rem 0.4rem; margin-right: 0.55rem; white-space: nowrap; }
+  .benefit b { color: var(--text); font-weight: 600; }
+  .mono2 { font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0; }
+  .tbl td .mono2, .tbl td.mono2 { color: var(--muted); }
+  .hl { color: var(--indigo); font-weight: 600; }
+  .hl2 { color: var(--jade); font-weight: 600; }
+  /* atoms → bonds → molecules → matter stepper, on every content slide */
+  .chain { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); margin:0.1rem 0 0.35rem; }
+  .chain span { opacity:0.4; }
+  .chain span.on { opacity:1; color:var(--jade); font-weight:600; }
+  .chain span.oni { opacity:1; color:var(--indigo); font-weight:600; }
+  .chain i { font-style:normal; color:var(--border-2); }
+  .di .cap b { color: var(--jade); font-weight: 700; }
+  /* human-labor positioning tag on use-case slides */
+  .labor { font-size: 0.8rem; color: var(--muted); margin: 0.15rem 0 0.05rem; line-height: 1.3; }
+  .labor .lt { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.1rem 0.42rem; border-radius: 5px; font-weight: 600; white-space: nowrap; margin-right: 0.35rem; }
+  .labor .lt.aug { color: var(--jade); border: 1px solid var(--jade-dim); }
+  .labor .lt.auto { color: var(--amber); border: 1px solid var(--amber); }
+  .labor b { color: var(--text); font-weight: 600; }
+  /* the five reasons companies buy — tagged on each use-case slide */
+  .buys { margin: 0.12rem 0 0.05rem; line-height: 1.6; }
+  .buys .bl { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); margin-right: 0.45rem; }
+  .buys .bp { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; color: var(--indigo); border: 1px solid var(--indigo-dim); border-radius: 999px; padding: 0.06rem 0.55rem; margin-right: 0.32rem; }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+    <!-- 1 · HERO -->
+    <section class="slide hero" data-part="Diagnose">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum University <small>Sales Doctrine</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Discovery · diagnose before you design</span>
+          <h1 class="rise" style="animation-delay:.1s; max-width:none">Diagnose<br><span class="g">The Discovery Architecture</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">The fastest way to lose an AI deal is to solve the first problem you hear. By the end: turn an ambiguous concern into a <strong>bounded, measurable, decision-ready</strong> evaluation.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>6 artifacts</b></span><span class="chip"><b>5 blocks</b></span><span class="chip"><b>2 gates</b></span>
+          </div>
+          <p class="hyp" style="margin-top:0.9rem; max-width:52ch">Research draft — public RuvNet projects are teaching cases; the binding method is the approved Cognitum sales-doctrine corpus.</p>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 380 380" role="img" aria-label="An ambiguous request enters a diagnostic funnel and exits as six labeled artifacts">
+            <defs><marker id="arH" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--jade)"/></marker></defs>
+            <rect class="v-pop" x="90" y="24" width="200" height="40" rx="10" fill="var(--surface)" stroke="var(--border-2)"/><text x="190" y="49" text-anchor="middle" class="slbl slbl-f" style="font-size:13px">&#8220;We need AI&#8221;</text>
+            <line class="v-draw" x1="190" y1="66" x2="190" y2="92" stroke="var(--jade)" stroke-width="1.6" marker-end="url(#arH)"/>
+            <path class="v-draw" style="animation-delay:.15s" d="M96 100 L284 100 L226 176 L154 176 Z" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.8"/>
+            <text x="190" y="146" text-anchor="middle" class="slbl sind" style="font-size:12px">DIAGNOSE</text>
+            <g stroke="var(--jade)" stroke-width="1.4"><line class="v-draw" style="animation-delay:.3s" x1="190" y1="178" x2="190" y2="204" marker-end="url(#arH)"/></g>
+            <g class="slbl slbl-t" text-anchor="middle" style="font-size:10.5px">
+              <rect class="v-pop" style="animation-delay:.4s" x="30" y="214" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="105" y="233">problem</text>
+              <rect class="v-pop" style="animation-delay:.46s" x="200" y="214" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="275" y="233">baseline</text>
+              <rect class="v-pop" style="animation-delay:.52s" x="30" y="252" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="105" y="271">outcome</text>
+              <rect class="v-pop" style="animation-delay:.58s" x="200" y="252" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="275" y="271">boundary</text>
+              <rect class="v-pop" style="animation-delay:.64s" x="30" y="290" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="105" y="309">decision path</text>
+              <rect class="v-pop" style="animation-delay:.7s" x="200" y="290" width="150" height="30" rx="8" fill="var(--surface)" stroke="var(--jade)"/><text x="275" y="309">next step</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · WHAT DIAGNOSIS PREVENTS -->
+    <section class="slide" data-part="Why diagnose">
+      <div class="inner">
+        <p class="kick"><span class="n">What diagnosis prevents</span> Four expensive failures begin in discovery</p>
+        <div class="grid g4" style="gap:0.5rem">
+          <div class="card mini c"><div class="ct">Wrong problem</div><div class="cd">A compelling demo solves the wrong problem.</div><div class="tag" style="margin-top:0.4rem">→ Block A</div></div>
+          <div class="card mini c"><div class="ct">No baseline</div><div class="cd">A pilot has no baseline or acceptance threshold.</div><div class="tag" style="margin-top:0.4rem">→ Block B/C</div></div>
+          <div class="card mini c"><div class="ct">Late boundary</div><div class="cd">Security or policy discovers the boundary too late.</div><div class="tag" style="margin-top:0.4rem">→ Block D</div></div>
+          <div class="card mini c"><div class="ct">Orphaned result</div><div class="cd">A champion celebrates, but nobody can convert it into a decision.</div><div class="tag" style="margin-top:0.4rem">→ Block D/E</div></div>
+        </div>
+        <div class="di plain" style="margin-top:0.7rem">
+          <svg viewBox="0 0 1000 60" role="img" aria-label="Four late-stage failures trace backward to one missing diagnosis">
+            <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8 0 L1 4 L8 8 z" fill="var(--crit)"/></marker></defs>
+            <circle class="v-pulse" cx="500" cy="30" r="20" fill="var(--crit)" opacity="0.18"/><circle cx="500" cy="30" r="20" fill="none" stroke="var(--crit)" stroke-width="2"/><text x="500" y="35" text-anchor="middle" class="slbl sbad" style="font-size:16px">?</text>
+            <g stroke="var(--crit)" stroke-width="1.4" stroke-dasharray="4 5"><line x1="150" y1="30" x2="476" y2="30" marker-start="url(#ar2)"/><line x1="380" y1="30" x2="476" y2="30"/><line x1="620" y1="30" x2="524" y2="30" marker-start="url(#ar2)"/><line x1="850" y1="30" x2="524" y2="30" marker-start="url(#ar2)"/></g>
+            <text x="150" y="52" text-anchor="middle" class="slbl slbl-f">late failures…</text>
+            <text x="500" y="58" text-anchor="middle" class="slbl sbad">…were created by a missing diagnosis</text>
+            <text x="850" y="52" text-anchor="middle" class="slbl slbl-f">…in delivery</text>
+          </svg>
+        </div>
+        <p class="src" style="margin-top:0.35rem">Diagnosis is risk control for both sides — it stops the buyer funding theater and stops Cognitum committing to work that cannot produce a decision.</p>
+      </div>
+    </section>
+
+    <!-- 3 · WHAT YOU WILL BE ABLE TO DO -->
+    <section class="slide" data-part="Why diagnose">
+      <div class="inner">
+        <p class="kick"><span class="n">What you will be able to do</span> A performance module — outcomes, not vocabulary</p>
+        <div class="split vr top">
+          <div class="di" style="align-self:center">
+            <span class="cap">Six outcomes around one verb</span>
+            <svg viewBox="0 0 300 240" role="img" aria-label="Six learner outcomes around a central verb, design fit">
+              <g stroke="var(--border-2)" stroke-width="1.3"><line class="v-draw" x1="150" y1="120" x2="60" y2="45"/><line class="v-draw" style="animation-delay:.08s" x1="150" y1="120" x2="240" y2="45"/><line class="v-draw" style="animation-delay:.16s" x1="150" y1="120" x2="272" y2="120"/><line class="v-draw" style="animation-delay:.24s" x1="150" y1="120" x2="240" y2="195"/><line class="v-draw" style="animation-delay:.32s" x1="150" y1="120" x2="60" y2="195"/><line class="v-draw" style="animation-delay:.4s" x1="150" y1="120" x2="28" y2="120"/></g>
+              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.8"><circle class="v-pop" cx="60" cy="45" r="9"/><circle class="v-pop" style="animation-delay:.08s" cx="240" cy="45" r="9"/><circle class="v-pop" style="animation-delay:.16s" cx="272" cy="120" r="9"/><circle class="v-pop" style="animation-delay:.24s" cx="240" cy="195" r="9"/><circle class="v-pop" style="animation-delay:.32s" cx="60" cy="195" r="9"/><circle class="v-pop" style="animation-delay:.4s" cx="28" cy="120" r="9"/></g>
+              <circle class="v-pulse" cx="150" cy="120" r="34" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2.5"/><text x="150" y="116" text-anchor="middle" class="slbl sind" style="font-size:11px">DESIGN</text><text x="150" y="130" text-anchor="middle" class="slbl sind" style="font-size:11px">FIT</text>
+            </svg>
+          </div>
+          <div>
+            <ul class="clean sm">
+              <li class="j">Run <b>Blocks A–E</b> in sequence — without turning discovery into an interrogation</li>
+              <li>Use <b>playback</b> to convert listening into buyer-confirmed truth</li>
+              <li class="j">Translate pain into a <b>quantified consequence and baseline</b></li>
+              <li>Write a <b>falsifiable acceptance test</b> before selecting technology</li>
+              <li class="j">Map an <b>operating boundary</b> and a named <b>decision path</b></li>
+              <li>End with a <b>bounded, calendared next step</b></li>
+            </ul>
+            <p class="src" style="margin-top:0.5rem">The final practice prohibits product names until the six artifacts exist — that exposes real diagnosis from a recommendation in disguise.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · PRODUCT QUESTION ≠ TOUR -->
+    <section class="slide" data-part="Why diagnose">
+      <div class="inner">
+        <p class="kick"><span class="n">A product question is not permission for a product tour</span></p>
+        <div class="bigquote i"><p>Buyer: &#8220;So what does Cognitum actually do?&#8221;</p></div>
+        <div class="versus" style="margin-top:0.8rem">
+          <div class="vcol"><div class="vlbl" style="color:var(--crit)">Weak response</div><p class="mut">Explain everything. Hand the design work back to the buyer with a catalog tour.</p></div>
+          <div class="vcol"><div class="vlbl" style="color:var(--jade)">Diagnostic response</div><p class="mut">&#8220;I&#39;ll make room for that. First, can I understand the problem behind the question, so I only show what is relevant?&#8221;</p></div>
+        </div>
+        <div class="callout" style="margin-top:0.85rem; border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">Rule</div><p>Answer relevance, not curiosity. The RuvNet ecosystem is broad — RuFlo orchestrates, RuVector remembers, MetaHarness governs, RuView senses. Breadth tempts a tour; discovery earns the right to select <strong>one lane, one bounded evaluation</strong>.</p></div>
+      </div>
+    </section>
+
+    <!-- 5 · OSS IS EVIDENCE, NOT DIAGNOSIS -->
+    <section class="slide" data-part="Why diagnose">
+      <div class="inner">
+        <p class="kick"><span class="n">Open source is evidence, not a diagnosis</span></p>
+        <div class="split v top">
+          <div class="di">
+            <span class="cap" style="color:var(--indigo)">Public repositories can show</span>
+            <ul class="clean sm">
+              <li>What a component is <b>designed</b> to do</li>
+              <li>Its architecture and interfaces</li>
+              <li>Tests, benchmarks &amp; documented limitations</li>
+              <li>Its maturity and evidence trail</li>
+            </ul>
+          </div>
+          <div class="di">
+            <span class="cap" style="color:var(--jade)">They cannot tell us</span>
+            <ul class="clean sm">
+              <li class="j">Which buyer problem matters most</li>
+              <li class="j">What consequence creates priority</li>
+              <li class="j">Which threshold is acceptable to <b>this</b> buyer</li>
+              <li class="j">Who can approve the decision</li>
+            </ul>
+          </div>
+        </div>
+        <div class="di plain" style="margin-top:0.5rem; text-align:center">
+          <svg viewBox="0 0 720 44" role="img" aria-label="Project evidence and buyer diagnosis connect only through a bounded evaluation">
+            <defs><marker id="ar5" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <text x="90" y="26" text-anchor="middle" class="slbl sind">project evidence</text>
+            <line x1="180" y1="22" x2="270" y2="22" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#ar5)"/>
+            <rect x="280" y="8" width="160" height="28" rx="8" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="360" y="26" text-anchor="middle" class="slbl sok">bounded evaluation</text>
+            <line x1="450" y1="22" x2="540" y2="22" stroke="var(--faint)" stroke-width="1.4" marker-end="url(#ar5)"/>
+            <text x="630" y="26" text-anchor="middle" class="slbl slbl-t">buyer diagnosis</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · THE ARCHITECTURE: FIVE BLOCKS -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">The architecture · five blocks in one view</span></p>
+        <div class="flow sm" style="margin:0.3rem 0 0.6rem">
+          <div class="node i"><span class="badge">A</span><b>Trigger</b><span>present state</span></div><div class="harrow">→</div>
+          <div class="node i"><span class="badge">B</span><b>Consequence</b><span>priority</span></div><div class="harrow">→</div>
+          <div class="node i"><span class="badge">C</span><b>Outcome</b><span>acceptance</span></div><div class="harrow">→</div>
+          <div class="node i"><span class="badge">D</span><b>Boundary</b><span>decision path</span></div><div class="harrow">→</div>
+          <div class="node kernel"><span class="badge">E</span><b>Fit</b><span>commitment</span></div>
+        </div>
+        <table class="tbl tiny">
+          <thead><tr><th>Block</th><th>Diagnostic job</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><td class="i">A · Trigger &amp; present state</td><td>What changed? What happens now?</td><td class="j">Buyer problem</td></tr>
+            <tr><td class="i">B · Consequence &amp; priority</td><td>What does failure cost or put at risk?</td><td class="j">Current baseline</td></tr>
+            <tr><td class="i">C · Outcome &amp; acceptance</td><td>What must improve, and how will we know?</td><td class="j">Desired outcome</td></tr>
+            <tr><td class="i">D · Boundary &amp; decision path</td><td>Where may it operate, and who decides?</td><td class="j">Boundary + decision path</td></tr>
+            <tr><td class="i">E · Fit &amp; commitment</td><td>Is the bounded problem worth evaluating?</td><td class="j">Calendared next step</td></tr>
+          </tbody>
+        </table>
+        <p class="hyp" style="text-align:center; margin-top:0.5rem">The sequence is binding: present state before consequence · consequence before outcome · outcome before solution fit.</p>
+      </div>
+    </section>
+
+    <!-- 7 · SIX ARTIFACTS -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">Discovery must produce six artifacts</span> Not a good conversation — six usable outputs</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Artifact</th><th>The question it answers</th></tr></thead>
+          <tbody>
+            <tr><td class="j">Buyer problem</td><td>What is actually happening?</td></tr>
+            <tr><td class="j">Current baseline</td><td>How does the present state perform now?</td></tr>
+            <tr><td class="j">Desired outcome</td><td>What must become materially different?</td></tr>
+            <tr><td class="j">Operating boundary</td><td>Where may data, tools, models, and actions operate?</td></tr>
+            <tr><td class="j">Decision path</td><td>Who evaluates, approves, can veto, and signs — and by when?</td></tr>
+            <tr><td class="j">Calendared next step</td><td>What happens next, with whom, at what time?</td></tr>
+          </tbody>
+        </table>
+        <div class="callout i" style="margin-top:0.7rem"><div class="h">Missing one means the evaluation cannot yet be designed</div><p>Notice what is absent: product selection, implementation plan, price, ROI promise, solution architecture. Discovery generates the inputs those later artifacts require.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 · TWO PLAYBACK GATES -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">Two playback gates turn listening into shared truth</span></p>
+        <div class="di plain" style="margin:0.2rem 0 0.6rem">
+          <svg viewBox="0 0 1000 70" role="img" aria-label="Two confirmation gates across the five-block pipeline">
+            <line x1="30" y1="35" x2="970" y2="35" stroke="var(--border-2)" stroke-width="2"/>
+            <g fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="1.8"><circle cx="120" cy="35" r="14"/><circle cx="300" cy="35" r="14"/><circle cx="500" cy="35" r="14"/><circle cx="700" cy="35" r="14"/><circle cx="880" cy="35" r="14"/></g>
+            <g class="slbl sind" text-anchor="middle" style="font-size:11px"><text x="120" y="40">A</text><text x="300" y="40">B</text><text x="500" y="40">C</text><text x="700" y="40">D</text><text x="880" y="40">E</text></g>
+            <g><rect class="v-pulse" x="392" y="10" width="16" height="20" rx="3" fill="var(--jade-wash)" stroke="var(--jade)"/><path d="M395 10 v-4 a5 5 0 0 1 10 0 v4" fill="none" stroke="var(--jade)" stroke-width="1.6"/><text x="400" y="62" text-anchor="middle" class="slbl sok">Gate 1</text></g>
+            <g><rect class="v-pulse" style="animation-delay:.5s" x="792" y="10" width="16" height="20" rx="3" fill="var(--jade-wash)" stroke="var(--jade)"/><path d="M795 10 v-4 a5 5 0 0 1 10 0 v4" fill="none" stroke="var(--jade)" stroke-width="1.6"/><text x="800" y="62" text-anchor="middle" class="slbl sok">Gate 2</text></g>
+          </svg>
+        </div>
+        <div class="split v top">
+          <div class="callout"><div class="h">Gate 1 · Situation playback</div><p>&#8220;Here is what I heard happening now. What have I missed or misunderstood?&#8221;</p></div>
+          <div class="callout"><div class="h">Gate 2 · Decision-path playback</div><p>&#8220;Here is what the evaluation must prove, inside which boundary, for which people, by which date. Is that the real path?&#8221;</p></div>
+        </div>
+        <p class="hyp" style="text-align:center; margin-top:0.55rem">Playback is not repetition. It is buyer-authorized correction — never weaken it with &#8220;does that make sense?&#8221;</p>
+      </div>
+    </section>
+
+    <!-- 9 · FRAME–DIAGNOSE–COMMIT -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">Frame → Diagnose → Commit</span> Protect the decision exit</p>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="num-card"><div class="ni">1</div><div class="nt"><b>Frame</b> — ≤ 90 seconds: purpose, success, exclusions, one confirmation question.</div></div>
+          <div class="num-card"><div class="ni">2</div><div class="nt"><b>Diagnose</b> — sequenced questions through Blocks A–E, one at a time.</div></div>
+          <div class="num-card j"><div class="ni">3</div><div class="nt"><b>Commit</b> — protect the final five minutes: name the next step, timeline, calendar it live.</div></div>
+        </div>
+        <div class="di plain" style="margin-top:0.7rem">
+          <svg viewBox="0 0 1000 60" role="img" aria-label="A thirty-minute call: frame, diagnose, then a protected commit">
+            <rect x="20" y="14" width="960" height="26" rx="6" fill="var(--surface)" stroke="var(--border-2)"/>
+            <rect x="20" y="14" width="48" height="26" rx="6" fill="var(--indigo-wash)" stroke="var(--indigo)"/>
+            <rect x="820" y="14" width="160" height="26" rx="6" fill="var(--jade-wash)" stroke="var(--jade)"/>
+            <line x1="740" y1="10" x2="740" y2="44" stroke="var(--amber)" stroke-width="1.4" stroke-dasharray="3 3"/>
+            <text x="44" y="31" text-anchor="middle" class="slbl sind" style="font-size:8px">Frame</text>
+            <text x="430" y="31" text-anchor="middle" class="slbl slbl-m">Diagnose</text>
+            <text x="900" y="31" text-anchor="middle" class="slbl sok">Commit (protected)</text>
+            <text x="740" y="55" text-anchor="middle" class="slbl swarn" style="font-size:8px">optional questions cut before the last 5 min</text>
+          </svg>
+        </div>
+        <p class="src" style="margin-top:0.35rem">If time collapses, follow the documented cut order. Never cut the decision path; never cut the Commit. &#8220;I&#39;ll send a recap&#8221; is not a decision exit.</p>
+      </div>
+    </section>
+
+    <!-- 10 · QUESTION-FIRST -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">Question-First keeps diagnosis real</span> Minimum runtime question-to-statement ratios</p>
+        <div class="split vr top">
+          <div class="di">
+            <span class="cap">The ratio narrows as the deal advances — never below 1:1</span>
+            <svg viewBox="0 0 360 170" role="img" aria-label="Descending question-to-statement ratio bars">
+              <g font-family="var(--font-mono)">
+                <text x="8" y="34" class="slbl slbl-t" style="font-size:11px">Discovery</text><rect class="v-gx" x="110" y="22" width="240" height="18" rx="4" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="120" y="35" class="slbl sok" style="font-size:10px">3 : 1</text>
+                <text x="8" y="82" class="slbl slbl-t" style="font-size:11px">Demo</text><rect class="v-gx" style="animation-delay:.1s" x="110" y="70" width="160" height="18" rx="4" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="120" y="83" class="slbl sind" style="font-size:10px">2 : 1</text>
+                <text x="8" y="130" class="slbl slbl-t" style="font-size:11px">Closing</text><rect class="v-gx" style="animation-delay:.2s" x="110" y="118" width="80" height="18" rx="4" fill="var(--surface)" stroke="var(--border-2)"/><text x="120" y="131" class="slbl slbl-m" style="font-size:10px">1 : 1</text>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <div class="callout" style="border-left-color:var(--crit)"><div class="h" style="color:var(--crit)">A leading question counts as a statement</div><p>&#8220;How is the current process controlled?&#8221; is a question. &#8220;Wouldn&#39;t you agree a default-deny tool policy would solve that?&#8221; is a recommendation wearing a question mark.</p></div>
+            <p class="src" style="margin-top:0.6rem">Question-First prevents a diagnostic call becoming a disguised pitch. Quality still matters — five superficial questions do not replace the one about authority or consequence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · FIVE SECONDS OF SILENCE -->
+    <section class="slide" data-part="The architecture">
+      <div class="inner">
+        <p class="kick"><span class="n">Five seconds of silence protects the hard question</span></p>
+        <div class="grid g6" style="gap:0.4rem">
+          <div class="card mini"><div class="cd" style="text-align:center">Budget</div></div>
+          <div class="card mini"><div class="cd" style="text-align:center">Timeline</div></div>
+          <div class="card mini"><div class="cd" style="text-align:center">Decision criteria</div></div>
+          <div class="card mini"><div class="cd" style="text-align:center">Authority</div></div>
+          <div class="card mini"><div class="cd" style="text-align:center">Disqualifiers</div></div>
+          <div class="card mini"><div class="cd" style="text-align:center">Failure conditions</div></div>
+        </div>
+        <div class="di plain" style="margin-top:0.7rem">
+          <svg viewBox="0 0 1000 76" role="img" aria-label="A five-second ruler with seller interruptions struck through">
+            <line x1="40" y1="46" x2="960" y2="46" stroke="var(--border-2)" stroke-width="2"/>
+            <g stroke="var(--jade)" stroke-width="2"><line x1="40" y1="38" x2="40" y2="54"/><line x1="270" y1="38" x2="270" y2="54"/><line x1="500" y1="38" x2="500" y2="54"/><line x1="730" y1="38" x2="730" y2="54"/><line x1="960" y1="38" x2="960" y2="54"/></g>
+            <g class="slbl slbl-f" text-anchor="middle" style="font-size:9px"><text x="40" y="68">0s</text><text x="270" y="68">2s</text><text x="500" y="68">3s</text><text x="730" y="68">4s</text><text x="960" y="68">5s</text></g>
+            <circle r="6" fill="var(--jade)" class="v-t" style="offset-path:path('M40 46 L960 46');animation-duration:5s"/>
+            <g class="slbl sbad" text-anchor="middle" style="font-size:9px"><text x="270" y="24">lower the stakes</text><text x="500" y="24">answer for them</text><text x="730" y="24">move on</text></g>
+            <g stroke="var(--crit)" stroke-width="1.4"><line x1="228" y1="20" x2="312" y2="28"/><line x1="458" y1="20" x2="542" y2="28"/><line x1="700" y1="20" x2="760" y2="28"/></g>
+          </svg>
+        </div>
+        <p class="hyp" style="text-align:center; margin-top:0.35rem">Do not soften · do not clarify prematurely · do not answer for the buyer. The discomfort is the seller&#39;s; the thinking time is the buyer&#39;s.</p>
+      </div>
+    </section>
+
+    <!-- 12 · BLOCK A -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block A · reconstruct reality, not opinions</span> Make the present state observable</p>
+        <div class="split vr top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">What changed that made this worth discussing now?</li>
+              <li>Walk me through the last failure, start to finish</li>
+              <li class="j">Who felt it first?</li>
+              <li>What workaround did they use?</li>
+              <li class="j">What have you already tried?</li>
+            </ul>
+            <div class="callout" style="margin-top:0.6rem"><div class="h">Playback</div><p>&#8220;Let me make sure I have the situation right…&#8221; — do not accept a label such as &#8220;memory problem.&#8221; Reconstruct the event.</p></div>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">Reconstruct the incident — not the category</span>
+            <svg viewBox="0 0 340 120" role="img" aria-label="An incident timeline of five boxes: trigger, action, failure, workaround, impact">
+              <defs><marker id="arA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+              <g class="slbl slbl-t" text-anchor="middle" style="font-size:9px">
+                <rect class="v-pop" x="8" y="40" width="58" height="34" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="37" y="60">trigger</text>
+                <rect class="v-pop" style="animation-delay:.08s" x="76" y="40" width="58" height="34" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="105" y="60">action</text>
+                <rect class="v-pop" style="animation-delay:.16s" x="144" y="40" width="58" height="34" rx="6" fill="var(--surface)" stroke="var(--crit)"/><text x="173" y="60" class="sbad">failure</text>
+                <rect class="v-pop" style="animation-delay:.24s" x="212" y="40" width="58" height="34" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="241" y="57">work-</text><text x="241" y="67">around</text>
+                <rect class="v-pop" style="animation-delay:.32s" x="280" y="40" width="52" height="34" rx="6" fill="var(--surface)" stroke="var(--jade)"/><text x="306" y="60">impact</text>
+              </g>
+              <g stroke="var(--faint)" stroke-width="1.2"><line x1="66" y1="57" x2="76" y2="57" marker-end="url(#arA)"/><line x1="134" y1="57" x2="144" y2="57" marker-end="url(#arA)"/><line x1="202" y1="57" x2="212" y2="57" marker-end="url(#arA)"/><line x1="270" y1="57" x2="280" y2="57" marker-end="url(#arA)"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · BLOCK A CASE -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block A case · &#8220;Our agents are inconsistent&#8221;</span> One label hides at least six failures</p>
+        <div class="di plain" style="margin:0.2rem 0 0.5rem">
+          <svg viewBox="0 0 1000 120" role="img" aria-label="One symptom branches into six possible failures">
+            <circle class="v-pulse" cx="120" cy="60" r="30" fill="var(--crit)" opacity="0.16"/><circle cx="120" cy="60" r="30" fill="var(--surface)" stroke="var(--crit)" stroke-width="2"/><text x="120" y="57" text-anchor="middle" class="slbl sbad" style="font-size:9px">&#8220;incon-</text><text x="120" y="68" text-anchor="middle" class="slbl sbad" style="font-size:9px">sistent&#8221;</text>
+            <g stroke="var(--border-2)" stroke-width="1.3" fill="none"><path class="v-draw" d="M150 60 C230 20 300 18 360 18"/><path class="v-draw" style="animation-delay:.06s" d="M150 60 C230 38 300 38 360 38"/><path class="v-draw" style="animation-delay:.12s" d="M150 60 C230 55 300 58 360 58"/><path class="v-draw" style="animation-delay:.18s" d="M150 60 C230 78 300 82 360 82"/><path class="v-draw" style="animation-delay:.24s" d="M150 60 C230 96 300 100 360 102"/><path class="v-draw" style="animation-delay:.3s" d="M150 60 C220 60 300 118 360 118"/></g>
+            <g class="slbl slbl-t" style="font-size:10px">
+              <text x="368" y="22">Context was never captured</text>
+              <text x="368" y="42">Relevant memory was not retrieved</text>
+              <text x="368" y="62">The wrong model or agent was routed</text>
+              <text x="368" y="86">Two agents duplicated work</text>
+              <text x="368" y="106">A tool failed or exceeded its authority</text>
+              <text x="368" y="121">The workflow had no approval or recovery path</text>
+            </g>
+          </svg>
+        </div>
+        <div class="callout i"><div class="h">Ask for the last event — do not debate the label</div><p>&#8220;Walk me through the last time it happened, beginning with the task the user gave.&#8221; Follow it to the first observable deviation. That moment is more useful than the buyer&#39;s initial category.</p></div>
+      </div>
+    </section>
+
+    <!-- 14 · SITUATION PLAYBACK -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">How to build the situation playback</span> Four elements — then invite correction</p>
+        <div class="grid g4" style="gap:0.5rem">
+          <div class="num-card"><div class="ni">1</div><div class="nt"><b>Trigger</b> — what changed or initiated the event</div></div>
+          <div class="num-card"><div class="ni">2</div><div class="nt"><b>Sequence</b> — what happened from start to failure</div></div>
+          <div class="num-card"><div class="ni">3</div><div class="nt"><b>Affected people</b> — who experienced or compensated</div></div>
+          <div class="num-card"><div class="ni">4</div><div class="nt"><b>Current response</b> — the workaround and prior attempts</div></div>
+        </div>
+        <div class="bigquote i" style="margin-top:0.7rem"><p>&#8220;When <span class="hl">[trigger]</span>, the team currently <span class="hl">[sequence]</span>. The failure appears at <span class="hl">[point]</span>, which forces <span class="hl">[people]</span> to <span class="hl">[workaround]</span>. You&#39;ve already tried <span class="hl">[attempt]</span>. What is wrong or missing in that account?&#8221;</p></div>
+        <p class="src" style="margin-top:0.5rem">Keep consequences out of the first playback. Replace vague nouns — &#8220;the system,&#8221; &#8220;the team&#8221; — with named workflows and roles. It often reveals two people describing different problems with the same word.</p>
+      </div>
+    </section>
+
+    <!-- 15 · BLOCK B -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block B · pain without consequence is not yet a deal</span> Translate friction into consequence</p>
+        <div class="split vr top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">What does the failure affect — time, cost, risk, or revenue?</li>
+              <li>What is the current baseline?</li>
+              <li class="j">What happens if nothing changes for two quarters?</li>
+              <li>What competes for the same people and budget?</li>
+              <li class="j">Is there a date or event creating urgency?</li>
+            </ul>
+            <div class="bigquote" style="margin-top:0.6rem"><p>&#8220;I hear a frustrating workflow, but I do not yet hear a reason to change it.&#8221;</p></div>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">The deal stops if the ladder ends at symptom</span>
+            <svg viewBox="0 0 300 190" role="img" aria-label="A ladder from symptom to urgency">
+              <g font-family="var(--font-mono)" text-anchor="middle" style="font-size:9px">
+                <rect x="30" y="150" width="240" height="26" rx="5" fill="var(--surface)" stroke="var(--border)"/><text x="150" y="167" class="slbl-f">symptom</text>
+                <rect x="30" y="114" width="240" height="26" rx="5" fill="var(--surface)" stroke="var(--border)"/><text x="150" y="131" class="slbl-f">operational effect</text>
+                <rect x="30" y="78" width="240" height="26" rx="5" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="150" y="95" class="sok">business consequence</text>
+                <rect x="30" y="42" width="240" height="26" rx="5" fill="var(--jade-wash)" stroke="var(--jade)"/><text x="150" y="59" class="sok">urgency</text>
+              </g>
+              <g stroke="var(--jade)" stroke-width="1.4"><path d="M150 150 L150 140" marker-end=""/><path d="M150 114 L150 104"/><path d="M150 78 L150 68"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · SYMPTOM → CONSEQUENCE LADDER -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Climb from symptom to business consequence</span> Do not stop at the first rung</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Rung</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Symptom</td><td>Agents repeat work</td></tr>
+            <tr><td>Operational effect</td><td>Release tasks are rerun</td></tr>
+            <tr><td class="j">Measured baseline</td><td>2 of 10 releases; 3 engineer-hours each</td></tr>
+            <tr><td class="j">Business consequence</td><td>Release windows slip; a customer commitment is at risk</td></tr>
+            <tr><td class="j">Urgency</td><td>Decision required before the 30 September release</td></tr>
+          </tbody>
+        </table>
+        <div class="callout i" style="margin-top:0.7rem"><div class="h">A consequence needs an owner, a unit, and a horizon</div><p>The baseline is not always money — it can be elapsed time, error rate, incidents per month, false alarms, or exposure duration. And the owner of the pain is often not the owner of the decision.</p></div>
+      </div>
+    </section>
+
+    <!-- 17 · BLOCK C -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block C · write the test before choosing the technology</span></p>
+        <div class="di scene">
+          <span class="cap">Acceptance-test grammar — a fill-in contract</span>
+          <svg viewBox="0 0 1000 60" role="img" aria-label="Acceptance test grammar with an impressive demo struck out">
+            <rect x="6" y="8" width="880" height="44" rx="8" fill="var(--surface)" stroke="var(--jade-dim)"/>
+            <text x="24" y="30" class="slbl slbl-t" style="font-size:11px">Move <tspan class="sind">[metric]</tspan> from <tspan class="sind">[baseline]</tspan> toward <tspan class="sind">[target]</tspan> within <tspan class="sind">[horizon]</tspan>, using <tspan class="sind">[evidence]</tspan>.</text>
+            <text x="24" y="46" class="slbl sbad" style="font-size:11px">The evaluation FAILS if <tspan style="fill:var(--crit)">[explicit failure condition]</tspan>.</text>
+            <g><rect x="900" y="16" width="94" height="28" rx="6" fill="var(--surface)" stroke="var(--border-2)"/><text x="947" y="34" text-anchor="middle" class="slbl slbl-f" style="font-size:9px">impressive demo</text><line x1="904" y1="18" x2="990" y2="42" stroke="var(--crit)" stroke-width="1.6"/></g>
+          </svg>
+        </div>
+        <div class="grid g4" style="gap:0.5rem; margin-top:0.5rem">
+          <div class="card mini"><div class="cd">What changes for the person doing the job?</div></div>
+          <div class="card mini"><div class="cd">Which metric moves from what baseline?</div></div>
+          <div class="card mini"><div class="cd">What is the smallest use case that proves the point?</div></div>
+          <div class="card mini c"><div class="cd">What would make it fail even if the demo looked impressive?</div></div>
+        </div>
+        <p class="hyp" style="margin-top:0.5rem">The failure condition protects the buyer from demo theater and the seller from a pilot with no finish line. Targets come from the buyer&#39;s baseline — never from a repository benchmark.</p>
+      </div>
+    </section>
+
+    <!-- 18 · ANATOMY OF THE TEST -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Anatomy of a falsifiable acceptance test</span></p>
+        <div class="bigquote i"><p style="font-size:1rem">Move <span class="hl">[metric]</span> from <span class="hl">[baseline]</span> toward <span class="hl">[target]</span> within <span class="hl">[horizon]</span>, measured with <span class="hl">[evidence]</span>, under <span class="hl">[conditions]</span>. The evaluation fails if <span class="hl" style="color:var(--crit)">[failure condition]</span>.</p></div>
+        <table class="tbl tiny" style="margin-top:0.6rem">
+          <thead><tr><th>Element</th><th>Why it matters</th><th>Element</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td class="i">Metric</td><td>Defines what changes</td><td class="i">Evidence</td><td>Makes the result inspectable</td></tr>
+            <tr><td class="i">Baseline</td><td>Makes improvement comparative</td><td class="i">Conditions</td><td>Defines where the result applies</td></tr>
+            <tr><td class="i">Target</td><td>Defines &#8220;enough&#8221;</td><td class="c">Failure condition</td><td>Makes &#8220;no&#8221; possible</td></tr>
+            <tr><td class="i">Horizon</td><td>Prevents endless evaluation</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">&#8220;Improve retrieval&#8221; is an intention. &#8220;Return an approved source in the top five for the agreed question set&#8221; is testable.</p>
+      </div>
+    </section>
+
+    <!-- 19 · RUVECTOR CASE -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">RuVector case · diagnose &#8220;the agent forgets&#8221;</span> Separate the memory loop</p>
+        <div class="di plain" style="margin:0.15rem 0 0.5rem">
+          <svg viewBox="0 0 1000 58" role="img" aria-label="The memory loop as seven stages with a boundary between local and hosted">
+            <defs><marker id="ar19" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--faint)"/></marker></defs>
+            <g class="slbl slbl-t" text-anchor="middle" style="font-size:9px">
+              <rect x="6" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="65" y="32">Capture</text>
+              <rect x="148" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="207" y="32">Encode</text>
+              <rect x="290" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="349" y="32">Store</text>
+              <rect x="432" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--indigo)"/><text x="491" y="32" class="sind">Retrieve</text>
+              <rect x="574" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="633" y="32">Rank</text>
+              <rect x="716" y="14" width="118" height="28" rx="6" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="775" y="32">Use</text>
+              <rect x="858" y="14" width="136" height="28" rx="6" fill="var(--surface)" stroke="var(--jade)"/><text x="926" y="32">Learn / expire</text>
+            </g>
+            <g stroke="var(--faint)" stroke-width="1.1"><line x1="124" y1="28" x2="148" y2="28" marker-end="url(#ar19)"/><line x1="266" y1="28" x2="290" y2="28" marker-end="url(#ar19)"/><line x1="408" y1="28" x2="432" y2="28" marker-end="url(#ar19)"/><line x1="550" y1="28" x2="574" y2="28" marker-end="url(#ar19)"/><line x1="692" y1="28" x2="716" y2="28" marker-end="url(#ar19)"/><line x1="834" y1="28" x2="858" y2="28" marker-end="url(#ar19)"/></g>
+            <line x1="420" y1="6" x2="420" y2="50" stroke="var(--amber)" stroke-width="1.3" stroke-dasharray="3 3"/><text x="420" y="56" text-anchor="middle" class="slbl swarn" style="font-size:8px">local · hosted boundary</text>
+          </svg>
+        </div>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="card mini"><div class="cd">What should have been remembered — and who decides that?</div></div>
+          <div class="card mini"><div class="cd">Absent, not retrieved, poorly ranked, or ignored?</div></div>
+          <div class="card mini"><div class="cd">Which source is trusted? How is lineage shown?</div></div>
+          <div class="card mini"><div class="cd">When should memory expire or lose influence?</div></div>
+          <div class="card mini"><div class="cd">Must retrieval remain local?</div></div>
+          <div class="card mini"><div class="cd">Which actions may recalled context influence?</div></div>
+        </div>
+        <p class="hyp" style="margin-top:0.45rem">RuVector leaves the application responsible for what to remember, which evidence is trusted, and when memory expires — those caveats are the discovery prompts.</p>
+      </div>
+    </section>
+
+    <!-- 20 · RUVIEW + SEED CASE -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">RuView + Cognitum Seed case · define the conditions</span> &#8220;Camera-free presence&#8221; is not yet a test</p>
+        <div class="split vr top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">Physical rooms, materials, distances, node placement</li>
+              <li>Presence, count, pose, vitals, or another specific output</li>
+              <li class="j">Calibration and environmental interference</li>
+              <li>False-positive and false-negative thresholds</li>
+              <li class="j">Edge, network, storage, and retention path</li>
+              <li>Safety response when confidence is low or data is missing</li>
+            </ul>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">Different outputs have different maturity &amp; evidence</span>
+            <svg viewBox="0 0 320 150" role="img" aria-label="A room cross-section with sensing nodes and an edge path, and separate output cards">
+              <rect x="14" y="14" width="220" height="80" rx="6" fill="var(--surface)" stroke="var(--border-2)"/>
+              <g fill="var(--jade)"><circle cx="40" cy="26" r="4"/><circle cx="124" cy="26" r="4"/><circle cx="208" cy="26" r="4"/></g>
+              <g stroke="var(--jade)" stroke-width="1" opacity="0.5"><path d="M40 30 A40 40 0 0 1 124 30"/><path d="M124 30 A40 40 0 0 1 208 30"/></g>
+              <text x="124" y="86" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">rooms · materials · interference</text>
+              <line x1="234" y1="54" x2="264" y2="54" stroke="var(--faint)" stroke-width="1.3"/><rect x="264" y="42" width="44" height="24" rx="5" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="286" y="57" text-anchor="middle" class="slbl sind" style="font-size:8px">edge</text>
+              <g class="slbl slbl-t" text-anchor="middle" style="font-size:8px">
+                <rect x="14" y="108" width="70" height="24" rx="5" fill="var(--surface)" stroke="var(--jade)"/><text x="49" y="123">presence</text>
+                <rect x="90" y="108" width="60" height="24" rx="5" fill="var(--surface)" stroke="var(--border-2)"/><text x="120" y="123">count</text>
+                <rect x="156" y="108" width="60" height="24" rx="5" fill="var(--surface)" stroke="var(--border-2)"/><text x="186" y="123">pose</text>
+                <rect x="222" y="108" width="60" height="24" rx="5" fill="var(--surface)" stroke="var(--border-2)"/><text x="252" y="123">vitals</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <p class="hyp" style="margin-top:0.4rem">RuView documents beta status and limitations; ADR-101 separates a shipped pose pipeline from a later accuracy target. A presence result does not prove pose or vitals.</p>
+      </div>
+    </section>
+
+    <!-- 21 · BLOCK D -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block D · map the operating boundary</span> Before capability, locate authority</p>
+        <div class="split vr top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">What data, actions, or systems may not leave the boundary?</li>
+              <li>Which tools may an agent invoke — and under whose approval?</li>
+              <li class="j">Who owns model, data, security, policy &amp; operations decisions?</li>
+              <li>Who uses, evaluates, approves, can veto, and signs?</li>
+              <li class="j">What must be true for an evaluation to become a decision?</li>
+            </ul>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">A boundary names crossings and owners</span>
+            <svg viewBox="0 0 300 160" role="img" aria-label="A boundary box with data, model, tools, logs and approvals, and named owners on the edges">
+              <rect x="40" y="24" width="220" height="112" rx="10" fill="none" stroke="var(--jade)" stroke-width="2" stroke-dasharray="6 5"/>
+              <g class="slbl slbl-t" text-anchor="middle" style="font-size:9px">
+                <rect x="66" y="42" width="76" height="24" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="104" y="57">data</text>
+                <rect x="158" y="42" width="76" height="24" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="196" y="57">model</text>
+                <rect x="66" y="76" width="76" height="24" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="104" y="91">tools</text>
+                <rect x="158" y="76" width="76" height="24" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="196" y="91">logs</text>
+                <rect x="102" y="108" width="96" height="22" rx="5" fill="var(--indigo-wash)" stroke="var(--indigo)"/><text x="150" y="123" class="sind">approvals</text>
+              </g>
+              <g fill="var(--amber)"><circle cx="40" cy="60" r="4"/><circle cx="260" cy="100" r="4"/><circle cx="150" cy="24" r="4"/></g>
+              <g class="slbl swarn" style="font-size:7px"><text x="6" y="63">owner</text><text x="266" y="103">owner</text><text x="132" y="16">owner</text></g>
+            </svg>
+          </div>
+        </div>
+        <p class="hyp" style="margin-top:0.4rem">&#8220;Local,&#8221; &#8220;private,&#8221; and &#8220;secure&#8221; are not boundaries. A boundary names systems, data classes, actions, identities, logs, network paths, retention, and exceptions.</p>
+      </div>
+    </section>
+
+    <!-- 22 · INVENTORY THE BOUNDARY -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Inventory the boundary before saying &#8220;private&#8221;</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Boundary dimension</th><th>Discovery prompt</th></tr></thead>
+          <tbody>
+            <tr><td class="i">Data</td><td>What enters, leaves, persists, or must never be retained?</td></tr>
+            <tr><td class="i">Models</td><td>Where does inference run? Which providers are permitted?</td></tr>
+            <tr><td class="i">Tools / actions</td><td>What may execute automatically? What requires approval?</td></tr>
+            <tr><td class="i">Identity</td><td>Which human or agent principal is acting?</td></tr>
+            <tr><td class="i">Network</td><td>Which endpoints and protocols may cross the perimeter?</td></tr>
+            <tr><td class="i">Evidence</td><td>What must be logged, signed, retained, or reproduced?</td></tr>
+            <tr><td class="i">Exceptions</td><td>What happens when the system is uncertain or unavailable?</td></tr>
+          </tbody>
+        </table>
+        <p class="hyp" style="text-align:center; margin-top:0.5rem">&#8220;Local,&#8221; &#8220;sovereign,&#8221; and &#8220;secure&#8221; are conclusions — not boundary definitions. Use public architecture to ask precise questions, not to supply pre-approved answers.</p>
+      </div>
+    </section>
+
+    <!-- 23 · MAP ROLES -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Map roles, not just stakeholders</span> A name in the account is not yet a role in the decision</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Role</th><th>Diagnostic question</th></tr></thead>
+          <tbody>
+            <tr><td class="j">User</td><td>Who experiences the workflow?</td></tr>
+            <tr><td class="j">Operator</td><td>Who runs and supports it?</td></tr>
+            <tr><td class="j">Evaluator</td><td>Who judges the evidence?</td></tr>
+            <tr><td class="j">Approver</td><td>Who authorizes adoption?</td></tr>
+            <tr><td class="j">Veto holder</td><td>Who can stop it — and on what grounds?</td></tr>
+            <tr><td class="j">Signer</td><td>Who executes the commercial commitment?</td></tr>
+          </tbody>
+        </table>
+        <div class="callout i" style="margin-top:0.65rem"><div class="h">Is the person in front of us recommending, approving, operating, or signing?</div><p>One person may hold several roles, but the roles still need names. Do not declare a contact a champion merely because they are enthusiastic — authority shows in access, influence, and action.</p></div>
+      </div>
+    </section>
+
+    <!-- 24 · DECISION-PATH PLAYBACK -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">The decision-path playback is the highest-value sentence</span></p>
+        <div class="bigquote i"><p>&#8220;The evaluation must prove <span class="hl">[acceptance test]</span> for <span class="hl">[users]</span>, inside <span class="hl">[boundary]</span>. <span class="hl">[names/roles]</span> evaluate it, <span class="hl">[name/role]</span> approves it, <span class="hl">[name/role]</span> can stop it, and the decision is needed by <span class="hl">[date]</span>. Is that the real path?&#8221;</p></div>
+        <div class="di plain" style="margin-top:0.7rem">
+          <svg viewBox="0 0 1000 66" role="img" aria-label="One evaluation reaches named roles by a date; the other stops at the committee">
+            <defs><marker id="ar24" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--jade)"/></marker><marker id="ar24x" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8 z" fill="var(--crit)"/></marker></defs>
+            <text x="10" y="20" class="slbl sok">named path →</text>
+            <g class="slbl slbl-t" text-anchor="middle" style="font-size:9px"><rect x="120" y="8" width="90" height="22" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="165" y="23">evaluator</text><rect x="240" y="8" width="90" height="22" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="285" y="23">approver</text><rect x="360" y="8" width="80" height="22" rx="5" fill="var(--surface)" stroke="var(--jade)"/><text x="400" y="23">signer</text></g>
+            <g stroke="var(--jade)" stroke-width="1.3"><line x1="210" y1="19" x2="240" y2="19" marker-end="url(#ar24)"/><line x1="330" y1="19" x2="360" y2="19" marker-end="url(#ar24)"/></g>
+            <text x="470" y="23" class="slbl sok">by a date ✓</text>
+            <text x="10" y="52" class="slbl sbad">vague path →</text>
+            <g class="slbl slbl-f" text-anchor="middle" style="font-size:9px"><rect x="120" y="40" width="150" height="22" rx="5" fill="var(--surface)" stroke="var(--crit)" stroke-dasharray="3 3"/><text x="195" y="55">&#8220;the committee&#8221;</text></g>
+            <line x1="270" y1="51" x2="320" y2="51" stroke="var(--crit)" stroke-width="1.3" marker-end="url(#ar24x)"/><text x="360" y="55" class="slbl sbad">stops</text>
+          </svg>
+        </div>
+        <p class="src" style="margin-top:0.35rem">A correction is not a setback — it is newly discovered architecture. If security, policy, or procurement appears after the evaluation, the design was incomplete before it started.</p>
+      </div>
+    </section>
+
+    <!-- 25 · BLOCK E -->
+    <section class="slide" data-part="The five blocks">
+      <div class="inner">
+        <p class="kick"><span class="n">Block E · bridge one diagnosed problem to one evaluation</span></p>
+        <div class="split vr top">
+          <div>
+            <div class="callout"><div class="h">Fit statement</div><p>&#8220;You are trying to <span class="hl">[outcome]</span> from a baseline of <span class="hl">[baseline]</span>, inside <span class="hl">[boundary]</span>, with <span class="hl">[decision path]</span>. A useful next step is a bounded evaluation of <span class="hl">[one use case]</span> against <span class="hl">[acceptance test]</span> — not a broad product trial.&#8221;</p></div>
+            <ul class="clean sm" style="margin-top:0.6rem">
+              <li class="j">&#8220;Is that a problem worth evaluating, or have I mapped the fit incorrectly?&#8221;</li>
+              <li>&#8220;Would Tuesday at 10:00 or Thursday at 14:00 work to design it with the named evaluators?&#8221;</li>
+            </ul>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">One narrow bridge — keep the rest of the portfolio dim</span>
+            <svg viewBox="0 0 300 150" role="img" aria-label="Six artifacts cross one narrow bridge to a bounded evaluation">
+              <g fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="1.6"><circle cx="30" cy="30" r="7"/><circle cx="30" cy="60" r="7"/><circle cx="30" cy="90" r="7"/><circle cx="30" cy="120" r="7"/><circle cx="56" cy="45" r="7"/><circle cx="56" cy="105" r="7"/></g>
+              <text x="40" y="140" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">6 artifacts</text>
+              <g stroke="var(--jade)" stroke-width="1.3"><line x1="64" y1="45" x2="150" y2="75"/><line x1="64" y1="105" x2="150" y2="75"/><line x1="37" y1="30" x2="150" y2="75"/><line x1="37" y1="120" x2="150" y2="75"/></g>
+              <rect class="v-pop" x="150" y="58" width="130" height="36" rx="8" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2"/><text x="215" y="80" text-anchor="middle" class="slbl sok" style="font-size:9px">bounded evaluation</text>
+              <g fill="none" stroke="var(--border-2)" opacity="0.4"><circle cx="250" cy="24" r="8"/><circle cx="274" cy="120" r="8"/><circle cx="230" cy="128" r="8"/></g>
+            </svg>
+          </div>
+        </div>
+        <p class="hyp" style="margin-top:0.4rem">A &#8220;no&#8221; is useful — it exposes a wrong map before delivery resources are committed. Keep the bridge capability-level; product mapping is the next module.</p>
+      </div>
+    </section>
+
+    <!-- 26 · THREE DIAGNOSES -->
+    <section class="slide" data-part="Putting it together">
+      <div class="inner">
+        <p class="kick"><span class="n">One architecture, three very different diagnoses</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Buyer opening</th><th>Likely hidden branches</th><th>Acceptance evidence</th><th>Boundary questions</th></tr></thead>
+          <tbody>
+            <tr><td class="j">&#8220;Our agents keep repeating work.&#8221;</td><td>capture · recall · coordination · policy</td><td>representative tasks · retrieval lineage · repeat-work rate</td><td>code · prompts · memory · hosted services</td></tr>
+            <tr><td class="j">&#8220;We need autonomous delivery.&#8221;</td><td>workflow design · tool authority · approvals · rollback</td><td>completed workflow · audit trail · prohibited-action test</td><td>MCP tools · credentials · execution sandbox</td></tr>
+            <tr><td class="j">&#8220;We need occupancy without cameras.&#8221;</td><td>sensing conditions · coverage · privacy · false alarms</td><td>room test set · error thresholds · data-flow record</td><td>RF inputs · edge/cloud path · retention · safety owner</td></tr>
+          </tbody>
+        </table>
+        <p class="hyp" style="text-align:center; margin-top:0.55rem">Products do not choose the diagnosis — evidence does. Each row can change lane after diagnosis. This is why we do not begin with a portfolio slide.</p>
+      </div>
+    </section>
+
+    <!-- 27 · FAILURE MODES -->
+    <section class="slide" data-part="Putting it together">
+      <div class="inner">
+        <p class="kick"><span class="n">Failure modes · where sellers leave the architecture</span></p>
+        <table class="tbl tiny">
+          <thead><tr><th>Failure mode</th><th>What it sounds like</th><th>Corrective move</th></tr></thead>
+          <tbody>
+            <tr><td class="c">Product gravity</td><td>&#8220;Let me show you all four platforms.&#8221;</td><td class="j">Return to the problem behind the question</td></tr>
+            <tr><td class="c">Label acceptance</td><td>&#8220;So this is a memory problem.&#8221;</td><td class="j">Reconstruct the last event</td></tr>
+            <tr><td class="c">Pain inflation</td><td>&#8220;That must be costing millions.&#8221;</td><td class="j">Ask for owner, unit, baseline, horizon</td></tr>
+            <tr><td class="c">Demo success</td><td>&#8220;They loved it.&#8221;</td><td class="j">Return to the pre-agreed acceptance test</td></tr>
+            <tr><td class="c">Boundary adjectives</td><td>&#8220;It stays private.&#8221;</td><td class="j">Name data, systems, actions, paths, owners</td></tr>
+            <tr><td class="c">Champion substitution</td><td>&#8220;They will handle approval.&#8221;</td><td class="j">Run the decision-path playback with names</td></tr>
+            <tr><td class="c">Recap exit</td><td>&#8220;I&#39;ll send materials.&#8221;</td><td class="j">Calendar the next step during the call</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.4rem">The architecture does not eliminate judgment — it tells the seller where judgment belongs and where improvisation creates avoidable risk.</p>
+      </div>
+    </section>
+
+    <!-- 28 · PRACTICE -->
+    <section class="slide" data-part="Putting it together">
+      <div class="inner">
+        <p class="kick"><span class="n">Practice · build the six artifacts</span> In pairs, one scenario from the three diagnoses</p>
+        <div class="split v top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">One Block A question and the situation playback</li>
+              <li>One Block B baseline and consequence</li>
+              <li class="j">One Block C acceptance test with an explicit failure condition</li>
+              <li>One Block D operating boundary</li>
+              <li class="j">One decision-path playback with named roles and a date</li>
+              <li>One Block E fit statement and two-option calendar ask</li>
+            </ul>
+            <div class="callout" style="margin-top:0.5rem; border-left-color:var(--crit)"><div class="h" style="color:var(--crit)">Constraint</div><p>No product name until all six artifacts exist. 8 min write · 4 min role-play · 3 min critique.</p></div>
+          </div>
+          <div class="di">
+            <span class="cap">Facilitation rubric</span>
+            <ul class="clean sm">
+              <li>Blocks run in sequence; questions do not smuggle a solution</li>
+              <li>Acceptance test has metric, baseline, target, horizon, evidence &amp; failure condition</li>
+              <li>Boundary identifies concrete data, systems, actions &amp; owners</li>
+              <li>Decision path names evaluator, approver, veto holder, signer &amp; date</li>
+              <li>Next step is calendared with the people needed to design it</li>
+            </ul>
+            <p class="src" style="margin-top:0.4rem">Debrief with one question: &#8220;What did the playback reveal that the original request concealed?&#8221;</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 29 · CLOSE -->
+    <section class="slide" data-part="Putting it together">
+      <div class="inner">
+        <p class="kick"><span class="n">Close · discovery is complete when the evaluation can be designed</span></p>
+        <div class="grid g3" style="gap:0.5rem">
+          <div class="di"><span class="cap">Six artifacts</span><p class="mut" style="font-size:0.9rem">Problem · Baseline · Outcome · Boundary · Decision path · Calendared next step</p></div>
+          <div class="di"><span class="cap">Two confirmation gates</span><p class="mut" style="font-size:0.9rem">Situation playback · Decision-path playback</p></div>
+          <div class="di"><span class="cap">Three controls</span><p class="mut" style="font-size:0.9rem">Frame–Diagnose–Commit · Question-First · Five seconds of silence</p></div>
+        </div>
+        <div class="versus" style="margin-top:0.9rem">
+          <div class="vcol"><div class="vlbl" style="color:var(--crit)">Do not ask</div><p class="mut">&#8220;Which product can I show?&#8221;</p></div>
+          <div class="vcol"><div class="vlbl" style="color:var(--jade)">Ask</div><p class="mut">&#8220;What evidence must travel through which boundary to whose decision?&#8221;</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APX A · PUBLIC PROJECT REVIEW -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix A · public project review</span> Teaching cases — not proof of methodology</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Project</th><th>Publicly documented role</th><th>Best diagnostic use</th><th>Do not imply</th></tr></thead>
+          <tbody>
+            <tr><td class="j">RuFlo</td><td>Agent harness — orchestration, routing, memory, learning, MCP tools, security controls</td><td>Separate workflow, coordination, memory, cost &amp; authority failures</td><td>&#8220;Multi-agent&#8221; is automatically better; benchmarks = ROI</td></tr>
+            <tr><td class="j">RuVector</td><td>Local-first adaptive vector/graph memory with provenance &amp; lifecycle</td><td>Define retrieval quality, trusted evidence, expiry, locality &amp; action influence</td><td>Reading memory = learning; the database decides policy</td></tr>
+            <tr><td class="j">MetaHarness</td><td>Portable harness generator — default-deny governance, scanning, witness-signed releases</td><td>Discover tool permissions, execution boundaries &amp; provenance needs</td><td>Beta status or signed provenance alone = production fit</td></tr>
+            <tr><td class="j">RuView</td><td>WiFi-based spatial sensing with an edge path to Cognitum Seed</td><td>Make environment, privacy, accuracy &amp; data-flow questions concrete</td><td>Presence, count, pose &amp; vitals share the same maturity</td></tr>
+            <tr><td class="j">rUv overview</td><td>Account-level map of orchestration, memory, runtime, sensing &amp; research</td><td>Explain why a portfolio tour can&#39;t substitute for diagnosis</td><td>Stars, forks, downloads &amp; age equal verified adoption</td></tr>
+          </tbody>
+        </table>
+        <p class="hyp" style="margin-top:0.45rem">The projects reinforce four habits: decompose the symptom · name the boundary · pre-commit evidence · keep maturity honest.</p>
+      </div>
+    </section>
+
+    <!-- APX B · FACILITATOR ANSWER KEY -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix B · facilitator answer key</span> Worked example — governed agent delivery workflow</p>
+        <div class="split v top">
+          <div>
+            <div class="di"><span class="cap">A · Trigger &amp; playback</span><p class="mut" style="font-size:0.82rem">&#8220;Walk me through the last release where an agent repeated work or used the wrong tool.&#8221; Playback: the workflow lost prior test context, retried a completed task, and reached a privileged deployment tool without the required security approval.</p></div>
+            <div class="di" style="margin-top:0.4rem"><span class="cap">B · Consequence &amp; baseline</span><p class="mut" style="font-size:0.82rem">Two of the last ten releases · ~3 engineer-hours each · the security lead stops the release · a customer commitment makes the next window decision-relevant.</p></div>
+            <div class="di" style="margin-top:0.4rem"><span class="cap">C · Acceptance test</span><p class="mut" style="font-size:0.82rem">Complete ten release tasks with zero duplicate completed steps, 100% enforcement of the named approval gate, and a trace linking every privileged call to its approver. <span class="sbad">Fails if</span> a prohibited tool runs, an approval is bypassed, or the audit record can&#39;t reconstruct the action.</p></div>
+          </div>
+          <div>
+            <div class="di"><span class="cap">D · Boundary &amp; decision path</span><p class="mut" style="font-size:0.82rem">Code &amp; build artifacts stay in the customer environment; deployment &amp; secret stores remain default-deny. Playback: Priya (Platform Eng) evaluates completion; Marco (Security) evaluates permissions &amp; auditability; Dana approves adoption; Legal can stop the purchase; decision needed before 30 Sept.</p></div>
+            <div class="di" style="margin-top:0.4rem"><span class="cap">E · Fit &amp; commitment</span><p class="mut" style="font-size:0.82rem">&#8220;A useful next step is to design one governed release workflow against those measures — not trial every orchestration feature. Have I mapped it correctly? Can Priya and Marco join Tuesday 10:00 or Thursday 14:00?&#8221;</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APX C · SOURCES & CLAIM-SAFETY -->
+    <section class="slide" data-part="Appendix">
+      <div class="inner">
+        <p class="kick"><span class="n">Appendix C · sources &amp; claim-safety</span></p>
+        <div class="split v top">
+          <div>
+            <div class="di"><span class="cap" style="color:var(--indigo)">Binding internal sources</span>
+              <ul class="clean sm">
+                <li>Cognitum Solution-Architecture Sales Doctrine (§2–4, §11)</li>
+                <li>Course build: <span class="mono2">fit-diagnose-discovery</span> — learner language, checks, activity, canonical title</li>
+                <li>Course sources file — build record &amp; sourcing limits</li>
+              </ul>
+            </div>
+            <div class="di" style="margin-top:0.4rem"><span class="cap" style="color:var(--jade)">Public primary sources reviewed</span>
+              <p class="mut" style="font-size:0.82rem">rUv ecosystem overview · RuFlo · RuVector · MetaHarness · RuView READMEs · RuView user guide (Cognitum Seed) · RuView ADR-101 (Pose Estimation Cog)</p>
+            </div>
+          </div>
+          <div class="callout" style="border-left-color:var(--crit)"><div class="h" style="color:var(--crit)">Claim-safety rules for production</div>
+            <ul class="clean sm">
+              <li>Treat every numeric target in examples as hypothetical unless the buyer supplies it</li>
+              <li>Do not convert stars, forks, downloads, or benchmarks into adoption or ROI</li>
+              <li>Preserve maturity labels — shipped, beta, threshold-met, production-ready are different claims</li>
+              <li>Keep public OSS evidence and internal sales doctrine visibly separate</li>
+            </ul>
+          </div>
+        </div>
+        <p class="hyp" style="text-align:center; margin-top:0.5rem">Before this draft changes a course or becomes outward-facing collateral, route it through the University&#39;s product-intake and claims processes.</p>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">Cognitum University · Sales Doctrine</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+
+</body>
+</html>
