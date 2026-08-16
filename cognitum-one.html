@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cognitum One enterprise offer foundation: four commercial lanes, the ONE anchor, two quantified wedges (LLM -96%, public cloud -100%), the full 100-module ONE library, and a 30-day execution roadmap.">
+<meta name="color-scheme" content="dark light">
+<title>Cognitum One · Enterprise Offer &amp; the ONE 100</title>
+<title>Cognitum One · Enterprise Offer &amp; the ONE 100</title>
+<style>
+  /* ============================================================
+     COGNITUM CONSULTANTS — ORIENTATION · 60-MIN DECK (v3, dynamic)
+     Fixed 1280x720 stage, scaled to fit — no slide ever scrolls.
+     Live particle background + animated SVG visualizations.
+     Palette: ink · indigo (cognition) · jade (lift) · amber/red penalties.
+     Keys: ← →  navigate · Space next · F present · T theme
+     ============================================================ */
+
+  :root {
+    --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB;
+    --text:#12151C; --muted:#566072; --faint:#8A93A5;
+    --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F;
+    --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10);
+    --p-ink:10,12,17;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,"JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --radius:14px; --radius-sm:9px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48;
+      --text:#E9ECF3; --muted:#99A2B3; --faint:#697386;
+      --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F;
+      --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12);
+    }
+  }
+  :root[data-theme="light"] { --ink:#F6F7F9; --surface:#FFFFFF; --surface-2:#F0F2F6; --border:#DDE1E9; --border-2:#C9CFDB; --text:#12151C; --muted:#566072; --faint:#8A93A5; --indigo:#4E52E0; --indigo-dim:#6f73ea; --jade:#0E9E68; --jade-dim:#12b477; --amber:#B67A12; --crit:#D2544F; --indigo-wash:rgba(78,82,224,0.08); --jade-wash:rgba(14,158,104,0.09); --crit-wash:rgba(210,84,79,0.10); }
+  :root[data-theme="dark"] { --ink:#0A0C11; --surface:#12151D; --surface-2:#191D27; --border:#262B37; --border-2:#333A48; --text:#E9ECF3; --muted:#99A2B3; --faint:#697386; --indigo:#8790FF; --indigo-dim:#6c76e8; --jade:#4FD6A0; --jade-dim:#38b384; --amber:#E7B15C; --crit:#F0736F; --indigo-wash:rgba(135,144,255,0.10); --jade-wash:rgba(79,214,160,0.10); --crit-wash:rgba(240,115,111,0.12); }
+
+  * { box-sizing: border-box; }
+  html { font-size: 19px; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a { color: var(--indigo); text-decoration: none; }
+  strong { color: var(--text); font-weight: 640; }
+  em { font-style: italic; color: var(--text); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border); padding: 0.06em 0.36em; border-radius: 5px; color: var(--text); }
+
+  .stagewrap { flex: 1; position: relative; overflow: hidden; }
+  #bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.9; pointer-events: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: center center; transform: translate(-50%, -50%) scale(1); z-index: 1; }
+  .stage::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); mask-image: radial-gradient(ellipse 78% 78% at 50% 44%, #000 30%, transparent 82%); opacity: 0.22; }
+
+  .slide { position: absolute; inset: 0; z-index: 1; padding: 40px 58px; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease; }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity .18s ease; } }
+  .slide .inner { width: 100%; }
+
+  .kick { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1rem; }
+  .kick .n { color: var(--indigo); }
+  .kick::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+
+  h2 { font-size: 2.2rem; line-height: 1.07; letter-spacing: -0.025em; font-weight: 690; margin: 0 0 0.75rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; letter-spacing: -0.01em; font-weight: 650; margin: 0 0 0.35rem; }
+  p { margin: 0 0 0.7rem; font-size: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.32rem; color: var(--muted); line-height: 1.4; }
+  .mut { color: var(--muted); }
+  .small { font-size: 0.95rem; }
+
+  .glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(85px); pointer-events: none; z-index: 0; }
+  .glow-a { width: 620px; height: 620px; left: -180px; top: -230px; background: radial-gradient(circle, var(--indigo), transparent 66%); opacity: 0.5; }
+  .glow-b { width: 540px; height: 540px; right: -180px; bottom: -210px; background: radial-gradient(circle, var(--jade), transparent 66%); opacity: 0.32; }
+  .title-brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 640; letter-spacing: -0.01em; margin-bottom: 1.7rem; font-size: 1.05rem; }
+  .title-brand .mark { width: 30px; height: 30px; }
+  .title-brand small { font-family: var(--font-mono); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-left: 0.7rem; border-left: 1px solid var(--border-2); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1.4rem; }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px var(--jade-wash); animation: beat 2s ease-in-out infinite; }
+  h1 { font-size: 4rem; line-height: 0.96; letter-spacing: -0.038em; font-weight: 720; margin: 0 0 1.1rem; max-width: 16ch; text-wrap: balance; }
+  h1 .g { color: var(--jade); }
+  .title-sub { font-size: 1.42rem; color: var(--muted); max-width: 60ch; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.7rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: baseline; gap: 0.5rem; background: var(--surface); border: 1px solid var(--border); padding: 0.5rem 0.85rem; border-radius: 10px; }
+  .chip b { color: var(--indigo); font-weight: 600; }
+  .chip span { color: var(--faint); }
+  .slide.active .rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .inner { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .heroviz { display: flex; align-items: center; justify-content: center; }
+  .heroviz svg { width: 100%; max-width: 440px; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px){ .hero .inner { grid-template-columns: 1fr; } }
+
+  .divider { align-items: flex-start; }
+  .divider .pnum { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 0.3em; color: var(--indigo); margin-bottom: 0.9rem; }
+  .divider h2 { font-size: 3.2rem; max-width: 20ch; }
+  .divider .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.7rem; max-width: 54ch; }
+  .divider .rule { width: 88px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--jade)); border-radius: 2px; margin-top: 1.4rem; }
+  .slide.active .divider .rule, .slide.active.divider .rule { animation: growbar .8s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .divider .dchips { display:flex; gap:0.5rem; margin-top:1.5rem; flex-wrap:wrap; }
+  .divider .dchips span { font-family:var(--font-mono); font-size:0.76rem; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:0.3rem 0.75rem; }
+  .divider .inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center; width: 100%; }
+  .divider .dviz { display: flex; align-items: center; justify-content: center; }
+  .divider .dviz svg { width: 100%; height: auto; max-width: 400px; display: block; }
+
+  .grid { display: grid; gap: 0.85rem; }
+  .g2 { grid-template-columns: repeat(2,1fr); }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .split.top { align-items: start; }
+  .split.v { grid-template-columns: 1.02fr 0.98fr; }
+  .split.vr { grid-template-columns: 0.92fr 1.08fr; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.95rem 1.05rem; }
+  .card .tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+  .card .tag.j { color: var(--jade); }
+  .card p { color: var(--muted); font-size: 0.98rem; margin: 0; }
+
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .stat .num { font-family: var(--font-mono); font-weight: 600; font-size: 2.55rem; line-height: 1; letter-spacing: -0.02em; color: var(--jade); font-variant-numeric: tabular-nums; }
+  .stat .num.i { color: var(--indigo); }
+  .stat .k { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  ul.clean li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: 1.08rem; line-height: 1.36; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--indigo); }
+  ul.clean li.j::before { background: var(--jade); }
+  ul.clean li b { color: var(--text); }
+  ul.clean.sm li { font-size: 0.97rem; padding-left: 1.25rem; }
+  .slide.active ul.clean li { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active ul.clean li:nth-child(2){animation-delay:.07s} .slide.active ul.clean li:nth-child(3){animation-delay:.14s}
+  .slide.active ul.clean li:nth-child(4){animation-delay:.21s} .slide.active ul.clean li:nth-child(5){animation-delay:.28s}
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .callout.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .callout p { margin: 0; font-size: 1.02rem; }
+  .callout .h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+
+  .bigquote { border: 1px solid var(--border); border-left: 3px solid var(--jade); background: var(--jade-wash); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.6rem 1.8rem; }
+  .bigquote.i { border-left-color: var(--indigo); background: var(--indigo-wash); }
+  .bigquote p { font-size: 2rem; line-height: 1.22; letter-spacing: -0.02em; font-weight: 560; margin: 0; text-wrap: balance; }
+  .bigquote.sm p { font-size: 1.55rem; }
+  .bigquote .who { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bigquote .who::before { content: ""; width: 1.8rem; height: 1px; background: var(--border-2); }
+
+  .di { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .di.plain { background: transparent; border: none; padding: 0; }
+  .di .cap { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .di svg { width: 100%; height: auto; display: block; }
+  .di.sq svg { max-width: 330px; margin-inline: auto; }
+  .stage svg text { font-family: var(--font-mono); }
+  .vlbl { fill: var(--muted); } .vlbl-t { fill: var(--text); } .vlbl-f { fill: var(--faint); }
+
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .node { flex: 1; border: 1px solid var(--border-2); border-radius: 10px; padding: 0.8rem 0.85rem; background: var(--surface-2); display: flex; flex-direction: column; gap: 0.3rem; }
+  .node .badge { font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--indigo); padding: 0.15rem 0.42rem; border-radius: 5px; font-weight: 600; align-self: flex-start; }
+  .node.j .badge { background: var(--jade); }
+  .node b { font-size: 0.95rem; letter-spacing: -0.01em; }
+  .node span { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+  .node.kernel { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade-wash), 0 0 26px -12px var(--jade); }
+  .harrow { display: flex; align-items: center; color: var(--faint); font-family: var(--font-mono); padding: 0 0.45rem; font-size: 0.85rem; }
+  .slide.active .harrow { animation: beat 1.6s ease-in-out infinite; }
+
+  .surfaces { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
+  .surf { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.6rem 0.75rem; }
+  .surf .f { font-family: var(--font-mono); font-size: 0.85rem; color: var(--indigo); display: block; }
+  .surf .d { font-size: 0.82rem; color: var(--muted); line-height: 1.28; }
+  .surf.ro { border-style: dashed; }
+  .surf.ro .f { color: var(--jade); }
+  .slide.active .surf { animation: pop2 .45s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .surf:nth-child(2){animation-delay:.05s}.slide.active .surf:nth-child(3){animation-delay:.1s}.slide.active .surf:nth-child(4){animation-delay:.15s}
+  .slide.active .surf:nth-child(5){animation-delay:.2s}.slide.active .surf:nth-child(6){animation-delay:.25s}.slide.active .surf:nth-child(7){animation-delay:.3s}.slide.active .surf:nth-child(8){animation-delay:.35s}
+
+  .steps { display: grid; gap: 0.45rem; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.85rem; }
+  .step .idx { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--ink); background: var(--text); width: 1.5rem; height: 1.5rem; border-radius: 6px; display: grid; place-items: center; }
+  .step.a .idx { background: var(--indigo); } .step.b .idx { background: var(--jade); }
+  .step b { font-size: 1rem; } .step p { margin: 0.08rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .slide.active .step { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .step:nth-child(2){animation-delay:.09s}.slide.active .step:nth-child(3){animation-delay:.18s}.slide.active .step:nth-child(4){animation-delay:.27s}
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.35rem; }
+  .panel .cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.2rem; }
+  .panel .ttl { font-weight: 620; margin-bottom: 1rem; letter-spacing: -0.01em; font-size: 1.08rem; }
+  .bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: end; height: 226px; position: relative; }
+  .bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0.45rem; text-align: center; }
+  .bar .col { height: 0%; background: linear-gradient(180deg, var(--indigo-dim), var(--indigo)); border-radius: 6px 6px 3px 3px; position: relative; min-height: 3px; transition: height 1s cubic-bezier(.2,.7,.2,1); }
+  .bar.hi .col { background: linear-gradient(180deg, var(--jade), var(--jade-dim)); box-shadow: 0 0 30px -8px var(--jade); }
+  .bar .col .v { position: absolute; top: -1.6rem; left: 0; right: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar .lab { font-size: 0.8rem; color: var(--muted); line-height: 1.22; }
+  .bar .lab b { display: block; color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; margin-top: 0.1rem; }
+
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; overflow: hidden; margin: 0; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.55; color: var(--text); }
+  pre .c { color: var(--faint); } pre .cmd { color: var(--jade); } pre .flag { color: var(--indigo); }
+
+  .pipe { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5rem; }
+  .pstep { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.75rem 0.8rem; position: relative; }
+  .pstep .s { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .pstep b { display: block; margin: 0.24rem 0 0.2rem; letter-spacing: -0.01em; font-size: 0.98rem; }
+  .pstep p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .slide.active .pstep { animation: pop2 .5s cubic-bezier(.2,1.1,.3,1) backwards; }
+  .slide.active .pstep:nth-child(2){animation-delay:.1s}.slide.active .pstep:nth-child(3){animation-delay:.2s}.slide.active .pstep:nth-child(4){animation-delay:.3s}.slide.active .pstep:nth-child(5){animation-delay:.4s}
+
+  .qa { display: grid; gap: 0.5rem; }
+  .qa .row { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 0.65rem 0.95rem; }
+  .qa .q { font-weight: 620; margin: 0 0 0.15rem; font-size: 1.02rem; }
+  .qa .a { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.35; }
+
+  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+  .vcol { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem 1.15rem; }
+  .vcol.d { border-top: 3px solid var(--indigo); } .vcol.f { border-top: 3px solid var(--jade); }
+  .vcol h3 { font-family: var(--font-mono); font-size: 0.86rem; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+  .vcol.d h3 { color: var(--indigo); } .vcol.f h3 { color: var(--jade); }
+  .vmid { display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--faint); }
+
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 2rem; }
+  .arow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .arow .an { font-family: var(--font-mono); color: var(--indigo); font-size: 0.98rem; }
+  .arow .at { font-size: 1.1rem; } .arow .am { font-family: var(--font-mono); font-size: 0.84rem; color: var(--faint); }
+  .slide.active .arow { animation: rise .5s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .arow:nth-child(2){animation-delay:.06s}.slide.active .arow:nth-child(3){animation-delay:.12s}.slide.active .arow:nth-child(4){animation-delay:.18s}.slide.active .arow:nth-child(5){animation-delay:.24s}.slide.active .arow:nth-child(6){animation-delay:.3s}
+
+  .src { font-family: var(--font-mono); font-size: 0.66rem; color: var(--faint); margin-top: 0.8rem; } .src a { color: var(--muted); }
+
+  /* ---------- chrome ---------- */
+  .ptrack { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 40; cursor: pointer; }
+  .progress { height: 3px; width: 0; background: linear-gradient(90deg, var(--indigo), var(--jade)); transition: width .4s ease; }
+  .topright { position: fixed; top: 0.8rem; right: 1rem; z-index: 41; display: flex; gap: 0.5rem; }
+  .btn { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.36rem 0.66rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .btn:hover { color: var(--text); border-color: var(--border-2); }
+  .navbar { flex: none; display: flex; align-items: center; gap: 1rem; padding: 0.5rem clamp(1rem, 4vw, 2rem); border-top: 1px solid var(--border); background: var(--ink); z-index: 41; }
+  .navbar .foot-brand { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .navbar .part { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar .part b { color: var(--indigo); }
+  .navbar .spacer { flex: 1; }
+  .hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--faint); letter-spacing: 0.05em; }
+  .counter { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; } .counter b { color: var(--text); }
+  .arrows { display: flex; gap: 0.4rem; }
+  .arr { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 1rem; }
+  .arr:hover { border-color: var(--indigo); color: var(--indigo); } .arr[disabled] { opacity: 0.35; cursor: default; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 9%; z-index: 30; cursor: pointer; background: transparent; border: none; }
+  .zone.l { left: 0; } .zone.r { right: 0; }
+  @media (max-width: 760px){ .hint, .navbar .part { display: none; } }
+
+
+  /* ---- HarnessaaS deck helpers ---- */
+  .card .ct { font-weight: 650; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text); }
+  .card.mini { padding: 0.7rem 0.8rem; }
+  .card.mini .ct { font-size: 0.9rem; }
+  .card .cd { color: var(--muted); font-size: 0.85rem; line-height: 1.34; }
+  .card.mini .cd { font-size: 0.8rem; line-height: 1.3; }
+  .card.j { border-color: var(--jade-dim); } .card.i { border-color: var(--indigo-dim); }
+  .card.a { border-color: var(--amber); } .card.c { border-color: var(--crit); }
+  .uh { border-left-color: var(--indigo) !important; background: var(--indigo-wash) !important; }
+  .flow.sm .node { padding: 0.6rem 0.6rem; }
+  .flow.sm .node b { font-size: 0.86rem; } .flow.sm .node span { font-size: 0.68rem; }
+  .flow.sm .harrow { padding: 0 0.26rem; font-size: 0.72rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); font-weight: 600; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-2); }
+  .tbl td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.3; }
+  .tbl td:first-child { color: var(--text); font-weight: 560; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl.sm { font-size: 0.84rem; } .tbl.sm td { padding: 0.4rem 0.7rem; } .tbl.sm th { padding: 0.38rem 0.7rem; }
+  .tbl .j { color: var(--jade); } .tbl .i { color: var(--indigo); } .tbl .c { color: var(--crit); }
+  .mat { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.16rem 0.55rem; border-radius: 6px; border: 1px solid var(--border-2); color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .mat.ship { color: var(--jade); border-color: var(--jade); }
+  .mat.pilot { color: var(--indigo); border-color: var(--indigo); }
+  .mat.gate { color: var(--amber); border-color: var(--amber); }
+  .mat.plan { color: var(--faint); border-color: var(--border-2); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
+  .num-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+  .num-card .ni { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--ink); background: var(--indigo); width: 1.4rem; height: 1.4rem; border-radius: 5px; display: grid; place-items: center; }
+  .num-card.j .ni { background: var(--jade); }
+  .num-card .nt { font-size: 0.86rem; color: var(--muted); line-height: 1.28; }
+  .num-card .nt b { color: var(--text); }
+
+  /* ---- Enterprise Matter additions ---- */
+  .g6 { grid-template-columns: repeat(6,1fr); }
+  .atomchip { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.74rem; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:0.28rem 0.7rem; }
+  .atomchip .dotm { width:8px; height:8px; border-radius:50%; background:var(--jade); }
+  .hyp { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.04em; color:var(--amber); margin-top:0.7rem; }
+  .tbl.tiny { font-size:0.78rem; } .tbl.tiny td { padding:0.34rem 0.6rem; } .tbl.tiny th { padding:0.32rem 0.6rem; }
+
+  /* ---- Enterprise Matter · dynamic subject-specific scenes ---- */
+  .di.scene { padding: 0.45rem 0.65rem; gap: 0.25rem; }
+  .di.scene svg { width: 100%; height: auto; display: block; }
+  .di.scene .cap { margin-bottom: 0.05rem; }
+  .slbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.02em; }
+  .slbl-t { fill: var(--text); } .slbl-f { fill: var(--faint); } .slbl-m { fill: var(--muted); }
+  .sok { fill: var(--jade); } .swarn { fill: var(--amber); } .sbad { fill: var(--crit); } .sind { fill: var(--indigo); }
+  @keyframes emsweep { to { transform: rotate(360deg); } }
+  .slide.active .v-sweep { animation: emsweep 3.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes emblink { 0%,45%,100%{opacity:.25} 55%,90%{opacity:1} }
+  .slide.active .v-blink { animation: emblink 2.2s ease-in-out infinite; }
+  @keyframes emcut { 0%,60%{opacity:1} 72%,100%{opacity:.12} }
+  .slide.active .v-cut { animation: emcut 3s ease-in-out infinite; }
+  @keyframes emflash { 0%,70%,100%{opacity:0} 82%{opacity:1} }
+  .slide.active .v-flash { animation: emflash 3s ease-in-out infinite; }
+  /* atom-composition line under each molecule kicker */
+  .molatoms { font-family: var(--font-mono); font-size: 0.73rem; color: var(--muted); margin: 0.2rem 0 0.05rem; letter-spacing: 0.01em; }
+  .molatoms .lbl { color: var(--faint); text-transform: uppercase; font-size: 0.58rem; letter-spacing: 0.11em; margin-right: 0.5rem; }
+  .molatoms b { color: var(--jade); font-weight: 600; } .molatoms b.i { color: var(--indigo); } .molatoms .mo { color: var(--faint); }
+  /* the model · ladder rungs */
+  .card .rsvg { width: 100%; height: 44px; margin-bottom: 0.35rem; display: block; }
+  .rung-n { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--faint); }
+  .benefit { font-size: 0.86rem; color: var(--muted); margin: 0.25rem 0 0.1rem; line-height: 1.3; }
+  .benefit .lbl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--jade); border: 1px solid var(--jade-dim); border-radius: 5px; padding: 0.08rem 0.4rem; margin-right: 0.55rem; white-space: nowrap; }
+  .benefit b { color: var(--text); font-weight: 600; }
+  .mono2 { font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0; }
+  .tbl td .mono2, .tbl td.mono2 { color: var(--muted); }
+  .hl { color: var(--indigo); font-weight: 600; }
+  .hl2 { color: var(--jade); font-weight: 600; }
+  /* atoms → bonds → molecules → matter stepper, on every content slide */
+  .chain { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); margin:0.1rem 0 0.35rem; }
+  .chain span { opacity:0.4; }
+  .chain span.on { opacity:1; color:var(--jade); font-weight:600; }
+  .chain span.oni { opacity:1; color:var(--indigo); font-weight:600; }
+  .chain i { font-style:normal; color:var(--border-2); }
+  .di .cap b { color: var(--jade); font-weight: 700; }
+  /* human-labor positioning tag on use-case slides */
+  .labor { font-size: 0.8rem; color: var(--muted); margin: 0.15rem 0 0.05rem; line-height: 1.3; }
+  .labor .lt { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.1rem 0.42rem; border-radius: 5px; font-weight: 600; white-space: nowrap; margin-right: 0.35rem; }
+  .labor .lt.aug { color: var(--jade); border: 1px solid var(--jade-dim); }
+  .labor .lt.auto { color: var(--amber); border: 1px solid var(--amber); }
+  .labor b { color: var(--text); font-weight: 600; }
+  /* the five reasons companies buy — tagged on each use-case slide */
+  .buys { margin: 0.12rem 0 0.05rem; line-height: 1.6; }
+  .buys .bl { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); margin-right: 0.45rem; }
+  .buys .bp { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; color: var(--indigo); border: 1px solid var(--indigo-dim); border-radius: 999px; padding: 0.06rem 0.55rem; margin-right: 0.32rem; }
+
+  /* ---- Cognitum Methods deck ---- */
+  .cog-tag { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.01em; color: var(--muted); }
+  /* generic 2-col grid (anatomy / fallbacks) */
+  .cog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.42rem 0.9rem; margin-top: 0.55rem; }
+  .cog-card { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.46rem 0.62rem; }
+  .cog-card .cl { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--ink); background: var(--indigo); width: 1.42rem; height: 1.42rem; border-radius: 5px; display: grid; place-items: center; }
+  .cog-card.j .cl { background: var(--jade); }
+  .cog-card .cx { font-size: 0.79rem; color: var(--muted); line-height: 1.28; }
+  .cog-card .cx b { color: var(--text); font-weight: 620; display: block; margin-bottom: 0.03rem; letter-spacing: -0.005em; }
+  /* vertical COGNITUM ladder — letters read straight down a spine */
+  .cog-split { grid-template-columns: 1.46fr 0.74fr; gap: 1.5rem; margin-top: 0.5rem; }
+  .cog-ladder { display: flex; flex-direction: column; gap: 0.3rem; position: relative; }
+  .cog-ladder::before { content: ""; position: absolute; left: 0.7rem; top: 0.85rem; bottom: 0.85rem; width: 2px; background: linear-gradient(var(--indigo), var(--jade)); opacity: 0.45; border-radius: 2px; }
+  .cog-row { display: grid; grid-template-columns: auto 1fr; gap: 0.66rem; align-items: start; }
+  .cog-row .cl { position: relative; z-index: 1; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--ink); background: var(--indigo); width: 1.44rem; height: 1.44rem; border-radius: 6px; display: grid; place-items: center; box-shadow: 0 0 0 3px var(--bg); }
+  .cog-row.j .cl { background: var(--jade); }
+  .cog-row .cx { font-size: 0.76rem; color: var(--muted); line-height: 1.28; padding-top: 0.12rem; }
+  .cog-row .cx b { color: var(--text); font-weight: 620; letter-spacing: -0.005em; }
+  .cog-gfx { align-self: center; background: transparent; border: none; padding: 0; gap: 0.4rem; }
+  .cog-gfx .cap { text-align: center; }
+  .cog-gfx svg { width: 100%; height: auto; max-height: 300px; }
+  .cog-take { margin-top: 0.5rem; padding: 0.55rem 0.8rem; }
+  .cog-take .h { margin-bottom: 0.1rem; }
+  .cog-take p { font-size: 0.9rem; }
+  /* master positioning hears grid */
+  .hears { display: grid; grid-template-columns: auto 1fr; gap: 0.34rem 0.9rem; align-items: baseline; }
+  .hears .hr { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--indigo); text-transform: uppercase; font-weight: 600; }
+  .hears .hh { font-size: 0.92rem; color: var(--muted); }
+
+  /* ---- Cognitum One deck ---- */
+  .oh-head { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--indigo); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; font-size: 0.9rem; color: var(--muted); margin: 0.5rem 0 0.55rem; line-height: 1.3; }
+  .oh-head b { font-family: var(--font-mono); font-weight: 700; }
+  .oh-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem 0.7rem; }
+  .oh-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.44rem 0.6rem; }
+  .oh-card .ac { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em; }
+  .oh-card .nm { font-size: 0.72rem; font-weight: 600; color: var(--text); line-height: 1.2; margin: 0.05rem 0 0.1rem; }
+  .oh-card .rl { font-size: 0.68rem; color: var(--muted); line-height: 1.24; }
+  /* 100 map */
+  .co-map { display: grid; grid-template-columns: repeat(10,1fr); gap: 0.3rem; margin-top: 0.5rem; }
+  .co-col { display: flex; flex-direction: column; gap: 0.18rem; }
+  .co-cn { font-family: var(--font-mono); font-size: 0.58rem; color: var(--faint); text-align: center; }
+  .co-cat { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--ink); border-radius: 4px; padding: 0.22rem 0.1rem; text-align: center; letter-spacing: 0.01em; }
+  .co-chip { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.16rem 0.1rem; text-align: center; }
+
+  /* ============ ANIMATION LAYER ============ */
+  @keyframes beat { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes pop2 { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+  @keyframes growbar { from{transform:scaleX(0);transform-origin:left} to{transform:scaleX(1)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes vdraw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+  @keyframes vpop { from { transform: scale(0); opacity:0 } to { transform: scale(1); opacity:1 } }
+  @keyframes vgrowY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes vgrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes vpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @keyframes vfade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vshimmer { 0%,100%{opacity:.28} 50%{opacity:1} }
+  @keyframes vtravel { from{offset-distance:0%} to{offset-distance:100%} }
+  @keyframes vtravelf { 0%{offset-distance:0%;opacity:0} 12%{opacity:1} 78%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  @keyframes vhalo { 0%{transform:scale(.6);opacity:.6} 100%{transform:scale(2.4);opacity:0} }
+
+  .slide.active .v-spin  { animation: spin 11s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-spinS { animation: spin 26s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-draw  { stroke-dasharray: 1600; animation: vdraw 1.5s ease forwards; }
+  .slide.active .v-pop   { transform-box: fill-box; transform-origin: center; animation: vpop .55s cubic-bezier(.2,1.3,.3,1) backwards; }
+  .slide.active .v-gy    { transform-box: fill-box; transform-origin: bottom; animation: vgrowY .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-gx    { transform-box: fill-box; transform-origin: left;   animation: vgrowX 1s cubic-bezier(.2,.7,.2,1) backwards; }
+  .slide.active .v-pulse { transform-box: fill-box; transform-origin: center; animation: vpulse 2s ease-in-out infinite; }
+  .slide.active .v-fade  { animation: vfade 1.1s ease forwards; }
+  .slide.active .v-shim  { animation: vshimmer 2.4s ease-in-out infinite; }
+  .slide.active .v-halo  { transform-box: fill-box; transform-origin: center; animation: vhalo 2.4s ease-out infinite; }
+  .v-t  { offset-distance: 0%; }
+  .slide.active .v-t { animation: vtravel 2s linear infinite; }
+  .slide.active .v-tf{ animation: vtravelf 2.4s linear infinite; }
+  .slide.active .v-spinR { animation: spin 12s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+  .slide.active .v-float { animation: vfloat 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .v-dash { stroke-dasharray: 5 8; } .slide.active .v-dash { animation: vdash 1.1s linear infinite; }
+  @keyframes vfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @keyframes vdash { to { stroke-dashoffset: -39; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg *, .kicker .dot, .harrow, ul.clean li, .step, .surf, .pstep, .arow, .rise, .divider .rule { animation: none !important; }
+    .slide.active .v-draw { stroke-dashoffset: 0 !important; }
+    .v-t, .v-tf { offset-distance: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ptrack" id="ptrack"><div class="progress" id="progress"></div></div>
+<div class="topright">
+  <button class="btn" id="themeBtn" type="button">Theme</button>
+  <button class="btn" id="fsBtn" type="button">Present</button>
+</div>
+
+<div class="stagewrap" id="stagewrap">
+  <canvas id="bg"></canvas>
+  <button class="zone l" id="zoneL" aria-label="Previous" tabindex="-1"></button>
+  <button class="zone r" id="zoneR" aria-label="Next" tabindex="-1"></button>
+  <div class="stage" id="stage">
+    <!-- 1 · HERO -->
+    <section class="slide hero" data-part="Foundation">
+      <div class="glow-a"></div><div class="glow-b"></div>
+      <div class="inner">
+        <div class="herotext">
+          <div class="title-brand rise">
+            <svg class="mark v-spinS" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2" stroke="var(--indigo)" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.4" fill="var(--jade)"/>
+              <path d="M12 2.8v5.8M12 15.4v5.8M2.8 12h5.8M15.4 12h5.8" stroke="var(--indigo)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cognitum One <small>Enterprise Offer Foundation</small>
+          </div>
+          <span class="kicker rise" style="animation-delay:.05s"><span class="dot"></span>Portfolio · business model · the ONE 100 · 30-day roadmap</span>
+          <h1 class="rise" style="animation-delay:.1s; max-width:none">Cognitum One<br><span class="g">The enterprise offer</span></h1>
+          <p class="title-sub rise" style="animation-delay:.18s">Four commercial lanes, one enterprise anchor — <strong>ONE</strong> — carried into accounts by Platform Distributed Consulting, and opened with two quantified economic wedges.</p>
+          <div class="chips rise" style="animation-delay:.26s">
+            <span class="chip"><b>4 lanes</b></span><span class="chip"><b>100 modules</b></span><span class="chip"><b>30-day roadmap</b></span>
+          </div>
+          <p class="hyp" style="margin-top:0.85rem">Prepared for Chris &amp; Cognitum One leadership · by Nicholas Ruest · July 3, 2026</p>
+        </div>
+        <div class="heroviz">
+          <svg viewBox="0 0 360 360" role="img" aria-label="Two quantified economic wedges: up to 96% LLM cost cut and up to 100% public-cloud removal">
+            <text x="180" y="34" text-anchor="middle" class="slbl slbl-f" style="font-size:11px">TWO QUANTIFIED WEDGES</text>
+            <g>
+              <rect x="60" y="60" width="240" height="30" rx="6" fill="var(--surface)" stroke="var(--border-2)"/>
+              <rect class="v-draw" x="60" y="60" width="230" height="30" rx="6" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <rect class="v-pop" x="60" y="60" width="10" height="30" rx="3" fill="var(--amber)"/>
+              <text x="180" y="80" text-anchor="middle" class="slbl swarn" style="font-size:12px;font-weight:700">ONE META · LLM cost −96%</text>
+            </g>
+            <text x="180" y="112" text-anchor="middle" class="slbl slbl-f" style="font-size:9px">route each task to the right model &amp; token budget</text>
+            <g>
+              <rect x="60" y="150" width="240" height="30" rx="6" fill="var(--surface)" stroke="var(--border-2)"/>
+              <rect class="v-pop" style="animation-delay:.2s" x="60" y="150" width="6" height="30" rx="3" fill="var(--jade)"/>
+              <text x="183" y="170" text-anchor="middle" class="slbl sok" style="font-size:12px;font-weight:700">ONE CLOUD · public cloud −100%</text>
+            </g>
+            <text x="180" y="202" text-anchor="middle" class="slbl slbl-f" style="font-size:9px">for workloads moved entirely off public cloud</text>
+            <circle class="v-pulse" cx="180" cy="270" r="40" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2.5"/>
+            <text x="180" y="266" text-anchor="middle" class="slbl sind" style="font-size:13px;font-weight:700">ONE</text>
+            <text x="180" y="282" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">the enterprise anchor</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="Foundation">
+      <div class="inner">
+        <p class="kick"><span class="n">Executive thesis</span> A portfolio with four commercial lanes, one anchor, two wedges</p>
+        <div class="grid g4" style="gap:0.6rem">
+          <div class="card mini i"><div class="ct">IBO</div><div class="cd">The SMB operations machine — business operations in a box.</div></div>
+          <div class="card mini j"><div class="ct">ONE</div><div class="cd">The enterprise offer that powers Platform Distributed Consulting.</div></div>
+          <div class="card mini i"><div class="ct">Premium Ruvnet OS Stack</div><div class="cd">Hardened commercial versions of selected open-source infrastructure.</div></div>
+          <div class="card mini i"><div class="ct">Marketplace</div><div class="cd">The hardware ecosystem where Cognitum One technology lives.</div></div>
+        </div>
+        <div class="callout" style="margin-top:0.8rem; border-left-color:var(--amber)">
+          <div class="h" style="color:var(--amber)">Two quantified opening wedges</div>
+          <p>Lead enterprise conversations with <b>ONE META</b> — LLM cost reduction up to <b>96%</b> — then <b>ONE CLOUD</b> — cloud cost reduction, up to <b>100% removal</b> of public-cloud spend where workloads move entirely off public infrastructure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The portfolio">
+      <div class="inner">
+        <p class="kick"><span class="n">Portfolio architecture &amp; offer boundaries</span> Each lane: a different buyer, promise &amp; sales motion</p>
+        <table class="tbl sm">
+          <thead><tr><th>Lane</th><th>Buyer</th><th>Clean promise</th></tr></thead>
+          <tbody>
+            <tr><td class="i">IBO</td><td>SMBs &amp; operators</td><td>Business operations in a box — a productized machine for SMB workflows and routine operations.</td></tr>
+            <tr><td class="j">ONE</td><td>Enterprise execs, CIO/CTO, transformation leaders</td><td>Operating Network for Enterprise — sold through direct leadership and Platform Distributed Consulting.</td></tr>
+            <tr><td class="i">Premium Ruvnet OS Stack</td><td>Developers, enterprise IT, platform teams</td><td>Hardened, supported versions of selected Ruvnet components (Ruflo, RuVector, RuvLLM, RuView, MetaHarness…).</td></tr>
+            <tr><td class="i">Cognitum One Marketplace</td><td>Enterprise buyers, OEMs, hardware partners</td><td>The world&#8217;s hardware featuring Cognitum One technology — certified, powered-by, bundled, deployment-ready.</td></tr>
+            <tr><td class="j">Platform Distributed Consulting</td><td>Certified consultants &amp; services partners</td><td>The delivery model for ONE — consultants sell outcomes, run ARC/MAP/LIFT, integrate the platform.</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:0.5rem">Each lane reinforces the broader strategy while preserving clear separation between product, platform, infrastructure, hardware ecosystem, and consulting delivery.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The portfolio">
+      <div class="inner">
+        <p class="kick"><span class="n">ONE remains the enterprise anchor</span> Operating Network for Enterprise</p>
+        <div class="split vr top">
+          <div>
+            <ul class="clean sm">
+              <li class="j">The stable anchor for executive conversations — the platform PDC consultants sell &amp; integrate</li>
+              <li>Distinct from the SMB product, the open-source repository portfolio, and the hardware Marketplace</li>
+              <li class="j">Includes governance, runtime coordination, data access, agent authorization, routing, measurement &amp; deployment control</li>
+              <li>Uses selected Premium Ruvnet OS Stack components where relevant — technical ingredients surface only when needed</li>
+              <li class="j">Leads to Marketplace hardware when the buyer needs customer-controlled, edge, appliance or private-cloud deployment</li>
+            </ul>
+          </div>
+          <div class="di" style="align-self:center">
+            <span class="cap">ONE makes the stack governable, measurable &amp; deployable</span>
+            <svg viewBox="0 0 260 210" role="img" aria-label="ONE as the enterprise anchor connecting the stack, the consultants, and the hardware">
+              <circle class="v-pulse" cx="130" cy="105" r="40" fill="var(--jade-wash)" stroke="var(--jade)" stroke-width="2.5"/>
+              <text x="130" y="102" text-anchor="middle" class="slbl sok" style="font-size:15px;font-weight:700">ONE</text>
+              <text x="130" y="117" text-anchor="middle" class="slbl slbl-f" style="font-size:8px">operating network</text>
+              <g stroke="var(--border-2)" stroke-width="1.3">
+                <line class="v-draw" x1="130" y1="65" x2="130" y2="28"/><line class="v-draw" style="animation-delay:.1s" x1="90" y1="105" x2="34" y2="105"/><line class="v-draw" style="animation-delay:.2s" x1="170" y1="105" x2="226" y2="105"/><line class="v-draw" style="animation-delay:.3s" x1="130" y1="145" x2="130" y2="182"/></g>
+              <g class="slbl sind" text-anchor="middle" style="font-size:9px">
+                <rect class="v-pop" x="86" y="12" width="88" height="20" rx="5" fill="var(--surface)" stroke="var(--indigo-dim)"/><text x="130" y="25">premium stack</text>
+                <rect class="v-pop" style="animation-delay:.1s" x="0" y="95" width="70" height="20" rx="5" fill="var(--surface)" stroke="var(--indigo-dim)"/><text x="35" y="108">governance</text>
+                <rect class="v-pop" style="animation-delay:.2s" x="190" y="95" width="70" height="20" rx="5" fill="var(--surface)" stroke="var(--indigo-dim)"/><text x="225" y="108">marketplace</text>
+                <rect class="v-pop" style="animation-delay:.3s" x="86" y="182" width="88" height="20" rx="5" fill="var(--surface)" stroke="var(--jade-dim)"/><text x="130" y="195" class="sok">PDC delivery</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The portfolio">
+      <div class="inner">
+        <p class="kick"><span class="n">Premium Ruvnet OS Stack</span> A separate product lane — hardened commercial infrastructure</p>
+        <div class="flow" style="margin-top:0.7rem">
+          <div class="node"><b>Open-source Ruvnet projects</b><span>Innovation pipeline: public experimentation, developer adoption, proof of technical direction.</span></div>
+          <div class="harrow">&#8594;</div>
+          <div class="node uh"><b>Premium Ruvnet OS Stack</b><span>Selected, hardened, authenticated, supported, packaged &amp; entitlement-controlled versions.</span></div>
+          <div class="harrow">&#8594;</div>
+          <div class="node" style="border-color:var(--jade-dim)"><b>ONE</b><span>Packages premium capabilities into governed enterprise outcomes, playbooks &amp; measurable deployments.</span></div>
+        </div>
+        <div class="callout" style="margin-top:0.9rem"><div class="h">Positioning discipline</div><p>Use open source as proof of technical direction; commercial discussions point to premium products or ONE packages. Lead with business pain and quantified outcomes — <b>not repos</b>.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The portfolio">
+      <div class="inner">
+        <p class="kick"><span class="n">Cognitum One Marketplace</span> A separate hardware ecosystem — the world&#8217;s hardware featuring Cognitum One</p>
+        <div class="grid g5" style="gap:0.55rem">
+          <div class="card mini"><div class="ct">Featured</div><div class="cd">Devices promoted because Cognitum One technology is included or relevant.</div></div>
+          <div class="card mini"><div class="ct">Certified</div><div class="cd">Validated against deployment, security, performance &amp; compatibility requirements.</div></div>
+          <div class="card mini j"><div class="ct">Powered-by</div><div class="cd">Appliances, edge nodes, private-cloud nodes &amp; partner systems running Cognitum One.</div></div>
+          <div class="card mini"><div class="ct">Bundled</div><div class="cd">Hardware, software entitlement &amp; implementation path sold together.</div></div>
+          <div class="card mini"><div class="ct">Partner-listed</div><div class="cd">OEM, silicon, appliance, robotics, industrial &amp; edge partners as deployment options.</div></div>
+        </div>
+        <div class="bigquote i" style="margin-top:0.85rem; padding:1rem 1.3rem"><p style="font-size:1.35rem">&#8220;The Marketplace turns Cognitum One from software alone into a hardware-enabled ecosystem — it shows enterprises where the technology can actually live.&#8221;</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The portfolio">
+      <div class="inner">
+        <p class="kick"><span class="n">Two quantified opening talk tracks</span> The go-to openers for executive conversations</p>
+        <div class="grid g2" style="gap:1rem; margin-top:0.3rem">
+          <div class="card a">
+            <div class="ct" style="color:var(--amber)">Primary opener · ONE META</div>
+            <div class="cd">Route each task to the right model, at the right reasoning depth, with the right token budget.</div>
+            <div style="font-family:var(--font-mono);font-size:2.4rem;font-weight:700;color:var(--amber);margin:0.3rem 0 0.1rem">−96%</div>
+            <div class="cd">Cut LLM costs by up to 96% in applicable workloads.</div>
+            <p class="src" style="margin-top:0.4rem">&#8220;Most companies overpay by sending routine work to expensive default model calls. ONE META fixes that.&#8221;</p>
+          </div>
+          <div class="card j">
+            <div class="ct" style="color:var(--jade)">Secondary opener · ONE CLOUD</div>
+            <div class="cd">Reduce waste, optimize workload placement, and move suitable workloads to private, hybrid, on-prem or edge.</div>
+            <div style="font-family:var(--font-mono);font-size:2.4rem;font-weight:700;color:var(--jade);margin:0.3rem 0 0.1rem">−100%</div>
+            <div class="cd">Remove up to 100% of public-cloud spend for workloads moved entirely off public cloud.</div>
+            <p class="src" style="margin-top:0.4rem">&#8220;After LLM spend, the next economic wedge is cloud. For suitable workloads, ONE CLOUD can remove the public-cloud bill entirely.&#8221;</p>
+          </div>
+        </div>
+        <p class="hyp" style="margin-top:0.6rem">Claim discipline: &#8220;up to 96%&#8221; applies to LLM workloads where routing replaces default calls; &#8220;up to 100%&#8221; applies to workloads that fully leave public cloud after assessment — not a blanket enterprise-wide claim.</p>
+      </div>
+    </section>
+
+    <section class="slide divider" data-part="The ONE 100">
+      <div class="inner">
+        <div class="dtext">
+          <div class="pnum rise">THE LIBRARY</div>
+          <h2 class="rise" style="animation-delay:.06s">The Cognitum One Hundred</h2>
+          <p class="sub rise" style="animation-delay:.12s">The enterprise acronym library that powers the ONE Platform Distributed Consulting model — a repeatable language for diagnosis, planning, integration, governance, measurement &amp; expansion.</p>
+          <div class="rule"></div>
+          <div class="dchips"><span>10 overlay categories</span><span>9 components each</span><span>100 modules</span></div>
+          <p class="src" style="margin-top:0.7rem; max-width:52ch">Operating principle: lead with the buyer&#8217;s pain, then introduce only the relevant ONE module. Two unnumbered anchors sit above the 100 — <b>ONE</b> (Operating Network for Enterprise) and <b>ONE PDC</b> (Platform Distributed Consulting).</p>
+        </div>
+        <div class="dviz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Ten overlay categories radiating from ONE">
+            <circle class="v-halo" cx="150" cy="150" r="46" fill="var(--jade)"/>
+            <g class="v-spinS"><circle cx="150" cy="150" r="118" fill="none" stroke="var(--indigo)" stroke-width="1.3" stroke-dasharray="2 13"/></g>
+            <circle class="v-pop" style="animation-delay:0.00s" cx="150.0" cy="58.0" r="8" fill="var(--amber)" opacity="0.9"/><text x="150.0" y="41.0" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">META</text><circle class="v-pop" style="animation-delay:0.05s" cx="204.1" cy="75.6" r="8" fill="var(--indigo)" opacity="0.9"/><text x="215.8" y="62.4" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">CORE</text><circle class="v-pop" style="animation-delay:0.10s" cx="237.5" cy="121.6" r="8" fill="var(--jade)" opacity="0.9"/><text x="256.5" y="118.4" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">MAP</text><circle class="v-pop" style="animation-delay:0.15s" cx="237.5" cy="178.4" r="8" fill="var(--indigo)" opacity="0.9"/><text x="256.5" y="187.6" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">GUARD</text><circle class="v-pop" style="animation-delay:0.20s" cx="204.1" cy="224.4" r="8" fill="var(--jade)" opacity="0.9"/><text x="215.8" y="243.6" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">DATA</text><circle class="v-pop" style="animation-delay:0.25s" cx="150.0" cy="242.0" r="8" fill="var(--amber)" opacity="0.9"/><text x="150.0" y="265.0" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">CLOUD</text><circle class="v-pop" style="animation-delay:0.30s" cx="95.9" cy="224.4" r="8" fill="var(--indigo)" opacity="0.9"/><text x="84.2" y="243.6" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">DEV</text><circle class="v-pop" style="animation-delay:0.35s" cx="62.5" cy="178.4" r="8" fill="var(--jade)" opacity="0.9"/><text x="43.5" y="187.6" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">OPS</text><circle class="v-pop" style="animation-delay:0.40s" cx="62.5" cy="121.6" r="8" fill="var(--indigo)" opacity="0.9"/><text x="43.5" y="118.4" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">FIN</text><circle class="v-pop" style="animation-delay:0.45s" cx="95.9" cy="75.6" r="8" fill="var(--jade)" opacity="0.9"/><text x="84.2" y="62.4" text-anchor="middle" class="slbl" fill="var(--muted)" style="font-size:7.5px">REV</text>
+            <circle class="v-pulse" cx="150" cy="150" r="30" fill="var(--indigo-wash)" stroke="var(--indigo)" stroke-width="2"/>
+            <text x="150" y="147" text-anchor="middle" class="slbl sind" style="font-size:13px;font-weight:700">ONE</text>
+            <text x="150" y="161" text-anchor="middle" class="slbl slbl-f" style="font-size:7.5px">+ ONE PDC</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">The 100 at a glance</span> Ten overlay categories &#183; nine components each &#183; every module prefixed <b>ONE</b></p>
+        <div class="co-map"><div class="co-col"><div class="co-cn">1</div><div class="co-cat" style="background:var(--amber)">META</div><div class="co-chip">PULSE</div><div class="co-chip">CPU</div><div class="co-chip">GPU</div><div class="co-chip">RAM</div><div class="co-chip">ROI</div><div class="co-chip">QoQ</div><div class="co-chip">KPI</div><div class="co-chip">OKR</div><div class="co-chip">CSF</div></div><div class="co-col"><div class="co-cn">2</div><div class="co-cat" style="background:var(--indigo)">CORE</div><div class="co-chip">API</div><div class="co-chip">ERP</div><div class="co-chip">CRM</div><div class="co-chip">IAM</div><div class="co-chip">SOP</div><div class="co-chip">ETM</div><div class="co-chip">PM</div><div class="co-chip">SOW</div><div class="co-chip">AOP</div></div><div class="co-col"><div class="co-cn">3</div><div class="co-cat" style="background:var(--jade)">MAP</div><div class="co-chip">ARC</div><div class="co-chip">LIFT</div><div class="co-chip">POC</div><div class="co-chip">MVP</div><div class="co-chip">R&amp;D</div><div class="co-chip">OC</div><div class="co-chip">CAGR</div><div class="co-chip">SCALE</div><div class="co-chip">EDU</div></div><div class="co-col"><div class="co-cn">4</div><div class="co-cat" style="background:var(--indigo)">GUARD</div><div class="co-chip">RISK</div><div class="co-chip">SEC</div><div class="co-chip">LEG</div><div class="co-chip">NDA</div><div class="co-chip">GDPR</div><div class="co-chip">GRC</div><div class="co-chip">HIPAA</div><div class="co-chip">ISO</div><div class="co-chip">SOX</div></div><div class="co-col"><div class="co-cn">5</div><div class="co-cat" style="background:var(--jade)">DATA</div><div class="co-chip">RFP</div><div class="co-chip">KPA</div><div class="co-chip">KRA</div><div class="co-chip">KRI</div><div class="co-chip">DEI</div><div class="co-chip">ESG</div><div class="co-chip">CSR</div><div class="co-chip">RCA</div><div class="co-chip">MEDIA</div></div><div class="co-col"><div class="co-cn">6</div><div class="co-cat" style="background:var(--amber)">CLOUD</div><div class="co-chip">IoT</div><div class="co-chip">SSL</div><div class="co-chip">LAN</div><div class="co-chip">ISP</div><div class="co-chip">FTP</div><div class="co-chip">WAN</div><div class="co-chip">ITAM</div><div class="co-chip">ITOM</div><div class="co-chip">UEM</div></div><div class="co-col"><div class="co-cn">7</div><div class="co-cat" style="background:var(--indigo)">DEV</div><div class="co-chip">SDK</div><div class="co-chip">CLI</div><div class="co-chip">CSS</div><div class="co-chip">QA</div><div class="co-chip">PR</div><div class="co-chip">CI/CD</div><div class="co-chip">UI</div><div class="co-chip">SAM</div><div class="co-chip">SSO</div></div><div class="co-col"><div class="co-cn">8</div><div class="co-cat" style="background:var(--jade)">OPS</div><div class="co-chip">SCM</div><div class="co-chip">HR</div><div class="co-chip">SLA</div><div class="co-chip">ETA</div><div class="co-chip">PO</div><div class="co-chip">ITSM</div><div class="co-chip">SOC</div><div class="co-chip">MDM</div><div class="co-chip">COMMS</div></div><div class="co-col"><div class="co-cn">9</div><div class="co-cat" style="background:var(--indigo)">FIN</div><div class="co-chip">EBITDA</div><div class="co-chip">FTE</div><div class="co-chip">GAAP</div><div class="co-chip">P&amp;L</div><div class="co-chip">OPEX</div><div class="co-chip">SG&amp;A</div><div class="co-chip">EBIT</div><div class="co-chip">ROIC</div><div class="co-chip">CAPEX</div></div><div class="co-col"><div class="co-cn">10</div><div class="co-cat" style="background:var(--jade)">REV</div><div class="co-chip">CAC</div><div class="co-chip">CLV</div><div class="co-chip">NPS</div><div class="co-chip">A/R</div><div class="co-chip">A/P</div><div class="co-chip">NWC</div><div class="co-chip">CCC</div><div class="co-chip">DSO</div><div class="co-chip">DPO</div></div></div>
+        <p class="src" style="margin-top:0.5rem">Exactly 100 numbered modules: 10 overlay categories (the coloured caps) + 90 supporting components. The following ten slides expand each category and all nine of its components.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 1 / 10 · ONE META</span> Model Efficiency &amp; Token Allocation</p>
+        <div class="oh-head" style="border-left-color:var(--amber)"><b style="color:var(--amber)">ONE META</b> — Route each task to the right model, depth &amp; token budget — cut LLM cost up to 96%.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE PULSE</div><div class="nm">Performance, Usage, Latency, Savings &amp; Efficiency</div><div class="rl">Live operational pulse across usage, speed, cost &amp; latency.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE CPU</div><div class="nm">Compute Prioritization Unit</div><div class="rl">Routes each task to local, cloud, agent, batch or low-cost paths.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE GPU</div><div class="nm">Governed Processing Utilization</div><div class="rl">Reserves accelerated compute only for tasks that truly need it.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE RAM</div><div class="nm">Runtime Allocation Manager</div><div class="rl">Decides what stays in memory, is compressed, retrieved or offloaded.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE ROI</div><div class="nm">Return Optimization Intelligence</div><div class="rl">A continuous view of where agentic work saves money &amp; creates value.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE QoQ</div><div class="nm">Quarterly Outcome Quantification</div><div class="rl">Turns quarterly results into measurable explanations &amp; routed action.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE KPI</div><div class="nm">Keystone Priority Intervention</div><div class="rl">Turns metrics &amp; drift into prioritized, routed interventions.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE OKR</div><div class="nm">Outcome-Keystone Router</div><div class="rl">Routes objectives, blockers &amp; progress into aligned action.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE CSF</div><div class="nm">Keystone Success Flow</div><div class="rl">Keeps critical success conditions active before outcomes slip.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 2 / 10 · ONE CORE</span> Control, Orchestration, Runtime &amp; Enterprise</p>
+        <div class="oh-head" style="border-left-color:var(--indigo)"><b style="color:var(--indigo)">ONE CORE</b> — The governed enterprise runtime — how agents operate, connect &amp; apply policy at scale.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE API</div><div class="nm">Agentic Process Interface</div><div class="rl">Secure interfaces so agents coordinate work across enterprise software.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE ERP</div><div class="nm">Execution Routing Processor</div><div class="rl">Routes ERP signals, approvals &amp; events into moving work.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE CRM</div><div class="nm">Conversion Routing Matrix</div><div class="rl">Routes the right next action from accounts, deals &amp; tickets.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE IAM</div><div class="nm">Intent Authorization Metrix</div><div class="rl">Decides if an action is allowed, denied, escalated or approved.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SOP</div><div class="nm">Sequence Orchestration Processor</div><div class="rl">Turns SOPs into executable sequences agents can run &amp; monitor.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE ETM</div><div class="nm">Enterprise Throughput Mesh</div><div class="rl">Links people, agents, tasks &amp; deadlines so work moves faster.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE PM</div><div class="nm">Project Motion</div><div class="rl">Live execution routing for blockers, scope drift &amp; milestone risk.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SOW</div><div class="nm">Service Outcome Workflow</div><div class="rl">Turns a statement of work into live delivery control.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE AOP</div><div class="nm">Agentic Operating Pulse</div><div class="rl">Turns the annual plan into a live execution rhythm.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 3 / 10 · ONE MAP</span> Modernization &amp; Agentic Planning</p>
+        <div class="oh-head" style="border-left-color:var(--jade)"><b style="color:var(--jade)">ONE MAP</b> — A structured agentic roadmap — from legacy systems to a clear plan for deployment.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE ARC</div><div class="nm">Agentic Readiness &amp; Capability</div><div class="rl">Structured assessment of where the business is ready for agents.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE LIFT</div><div class="nm">Legacy Integration &amp; Flow Transformation</div><div class="rl">Integrates legacy systems into agentic flows without rip-and-replace.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE POC</div><div class="nm">Proof-to-Operations Converter</div><div class="rl">A governed path from proof-of-concept to deployment.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE MVP</div><div class="nm">Market Validation Processor</div><div class="rl">Tests whether a use case is real &amp; deserves production.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE R&amp;D</div><div class="nm">Research &amp; Deployment</div><div class="rl">Routes the strongest concepts into pilots, products &amp; rollout.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE OC</div><div class="nm">Option Consequence</div><div class="rl">Surfaces what the business gives up &amp; routes the better move.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE CAGR</div><div class="nm">Compound Action Growth Router</div><div class="rl">Routes the actions that improve the growth trajectory.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE SCALE</div><div class="nm">Secure Continuous Agentic Lifecycle Enablement</div><div class="rl">A secure lifecycle for building, governing &amp; scaling agents.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE EDU</div><div class="nm">Enterprise Deployment University</div><div class="rl">Consultant training &amp; certification for deployment capacity.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 4 / 10 · ONE GUARD</span> Governance, Usage, Risk &amp; Deployment</p>
+        <div class="oh-head" style="border-left-color:var(--indigo)"><b style="color:var(--indigo)">ONE GUARD</b> — Active control over how agents are used, where risk appears &amp; what deployments are allowed.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE RISK</div><div class="nm">Risk Intelligence &amp; Security Knowledge</div><div class="rl">Finds exposure, maps controls &amp; routes remediation before damage.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SEC</div><div class="nm">Security, Entitlements &amp; Compliance</div><div class="rl">Governs who &amp; which agents can act on what systems.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE LEG</div><div class="nm">Legal Enterprise Governance</div><div class="rl">Reviews obligations, flags risky terms &amp; routes approvals.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE NDA</div><div class="nm">Need-to-Disclose Authorization</div><div class="rl">Controls what can be shared, with whom &amp; under which agreement.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE GDPR</div><div class="nm">Governed Data Permission Router</div><div class="rl">Finds personal data, who can access it &amp; where risk escalates.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE GRC</div><div class="nm">Governance Response Command</div><div class="rl">Detects exposure, assigns owners &amp; verifies controls live.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE HIPAA</div><div class="nm">Health Information Permissioning &amp; Access Assurance</div><div class="rl">Controls access to protected health data &amp; what is logged.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE ISO</div><div class="nm">Integrated Standards Orchestration</div><div class="rl">Maps requirements, controls &amp; proof into routed compliance.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SOX</div><div class="nm">Systems Oversight eXecution</div><div class="rl">Maps controls, approvals &amp; remediation for financial oversight.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 5 / 10 · ONE DATA</span> Data, Architecture, Transformation &amp; Access</p>
+        <div class="oh-head" style="border-left-color:var(--jade)"><b style="color:var(--jade)">ONE DATA</b> — Governed data pathways so agents reason, retrieve &amp; act on enterprise knowledge securely.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE RFP</div><div class="nm">Requirement Fulfillment Processor</div><div class="rl">Extracts requirements &amp; assembles the proposal response.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE KPA</div><div class="nm">Keystone Process Activation</div><div class="rl">Activates priority process domains agents can route &amp; improve.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE KRA</div><div class="nm">Keystone Result Activation</div><div class="rl">Routes ownership areas &amp; target outcomes forward.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE KRI</div><div class="nm">Keystone Risk Interception</div><div class="rl">Turns warning indicators into routed review &amp; prevention.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE DEI</div><div class="nm">Decision Equity Intelligence</div><div class="rl">Flags uneven outcomes in hiring, pay &amp; access, routes review.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE ESG</div><div class="nm">Enterprise Sustainability Governance</div><div class="rl">Turns ESG signals into routed accountability actions.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE CSR</div><div class="nm">Corporate Stewardship Router</div><div class="rl">Routes community, supplier &amp; stakeholder responsibility actions.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE RCA</div><div class="nm">Resolution Control Architecture</div><div class="rl">Turns incidents into controlled remediation that reduces repeats.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE MEDIA</div><div class="nm">Message Engagement &amp; Distribution Intelligence Automation</div><div class="rl">Routes content &amp; engagement to improve reach &amp; response.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 6 / 10 · ONE CLOUD</span> Cloud Lifecycle Optimization &amp; Unified Deployment</p>
+        <div class="oh-head" style="border-left-color:var(--amber)"><b style="color:var(--amber)">ONE CLOUD</b> — Optimize cloud, cut spend &amp; remove up to 100% of public-cloud cost for workloads moved off it.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE IoT</div><div class="nm">Intelligent Operations Telemetry</div><div class="rl">Routes device data, anomalies &amp; field conditions into workflows.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE SSL</div><div class="nm">Secure Signal Layer</div><div class="rl">Protects sessions, API calls &amp; data moving between environments.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE LAN</div><div class="nm">Local Agentic Network</div><div class="rl">On-prem agentic execution without unnecessary cloud dependency.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE ISP</div><div class="nm">Intelligent Service Pathing</div><div class="rl">Optimizes routing across cost, latency, uptime &amp; failover.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE FTP</div><div class="nm">File Transit Processor</div><div class="rl">Governed file flow with permissions, lineage &amp; routed approvals.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE WAN</div><div class="nm">Wide Agentic Network</div><div class="rl">Connects branches, clouds &amp; edge into one governed fabric.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE ITAM</div><div class="nm">Infrastructure Traceability &amp; Asset Mesh</div><div class="rl">Live asset intelligence across devices, software &amp; lifecycle.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE ITOM</div><div class="nm">Infrastructure Telemetry &amp; Operations Mesh</div><div class="rl">Connects infra signals, incidents &amp; remediation live.</div></div><div class="oh-card"><div class="ac" style="color:var(--amber)">ONE UEM</div><div class="nm">Unified Endpoint Mesh</div><div class="rl">Endpoint control across laptops, phones, apps &amp; compliance.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 7 / 10 · ONE DEV</span> Developer Execution Velocity</p>
+        <div class="oh-head" style="border-left-color:var(--indigo)"><b style="color:var(--indigo)">ONE DEV</b> — Agentic engineering — understand repos, generate code &amp; move engineering work faster.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SDK</div><div class="nm">Solution Deployment Kit</div><div class="rl">Reusable connectors, templates &amp; implementation paths.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE CLI</div><div class="nm">Control Layer Interface</div><div class="rl">A governed control surface to operate ONE components safely.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE CSS</div><div class="nm">Composable Surface System</div><div class="rl">Reusable enterprise surfaces for dashboards &amp; agent panels.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE QA</div><div class="nm">Quality Automation</div><div class="rl">Continuous validation before failures spread to production.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE PR</div><div class="nm">Production Readiness</div><div class="rl">Turns pull requests into active release gates.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE CI/CD</div><div class="nm">Change Intelligence / Controlled Deployment</div><div class="rl">Governed releases that cut failures &amp; speed safe delivery.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE UI</div><div class="nm">Unified Interaction</div><div class="rl">Guides users &amp; agents to the right surface at the right moment.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SAM</div><div class="nm">Software Allocation Mesh</div><div class="rl">Finds unused licenses, shadow software &amp; cost savings.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SSO</div><div class="nm">Secure Session Orchestration</div><div class="rl">Governs access, sessions &amp; authentication across systems.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 8 / 10 · ONE OPS</span> Operational Process Systems</p>
+        <div class="oh-head" style="border-left-color:var(--jade)"><b style="color:var(--jade)">ONE OPS</b> — Connected process systems that route requests, automate workflows &amp; clear bottlenecks.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE SCM</div><div class="nm">Supply Chain Management</div><div class="rl">Routes demand, supplier &amp; inventory signals into action.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE HR</div><div class="nm">Human Redeployment</div><div class="rl">Finds idle capacity &amp; reassigns people to higher-value work.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE SLA</div><div class="nm">Service-Level Automation</div><div class="rl">Detects breach risk &amp; routes remediation before SLAs fail.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE ETA</div><div class="nm">Execution Timing Assurance</div><div class="rl">Keeps delivery, response &amp; completion on track.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE PO</div><div class="nm">Procurement Orchestration</div><div class="rl">Turns purchase orders into safe, routed spend control.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE ITSM</div><div class="nm">Issue-to-Service Motion</div><div class="rl">Triages issues &amp; drives requests toward resolution.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE SOC</div><div class="nm">Security Operations Command</div><div class="rl">Triages threats, correlates signals &amp; coordinates containment.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE MDM</div><div class="nm">Managed Device Mesh</div><div class="rl">Endpoint governance across users, devices &amp; posture.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE COMMS</div><div class="nm">Coordinated Outreach &amp; Message Management System</div><div class="rl">Routes stakeholder, incident &amp; team communications.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 9 / 10 · ONE FIN</span> Finance Intelligence Network</p>
+        <div class="oh-head" style="border-left-color:var(--indigo)"><b style="color:var(--indigo)">ONE FIN</b> — A connected finance intelligence network — margin, profitability, cost &amp; cash.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE EBITDA</div><div class="nm">Enterprise Bottleneck Intelligence, Throughput Diagnostics &amp; Action</div><div class="rl">Finds margin-eroding bottlenecks &amp; routes throughput fixes.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE FTE</div><div class="nm">Full-Time Execution</div><div class="rl">Shows where capacity is wasted &amp; how to raise output per role.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE GAAP</div><div class="nm">Governed Accounting Action Protocol</div><div class="rl">Reviews transactions &amp; keeps work aligned to standards.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE P&amp;L</div><div class="nm">Performance &amp; Leakage</div><div class="rl">Finds where margin leaks &amp; routes corrective action.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE OPEX</div><div class="nm">Operational Profit Extraction</div><div class="rl">Cuts waste &amp; vendor drag without weakening execution.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE SG&amp;A</div><div class="nm">Spend Governance &amp; Automation</div><div class="rl">Finds overhead to reduce, route, automate or consolidate.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE EBIT</div><div class="nm">Earnings Bottleneck Intelligence &amp; Triage</div><div class="rl">Finds where operating friction suppresses earnings.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE ROIC</div><div class="nm">Return Optimization &amp; Investment Control</div><div class="rl">Finds where capital creates value or is tied up.</div></div><div class="oh-card"><div class="ac" style="color:var(--indigo)">ONE CAPEX</div><div class="nm">Capital Allocation &amp; Performance Execution</div><div class="rl">Prioritizes spend &amp; measures if investment produces value.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="The ONE 100">
+      <div class="inner">
+        <p class="kick"><span class="n">Layer 10 / 10 · ONE REV</span> Revenue Execution Velocity</p>
+        <div class="oh-head" style="border-left-color:var(--jade)"><b style="color:var(--jade)">ONE REV</b> — Revenue execution across pipeline, customer value, receivables &amp; cash velocity.</div>
+        <div class="oh-grid"><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE CAC</div><div class="nm">Conversion Acquisition Control</div><div class="rl">Finds where acquisition budget leaks &amp; routes efficient growth.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE CLV</div><div class="nm">Continuity Leverage Vector</div><div class="rl">Routes actions to retain, expand &amp; reactivate relationships.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE NPS</div><div class="nm">Next Promoter Sequence</div><div class="rl">Routes recovery, retention &amp; advocacy from feedback signals.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE A/R</div><div class="nm">Accelerated Receivables</div><div class="rl">Turns aging invoices into routed cash-recovery workflows.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE A/P</div><div class="nm">Approval-to-Payment</div><div class="rl">Governed payment execution that protects cash.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE NWC</div><div class="nm">Net Working Control</div><div class="rl">Coordinates receivables, payables &amp; timing to free trapped cash.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE CCC</div><div class="nm">Cash Conversion Control</div><div class="rl">Finds where cash is delayed across the cycle.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE DSO</div><div class="nm">Days-to-Settlement Optimization</div><div class="rl">Finds what slows settlement &amp; assigns the next move.</div></div><div class="oh-card"><div class="ac" style="color:var(--jade)">ONE DPO</div><div class="nm">Dynamic Payment Orchestration</div><div class="rl">Balances vendor terms, cash &amp; discounts before money leaves.</div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="Execution">
+      <div class="inner">
+        <p class="kick"><span class="n">30-day execution roadmap</span> From portfolio structure into commercial operation</p>
+        <table class="tbl tiny">
+          <thead><tr><th>Window</th><th>Revenue / Operations</th><th>Product / Technical</th><th>Consulting / GTM</th></tr></thead>
+          <tbody>
+            <tr><td class="i">0&#8211;7d</td><td>Lock the commercial operating path: pricing, payment, accounts, license activation, support &amp; revenue tracking.</td><td>Freeze the Cognitum Console MVP: orgs, users, seats, API keys, billing, entitlements, access &amp; usage.</td><td>Finalize the PDC professional model &amp; the full materials inventory: decks, scripts, discovery, proposals.</td></tr>
+            <tr><td class="i">8&#8211;14d</td><td>Make the Console operational: create accounts, collect payments, issue access, manage licenses, support first customers.</td><td>Develop &amp; harden the ONE technology layer: Console integration, entitlements, logging, usage, deployment &amp; governance.</td><td>Build the first complete PDC training system: onboarding, playbook, discovery, talk tracks, objection handling.</td></tr>
+            <tr><td class="i">15&#8211;21d</td><td>Use the Console as the commercial control point: revenue, access, licenses, engagement activation &amp; reporting.</td><td>Harden IBO as the SMB lane: workflow packaging, deployment readiness, onboarding &amp; support; keep building ONE.</td><td>Complete consultant-facing materials: enterprise &amp; PDC decks, one-pagers, discovery scripts, proposals, branding.</td></tr>
+            <tr><td class="j">22&#8211;30d</td><td>Move into operating mode: Console live, revenue active, first customers onboarded, basic reporting available.</td><td>Build the Marketplace on the website: listing categories, partner positioning, certified/featured/powered-by, intake.</td><td>Launch the complete PDC enablement package: training, certification, decks, scripts, discovery tools &amp; playbooks.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:0.55rem; border-left-color:var(--jade)"><div class="h" style="color:var(--jade)">30-day success standard</div><p>Console hardened enough to operate &amp; collect revenue · ONE actively developed and connected · a hardened IBO · a Marketplace live on the website · a complete PDC enablement system.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="Execution">
+      <div class="inner">
+        <p class="kick"><span class="n">Leadership decisions for confirmation</span> Lock the lanes, the openers &amp; the library</p>
+        <div class="grid g2" style="gap:0.5rem 1.2rem">
+          <div class="num-card"><div class="ni">1</div><div class="nt">Finalize the commercial lanes: <b>IBO, ONE, Premium Ruvnet OS Stack &amp; Marketplace</b> (IBO sits within the Marketplace path).</div></div>
+          <div class="num-card"><div class="ni">2</div><div class="nt">Define <b>Platform Distributed Consulting</b> as the delivery &amp; distribution model for ONE.</div></div>
+          <div class="num-card j"><div class="ni">3</div><div class="nt">Approve <b>ONE META</b> as the primary quantified opener — up to <b>96%</b> LLM cost reduction in applicable workloads.</div></div>
+          <div class="num-card j"><div class="ni">4</div><div class="nt">Approve <b>ONE CLOUD</b> as the secondary opener — reduce cloud spend &amp; remove up to <b>100%</b> of public-cloud cost for moved workloads.</div></div>
+          <div class="num-card"><div class="ni">5</div><div class="nt">Define the <b>Marketplace</b> as the world&#8217;s hardware featuring Cognitum One — certified, powered-by, bundled, featured &amp; partner-listed.</div></div>
+          <div class="num-card"><div class="ni">6</div><div class="nt">Define <b>Premium Ruvnet OS Stack</b> products as commercial infrastructure &amp; ingredients that support ONE.</div></div>
+          <div class="num-card"><div class="ni">7</div><div class="nt">Finalize the full <b>Cognitum One Hundred</b> and classify each module as external, internal/PDC, or technical-supporting.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-part="Execution">
+      <div class="inner">
+        <p class="kick"><span class="n">Executive-ready summary</span> A portfolio with clean lanes, anchored in ONE</p>
+        <div class="grid g4" style="gap:0.55rem">
+          <div class="card mini i"><div class="ct">IBO</div><div class="cd">The SMB operations machine.</div></div>
+          <div class="card mini j"><div class="ct">ONE</div><div class="cd">The enterprise operating network — the anchor.</div></div>
+          <div class="card mini i"><div class="ct">Premium Stack</div><div class="cd">Hardened commercial infrastructure from the open-source pipeline.</div></div>
+          <div class="card mini i"><div class="ct">Marketplace</div><div class="cd">The hardware ecosystem where the technology lives.</div></div>
+        </div>
+        <div class="bigquote" style="margin-top:0.8rem; padding:1rem 1.3rem"><p style="font-size:1.35rem">Lead with measurable savings, anchor in <span class="g">ONE</span>, separate the lanes, bring the premium stack when depth is needed, make deployment tangible through Marketplace hardware, and scale through <span class="g">Platform Distributed Consulting</span>.</p></div>
+        <p class="src" style="margin-top:0.5rem">PDC is the delivery model that carries ONE into accounts through repeatable implementation — outcomes first, ingredients second.</p>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<nav class="navbar">
+  <span class="foot-brand">Cognitum One · Enterprise Offer Foundation</span>
+  <span class="part" id="partLbl"></span>
+  <span class="hint">← → navigate</span>
+  <span class="spacer"></span>
+  <span class="counter"><b id="cur">1</b> / <span id="total">43</span></span>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous slide">&#8249;</button>
+    <button class="arr" id="next" aria-label="Next slide">&#8250;</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stage = document.getElementById('stage');
+    var wrap = document.getElementById('stagewrap');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var n = slides.length;
+    var i = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var progress = document.getElementById('progress');
+    var curEl = document.getElementById('cur');
+    var totalEl = document.getElementById('total');
+    var partLbl = document.getElementById('partLbl');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = n;
+
+    function fit() {
+      var s = Math.min(wrap.clientWidth / 1280, wrap.clientHeight / 720);
+      stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+
+    function fromHash() {
+      var m = (location.hash || '').match(/(\d+)/);
+      if (m) { var v = parseInt(m[1], 10) - 1; if (v >= 0 && v < n) return v; }
+      return 0;
+    }
+
+    function runCounters(slide) {
+      slide.querySelectorAll('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')) || 0;
+        var dp = parseInt(el.getAttribute('data-dp') || '0', 10);
+        var pre = el.getAttribute('data-pre') || '';
+        var suf = el.getAttribute('data-suf') || '';
+        function fmt(v) { return pre + v.toFixed(dp) + suf; }
+        if (reduce) { el.textContent = fmt(to); return; }
+        var t0 = null, dur = 900;
+        el.textContent = fmt(0);
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function fitSlide(slide) {
+      var inner = slide.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var avail = slide.clientHeight - 2 * parseFloat(getComputedStyle(slide).paddingTop);
+      var need = inner.scrollHeight;
+      if (need > avail) {
+        var k = Math.max(0.58, avail / need);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k + ')';
+      }
+    }
+
+    function render() {
+      slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      curEl.textContent = i + 1;
+      partLbl.innerHTML = '<b>' + (slides[i].getAttribute('data-part') || '') + '</b>';
+      progress.style.width = (n > 1 ? (i / (n - 1)) * 100 : 100) + '%';
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === n - 1;
+      var active = slides[i];
+      fitSlide(active);
+      runCounters(active);
+      if (active.getAttribute('data-chart')) {
+        var cols = active.querySelectorAll('.bars .col');
+        cols.forEach(function (c) { c.style.height = '0%'; });
+        var run = function () { cols.forEach(function (c) { c.style.height = (c.getAttribute('data-h') || 0) + '%'; }); };
+        if (reduce) run(); else setTimeout(run, 260);
+      }
+    }
+
+    function go(x) {
+      i = Math.max(0, Math.min(n - 1, x));
+      if (history.replaceState) history.replaceState(null, '', '#' + (i + 1)); else location.hash = '#' + (i + 1);
+      render();
+    }
+    function next() { go(i + 1); }
+    function prev() { go(i - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    document.getElementById('zoneL').addEventListener('click', prev);
+    document.getElementById('zoneR').addEventListener('click', next);
+    document.getElementById('ptrack').addEventListener('click', function (e) { go(Math.round((e.clientX / window.innerWidth) * (n - 1))); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'f' || k === 'F') { toggleFs(); }
+      else if (k === 't' || k === 'T') { toggleTheme(); }
+    });
+
+    var sx = 0, sy = 0;
+    document.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
+
+    function currentTheme() { return root.dataset.theme ? root.dataset.theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+    function toggleTheme() { root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark'; }
+    function toggleFs() { if (!document.fullscreenElement) { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('fsBtn').addEventListener('click', toggleFs);
+    window.addEventListener('hashchange', function () { var v = fromHash(); if (v !== i) go(v); });
+    document.addEventListener('fullscreenchange', fit);
+
+    /* ---- live particle-network background ---- */
+    (function () {
+      var cv = document.getElementById('bg');
+      if (!cv || reduce) { if (cv) cv.style.display = 'none'; return; }
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, parts = [];
+      function hue() {
+        var dark = currentTheme() === 'dark';
+        return dark ? { d: '135,144,255', j: '79,214,160', a: 0.5 } : { d: '78,82,224', j: '14,158,104', a: 0.32 };
+      }
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        var target = Math.max(28, Math.min(64, Math.round(W * H / 26000)));
+        parts = [];
+        for (var k = 0; k < target; k++) {
+          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28, g: Math.random() < 0.32 });
+        }
+      }
+      function tick() {
+        if (reduce) return;
+        var col = hue();
+        ctx.clearRect(0, 0, W, H);
+        for (var a = 0; a < parts.length; a++) {
+          var p = parts[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          for (var b = a + 1; b < parts.length; b++) {
+            var q = parts[b], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+            if (d2 < 15000) {
+              var o = (1 - d2 / 15000) * 0.5 * col.a;
+              ctx.strokeStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + o + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(' + (p.g ? col.j : col.d) + ',' + (col.a + 0.15) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g ? 2.1 : 1.5, 0, 6.2832); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize);
+      resize(); requestAnimationFrame(tick);
+    })();
+
+    i = fromHash();
+    fit();
+    render();
+  })();
+</script>
+
+</body>
+</html>
